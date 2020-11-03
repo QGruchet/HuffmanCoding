@@ -7,7 +7,8 @@ class Sommet
 {
   private:
     /* Attributes */
-    int numCar; // if car = \0, numCar = Sum of char under Sommet, else numCar = frequency of car
+    int numCar; // if car = '\0', numCar = Sum of char under Sommet,
+                // else numCar = frequency of car
     char car;
 
   public:
