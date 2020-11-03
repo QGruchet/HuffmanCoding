@@ -7,7 +7,7 @@ class Sommet
 {
   private:
     /* Attributes */
-    int numCar;
+    int numCar; // if car = \0, numCar = Sum of char under Sommet, else numCar = frequency of car
     char car;
 
   public:
@@ -44,6 +44,8 @@ class ArbreB
 
     void operator<(const Sommet&); // Add node
     int operator>(Sommet&); // Dell node
+
+    // Sommet operator[]()
 
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
