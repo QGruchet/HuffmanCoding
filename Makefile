@@ -14,6 +14,7 @@ endif
 
 all: $(EXEC)
 
+# $@ ref name of target, here $(EXEC)
 $(EXEC) : Main.o Tree.o
 	$(CC) src/target/Main.o src/target/Main.o -o src/bin/$@
 
@@ -24,9 +25,12 @@ run :
 
 #################################
 
+# $@ ref name of target, here Main.o
+# $< ref first dependency, here src/main/Main.cpp
 Main.o: src/main/Main.cpp
 	$(CC) -c $(CFLAGS) $< -o src/target/$@
 
+# $< ref first dependency, here lib/Tree.cpp
 Tree.o: lib/Tree.cpp lib/Tree.hpp
     $(CC) -c $(CFLAGS) $< -o src/target/$@
 
