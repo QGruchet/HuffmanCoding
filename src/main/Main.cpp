@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "Tree.hpp"
+
 int main(int argc, char const *argv[])
 {
   std::cout << "hello world" << std::endl;
