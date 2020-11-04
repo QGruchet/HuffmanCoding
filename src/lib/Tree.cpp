@@ -2,7 +2,7 @@
 
 /* Builders */
 // Default
-Sommet::Sommet() : numCar(0), car('\0') {}
+Sommet::Sommet() : numCar(0), car('\0'), left(nullptr), right(nullptr) {}
 ArbreB::ArbreB() : root(nullptr) {}
 // End default
 
@@ -12,7 +12,7 @@ Sommet::Sommet(const Sommet &other) {
     this->car = other.car;
 
     this->left = other.left;
-    this->right = right;
+    this->right = other.right;
 }
 
 ArbreB::ArbreB(const ArbreB &other) {
@@ -98,4 +98,21 @@ int Sommet::getNumCar() const {
 char Sommet::getCar() const {
     return this->car;
 }
+
+Sommet* Sommet::getLeft() const {
+    return this->left;
+}
+
+Sommet* Sommet::getRight() const {
+    return this->right;
+}
+
+Sommet* ArbreB::getRoot() const {
+    return this->root;
+}
 /* End getters */
+
+/* Destructors */
+Sommet::~Sommet() {}
+ArbreB::~ArbreB() {}
+/* End destructors */

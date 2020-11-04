@@ -1,9 +1,10 @@
-#include <iostream>
-
-#include "Tree.hpp"
+#include "../lib/Tree.hpp"
+#include "../test/Test.hpp"
 
 int main(int argc, char const *argv[])
 {
-  std::cout << "hello world" << std::endl;
+  Test test;
+  test.allTest();
+
   return 0;
 }

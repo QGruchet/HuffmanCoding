@@ -26,6 +26,8 @@ class Sommet
     /* Getters */
     int getNumCar() const;
     char getCar() const;
+    Sommet* getLeft() const;
+    Sommet* getRight() const;
 
     /* Destructor */
     ~Sommet();
@@ -52,9 +54,12 @@ class ArbreB
     void operator<(const Sommet&); // Add node
     int operator>(Sommet&); // Dell node ( Quentin )
 
-    Sommet operator[](int index);
+    Sommet &operator[](int index);
 
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
+
+    /* Getters */
+    Sommet* getRoot() const;
 
     /* Destructor */
     ~ArbreB();
