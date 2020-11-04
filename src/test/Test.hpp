@@ -15,6 +15,9 @@ class Test
         bool testCopyBuilderSommet() const;
         bool testDefaultBuilderArbreB() const;
         bool testCopyBuilderArbreB() const;
+        bool testBuilderSommetWithParam() const;
+        bool testBuilderSommetWithParamFailed() const;
+        bool testBuilderArbreBWithParam() const;
 };
 
 #endif

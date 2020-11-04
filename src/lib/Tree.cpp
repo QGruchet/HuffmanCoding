@@ -21,11 +21,22 @@ ArbreB::ArbreB(const ArbreB &other) {
 // End copy
 
 Sommet::Sommet(int numCar, char car) {
-    this->numCar = numCar;
-    this->car = car;
+    if( numCar >= 0) {
+        this->numCar = numCar;
+        this->car = car;
 
-    this->left = nullptr;
-    this->right = nullptr;
+        this->left = nullptr;
+        this->right = nullptr;
+    }
+    else {
+        std::cout << "ERROR : invalid numCar, call default builder" << std::endl;
+
+        this->numCar = 0;
+        this->car = '\0';
+
+        this->left = nullptr;
+        this->right = nullptr;
+    }
 }
 
 ArbreB::ArbreB(Sommet* root) {

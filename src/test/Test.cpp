@@ -5,6 +5,9 @@ void Test::allTest() const {
     std::cout << "testCopyBuilderSommet : " << (testCopyBuilderSommet() ? "succed"  : "failed") << " ! " << std::endl;
     std::cout << "testDefaultBuilderArbreB : " << (testDefaultBuilderArbreB() ? "succed"  : "failed") << " ! " << std::endl;
     std::cout << "testCopyBuilderArbreB : " << (testCopyBuilderArbreB() ? "succed"  : "failed") << " ! " << std::endl;
+    std::cout << "testBuilderSommetWithParamFailed : " << (testBuilderSommetWithParamFailed() ? "succed"  : "failed") << " ! " << std::endl;
+    std::cout << "testBuilderSommetWithParam : " << (testBuilderSommetWithParam() ? "succed"  : "failed") << " ! " << std::endl;
+    std::cout << "testBuilderArbreBWithParam : " << (testBuilderArbreBWithParam() ? "succed"  : "failed") << " ! " << std::endl;
 }
 
 bool Test::testDefaultBuilderSommet() const {
@@ -38,3 +41,33 @@ bool Test::testCopyBuilderArbreB() const {
 
     return ( tree.getRoot() == treeCopy.getRoot() );
 }
+
+bool Test::testBuilderSommetWithParamFailed() const {
+    Sommet node(-1, '\0');
+
+    return ( (node.getNumCar() == 0)
+        && (node.getCar() == '\0')
+        && (node.getLeft() == nullptr)
+        && (node.getRight() ==  nullptr) );
+}
+
+bool Test::testBuilderSommetWithParam() const {
+    Sommet node(2, 'e');
+
+    return ( (node.getNumCar() == 2)
+        && (node.getCar() == 'e')
+        && (node.getLeft() == nullptr)
+        && (node.getRight() ==  nullptr) );
+}
+
+bool Test::testBuilderArbreBWithParam() const {
+    Sommet* node = new Sommet(2, 'e');
+    ArbreB tree(node);
+    Sommet* root = tree.getRoot();
+
+    return ( (root->getNumCar() == 2)
+        && (root->getCar() == 'e')
+        && (root->getLeft() == nullptr)
+        && (root->getRight() ==  nullptr) );
+}
+
