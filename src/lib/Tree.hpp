@@ -17,12 +17,15 @@ class Sommet
     Sommet(); // Default
     Sommet(const Sommet&); // Copy
     Sommet(int numCar, char car);
-    Sommet(const Sommet *left, const Sommet *right);
 
     /* Overloaded */
     Sommet &operator=(const Sommet&);
 
     friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
+
+    /* Getters */
+    int getNumCar() const;
+    char getCar() const;
 
     /* Destructor */
     ~Sommet();
@@ -38,7 +41,7 @@ class ArbreB
     /* Builders */
     ArbreB(); // Default
     ArbreB(const ArbreB&); // Copy
-    ArbreB(const Sommet* root);
+    ArbreB(Sommet* root);
 
     /* Overloaded */
     ArbreB &operator=(const ArbreB&);
@@ -49,7 +52,7 @@ class ArbreB
     void operator<(const Sommet&); // Add node
     int operator>(Sommet&); // Dell node ( Quentin )
 
-    // Sommet operator[]()
+    Sommet operator[](int index);
 
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
