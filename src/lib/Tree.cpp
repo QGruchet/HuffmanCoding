@@ -147,7 +147,7 @@ Sommet* ArbreB::getRoot() const {
     return this->root;
 }
 
-int maximum(int a, int b){
+int Sommet::maximum(int a, int b){
     if(a < b){
         return b;
     }
@@ -156,7 +156,7 @@ int maximum(int a, int b){
     }
 }
 
-int getDepth(Sommet *sommet){
+int Sommet::getDepth(Sommet *sommet){
     if(sommet->getCar() == '\0'){
         return 0;
     }
@@ -168,11 +168,11 @@ int getDepth(Sommet *sommet){
 /* End getters */
 
 /* Printer */
-void printTree(Sommet *sommet, int depth){
+void ArbreB::printTree(Sommet *sommet, int depth){
     if(sommet->getCar() != '\0'){
         for (int i = 0; i < depth; ++i)
         {
-            std::cout << sommet << "    ";
+            std::cout << sommet << "    " << std::endl;
             printTree(sommet->getLeft(), depth + 1);
             printTree(sommet->getRight(), depth + 1);
         }

@@ -30,7 +30,7 @@ class Sommet
     char getCar() const;
     Sommet* getLeft() const;
     Sommet* getRight() const;
-    int getDepth(Sommet* sommet);
+    int getDepth(Sommet*);
 
 
 
@@ -65,7 +65,7 @@ class ArbreB
     Sommet &operator[](int index);
 
     /*printer*/
-    void printTree(ArbreB, int depth);
+    void printTree(Sommet*, int depth);
 
     /* Getters */
     Sommet* getRoot() const;
