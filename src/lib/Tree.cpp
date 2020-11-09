@@ -132,12 +132,12 @@ int maximum(int a, int b){
 }
 
 int getDepth(Sommet *sommet){
-    if(sommet->getCar() == '\0'){
+  if(sommet->getCar() == '\0') {
         return 0;
-    }
-    else{
+  }
+  else{
         return 1 + maximum(getDepth(sommet->getLeft()), getDepth(sommet->getRight()));
-    }
+  }
 }
 
 /* End getters */

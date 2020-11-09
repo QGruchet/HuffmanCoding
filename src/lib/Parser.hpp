@@ -8,9 +8,9 @@
 
 class Parser
 {
-  public:
-    /* Methodes */
-    void freqChar(std::string nameFile, std::vector<int> freq) const;
+    public:
+        /* Methodes */
+        void freqChar(std::string nameFile, std::vector<int> freq) const;
 };
 
 #endif

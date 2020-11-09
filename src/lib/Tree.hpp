@@ -5,70 +5,70 @@
 
 class Sommet
 {
-  private:
-    /* Data */
-    int numCar; // if car = '\0', numCar = Sum of char under Sommet,
-                // else numCar = frequency of car
-    char car;
-    Sommet *left, *right;
+    private:
+        /* Data */
+        int numCar; // if car = '\0', numCar = Sum of char under Sommet,
+                    // else numCar = frequency of car
+        char car;
+        Sommet *left, *right;
 
-  public:
-    /* Builders */
-    Sommet(); // Default
-    Sommet(const Sommet&); // Copy
-    Sommet(int numCar, char car);
+    public:
+        /* Builders */
+        Sommet(); // Default
+        Sommet(const Sommet&); // Copy
+        Sommet(int numCar, char car);
 
-    /* Overloaded */
-    Sommet &operator=(const Sommet&);
+        /* Overloaded */
+        Sommet &operator=(const Sommet&);
 
-    friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
-    
-    int maximum(int a, int b);
+        friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
+        
+        int maximum(int a, int b);
 
-    /* Getters */
-    int getNumCar() const;
-    char getCar() const;
-    Sommet* getLeft() const;
-    Sommet* getRight() const;
-    int getDepth(Sommet* sommet);
+        /* Getters */
+        int getNumCar() const;
+        char getCar() const;
+        Sommet* getLeft() const;
+        Sommet* getRight() const;
+        int getDepth(Sommet* sommet);
 
 
 
-    /* Destructor */
-    ~Sommet();
+        /* Destructor */
+        ~Sommet();
 };
 
 class ArbreB
 {
-  private:
-    /* Data */
-    Sommet *root;
+    private:
+        /* Data */
+        Sommet *root;
 
-  public:
-    /* Builders */
-    ArbreB(); // Default
-    ArbreB(const ArbreB&); // Copy
-    ArbreB(Sommet* root);
+    public:
+        /* Builders */
+        ArbreB(); // Default
+        ArbreB(const ArbreB&); // Copy
+        ArbreB(Sommet* root);
 
-    /* Overloaded */
-    ArbreB &operator=(const ArbreB&);
+        /* Overloaded */
+        ArbreB &operator=(const ArbreB&);
 
-    ArbreB &operator+=(const ArbreB&); // Add an other tree ( Quentin )
-    ArbreB &operator-=(const ArbreB&); // Split tree ( Quentin )
+        ArbreB &operator+=(const ArbreB&); // Add an other tree ( Quentin )
+        ArbreB &operator-=(const ArbreB&); // Split tree ( Quentin )
 
-    void operator<(Sommet newRoot); // Add node
-    void operator>(Sommet* newRoot); // Dell node ( Quentin )
+        void operator<(Sommet newRoot); // Add node
+        void operator>(Sommet* newRoot); // Dell node ( Quentin )
 
-    Sommet &operator[](int index);
+        Sommet &operator[](int index);
 
-    /*printer*/
-    void printTree(ArbreB, int depth);
+        /*printer*/
+        void printTree(ArbreB, int depth);
 
-    /* Getters */
-    Sommet* getRoot() const;
+        /* Getters */
+        Sommet* getRoot() const;
 
-    /* Destructor */
-    ~ArbreB();
+        /* Destructor */
+        ~ArbreB();
 };
 
 #endif
