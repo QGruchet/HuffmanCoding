@@ -56,8 +56,11 @@ class ArbreB
     ArbreB &operator+=(const ArbreB&); // Add an other tree ( Quentin )
     ArbreB &operator-=(const ArbreB&); // Split tree ( Quentin )
 
-    void operator<(const Sommet&); // Add node
+    void operator<(Sommet&); // Add node
     int operator>(Sommet&); // Dell node ( Quentin )
+
+    int emptyTree();
+    ArbreB addNode(Sommet *);
 
     Sommet &operator[](int index);
 

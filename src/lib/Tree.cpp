@@ -90,8 +90,33 @@ std::ostream &operator<<(std::ostream &flux, const Sommet &other) {
 // End operator[]
 
 // Operator<, operator>
-void ArbreB::operator<(const Sommet&) {
-    return;
+void ArbreB::operator<(Sommet& sommet) {
+    
+}
+
+int ArbreB::emptyTree(){
+    if(this->getRoot() == nullptr){
+        return 1;
+    }
+    return 0;
+}
+
+ArbreB ArbreB::addNode(Sommet *sommet){
+    if(this->emptyTree()){
+        this->root = sommet;
+    }
+    else{
+        if(sommet->getCar() <= this->root->getCar()){
+            this->root->getLeft() = addNode(sommet);
+        }
+        if(sommet->getCar() > this->root->getCar()){
+            this->root->getRight() = addNode(sommet);
+        }
+        else{
+            std::cout << "Error in node insertion";
+        }
+    }
+    return *this;
 }
 
 int ArbreB::operator>(Sommet&) {
