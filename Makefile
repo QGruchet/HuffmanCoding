@@ -12,7 +12,10 @@ endif
 
 #################################
 
-all: $(EXEC)
+all: build $(EXEC)
+
+build:
+	./build.sh
 
 # $@ ref name of target, here $(EXEC)
 $(EXEC) : Main.o Tree.o Test.o
@@ -52,6 +55,7 @@ vg3:
 
 clean:
 	rm src/target/*.o
+	rmdir src/target
 
 mrproper: clean
-	rm bin/$(EXEC)
+	rm src/bin/$(EXEC)
