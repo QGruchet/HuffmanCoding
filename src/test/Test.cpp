@@ -9,9 +9,10 @@ void Test::allTest() const {
     // std::cout << "testBuilderSommetWithParamFailed : " << (testBuilderSommetWithParamFailed() ? "succed"  : "failed") << " ! " << std::endl;
     std::cout << "testBuilderSommetWithParam : " << (testBuilderSommetWithParam() ? "succed"  : "failed") << " ! " << std::endl;
     std::cout << "testBuilderArbreBWithParam : " << (testBuilderArbreBWithParam() ? "succed"  : "failed") << " ! " << std::endl;
+    
 
     /* Test Parser.hpp */
-    std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "succed" : "failed") << " ! " << std::endl;
+    // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "succed" : "failed") << " ! " << std::endl;
 }
 
 /* Test Tree.hpp */
