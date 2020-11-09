@@ -2,6 +2,7 @@
 #define Test_HPP
 
 #include "../lib/Tree.hpp"
+#include "../lib/Parser.hpp"
 
 class Test
 {
@@ -10,7 +11,7 @@ class Test
         // Global
         void allTest() const;
 
-        // Test builder
+        // Test Tree.hpp
         bool testDefaultBuilderSommet() const;
         bool testCopyBuilderSommet() const;
         bool testDefaultBuilderArbreB() const;
@@ -18,6 +19,9 @@ class Test
         bool testBuilderSommetWithParam() const;
         bool testBuilderSommetWithParamFailed() const;
         bool testBuilderArbreBWithParam() const;
+
+        // Test Parser.hpp
+        bool testCalculFreqChar() const;
 };
 
 #endif

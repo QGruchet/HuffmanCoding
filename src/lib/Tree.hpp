@@ -1,12 +1,12 @@
 #ifndef Tree_HPP
 #define Tree_HPP
 
-#include <iostream>
+#include "Parser.hpp"
 
 class Sommet
 {
   private:
-    /* Attributes */
+    /* Data */
     int numCar; // if car = '\0', numCar = Sum of char under Sommet,
                 // else numCar = frequency of car
     char car;
@@ -36,7 +36,7 @@ class Sommet
 class ArbreB
 {
   private:
-    /* Attributes */
+    /* Data */
     Sommet *root;
 
   public:
@@ -51,8 +51,8 @@ class ArbreB
     ArbreB &operator+=(const ArbreB&); // Add an other tree ( Quentin )
     ArbreB &operator-=(const ArbreB&); // Split tree ( Quentin )
 
-    void operator<(const Sommet&); // Add node
-    int operator>(Sommet&); // Dell node ( Quentin )
+    void operator<(Sommet newRoot); // Add node
+    void operator>(Sommet* newRoot); // Dell node ( Quentin )
 
     Sommet &operator[](int index);
 

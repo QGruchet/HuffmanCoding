@@ -90,12 +90,12 @@ std::ostream &operator<<(std::ostream &flux, const Sommet &other) {
 // End operator[]
 
 // Operator<, operator>
-void ArbreB::operator<(const Sommet&) {
+void ArbreB::operator<(Sommet newRoot) {
     return;
 }
 
-int ArbreB::operator>(Sommet&) {
-    return 0;
+void ArbreB::operator>(Sommet* newRoot) {
+    return;
 }
 // End Operator<, operator>
 
