@@ -12,6 +12,7 @@ class Sommet
         char car;
         Sommet *left, *right;
 
+    public:
         /* Builders */
         Sommet(); // Default
         Sommet(const Sommet&); // Copy
@@ -24,7 +25,6 @@ class Sommet
         
         int maximum(int a, int b);
 
-    public:
         /* Getters */
         int getNumCar() const;
         char getCar() const;
