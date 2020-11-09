@@ -18,8 +18,8 @@ build:
 	./build.sh
 
 # $@ ref name of target, here $(EXEC)
-$(EXEC) : Main.o Tree.o Test.o
-	$(CC) src/target/Main.o src/target/Tree.o src/target/Test.o -o src/bin/$@
+$(EXEC) : Main.o Tree.o Test.o Parser.o
+	$(CC) src/target/Main.o src/target/Tree.o src/target/Test.o src/target/Parser.o -o src/bin/$@
 
 #################################
 
@@ -40,6 +40,8 @@ Tree.o: src/lib/Tree.cpp src/lib/Tree.hpp
 Test.o: src/test/Test.cpp src/test/Test.hpp
 	$(CC) -c $(CFLAGS) $< -o src/target/$@
 
+Parser.o: src/lib/Parser.cpp src/lib/Parser.hpp
+	$(CC) -c $(CFLAGS) $< -o src/target/$@
 #################################
 
 vg:

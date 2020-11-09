@@ -90,6 +90,7 @@ std::ostream &operator<<(std::ostream &flux, const Sommet &other) {
 // End operator[]
 
 // Operator<, operator>
+<<<<<<< HEAD
 void ArbreB::operator<(Sommet& sommet) {
     
 }
@@ -114,10 +115,14 @@ ArbreB ArbreB::addNode(Sommet *sommet){
         }
     }
     return *this;
+=======
+void ArbreB::operator<(Sommet newRoot) {
+    return;
+>>>>>>> 9989db358e97b8c4612d38b6fbad8187acb968a0
 }
 
-int ArbreB::operator>(Sommet&) {
-    return 0;
+void ArbreB::operator>(Sommet* newRoot) {
+    return;
 }
 // End Operator<, operator>
 
@@ -153,13 +158,18 @@ int Sommet::maximum(int a, int b){
     }
 }
 
+<<<<<<< HEAD
 int Sommet::getDepth(Sommet *sommet){
     if(sommet->getCar() == '\0'){
+=======
+int getDepth(Sommet *sommet){
+  if(sommet->getCar() == '\0') {
+>>>>>>> 9989db358e97b8c4612d38b6fbad8187acb968a0
         return 0;
-    }
-    else{
+  }
+  else{
         return 1 + maximum(getDepth(sommet->getLeft()), getDepth(sommet->getRight()));
-    }
+  }
 }
 
 /* End getters */
