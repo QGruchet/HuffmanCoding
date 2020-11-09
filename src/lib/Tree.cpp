@@ -121,7 +121,39 @@ Sommet* Sommet::getRight() const {
 Sommet* ArbreB::getRoot() const {
     return this->root;
 }
+
+int maximum(int a, int b){
+    if(a < b){
+        return b;
+    }
+    else{
+        return a;
+    }
+}
+
+int getDepth(Sommet *sommet){
+    if(sommet->getCar() == '\0'){
+        return 0;
+    }
+    else{
+        return 1 + maximum(getDepth(sommet->getLeft()), getDepth(sommet->getRight()));
+    }
+}
+
 /* End getters */
+
+/* Printer */
+void printTree(Sommet *sommet, int depth){
+    if(sommet->getCar() != '\0'){
+        for (int i = 0; i < depth; ++i)
+        {
+            std::cout << sommet << "    ";
+            printTree(sommet->getLeft(), depth + 1);
+            printTree(sommet->getRight(), depth + 1);
+        }
+    }
+}
+/* End printers */
 
 /* Destructors */
 Sommet::~Sommet() {}

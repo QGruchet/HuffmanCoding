@@ -22,12 +22,17 @@ class Sommet
     Sommet &operator=(const Sommet&);
 
     friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
+    
+    int maximum(int a, int b);
 
     /* Getters */
     int getNumCar() const;
     char getCar() const;
     Sommet* getLeft() const;
     Sommet* getRight() const;
+    int getDepth(Sommet* sommet);
+
+
 
     /* Destructor */
     ~Sommet();
@@ -56,7 +61,8 @@ class ArbreB
 
     Sommet &operator[](int index);
 
-    friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
+    /*printer*/
+    void printTree(ArbreB, int depth);
 
     /* Getters */
     Sommet* getRoot() const;
