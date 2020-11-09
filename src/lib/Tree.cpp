@@ -90,8 +90,35 @@ std::ostream &operator<<(std::ostream &flux, const Sommet &other) {
 // End operator[]
 
 // Operator<, operator>
+<<<<<<< HEAD
+void ArbreB::operator<(Sommet& sommet) {
+    
+}
+
+int ArbreB::emptyTree(){
+    if(this->getRoot() == nullptr){
+        return 1;
+    }
+    return 0;
+}
+
+ArbreB ArbreB::addNode(Sommet *sommet){
+    if(this->emptyTree()){
+        this->root = sommet;
+    }
+    else{
+        if(sommet->getCar() < this->root->getCar()){
+            this->root->getLeft() = addNode(sommet);
+        }
+        else {
+            this->root->getRight() = addNode(sommet);
+        }
+    }
+    return *this;
+=======
 void ArbreB::operator<(Sommet newRoot) {
     return;
+>>>>>>> 9989db358e97b8c4612d38b6fbad8187acb968a0
 }
 
 void ArbreB::operator>(Sommet* newRoot) {
@@ -122,7 +149,7 @@ Sommet* ArbreB::getRoot() const {
     return this->root;
 }
 
-int maximum(int a, int b){
+int Sommet::maximum(int a, int b){
     if(a < b){
         return b;
     }
@@ -131,8 +158,13 @@ int maximum(int a, int b){
     }
 }
 
+<<<<<<< HEAD
+int Sommet::getDepth(Sommet *sommet){
+    if(sommet->getCar() == '\0'){
+=======
 int getDepth(Sommet *sommet){
   if(sommet->getCar() == '\0') {
+>>>>>>> 9989db358e97b8c4612d38b6fbad8187acb968a0
         return 0;
   }
   else{
@@ -143,11 +175,11 @@ int getDepth(Sommet *sommet){
 /* End getters */
 
 /* Printer */
-void printTree(Sommet *sommet, int depth){
+void ArbreB::printTree(Sommet *sommet, int depth){
     if(sommet->getCar() != '\0'){
         for (int i = 0; i < depth; ++i)
         {
-            std::cout << sommet << "    ";
+            std::cout << sommet << "    " << std::endl;
             printTree(sommet->getLeft(), depth + 1);
             printTree(sommet->getRight(), depth + 1);
         }
