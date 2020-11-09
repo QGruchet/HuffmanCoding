@@ -106,14 +106,11 @@ ArbreB ArbreB::addNode(Sommet *sommet){
         this->root = sommet;
     }
     else{
-        if(sommet->getCar() <= this->root->getCar()){
+        if(sommet->getCar() < this->root->getCar()){
             this->root->getLeft() = addNode(sommet);
         }
-        if(sommet->getCar() > this->root->getCar()){
+        else {
             this->root->getRight() = addNode(sommet);
-        }
-        else{
-            std::cout << "Error in node insertion";
         }
     }
     return *this;
