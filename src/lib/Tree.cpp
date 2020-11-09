@@ -90,35 +90,31 @@ std::ostream &operator<<(std::ostream &flux, const Sommet &other) {
 // End operator[]
 
 // Operator<, operator>
-<<<<<<< HEAD
-void ArbreB::operator<(Sommet& sommet) {
-    
+void ArbreB::operator<(Sommet newNode) {
+    return;
 }
 
-int ArbreB::emptyTree(){
-    if(this->getRoot() == nullptr){
-        return 1;
-    }
-    return 0;
+int ArbreB::emptyTree() {
+    return (this->root == nullptr);
 }
 
-ArbreB ArbreB::addNode(Sommet *sommet){
+void ArbreB::addNode(Sommet *newNode, Sommet *root) {
     if(this->emptyTree()){
-        this->root = sommet;
+        this->root = newNode;
+        return;
+    }
+    else if(!root) {
+      root = newNode;
     }
     else{
-        if(sommet->getCar() < this->root->getCar()){
-            this->root->getLeft() = addNode(sommet);
+        if(root->getCar() < newNode->getCar()){
+            addNode(newNode, root->getLeft());
         }
         else {
-            this->root->getRight() = addNode(sommet);
+            addNode(newNode, root->getRight());
         }
     }
-    return *this;
-=======
-void ArbreB::operator<(Sommet newRoot) {
     return;
->>>>>>> 9989db358e97b8c4612d38b6fbad8187acb968a0
 }
 
 void ArbreB::operator>(Sommet* newRoot) {
@@ -148,34 +144,23 @@ Sommet* Sommet::getRight() const {
 Sommet* ArbreB::getRoot() const {
     return this->root;
 }
-
-int Sommet::maximum(int a, int b){
-    if(a < b){
-        return b;
-    }
-    else{
-        return a;
-    }
-}
-
-<<<<<<< HEAD
-int Sommet::getDepth(Sommet *sommet){
-    if(sommet->getCar() == '\0'){
-=======
-int getDepth(Sommet *sommet){
-  if(sommet->getCar() == '\0') {
->>>>>>> 9989db358e97b8c4612d38b6fbad8187acb968a0
-        return 0;
-  }
-  else{
-        return 1 + maximum(getDepth(sommet->getLeft()), getDepth(sommet->getRight()));
-  }
-}
-
 /* End getters */
 
-/* Printer */
-void ArbreB::printTree(Sommet *sommet, int depth){
+/* Methodes */
+int Sommet::maximum(int a, int b){
+    return (a > b) ? a : b;
+}
+
+int Sommet::getDepth(Sommet *sommet){
+    if(sommet->getCar() == '\0'){
+        return 0;
+    }
+    else{
+            return 1 + maximum(getDepth(sommet->getLeft()), getDepth(sommet->getRight()));
+    }
+}
+
+void ArbreB::printTree(Sommet *sommet, int depth) {
     if(sommet->getCar() != '\0'){
         for (int i = 0; i < depth; ++i)
         {

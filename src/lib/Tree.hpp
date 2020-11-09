@@ -12,7 +12,6 @@ class Sommet
         char car;
         Sommet *left, *right;
 
-    public:
         /* Builders */
         Sommet(); // Default
         Sommet(const Sommet&); // Copy
@@ -25,6 +24,7 @@ class Sommet
         
         int maximum(int a, int b);
 
+    public:
         /* Getters */
         int getNumCar() const;
         char getCar() const;
@@ -54,13 +54,15 @@ class ArbreB
         ArbreB &operator+=(const ArbreB&); // Add an other tree ( Quentin )
         ArbreB &operator-=(const ArbreB&); // Split tree ( Quentin )
 
-        void operator<(Sommet newRoot); // Add node
-        void operator>(Sommet* newRoot); // Dell node ( Quentin )
+        void operator<(Sommet newNode); // Add node
+        void operator>(Sommet* newNode); // Dell node ( Quentin )
 
         Sommet &operator[](int index);
 
-        /*printer*/
-        void printTree(ArbreB, int depth);
+        /* Methodes */
+        void printTree(Sommet *sommet, int depth);
+        int emptyTree();
+        void addNode(Sommet *newNode, Sommet *root);
 
         /* Getters */
         Sommet* getRoot() const;
