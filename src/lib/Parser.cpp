@@ -3,11 +3,11 @@
 void Parser::freqChar(std::string nameFile, std::vector<int> freq) const {
     std::ifstream flux(nameFile);
     char read;
-    int buffChar = 256, oldBuffChar = 0;
+    int buffChar = 256, buffSize = 2*buffChar, oldBuffChar = 0;
 
     if(flux) {
-        freq.reserve(buffChar*buffChar);
-        for(int i=0; i<buffChar*buffChar; ++i) {
+        freq.reserve(buffSize);
+        for(int i=0; i<buffSize; ++i) {
             freq[i] = 0;
         }
         
@@ -16,14 +16,14 @@ void Parser::freqChar(std::string nameFile, std::vector<int> freq) const {
             if(posCharRead >= buffChar) {
                 oldBuffChar = buffChar;
                 buffChar += buffChar/2;
-                freq.resize(buffChar*buffChar);
-                for(int i=oldBuffChar; i<buffChar*buffChar; ++i) {
+                freq.resize(buffSize);
+                for(int i=oldBuffChar; i<buffSize; ++i) {
                     freq[i] = 0;
                 }
             }
             flux.get(read);
             posCharRead++;
-            for(int i=0; i<buffChar*buffChar; i+=2) {
+            for(int i=0; i<buffSize; i+=2) {
                 if(read == freq[i]) {
                     freq[i+1] += 1;
                 }

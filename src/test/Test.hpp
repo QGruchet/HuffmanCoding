@@ -16,10 +16,14 @@ class Test
         bool testCopyBuilderSommet() const;
         bool testDefaultBuilderArbreB() const;
         bool testCopyBuilderArbreB() const;
-        bool testBuilderSommetWithParam() const;
         bool testBuilderSommetWithParamFailed() const;
+        bool testBuilderSommetWithNumCarAndCar() const;
+        bool testBuilderSommetWithNum() const;
         bool testBuilderArbreBWithParam() const;
-        void testAddNode() const;
+        bool testAddNode() const;
+        bool testDepth() const;
+        bool testSize() const;
+        bool testTreeToVector() const;
 
         // Test Parser.hpp
         bool testCalculFreqChar() const;
