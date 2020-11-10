@@ -19,6 +19,7 @@ class Test
         bool testBuilderSommetWithParam() const;
         bool testBuilderSommetWithParamFailed() const;
         bool testBuilderArbreBWithParam() const;
+        void testAddNode() const;
 
         // Test Parser.hpp
         bool testCalculFreqChar() const;

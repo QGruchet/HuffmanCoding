@@ -9,7 +9,7 @@ void Test::allTest() const {
     // std::cout << "testBuilderSommetWithParamFailed : " << (testBuilderSommetWithParamFailed() ? "succed"  : "failed") << " ! " << std::endl;
     std::cout << "testBuilderSommetWithParam : " << (testBuilderSommetWithParam() ? "succed"  : "failed") << " ! " << std::endl;
     std::cout << "testBuilderArbreBWithParam : " << (testBuilderArbreBWithParam() ? "succed"  : "failed") << " ! " << std::endl;
-    
+    testAddNode();
 
     /* Test Parser.hpp */
     // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "succed" : "failed") << " ! " << std::endl;
@@ -75,6 +75,30 @@ bool Test::testBuilderArbreBWithParam() const {
         && (root->getCar() == 'e')
         && (root->getLeft() == nullptr)
         && (root->getRight() ==  nullptr) );
+}
+
+void Test::testAddNode() const {
+    Sommet* node = new Sommet(2, '\0');
+    ArbreB tree(node);
+    Sommet* node2 = new Sommet(3, '\0');
+    tree.addNode(node2, tree.getRoot());
+    Sommet* node3 = new Sommet(1, '\0');
+    tree.addNode(node3, tree.getRoot());
+    Sommet* node4 = new Sommet(13, '\0');
+    tree.addNode(node4, tree.getRoot());
+    Sommet* node5 = new Sommet(6, '\0');
+    tree.addNode(node5, tree.getRoot());
+    // Sommet* node6 = new Sommet(0, '\0');
+    // tree.addNode(node6, tree.getRoot());
+    Sommet* node7 = new Sommet(3, '\0');
+    tree.addNode(node7, tree.getRoot());
+    // Sommet* node8 = new Sommet(5, '\0');
+    // tree.addNode(node8, tree.getRoot());
+    Sommet* node9 = new Sommet(69, '\0');
+    tree.addNode(node9, tree.getRoot());
+    // Sommet* node10 = new Sommet(7, '\0');
+    // tree.addNode(node10, tree.getRoot());
+    tree.printTree(node, 0);
 }
 /* End Tree.hpp */
 

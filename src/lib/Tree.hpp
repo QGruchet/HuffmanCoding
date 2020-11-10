@@ -5,6 +5,8 @@
 
 class Sommet
 {
+    friend class ArbreB;
+
     private:
         /* Data */
         int numCar; // if car = '\0', numCar = Sum of char under Sommet,
@@ -23,14 +25,12 @@ class Sommet
 
         friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
         
-        int maximum(int a, int b);
 
         /* Getters */
         int getNumCar() const;
         char getCar() const;
         Sommet* getLeft() const;
         Sommet* getRight() const;
-        int getDepth(Sommet* sommet);
 
         /* Destructor */
         ~Sommet();
@@ -59,13 +59,17 @@ class ArbreB
 
         Sommet &operator[](int index);
 
+        // friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
+
         /* Methodes */
-        void printTree(Sommet *sommet, int depth);
+        void printTree(Sommet *sommet, int) ;
         int emptyTree();
         void addNode(Sommet *newNode, Sommet *root);
+        int maximum(int a, int b);
 
         /* Getters */
         Sommet* getRoot() const;
+        int getDepth(Sommet* sommet);
 
         /* Destructor */
         ~ArbreB();
