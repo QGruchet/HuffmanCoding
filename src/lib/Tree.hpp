@@ -24,10 +24,17 @@ class Sommet
         Sommet(int numCar, char car);
         Sommet(int num);
 
-        friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
+        /* Overloaded */
         
         /* Methodes */
+        void add(Sommet *root, int newDatat);
+
         bool isLeaf();
+
+        void printPrefix(Sommet *node);
+        void print(Sommet *node);
+        void printTree(Sommet *node, int space);
+        void clean(Sommet *node);
 
         /* Getters */
         int getNumCar() const;
@@ -48,39 +55,19 @@ class ArbreB
 
     public:
         /* Builders */
-        ArbreB(); // Default
-        ArbreB(const ArbreB&); // Copy
-        ArbreB(Sommet* root);
+        ArbreB(); //Default
+        ArbreB(Sommet *root);
 
         /* Overloaded */
-        ArbreB &operator=(ArbreB&);
-
-        ArbreB &operator+=(const ArbreB&); // Add an other tree
-        ArbreB &operator-=(const ArbreB&); // Split tree
-
-        void operator<(Sommet newNode); // Add node
-        void operator>(int index); // Dell node at index
-
-        Sommet* operator[](int index);
-
-        friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
         /* Methodes */
         int maximum(int a, int b);
-
         bool isTreeEmpty();
-
-        void addNode(Sommet *root, Sommet *newNode);
-        void toQueue(std::queue<Sommet> *queueTree);
-        void clear(Sommet **node);
-        void copy(Sommet *node,Sommet *nodeCopy);
-
-        void printTree(Sommet *sommet, int);
 
         /* Getters */
         Sommet* getRoot() const;
+        int getDepth(Sommet *node);
         int getSize() const;
-        int getDepth(Sommet* sommet);
 
         /* Destructor */
         ~ArbreB();

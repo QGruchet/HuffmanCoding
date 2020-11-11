@@ -6,15 +6,14 @@ void Test::allTest() const {
     std::cout << "testCopyBuilderSommet : " << (testCopyBuilderSommet() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testDefaultBuilderArbreB : " << (testDefaultBuilderArbreB() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testCopyBuilderArbreB : " << (testCopyBuilderArbreB() ? "succes"  : "fail") << " ! " << std::endl;
-    // std::cout << "testBuilderSommetWithParamFailed : " << (testBuilderSommetWithParamFailed() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testBuilderSommetWithNumCarAndCar : " << (testBuilderSommetWithNumCarAndCar() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testBuilderSommetWithNum : " << (testBuilderSommetWithNum() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testBuilderArbreBWithParam : " << (testBuilderArbreBWithParam() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testCopyArbreB : " << (testCopyArbreB() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testTreeToQueue : " << (testTreeToQueue() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testGetSommetAtIndex : " << (testGetSommetAtIndex() ? "succes"  : "fail") << " ! " << std::endl;
-    std::cout << "testAddNode : " << (testAddNode() ? "succes"  : "fail") << " ! " << std::endl;
-    std::cout << "testAddNode2 : " << (testAddNode2() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testadd : " << (testAdd() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testadd2 : " << (testAdd2() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testDepth : " << (testDepth() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testSize : " << (testSize() ? "succes"  : "fail") << " ! " << std::endl;
     std::cout << "testDellNodeAtIndex : " << (testDellNodeAtIndex() ? "succes"  : "fail") << " ! " << std::endl;
@@ -45,8 +44,8 @@ bool Test::testCopyBuilderSommet() const {
 
     return ( (node.getNumCar() == nodeCopy.getNumCar())
         && (node.getCar() == nodeCopy.getCar())
-        && (node.getLeft() == nodeCopy.getLeft())
-        && (node.getRight() ==  nodeCopy.getRight()) );
+        && (nodeCopy.getLeft() == nullptr)
+        && (nodeCopy.getRight() ==  nullptr) );
 }
 
 bool Test::testCopyBuilderArbreB() const {
@@ -54,15 +53,6 @@ bool Test::testCopyBuilderArbreB() const {
     ArbreB treeCopy;
 
     return ( tree.getRoot() == treeCopy.getRoot() );
-}
-
-bool Test::testBuilderSommetWithParamFailed() const {
-    Sommet node(-1, '\0');
-
-    return ( (node.getNumCar() == -1)
-        && (node.getCar() == '\0')
-        && (node.getLeft() == nullptr)
-        && (node.getRight() ==  nullptr) );
 }
 
 bool Test::testBuilderSommetWithNumCarAndCar() const {
@@ -97,117 +87,69 @@ bool Test::testBuilderArbreBWithParam() const {
 bool Test::testCopyArbreB() const {
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
-    tree.addNode(root, new Sommet(2));
-    tree.addNode(root, new Sommet(0));
-    tree.addNode(root, new Sommet(3));
-
-    ArbreB treeCopy;
-    treeCopy = tree;
-
-    treeCopy.printTree(treeCopy.getRoot(), 0);
+    root->add(root, 2);
+    root->add(root, 0);
+    root->add(root, 3);
+    
     return 0;
 }
 
 bool Test::testTreeToQueue() const {
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
-    tree.addNode(root, new Sommet(2));
-    tree.addNode(root, new Sommet(0));
-    tree.addNode(root, new Sommet(3));
+    root->add(root, 2);
+    root->add(root, 0);
+    root->add(root, 3);
 
-    std::queue<Sommet> queueTree;
-    tree.toQueue(&queueTree);
-    std::queue<Sommet> queueTest;
-    queueTest.push(Sommet(1));
-    queueTest.push(Sommet(0));
-    queueTest.push(Sommet(2));
-    queueTest.push(Sommet(3));
-
-    if(queueTest.size() != queueTree.size()) {
-        return false;
-    }
-    bool ret = true;
-    while(!queueTree.empty()) {
-        ret &= (queueTree.front().getNumCar() == queueTest.front().getNumCar());
-        queueTest.pop();
-        queueTree.pop();
-    }
-    return ret;
+    return 0;
 }
 
 bool Test::testGetSommetAtIndex() const {
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
-    tree.addNode(root, new Sommet(2));
-    tree.addNode(root, new Sommet(0));
-    tree.addNode(root, new Sommet(3));
+    root->add(root, 2);
+    root->add(root, 0);
+    root->add(root, 3);
 
-    return tree[4]->getNumCar() == 3;
+    return 0;
 }
 
-bool Test::testAddNode() const {
+bool Test::testAdd() const {
     Sommet* root = new Sommet(2);
     ArbreB tree(root);
 
-    tree.addNode(root, new Sommet(3));
-    tree.addNode(root, new Sommet(1));
-    tree.addNode(root, new Sommet(13));
-    tree.addNode(root, new Sommet(6));
-    tree.addNode(root, new Sommet(0));
-    tree.addNode(root, new Sommet(3));
-    tree.addNode(root, new Sommet(5));
-    tree.addNode(root, new Sommet(69));
+    root->add(root, 3);
+    root->add(root, 1);
+    root->add(root, 13);
+    root->add(root, 6);
+    root->add(root, 0);
+    root->add(root, 3);
+    root->add(root, 5);
+    root->add(root, 69);
     
     return 1;
 }
 
-bool Test::testAddNode2() const {
-    Sommet* root = new Sommet(2);
-    ArbreB tree(root);
-
-    tree.addNode(root, new Sommet(3));
-    tree.addNode(root, new Sommet(1));
-    tree.addNode(root, new Sommet(13));
-    tree.addNode(root, new Sommet(6));
-    tree.addNode(root, new Sommet(0));
-    tree.addNode(root, new Sommet(3));
-    tree.addNode(root, new Sommet(5));
-    tree.addNode(root, new Sommet(69));
-    
-    return 1;
+bool Test::testAdd2() const {
+    return 0;
 }
 
 bool Test::testDepth() const {
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
-    tree.addNode(root, new Sommet(2));
-    tree.addNode(root, new Sommet(0));
-    tree.addNode(root, new Sommet(3));
+    root->add(root, 2);
+    root->add(root, 0);
+    root->add(root, 3);
 
     return (tree.getDepth(root) == 2);
 }
 
 bool Test::testSize() const {
-    Sommet *root = new Sommet(1);
-    ArbreB tree(root);
-    tree < Sommet(2);
-    tree < Sommet(0);
-    tree < Sommet(3);
-
-    return ((tree[4]->getNumCar() == 3) && (tree.getSize() == 4) && (tree.getDepth(root) == 2));
+    return 0;
 }
 
 bool Test::testDellNodeAtIndex() const {
-    Sommet *root = new Sommet(1);
-    ArbreB tree(root);
-    tree < Sommet(2);
-    tree < Sommet(0);
-    tree < Sommet(3);
-    tree > 3;
-
-    tree.printTree(root, 0);
-
-    return ((tree[3]->getNumCar() == 3) && (tree.getSize() == 3) && (tree.getDepth(root) == 1));
+    return 0;
 }
 /* End Tree.hpp */
 

@@ -23,8 +23,8 @@ class Test
         bool testCopyArbreB() const;
         bool testTreeToQueue() const;
         bool testGetSommetAtIndex() const;
-        bool testAddNode() const;
-        bool testAddNode2() const;
+        bool testAdd() const;
+        bool testAdd2() const;
         bool testDepth() const;
         bool testSize() const;
         bool testDellNodeAtIndex() const;
