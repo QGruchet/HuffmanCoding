@@ -2,21 +2,25 @@
 
 void Test::allTest() const {
     /* Test Tree.hpp */
-    std::cout << "testDefaultBuilderSommet : " << (testDefaultBuilderSommet() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testCopyBuilderSommet : " << (testCopyBuilderSommet() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testDefaultBuilderArbreB : " << (testDefaultBuilderArbreB() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testCopyBuilderArbreB : " << (testCopyBuilderArbreB() ? "succed"  : "failed") << " ! " << std::endl;
-    // std::cout << "testBuilderSommetWithParamFailed : " << (testBuilderSommetWithParamFailed() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testBuilderSommetWithNumCarAndCar : " << (testBuilderSommetWithNumCarAndCar() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testBuilderSommetWithNum : " << (testBuilderSommetWithNum() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testBuilderArbreBWithParam : " << (testBuilderArbreBWithParam() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testAddNode : " << (testAddNode() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testDepth : " << (testDepth() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testSize : " << (testSize() ? "succed"  : "failed") << " ! " << std::endl;
-    std::cout << "testTreeToVector : " << (testTreeToVector() ? "succed"  : "failed") << " ! " << std::endl;
+    std::cout << "testDefaultBuilderSommet : " << (testDefaultBuilderSommet() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testCopyBuilderSommet : " << (testCopyBuilderSommet() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testDefaultBuilderArbreB : " << (testDefaultBuilderArbreB() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testCopyBuilderArbreB : " << (testCopyBuilderArbreB() ? "succes"  : "fail") << " ! " << std::endl;
+    // std::cout << "testBuilderSommetWithParamFailed : " << (testBuilderSommetWithParamFailed() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testBuilderSommetWithNumCarAndCar : " << (testBuilderSommetWithNumCarAndCar() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testBuilderSommetWithNum : " << (testBuilderSommetWithNum() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testBuilderArbreBWithParam : " << (testBuilderArbreBWithParam() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testCopyArbreB : " << (testCopyArbreB() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testTreeToQueue : " << (testTreeToQueue() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testGetSommetAtIndex : " << (testGetSommetAtIndex() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testAddNode : " << (testAddNode() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testAddNode2 : " << (testAddNode2() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testDepth : " << (testDepth() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testSize : " << (testSize() ? "succes"  : "fail") << " ! " << std::endl;
+    std::cout << "testDellNodeAtIndex : " << (testDellNodeAtIndex() ? "succes"  : "fail") << " ! " << std::endl;
 
     /* Test Parser.hpp */
-    // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "failed") << " ! " << std::endl;
+    // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
 }
 
 /* Test Tree.hpp */
@@ -90,6 +94,57 @@ bool Test::testBuilderArbreBWithParam() const {
         && (root->getRight() ==  nullptr) );
 }
 
+bool Test::testCopyArbreB() const {
+    Sommet *root = new Sommet(1);
+    ArbreB tree(root);
+    tree.addNode(root, new Sommet(2));
+    tree.addNode(root, new Sommet(0));
+    tree.addNode(root, new Sommet(3));
+
+    ArbreB treeCopy;
+    treeCopy = tree;
+
+    treeCopy.printTree(treeCopy.getRoot(), 0);
+    return 0;
+}
+
+bool Test::testTreeToQueue() const {
+    Sommet *root = new Sommet(1);
+    ArbreB tree(root);
+    tree.addNode(root, new Sommet(2));
+    tree.addNode(root, new Sommet(0));
+    tree.addNode(root, new Sommet(3));
+
+    std::queue<Sommet> queueTree;
+    tree.toQueue(&queueTree);
+    std::queue<Sommet> queueTest;
+    queueTest.push(Sommet(1));
+    queueTest.push(Sommet(0));
+    queueTest.push(Sommet(2));
+    queueTest.push(Sommet(3));
+
+    if(queueTest.size() != queueTree.size()) {
+        return false;
+    }
+    bool ret = true;
+    while(!queueTree.empty()) {
+        ret &= (queueTree.front().getNumCar() == queueTest.front().getNumCar());
+        queueTest.pop();
+        queueTree.pop();
+    }
+    return ret;
+}
+
+bool Test::testGetSommetAtIndex() const {
+    Sommet *root = new Sommet(1);
+    ArbreB tree(root);
+    tree.addNode(root, new Sommet(2));
+    tree.addNode(root, new Sommet(0));
+    tree.addNode(root, new Sommet(3));
+
+    return tree[4]->getNumCar() == 3;
+}
+
 bool Test::testAddNode() const {
     Sommet* root = new Sommet(2);
     ArbreB tree(root);
@@ -103,7 +158,23 @@ bool Test::testAddNode() const {
     tree.addNode(root, new Sommet(5));
     tree.addNode(root, new Sommet(69));
     
-    return 0;
+    return 1;
+}
+
+bool Test::testAddNode2() const {
+    Sommet* root = new Sommet(2);
+    ArbreB tree(root);
+
+    tree.addNode(root, new Sommet(3));
+    tree.addNode(root, new Sommet(1));
+    tree.addNode(root, new Sommet(13));
+    tree.addNode(root, new Sommet(6));
+    tree.addNode(root, new Sommet(0));
+    tree.addNode(root, new Sommet(3));
+    tree.addNode(root, new Sommet(5));
+    tree.addNode(root, new Sommet(69));
+    
+    return 1;
 }
 
 bool Test::testDepth() const {
@@ -119,25 +190,24 @@ bool Test::testDepth() const {
 bool Test::testSize() const {
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
-    tree.addNode(root, new Sommet(2));
-    tree.addNode(root, new Sommet(0));
-    tree.addNode(root, new Sommet(3));
+    tree < Sommet(2);
+    tree < Sommet(0);
+    tree < Sommet(3);
 
-    return (tree.getSize() == 4);
+    return ((tree[4]->getNumCar() == 3) && (tree.getSize() == 4) && (tree.getDepth(root) == 2));
 }
 
-bool Test::testTreeToVector() const {
+bool Test::testDellNodeAtIndex() const {
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
-    tree.addNode(root, new Sommet(2));
-    tree.addNode(root, new Sommet(0));
-    tree.addNode(root, new Sommet(3));
+    tree < Sommet(2);
+    tree < Sommet(0);
+    tree < Sommet(3);
+    tree > 3;
 
-    std::vector<Sommet*> vectorTree;
-    tree.toVector(vectorTree);
-    std::vector<Sommet*> vectorTest = {new Sommet(1), new Sommet(0), new Sommet(2), new Sommet(3)};
+    tree.printTree(root, 0);
 
-    return vectorTree == vectorTest;
+    return ((tree[3]->getNumCar() == 3) && (tree.getSize() == 3) && (tree.getDepth(root) == 1));
 }
 /* End Tree.hpp */
 

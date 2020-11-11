@@ -20,10 +20,14 @@ class Test
         bool testBuilderSommetWithNumCarAndCar() const;
         bool testBuilderSommetWithNum() const;
         bool testBuilderArbreBWithParam() const;
+        bool testCopyArbreB() const;
+        bool testTreeToQueue() const;
+        bool testGetSommetAtIndex() const;
         bool testAddNode() const;
+        bool testAddNode2() const;
         bool testDepth() const;
         bool testSize() const;
-        bool testTreeToVector() const;
+        bool testDellNodeAtIndex() const;
 
         // Test Parser.hpp
         bool testCalculFreqChar() const;

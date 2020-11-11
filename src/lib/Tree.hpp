@@ -2,6 +2,7 @@
 #define Tree_HPP
 
 #include "Parser.hpp"
+#include "queue"
 
 class Sommet
 {
@@ -20,15 +21,13 @@ class Sommet
     public:
         /* Builders */
         Sommet(); // Default
-        Sommet(const Sommet&); // Copy
         Sommet(int numCar, char car);
         Sommet(int num);
 
-        /* Overloaded */
-        Sommet &operator=(const Sommet&);
-
         friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
         
+        /* Methodes */
+        bool isLeaf();
 
         /* Getters */
         int getNumCar() const;
@@ -54,13 +53,13 @@ class ArbreB
         ArbreB(Sommet* root);
 
         /* Overloaded */
-        ArbreB &operator=(const ArbreB&);
+        ArbreB &operator=(ArbreB&);
 
         ArbreB &operator+=(const ArbreB&); // Add an other tree
         ArbreB &operator-=(const ArbreB&); // Split tree
 
         void operator<(Sommet newNode); // Add node
-        void operator>(Sommet* newNode); // Dell node
+        void operator>(int index); // Dell node at index
 
         Sommet* operator[](int index);
 
@@ -72,7 +71,9 @@ class ArbreB
         bool isTreeEmpty();
 
         void addNode(Sommet *root, Sommet *newNode);
-        void toVector(std::vector<Sommet*> vectorTree);
+        void toQueue(std::queue<Sommet> *queueTree);
+        void clear(Sommet **node);
+        void copy(Sommet *node,Sommet *nodeCopy);
 
         void printTree(Sommet *sommet, int);
 

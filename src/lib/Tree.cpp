@@ -6,15 +6,6 @@ Sommet::Sommet() : numCar(-1), car('\0'), left(nullptr), right(nullptr) {}
 ArbreB::ArbreB() : root(nullptr), depth(0), size(0) {}
 // End default
 
-// Copy
-Sommet::Sommet(const Sommet &other) {
-    this->numCar = other.numCar;
-    this->car = other.car;
-
-    this->left = other.left;
-    this->right = other.right;
-}
-
 ArbreB::ArbreB(const ArbreB &other) {
     this->root = other.root;
     this->depth = other.depth;
@@ -58,22 +49,25 @@ ArbreB::ArbreB(Sommet* root) {
 
 /* Overloaded */
 // Operator=
-Sommet& Sommet::operator=(const Sommet &other) {
-    if( this != &other) {
-        this->numCar = other.numCar;
-        this->car = other.car;
-
-        this->left = other.left;
-        this->right = other.right;
+void ArbreB::copy(Sommet *node, Sommet *nodeCopy) {
+    if(!node) {
+        return;
+    }
+    if(node->isLeaf()) {
+        nodeCopy = new Sommet(node->numCar, node->car);
+        this->size += 1;
     }
 
-    return *this;
+    copy(node->left, nodeCopy->left);
+    copy(node->right, nodeCopy->right);
 }
-ArbreB& ArbreB::operator=(const ArbreB &other) {
+
+ArbreB& ArbreB::operator=(ArbreB &other) {
     if(this != &other) {
-        this->root = other.root;
-        this->depth = other.depth;
-        this->size = other.size;
+        this->root = new Sommet(other.root->numCar, other.root->car);
+        this->size = 0;
+        this->depth = this->getDepth(this->root);
+        copy(other.root, this->root);
     }
 
     return *this;
@@ -90,6 +84,10 @@ std::ostream &operator<<(std::ostream &flux, const Sommet &other) {
     }
     return flux;
 }
+
+// std::ostream &operator<<(std::ostream &flux, const ArbreB &other) {
+//     return flux;
+// } 
 // End operator<<
 
 // Operator+=, operator-=
@@ -109,9 +107,15 @@ Sommet* ArbreB::operator[](int index) {
         return nullptr;
     }
 
-    std::vector<Sommet*> vector;
-    this->toVector(vector);
-    return vector.at(index-1);
+    std::queue<Sommet> queueTree;
+    this->toQueue(&queueTree);
+    int posInQueue = 0;
+    while(posInQueue<index-1) {
+        queueTree.pop();
+        posInQueue++;
+    }
+    
+    return &(queueTree.front());
 }
 // End operator[]
 
@@ -120,15 +124,29 @@ void ArbreB::operator<(Sommet newNode) {
     addNode(this->root, &newNode);
 }
 
-void ArbreB::operator>(Sommet* newRoot) {
-    return;
+void ArbreB::operator>(int index) {
+    if(0 > index-1 || index-1 >= this->size ) {
+        std::cout << "ERROR : index out of range" << std::endl;
+        return;
+    }
+
+    std::queue<Sommet> queueTree;
+    this->toQueue(&queueTree);
+    Sommet *root = &queueTree.front();
+    ArbreB tree(root);
+    queueTree.pop();
+    int tmp = 1;
+    while(!queueTree.empty()) {
+        if(tmp!=index-1) {
+            tree < queueTree.front();
+        }
+        queueTree.pop();
+        tmp++;
+    }
+
+    *this = tree;
 }
 
-// std::ostream &operator<<(std::ostream &flux, const ArbreB &other) {
-//     flux << "size : " << other.getSize() << ", depth : " << other.getDepth(other.getRoot());
-//     other.printTree(other.getRoot(), 0);
-//     return flux;
-// } 
 // End Operator<, operator>
 
 /* End overloaded */
@@ -180,6 +198,10 @@ bool ArbreB::isTreeEmpty() {
     return (this->root == nullptr);
 }
 
+bool Sommet::isLeaf() {
+    return (!this->left && !this->right);
+}
+
 void ArbreB::addNode(Sommet *root, Sommet *newNode) {
     if(this->isTreeEmpty()){
         this->root = newNode;
@@ -203,41 +225,57 @@ void ArbreB::addNode(Sommet *root, Sommet *newNode) {
     }
 }
 
-void ArbreB::toVector(std::vector<Sommet*> vectorTree) {
-    std::vector<Sommet*> fifo;
-    fifo.reserve(this->size);
-    fifo.push_back(this->root);
-
-    vectorTree.reserve(this->size);
+void ArbreB::toQueue(std::queue<Sommet> *queueTree) {
+    std::queue<Sommet*> fifo;
+    fifo.push(this->root);
 
     while(!fifo.empty()) {
-        Sommet *last = fifo.back();
-        fifo.pop_back();
+        Sommet *last = fifo.front();
+        fifo.pop();
 
-        if(last) {
-            vectorTree.push_back(last);
-            fifo.push_back(last->left);
-            fifo.push_back(last->right);
+        (*queueTree).push(*last);
+        if(last->left) {
+            fifo.push(last->left);
+        }
+        if(last->right) {
+            fifo.push(last->right);
         }
     }
 }
 
-void ArbreB::printTree(Sommet *sommet, int space) {
-    if(!sommet) {
+void ArbreB::printTree(Sommet *node, int space) {
+    if(!node) {
         return;
     }
     else {
-        printTree(sommet->right, space + 1);
+        printTree(node->right, space + 1);
         for(int i = 0; i < space; i++) {
             printf("   ");
         }
-        std::cout << *sommet << std::endl;
-        printTree(sommet->left, space + 1);
+        std::cout << *node << std::endl;
+        printTree(node->left, space + 1);
     }
+}
+
+void ArbreB::clear(Sommet **node) {
+    Sommet *tmpNode = *node;
+
+    if(!node) return;
+
+    if(tmpNode->left)  clear(&tmpNode->left);
+    if(tmpNode->right) clear(&tmpNode->right);
+
+    delete tmpNode; 
+    *node = NULL;
 }
 /* End printers */
 
 /* Destructors */
 Sommet::~Sommet() {}
-ArbreB::~ArbreB() {}
+ArbreB::~ArbreB() {
+    if(this->root) {
+        this->clear(&this->root);
+        delete this->root;
+    }
+}
 /* End destructors */

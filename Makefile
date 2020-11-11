@@ -5,9 +5,9 @@ EXEC=main
 #################################
 
 ifeq ($(DEBUG), yes)
-	CFLAGS = -std=c++17 -Wall -g
+	CFLAGS = -std=c++17 -Wall -Wextra -g
 else
-	CFLAGS = -std=c++17 -Wall
+	CFLAGS = -std=c++17 -Wall -Wextra
 endif
 
 #################################
