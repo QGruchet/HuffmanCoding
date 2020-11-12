@@ -6,94 +6,78 @@ Sommet::Sommet() : numCar(-1), car('\0'), left(nullptr), right(nullptr) {}
 ArbreB::ArbreB() : root(nullptr), depth(0), size(0) {}
 // End default
 
-ArbreB::ArbreB(Sommet *root) {
-    this->root = root;
-    this->depth = getDepth(root);
-    this->size = 0;
+ArbreB::ArbreB(Sommet *newRoot) {
+    root = newRoot;
+    depth = newRoot->getDepth();
+    size = 0;
 }
 
-void Sommet::init(int numCar, char car) {
-    if( numCar >= 0) {
-        this->numCar = numCar;
-        this->car = car;
+void Sommet::init(int newNumCar, char newCar) {
+    if(newNumCar >= 0) {
+        numCar = newNumCar;
+        car = newCar;
 
-        this->left = nullptr;
-        this->right = nullptr;
+        left = nullptr;
+        right = nullptr;
     }
     else {
-        std::cout << "ERROR : invalid numCar, call default builder" << std::endl;
+        std::cout << "ERROR : invalid newNumCar, call default builder" << std::endl;
 
-        this->numCar = 0;
-        this->car = '\0';
+        numCar = 0;
+        car = '\0';
 
-        this->left = nullptr;
-        this->right = nullptr;
+        left = nullptr;
+        right = nullptr;
     }
 }
 
-Sommet::Sommet(int numCar, char car) {
-    init(numCar, car);
+Sommet::Sommet(int newNumCar, char newCar) {
+    init(newNumCar, newCar);
 }
 
-Sommet::Sommet(int num) {
-    init(num, '\0');
+Sommet::Sommet(int newNum) {
+    init(newNum, '\0');
 }
 /* End builders */
 
 /* Overloaded */
 // Operator=
-// ArbreB& ArbreB::operator=(ArbreB &other) {
-//     return *this;
-// }
 // End operator=
 
 // Operator<<
-std::ostream &operator<<(std::ostream &flux, const Sommet &other) {
-    if(other.getCar() == '\0') {
-        flux << other.getNumCar();
+Sommet& Sommet::operator<<(int newData) {
+    if(numCar >= newData) {
+      if(left) {
+        *left << newData;
+      }
+      else{
+        left = new Sommet(newData);
+      }
     }
-    else {
-        flux << other.getNumCar() << ", " << other.getCar();
+    else{
+      if(right) {
+        *right << newData;
+      }
+      else {
+        right = new Sommet(newData);
+      }
     }
-    return flux;
+    return *this;
 }
 
-// std::ostream &operator<<(std::ostream &flux, const ArbreB &other) {
-//     return flux;
-// } 
+std::ostream &operator<<(std::ostream &flux, Sommet s) {
+    flux << "Prefix : \n";
+    s.printPrefix();
+
+    return flux;
+}
 // End operator<<
 
 // Operator+=, operator-=
-// ArbreB& ArbreB::operator+=(const ArbreB &other) {
-//     /* Not implemented yet */
-// }
-
-// ArbreB& ArbreB::operator-=(const ArbreB &other) {
-//     /* Not implemented yet */
-// }
 // End operator+=, operator-=
 
 // Operator[]
-// Sommet* ArbreB::operator[](int index) {
-//     if(index-1 < 0 || index-1 >= this->size) {
-//         std::cout << "ERROR : index out of band." << std::endl;
-//         return nullptr;
-//     }
-
-//     std::queue<Sommet> queueTree;
-//     this->toQueue(&queueTree);
-//     int posInQueue = 0;
-//     while(posInQueue<index-1) {
-//         queueTree.pop();
-//         posInQueue++;
-//     }
-    
-//     return &(queueTree.front());
-// }
 // End operator[]
-
-// Operator<, operator>
-// End Operator<, operator>
 /* End overloaded */
 
 /* Getters */
@@ -106,27 +90,26 @@ char Sommet::getCar() const {
 }
 
 Sommet* Sommet::getLeft() const {
-    return this->left;
+    return left;
 }
 
 Sommet* Sommet::getRight() const {
-    return this->right;
+    return right;
 }
 
 Sommet* ArbreB::getRoot() const {
-    return this->root;
+    return root;
 }
 
-int ArbreB::getDepth(Sommet *node) {
-    if(!node) {
-        return 0;
+int Sommet::getDepth() {
+    int depthLeft = 0, depthRight = 0;
+    if(left) {
+        depthLeft = left->getDepth();
     }
-    else if(node == this->root) {
-        return maximum(getDepth(node->getLeft()), getDepth(node->getRight()));
+    else if(right) {
+        depthRight = right->getDepth();
     }
-    else {
-        return 1 + maximum(getDepth(node->getLeft()), getDepth(node->getRight()));
-    }
+    return 1 + maximum(depthLeft, depthRight);
 }
 
 int ArbreB::getSize() const {
@@ -135,101 +118,46 @@ int ArbreB::getSize() const {
 /* End getters */
 
 /* Methodes */
-void Sommet::add(Sommet *root, int newData) {
-    if(!root) {
-        root = new Sommet(newData);
-        return;
-    }
-
-    if(!root->left && root->numCar >= newData) {
-        root->left = new Sommet(newData);
-        return;
-    }
-    else if(!root->right && root->numCar < newData) {
-        root->right = new Sommet(newData);
-        return;
-    }
-
-    if(root->numCar >= newData) {
-        add(root->left, newData);
-    }
-    else{
-        add(root->right, newData);
-    }
-}
-
-int ArbreB::maximum(int a, int b){
+int Sommet::maximum(int a, int b){
     return (a > b) ? a : b;
 }
 
 bool ArbreB::isTreeEmpty() {
-    return !(this->root);
+    return !(root);
 }
 
 bool Sommet::isLeaf() {
-    return (!this->left && !this->right);
+    return (!left && !right);
 }
 
-// void ArbreB::toQueue(std::queue<Sommet> *queueTree) {
-//     std::queue<Sommet> fifo;
-//     fifo.push(*this->root);
-
-//     while(!fifo.empty()) {
-//         Sommet last = fifo.front();
-//         fifo.pop();
-
-//         (*queueTree).push(last);
-//         if(last.left) {
-//             fifo.push(*last.left);
-//         }
-//         if(last.right) {
-//             fifo.push(*last.right);
-//         }
-//     }
-// }
-void Sommet::print(Sommet *node) {
-    if(!node) {
-        std::cout << "Empty tree" << std::endl;
-        return;
-    }
-    std::cout << "Prefix : " << std::endl;
-    printPrefix(node);
-    std::cout << "\n";
+void Sommet::printPrefix() {
+    std::cout << numCar << ", ";
+    left->printPrefix();
+    right->printPrefix();
 }
 
-void Sommet::printPrefix(Sommet *node) {
-    if(!node) {
-        return;
+void Sommet::printBeautifulTree(int space) {
+    if(right) {
+        right->printBeautifulTree(space + 1);
     }
-    
-    std::cout << node->numCar << ", ";
-    printPrefix(node->left);
-    printPrefix(node->right);
-}
-
-void Sommet::printTree(Sommet *node, int space) {
-    if(!node) {
-        return;
+    for(int i = 0; i < space; i++) {
+        printf("   ");
     }
-    else {
-        printTree(node->right, space + 1);  
-        for(int i = 0; i < space; i++) {
-            printf("   ");
-        }
-        std::cout << *node << std::endl;
-        printTree(node->left, space + 1);
+    std::cout << this->numCar << std::endl;
+    if(left) {
+        left->printBeautifulTree(space + 1);
     }
 }
 
-void Sommet::clean(Sommet *node) {
-    if(!node) {
-        return;
+void Sommet::clean() {
+    if(left) {
+        left->clean();
+    }
+    if(right) {
+        right->clean();
     }
 
-    clean(node->left);
-    clean(node->right);
-
-    delete node;
+    delete this;
 }
 /* End printers */
 
@@ -290,6 +218,8 @@ void Sommet::ecritureEnder(){
 /* Destructors */
 Sommet::~Sommet() {}
 ArbreB::~ArbreB() {
-    this->root->clean(this->root);
+    if(root) {
+        root->clean();
+    }
 }
 /* End destructors */

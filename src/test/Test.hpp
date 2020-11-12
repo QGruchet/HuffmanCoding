@@ -6,32 +6,38 @@
 
 class Test
 {
+    private:
+        /* Data */
+        int sumTest;
+        int numTestSucced;
+
     public:
+        /* Builder */
+        Test();
+
         /* Methodes */
         // Global
-        void allTest() const;
+        void allTest();
 
         // Test Tree.hpp
-        bool testDefaultBuilderSommet() const;
-        bool testCopyBuilderSommet() const;
-        bool testDefaultBuilderArbreB() const;
-        bool testCopyBuilderArbreB() const;
-        bool testBuilderSommetWithParamFailed() const;
-        bool testBuilderSommetWithNumCarAndCar() const;
-        bool testBuilderSommetWithNum() const;
-        bool testBuilderArbreBWithParam() const;
-        bool testCopyArbreB() const;
-        bool testTreeToQueue() const;
-        bool testGetSommetAtIndex() const;
-        bool testAdd() const;
-        bool testAdd2() const;
-        bool testDepth() const;
-        bool testSize() const;
-        bool testDellNodeAtIndex() const;
-        void createDot() const;
+        bool testDefaultBuilderSommet();
+        bool testCopyBuilderSommet();
+        bool testDefaultBuilderArbreB();
+        bool testCopyBuilderArbreB();
+        bool testBuilderSommetWithParamFailed();
+        bool testBuilderSommetWithNumCarAndCar();
+        bool testBuilderSommetWithNum();
+        bool testBuilderArbreBWithParam();
+        bool testTreeToQueue();
+        bool testGetSommetAtIndex();
+        bool testAdd();
+        bool testDepth();
+        bool testSize();
+        bool testDellNodeAtIndex();
+        bool createDot();
 
         // Test Parser.hpp
-        bool testCalculFreqChar() const;
+        bool testCalculFreqChar();
 };
 
 #endif
