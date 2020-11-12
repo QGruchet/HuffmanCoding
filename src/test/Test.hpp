@@ -28,6 +28,7 @@ class Test
         bool testDepth() const;
         bool testSize() const;
         bool testDellNodeAtIndex() const;
+        void createDot() const;
 
         // Test Parser.hpp
         bool testCalculFreqChar() const;

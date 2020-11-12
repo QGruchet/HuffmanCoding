@@ -58,6 +58,8 @@ vg3:
 clean:
 	rm src/target/*.o
 	rmdir src/target
+	rm binary_tree.dot
+	rm test.png
 
 mrproper: clean
 	rm src/bin/$(EXEC)
