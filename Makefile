@@ -26,6 +26,9 @@ $(EXEC) : Main.o Tree.o Test.o Parser.o
 run :
 	./src/bin/$(EXEC)
 
+dot :
+	dot -Tpng binary_tree.dot > test.png
+	
 #################################
 
 # $@ ref name of target, here Main.o
