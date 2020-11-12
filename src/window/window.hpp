@@ -32,6 +32,7 @@ class Fenetre : public Gtk::Window {
         Gtk::ScrolledWindow barresDeDefilement;
         Gtk::HButtonBox boiteH;
         Gtk::VBox boiteV;
+        Gtk::VBox boiteV2;
         Gtk::Button boutonEnregistrer;
         Gtk::Button boutonOuvrir;
         Gtk::Button boutonAgrandir;

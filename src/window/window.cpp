@@ -32,6 +32,8 @@ Fenetre::Fenetre() : boutonEnregistrer(Gtk::Stock::SAVE), boutonOuvrir(Gtk::Stoc
 	boiteH.pack_start(boutonAgrandir);
     boiteH.pack_start(boutonRetrecir);
     boiteH.pack_start(boutonHelp);
+
+    
     
     //Connexion des signaux aux fonctions de rappel.
     boutonOuvrir.signal_clicked().connect(sigc::mem_fun(*this, &Fenetre::dialogueOuvrirFichier));
@@ -134,13 +136,23 @@ void Fenetre::ouvrirFichier(std::string nomFichier) {
 }
 
 void Fenetre::ouvrirImage(std::string nomFichier){
-    GtkWidget *image, *window;
+    int n=0;
+    GtkWidget *image, *window, *boutton, *Vbox;
     std::cout << "Ouverture de l'image : " << nomFichier << std::endl;
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_keep_above(GTK_WINDOW(window), TRUE);
+
+    Vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    gtk_container_add(GTK_CONTAINER(window), Vbox);
+    
     image = gtk_image_new_from_file(nomFichier.c_str());
-    gtk_container_add(GTK_CONTAINER(window), image);
+    gtk_box_pack_start(GTK_BOX (Vbox), image, FALSE, FALSE, 0);
+    
+    boutton = gtk_button_new_with_label("Quitter");
+    gtk_box_pack_start(GTK_BOX(Vbox), boutton, FALSE, FALSE, 0);
+    g_signal_connect(G_OBJECT(boutton), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+
     gtk_widget_show_all(window);
 
 }
