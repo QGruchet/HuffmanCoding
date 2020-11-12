@@ -1,6 +1,8 @@
 DEBUG=yes
 CC=g++
 EXEC=main
+WIN=window
+PACKWIN=-std=c++0x `pkg-config --cflags gtkmm-3.0 --cflags --libs`
 
 #################################
 
@@ -25,10 +27,17 @@ $(EXEC) : Main.o Tree.o Test.o Parser.o
 
 run :
 	./src/bin/$(EXEC)
+	mv binary_tree.dot src/out/
 
 dot :
-	dot -Tpng binary_tree.dot > test.png
-	
+	dot -Tpng binary_tree.dot > src/out/test.png
+
+
+#################################
+
+window : src/window/window.cpp src/window/window.hpp
+	$(CC) src/window/window.cpp -o src/bin/$@ $(PACKWIN)
+	./src/bin/$(WIN);
 #################################
 
 # $@ ref name of target, here Main.o
@@ -66,3 +75,4 @@ clean:
 
 mrproper: clean
 	rm src/bin/$(EXEC)
+	rm src/bin/$(WIN)
