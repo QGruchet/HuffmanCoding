@@ -3,6 +3,9 @@
 
 #include "Parser.hpp"
 #include "queue"
+#include <iostream>
+#include <fstream>
+#include <string>
 
 class Sommet
 {
@@ -43,6 +46,10 @@ class Sommet
         Sommet* getLeft() const;
         Sommet* getRight() const;
         int getDepth();
+
+        void ecritureHeader();
+        void ecritureFichier(Sommet* node);
+        void ecritureEnder();
 
         /* Destructor */
         ~Sommet();

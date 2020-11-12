@@ -1,5 +1,5 @@
-#ifndef MAIN_HPP
-#define MAIN_HPP
+#ifndef WINDOW_HPP
+#define WINDOW_HPP
 
 #include <fstream>
 #include <vector>
@@ -23,15 +23,21 @@ class Fenetre : public Gtk::Window {
         void dialogueOuvrirFichier();
         void dialogueEnregistrerFichier();
         void ouvrirFichier(std::string nomFichier);
+        void ouvrirImage(std::string nomFichier);
         void augmenterTaille();
+        void diminuerTaille(); 
+        void help();
         
     private :
         Gtk::ScrolledWindow barresDeDefilement;
         Gtk::HButtonBox boiteH;
         Gtk::VBox boiteV;
+        Gtk::VBox boiteV2;
         Gtk::Button boutonEnregistrer;
         Gtk::Button boutonOuvrir;
         Gtk::Button boutonAgrandir;
+        Gtk::Button boutonRetrecir;
+        Gtk::Button boutonHelp;
         Gtk::TextView zoneTexte;
 };
 

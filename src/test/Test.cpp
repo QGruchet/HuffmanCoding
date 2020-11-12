@@ -18,6 +18,7 @@ void Test::allTest() {
     std::cout << "#              test depth                 :" << (testDepth() ? "     succes"  : "       fail") << " ! #" << std::endl;
     std::cout << "#               test size                 :" << (testSize() ? "     succes"  : "       fail") << " ! #" << std::endl;
     std::cout << "#        test dell node at index          :" << (testDellNodeAtIndex() ? "     succes"  : "       fail") << " ! #" << std::endl;
+    std::cout << "#            test create dot              :" << (createDot() ? "     succes"  : "       fail") << " ! #" << std::endl;
 
     /* Test Parser.hpp */
     // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
@@ -191,6 +192,26 @@ bool Test::testSize() {
 
 bool Test::testDellNodeAtIndex() {
     bool ret = 0;
+
+    sumTest += int(ret);
+    numTestSucced += 1;
+
+    return ret;
+}
+
+bool Test::createDot() {
+    Sommet *root = new Sommet(2);
+    *root << 5;
+    *root << 1;
+    *root << 7;
+    *root << 6;
+    *root << 4;
+    *root << 0;
+    root->ecritureHeader();
+    root->ecritureFichier(root);
+    root->ecritureEnder();
+
+    bool ret = 1;
 
     sumTest += int(ret);
     numTestSucced += 1;

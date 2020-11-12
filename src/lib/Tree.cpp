@@ -161,6 +161,55 @@ void Sommet::clean() {
 }
 /* End printers */
 
+void Sommet::ecritureHeader(){
+    std::string const nomFichier("binary_tree.dot");
+    std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
+
+    if(flux){
+        flux << "digraph{" << std::endl;
+    }
+}
+
+void Sommet::ecritureFichier(Sommet *node){
+    std::string const nomFichier("binary_tree.dot");
+    std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
+
+    
+    if(flux){
+        if(!node){
+            return;
+        }
+        else{
+            if(node->left){
+                flux << *node << "->" << std::endl;
+            }
+            else{
+                flux << *node << std::endl;
+            }
+            ecritureFichier(node->left);
+            if(node->right){
+                flux << *node << "->" << std::endl;
+            }
+            else{
+                flux << *node << std::endl;
+            }
+            ecritureFichier(node->right);
+        }
+    }
+    else{
+        std::cout << "Error : opening file";
+    }
+}
+
+void Sommet::ecritureEnder(){
+    std::string const nomFichier("binary_tree.dot");
+    std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
+
+    if(flux){
+        flux << "}" << std::endl;
+    }
+}
+
 /* Destructors */
 Sommet::~Sommet() {}
 ArbreB::~ArbreB() {
