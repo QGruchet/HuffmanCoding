@@ -16,31 +16,33 @@ class Sommet
         Sommet *left, *right;
 
         /* Init */
-        void init(int numCar, char car);
+        void init(int newNumCar, char newCar);
 
     public:
         /* Builders */
         Sommet(); // Default
-        Sommet(int numCar, char car);
-        Sommet(int num);
+        Sommet(int newNumCar, char newCar);
+        Sommet(int newNum);
 
         /* Overloaded */
+        Sommet& operator<<(int newData);
         
         /* Methodes */
-        void add(Sommet *root, int newDatat);
+        int maximum(int a, int b);
 
         bool isLeaf();
 
-        void printPrefix(Sommet *node);
+        void printPrefix();
         void print(Sommet *node);
-        void printTree(Sommet *node, int space);
-        void clean(Sommet *node);
+        void printBeautifulTree(int space);
+        void clean();
 
         /* Getters */
         int getNumCar() const;
         char getCar() const;
         Sommet* getLeft() const;
         Sommet* getRight() const;
+        int getDepth();
 
         /* Destructor */
         ~Sommet();
@@ -61,12 +63,10 @@ class ArbreB
         /* Overloaded */
 
         /* Methodes */
-        int maximum(int a, int b);
         bool isTreeEmpty();
 
         /* Getters */
         Sommet* getRoot() const;
-        int getDepth(Sommet *node);
         int getSize() const;
 
         /* Destructor */
