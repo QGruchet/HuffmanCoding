@@ -30,7 +30,7 @@ run :
 	mv binary_tree.dot src/out/
 
 dot :
-	dot -Tpng binary_tree.dot > src/out/test.png
+	dot -Tpng src/out/binary_tree.dot > src/out/test.png
 
 
 #################################
@@ -70,8 +70,8 @@ vg3:
 clean:
 	rm src/target/*.o
 	rmdir src/target
-	rm binary_tree.dot
-	rm test.png
+	rm src/out/binary_tree.dot
+	rm src/out/test.png
 
 mrproper: clean
 	rm src/bin/$(EXEC)

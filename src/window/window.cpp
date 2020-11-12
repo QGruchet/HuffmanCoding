@@ -5,7 +5,6 @@
 #include "window.hpp"
 
 
-
 Fenetre::Fenetre() : boutonEnregistrer(Gtk::Stock::SAVE), boutonOuvrir(Gtk::Stock::OPEN), boutonAgrandir(Gtk::Stock::ZOOM_IN), boutonRetrecir(Gtk::Stock::ZOOM_OUT), boutonHelp(Gtk::Stock::HELP){
     //Configurer la fenêtre.
     set_position(Gtk::WIN_POS_CENTER);
@@ -137,13 +136,13 @@ void Fenetre::ouvrirFichier(std::string nomFichier) {
 
 void Fenetre::ouvrirImage(std::string nomFichier){
     int n=0;
-    GtkWidget *image, *window, *boutton, *Vbox;
+    GtkWidget *image, *window, *boutton, *boutton2, *Vbox;
     std::cout << "Ouverture de l'image : " << nomFichier << std::endl;
 
     window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_keep_above(GTK_WINDOW(window), TRUE);
 
-    Vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    Vbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     gtk_container_add(GTK_CONTAINER(window), Vbox);
     
     image = gtk_image_new_from_file(nomFichier.c_str());
@@ -151,12 +150,14 @@ void Fenetre::ouvrirImage(std::string nomFichier){
     
     boutton = gtk_button_new_with_label("Quitter");
     gtk_box_pack_start(GTK_BOX(Vbox), boutton, FALSE, FALSE, 0);
-    g_signal_connect(G_OBJECT(boutton), "clicked", G_CALLBACK(gtk_main_quit), NULL);
+
+    boutton2 = gtk_button_new_with_label("Quitter");
+    gtk_box_pack_start(GTK_BOX(Vbox), boutton2, FALSE, FALSE, 0);
+    g_signal_connect(G_OBJECT(boutton2), "clicked", G_CALLBACK(gtk_main_quit), NULL);
 
     gtk_widget_show_all(window);
 
 }
-
 void Fenetre::augmenterTaille() {
 	int largeur(0);
 	int hauteur(0);
@@ -167,8 +168,10 @@ void Fenetre::augmenterTaille() {
 void Fenetre::diminuerTaille() {
     int largeur(0);
     int hauteur(0);
-    get_size(largeur, hauteur);
-    resize(largeur - 100, hauteur - 100);
+    int lX = 100;
+    int hY = 100;
+    get_size(lX, hY);
+    resize(largeur - lX, hauteur - hY);
 }
 
 void Fenetre::help() {

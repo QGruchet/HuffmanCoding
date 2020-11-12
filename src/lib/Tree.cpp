@@ -234,6 +234,12 @@ void Sommet::clean(Sommet *node) {
 /* End printers */
 
 void Sommet::ecritureHeader(){
+    //Si le fichier existe on le supprime cela evite d'ecrire deux fois dans un meme fichier
+    if(std::ifstream("src/out/binary_tree.dot")){
+        remove("src/out/binary_tree.dot");
+        std::cout << "Suppression de binary_tree.dot" << std::endl;
+    }
+    //On creer le fichier
     std::string const nomFichier("binary_tree.dot");
     std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
 
@@ -246,7 +252,6 @@ void Sommet::ecritureFichier(Sommet *node){
     std::string const nomFichier("binary_tree.dot");
     std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
 
-    
     if(flux){
         if(!node){
             return;
