@@ -65,6 +65,13 @@ Sommet& Sommet::operator<<(int newData) {
     return *this;
 }
 
+std::ostream &operator<<(std::ostream &flux, const Sommet *other) {
+    if(other->getCar() == '\0') {
+        flux << other->getNumCar();
+    }
+    return flux;
+}
+
 std::ostream &operator<<(std::ostream &flux, Sommet s) {
     flux << "Prefix : \n";
     s.printPrefix();
@@ -186,17 +193,17 @@ void Sommet::ecritureFichier(Sommet *node){
         }
         else{
             if(node->left){
-                flux << *node << "->" << std::endl;
+                flux << node << "->" << std::endl;
             }
             else{
-                flux << *node << std::endl;
+                flux << node << std::endl;
             }
             ecritureFichier(node->left);
             if(node->right){
-                flux << *node << "->" << std::endl;
+                flux << node << "->" << std::endl;
             }
             else{
-                flux << *node << std::endl;
+                flux << node << std::endl;
             }
             ecritureFichier(node->right);
         }
