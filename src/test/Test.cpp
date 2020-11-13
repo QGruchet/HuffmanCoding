@@ -116,6 +116,7 @@ bool Test::testBuilderArbreBWithParam() {
 }
 
 bool Test::testTreeToQueue() {
+    srand((unsigned int)time(0));
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
     *root << 2;
@@ -131,6 +132,7 @@ bool Test::testTreeToQueue() {
 }
 
 bool Test::testGetSommetAtIndex() {
+    srand((unsigned int)time(0));
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
     *root << 2;
@@ -146,6 +148,7 @@ bool Test::testGetSommetAtIndex() {
 }
 
 bool Test::testAdd() {
+    srand((unsigned int)time(0));
     Sommet* root = new Sommet(2);
     ArbreB tree(root);
 
@@ -167,6 +170,7 @@ bool Test::testAdd() {
 }
 
 bool Test::testDepth() {
+    srand((unsigned int)time(0));
     Sommet *root = new Sommet(1);
     ArbreB tree(root);
     *root << 2;
@@ -200,6 +204,7 @@ bool Test::testDellNodeAtIndex() {
 }
 
 bool Test::createDot() {
+    srand((unsigned int)time(0));
     Sommet *root = new Sommet(2);
     *root << 5;
     *root << 1;

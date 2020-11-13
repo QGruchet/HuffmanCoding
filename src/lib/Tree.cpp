@@ -45,24 +45,24 @@ Sommet::Sommet(int newNum) {
 // End operator=
 
 // Operator<<
-Sommet& Sommet::operator<<(int newData) {
-    if(numCar >= newData) {
-      if(left) {
-        *left << newData;
-      }
-      else{
-        left = new Sommet(newData);
-      }
+Sommet& Sommet::operator<<(int newData) { // Add randomly newData in the tree
+  if(rand()%2) { // Look at left (random)
+    if (left) { // Empty child, create new node
+      *left << newData;
     }
-    else{
-      if(right) {
-        *right << newData;
-      }
-      else {
-        right = new Sommet(newData);
-      }
+    else { // Go on left
+      left = new Sommet(newData);
     }
-    return *this;
+  }
+  else { // Look at right (random)
+    if (right) { // Empty child, create new node
+      *right << newData;
+    }
+    else { // Go on right
+      right = new Sommet(newData);
+    }
+  }
+  return *this;
 }
 
 std::ostream &operator<<(std::ostream &flux, Sommet s) {
