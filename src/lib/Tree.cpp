@@ -65,6 +65,13 @@ Sommet& Sommet::operator<<(int newData) { // Add randomly newData in the tree
   return *this;
 }
 
+std::ostream &operator<<(std::ostream &flux, const Sommet *other) {
+    if(other->getCar() == '\0') {
+        flux << other->getNumCar();
+    }
+    return flux;
+}
+
 std::ostream &operator<<(std::ostream &flux, Sommet s) {
     flux << "Prefix : \n";
     s.printPrefix();
@@ -162,6 +169,12 @@ void Sommet::clean() {
 /* End printers */
 
 void Sommet::ecritureHeader(){
+    //Si le fichier existe on le supprime cela evite d'ecrire deux fois dans un meme fichier
+    if(std::ifstream("src/out/binary_tree.dot")){
+        remove("src/out/binary_tree.dot");
+        std::cout << "Suppression de binary_tree.dot" << std::endl;
+    }
+    //On creer le fichier
     std::string const nomFichier("binary_tree.dot");
     std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
 
@@ -174,24 +187,23 @@ void Sommet::ecritureFichier(Sommet *node){
     std::string const nomFichier("binary_tree.dot");
     std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
 
-    
     if(flux){
         if(!node){
             return;
         }
         else{
             if(node->left){
-                flux << *node << "->" << std::endl;
+                flux << node << "->" << std::endl;
             }
             else{
-                flux << *node << std::endl;
+                flux << node << std::endl;
             }
             ecritureFichier(node->left);
             if(node->right){
-                flux << *node << "->" << std::endl;
+                flux << node << "->" << std::endl;
             }
             else{
-                flux << *node << std::endl;
+                flux << node << std::endl;
             }
             ecritureFichier(node->right);
         }
