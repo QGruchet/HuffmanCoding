@@ -10,75 +10,82 @@
 
 class Sommet
 {
-    friend class ArbreB;
+  friend class ArbreB;
 
-    private:
-        /* Data */
-        int numCar; // if car = '\0', numCar = Sum of char under Sommet,
-                    // else numCar = frequency of car
-        char car;
-        Sommet *left, *right;
+  private:
+    /* Data */
+    int numCar; // if car = '\0', numCar = Sum of char under Sommet,
+                // else numCar = frequency of car
+    char car;
+    Sommet *left, *right;
 
-        /* Init */
-        void init(int newNumCar, char newCar);
+    /* Init */
+    void init(int, char);
 
-    public:
-        /* Builders */
-        Sommet(); // Default
-        Sommet(int newNumCar, char newCar);
-        Sommet(int newNum);
+public:
+    /* Builders */
+    Sommet(); // Default
+    Sommet(int, char);
+    Sommet(int);
 
-        /* Overloaded */
-        Sommet& operator<<(int newData);
-        
-        /* Methodes */
-        int maximum(int a, int b);
+    /* Overloaded */
+    Sommet& operator<<(int);
+    
+    /* Methodes */
+    bool isLeaf();
 
-        bool isLeaf();
+    void Min(int*);
+    int dataMin();
 
-        void printPrefix();
-        void print(Sommet *node);
-        void printBeautifulTree(int space);
-        void clean();
+    void Max(int*);
+    int dataMax();
 
-        /* Getters */
-        int getNumCar() const;
-        char getCar() const;
-        Sommet* getLeft() const;
-        Sommet* getRight() const;
-        int getDepth();
+    bool found(int);
+    void foundRec(bool*, int);
 
-        void ecritureHeader();
-        void ecritureFichier(Sommet* node);
-        void ecritureEnder();
+    void printPrefix();
+    void print(Sommet*);
+    void printBeautifulTree(int);
+    void clean();
 
-        /* Destructor */
-        ~Sommet();
+    /* Getters */
+    int getNumCar() const;
+    char getCar() const;
+    Sommet* getLeft() const;
+    Sommet* getRight() const;
+    int getDepth();
+
+    void ecritureHeader();
+    void ecritureFichier(Sommet*);
+    void ecritureEnder();
+
+    /* Destructor */
+    ~Sommet();
 };
 
 class ArbreB
 {
-    private:
-        /* Data */
-        Sommet *root;
-        int depth, size;
+  private:
+    /* Data */
+    Sommet *root;
+    int depth, size;
 
-    public:
-        /* Builders */
-        ArbreB(); //Default
-        ArbreB(Sommet *root);
+  public:
+    /* Builders */
+    ArbreB(); //Default
+    ArbreB(Sommet *root);
 
-        /* Overloaded */
+    /* Overloaded */
 
-        /* Methodes */
-        bool isTreeEmpty();
+    /* Methodes */
+    bool isTreeEmpty();
 
-        /* Getters */
-        Sommet* getRoot() const;
-        int getSize() const;
+    /* Getters */
+    Sommet* getRoot() const;
+    int getSize() const;
 
-        /* Destructor */
-        ~ArbreB();
+    /* Destructor */
+    ~ArbreB();
 };
 
 #endif

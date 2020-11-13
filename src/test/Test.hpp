@@ -6,38 +6,38 @@
 
 class Test
 {
-    private:
-        /* Data */
-        int sumTest;
-        int numTestSucced;
+  private:
+    /* Data */
+    int sumTest;
+    int numTestSucced;
 
-    public:
-        /* Builder */
-        Test();
+  public:
+    /* Builder */
+    Test();
 
-        /* Methodes */
-        // Global
-        void allTest();
+    /* Methodes */
+    // Global
+    void allTest();
 
-        // Test Tree.hpp
-        bool testDefaultBuilderSommet();
-        bool testCopyBuilderSommet();
-        bool testDefaultBuilderArbreB();
-        bool testCopyBuilderArbreB();
-        bool testBuilderSommetWithParamFailed();
-        bool testBuilderSommetWithNumCarAndCar();
-        bool testBuilderSommetWithNum();
-        bool testBuilderArbreBWithParam();
-        bool testTreeToQueue();
-        bool testGetSommetAtIndex();
-        bool testAdd();
-        bool testDepth();
-        bool testSize();
-        bool testDellNodeAtIndex();
-        bool createDot();
+    // Test Tree.hpp
+    bool testDefaultBuilderSommet();
+    bool testCopyBuilderSommet();
+    bool testDefaultBuilderArbreB();
+    bool testCopyBuilderArbreB();
+    bool testBuilderSommetWithParamFailed();
+    bool testBuilderSommetWithNumCarAndCar();
+    bool testBuilderSommetWithNum();
+    bool testBuilderArbreBWithParam();
+    bool testTreeToQueue();
+    bool testGetSommetAtIndex();
+    bool testAdd();
+    bool testDepth();
+    bool testSize();
+    bool testDellNodeAtIndex();
+    bool createDot();
 
-        // Test Parser.hpp
-        bool testCalculFreqChar();
+    // Test Parser.hpp
+    bool testCalculFreqChar();
 };
 
 #endif

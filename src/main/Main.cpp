@@ -2,8 +2,8 @@
 #include "../test/Test.hpp"
 
 int main(void) {
-    Test test;
-    test.allTest();
+  Test test;
+  test.allTest();
 
-    return 0;
+  return 0;
 }
