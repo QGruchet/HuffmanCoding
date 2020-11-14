@@ -65,11 +65,65 @@ Sommet& Sommet::operator<<(int newData) { // Add randomly newData in the tree
   return *this;
 }
 
-std::ostream &operator<<(std::ostream &flux, const Sommet *other) {
-  if(other->getCar() == '\0') {
-    flux << other->getNumCar();
+Sommet& Sommet::operator>>(int dellData) {
+  if(numCar == dellData) { // Dell the root
+    Sommet *tmp = nullptr;
+    if(left) {
+      numCar = left->numCar;
+      tmp = left;
+      left = nullptr;
+    }
+    else if(right) {
+      numCar = right->numCar;
+      tmp = right;
+      right = nullptr;
+    }
+    if(tmp) {
+      delete tmp;
+    }
+    return *this;
   }
-  return flux;
+
+  if(left) {
+    if(left->numCar == dellData) {
+      Sommet *dellNode = left;
+      if(left->left) { // if we have left child we relace dellNode by is left child
+        left = left->left;
+      }
+      else if(left->right) { // if haven't left child we replace by is right child
+        left = left->right;
+      }
+      else { // If we haven't any child
+        left = nullptr;
+      }
+      delete dellNode;
+      return *this;
+    }
+    else {
+      *left >> dellData;
+    }
+  }
+  else if(right) {
+    if(right->numCar == dellData) {
+      Sommet *dellNode = right;
+      if(right->left) { // Relace dellNode by is left child if existe
+        right = right->left;
+      }
+      else if(left->right) { // Else by is right child
+        right = right->right;
+      }
+      else { // If we haven't any child
+        right = nullptr;
+      }
+      delete dellNode;
+      return *this;
+    }
+    else {
+      *right >> dellData;
+    }
+  }
+
+  return *this;
 }
 
 std::ostream &operator<<(std::ostream &flux, Sommet s) {
@@ -183,10 +237,6 @@ void Sommet::foundRec(bool *found, int dataSearch) {
   if(right) {
     right->foundRec(found, dataSearch);
   }
-}
-
-bool ArbreB::isTreeEmpty() {
-  return !(root);
 }
 
 bool Sommet::isLeaf() {

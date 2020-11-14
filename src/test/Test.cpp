@@ -13,11 +13,11 @@ void Test::allTest() {
   std::cout << "#      test builder 'sommet' with num       :" << (testBuilderSommetWithNum() ? "     succes"  : "       fail") << " ! #" << std::endl;
   std::cout << "#     test builder 'arbreB' with param      :" << (testBuilderArbreBWithParam() ? "     succes"  : "       fail") << " ! #" << std::endl;
   std::cout << "#        test get 'sommet' at index         :" << (testGetSommetAtIndex() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#                test add                 :" << (testAdd() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#              test depth                 :" << (testDepth() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#               test size                 :" << (testSize() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#        test dell node at index          :" << (testDellNodeAtIndex() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#            test create dot              :" << (createDot() ? "     succes"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                 test add                  :" << (testAdd() ? "     succes"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#               test depth                  :" << (testDepth() ? "     succes"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                test size                  :" << (testSize() ? "     succes"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                test dell                  :" << (testDell() ? "     succes"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#             test create dot               :" << (createDot() ? "     succes"  : "       fail") << " ! #" << std::endl;
 
   /* Test Parser.hpp */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
@@ -144,7 +144,7 @@ bool Test::testAdd() {
   *root << 5;
   *root << 69;
   
-  bool ret = 1;
+  bool ret = 0;
 
   sumTest += int(ret);
   numTestSucced += 1;
@@ -177,8 +177,17 @@ bool Test::testSize() {
   return ret;
 }
 
-bool Test::testDellNodeAtIndex() {
-  bool ret = 0;
+bool Test::testDell() {
+  srand((unsigned int)time(0));
+  Sommet *root = new Sommet(1);
+  ArbreB tree(root);
+  *root << 2;
+  *root << 0;
+  *root << 3;
+
+  *root >> 3;
+
+  bool ret = 1;
 
   sumTest += int(ret);
   numTestSucced += 1;

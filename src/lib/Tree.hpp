@@ -30,6 +30,9 @@ public:
 
     /* Overloaded */
     Sommet& operator<<(int);
+    Sommet& operator>>(int);
+
+    friend std::ostream &operator<<(std::ostream &flux, Sommet s);
     
     /* Methodes */
     bool isLeaf();
@@ -78,7 +81,6 @@ class ArbreB
     /* Overloaded */
 
     /* Methodes */
-    bool isTreeEmpty();
 
     /* Getters */
     Sommet* getRoot() const;

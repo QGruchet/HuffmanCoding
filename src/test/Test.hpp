@@ -33,7 +33,7 @@ class Test
     bool testAdd();
     bool testDepth();
     bool testSize();
-    bool testDellNodeAtIndex();
+    bool testDell();
     bool createDot();
 
     // Test Parser.hpp
