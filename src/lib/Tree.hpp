@@ -44,7 +44,6 @@ public:
     int dataMax();
 
     bool found(int);
-    void foundRec(bool*, int);
 
     void printPrefix();
     void print(Sommet*);
@@ -76,7 +75,7 @@ class ArbreB
   public:
     /* Builders */
     ArbreB(); //Default
-    ArbreB(Sommet *root);
+    ArbreB(Sommet*);
 
     /* Overloaded */
 

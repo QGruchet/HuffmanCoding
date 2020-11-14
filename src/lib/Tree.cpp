@@ -129,7 +129,6 @@ Sommet& Sommet::operator>>(int dellData) {
 std::ostream &operator<<(std::ostream &flux, Sommet s) {
   flux << "Prefix : \n";
   s.printPrefix();
-
   return flux;
 }
 // End operator<<
@@ -222,21 +221,20 @@ int Sommet::dataMax() {
 }
 
 bool Sommet::found(int dataSearch) {
-  bool found = false;
-  foundRec(&found, dataSearch);
-  return found;
-}
-
-void Sommet::foundRec(bool *found, int dataSearch) {
   if(numCar == dataSearch) {
-    *found = true;
+    return true;
   }
   if(left) {
-    left->foundRec(found, dataSearch);
+    bool ret1 = left->found(dataSearch);
+    if(ret1) {
+      return ret1;
+    }
   }
   if(right) {
-    right->foundRec(found, dataSearch);
+    return right->found(dataSearch);
   }
+
+  return false;
 }
 
 bool Sommet::isLeaf() {
@@ -254,7 +252,7 @@ void Sommet::printBeautifulTree(int space) {
     right->printBeautifulTree(space + 1);
   }
   for(int i = 0; i < space; i++) {
-    printf("   ");
+    std::cout << "   ";
   }
   std::cout << this->numCar << std::endl;
   if(left) {
