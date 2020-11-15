@@ -2,8 +2,8 @@
 
 /* Builders */
 // Default
-Sommet::Sommet() : numCar(-1), car('\0'), left(nullptr), right(nullptr) {}
-ArbreB::ArbreB() : root(nullptr), depth(0), size(0) {}
+Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
+ArbreB::ArbreB() : depth(0), size(0), root(nullptr)  {}
 // End default
 
 ArbreB::ArbreB(Sommet *newRoot) {
@@ -12,32 +12,7 @@ ArbreB::ArbreB(Sommet *newRoot) {
   size = 0;
 }
 
-void Sommet::init(int newNumCar, char newCar) {
-  if(newNumCar >= 0) {
-    numCar = newNumCar;
-    car = newCar;
-
-    left = nullptr;
-    right = nullptr;
-  }
-  else {
-    std::cout << "ERROR : invalid newNumCar, call default builder" << std::endl;
-
-    numCar = 0;
-    car = '\0';
-
-    left = nullptr;
-    right = nullptr;
-  }
-}
-
-Sommet::Sommet(int newNumCar, char newCar) {
-  init(newNumCar, newCar);
-}
-
-Sommet::Sommet(int newNum) {
-  init(newNum, '\0');
-}
+Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
 /* End builders */
 
 /* Overloaded */
@@ -45,90 +20,54 @@ Sommet::Sommet(int newNum) {
 // End operator=
 
 // Operator<<
-Sommet& Sommet::operator<<(int newData) { // Add randomly newData in the tree
-  if(rand()%2) { // Look at left if rand is even
-    if (left) { // Empty child, create new node
-      *left << newData;
-    }
-    else { // Go on left
-      left = new Sommet(newData);
-    }
+ArbreB& ArbreB::operator<<(int newData) {
+  if(!root) {
+    root = new Sommet(newData);
   }
-  else { // Look at right is not even
-    if (right) { // Empty child, create new node
-      *right << newData;
-    }
-    else { // Go on right
-      right = new Sommet(newData);
-    }
+  else {
+    root = add(newData);
   }
   return *this;
 }
 
-Sommet& Sommet::operator>>(int dellData) {
-  if(numCar == dellData) { // Dell the root
-    Sommet *tmp = nullptr;
-    if(left) {
-      numCar = left->numCar;
-      tmp = left;
-      left = nullptr;
-    }
-    else if(right) {
-      numCar = right->numCar;
-      tmp = right;
-      right = nullptr;
-    }
-    if(tmp) {
-      delete tmp;
-    }
-    return *this;
-  }
-
-  if(left) {
-    if(left->numCar == dellData) {
-      Sommet *dellNode = left;
-      if(left->left) { // if we have left child we relace dellNode by is left child
-        left = left->left;
-      }
-      else if(left->right) { // if haven't left child we replace by is right child
-        left = left->right;
-      }
-      else { // If we haven't any child
-        left = nullptr;
-      }
-      delete dellNode;
-      return *this;
+Sommet* ArbreB::add(int newData) {
+  if(rand()%2) {
+    if(root->left) {
+      root->left = add(newData);
     }
     else {
-      *left >> dellData;
+      root->left = new Sommet(newData);
     }
   }
-  else if(right) {
-    if(right->numCar == dellData) {
-      Sommet *dellNode = right;
-      if(right->left) { // Relace dellNode by is left child if existe
-        right = right->left;
-      }
-      else if(left->right) { // Else by is right child
-        right = right->right;
-      }
-      else { // If we haven't any child
-        right = nullptr;
-      }
-      delete dellNode;
-      return *this;
+  else {
+    if(root->right) {
+      root->right = add(newData);
     }
     else {
-      *right >> dellData;
+      root->right = new Sommet(newData);
     }
   }
-
-  return *this;
+  return root;
 }
 
-std::ostream &operator<<(std::ostream &flux, Sommet s) {
-  flux << "Prefix : \n";
-  s.printPrefix();
+// ArbreB& ArbreB::operator>>(int dellData) {}
+// Sommet* ArbreB::dell(int dellData) {}
+
+std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
+  flux << node.data << ", ";
+  if(node.left) {
+    flux << *node.left;
+  }
+  if(node.right) {
+    flux << *node.right;
+  }
+  return flux;
+}
+
+std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
+  if(tree.root) {
+    flux << *tree.root;
+  }
   return flux;
 }
 // End operator<<
@@ -137,16 +76,13 @@ std::ostream &operator<<(std::ostream &flux, Sommet s) {
 // End operator+=, operator-=
 
 // Operator[]
+// Sommet* ArbreB::operator[](int) {}
 // End operator[]
 /* End overloaded */
 
 /* Getters */
-int Sommet::getNumCar() const {
-  return this->numCar;
-}
-
-char Sommet::getCar() const {
-  return this->car;
+int Sommet::getData() const {
+  return data;
 }
 
 Sommet* Sommet::getLeft() const {
@@ -182,69 +118,10 @@ int ArbreB::getSize() const {
 /* End getters */
 
 /* Methodes */
-void Sommet::Min(int *min) {
-  if(numCar <= *min) {
-    *min = numCar;
-  }
-
-  if(left) {
-    left->Min(min);
-  }
-  if(right) {
-    right->Min(min);
-  }
-}
-
-int Sommet::dataMin() {
-  int min = INT32_MAX; // Init min with the max value for int
-  Min(&min);
-  return min;
-}
-
-void Sommet::Max(int *max) {
-  if(numCar >= *max) {
-    *max = numCar;
-  }
-
-  if(left) {
-    left->Max(max);
-  }
-  if(right) {
-    right->Max(max);
-  }
-}
-
-int Sommet::dataMax() {
-  int max = INT32_MIN; // Init min with the min value for int
-  Max(&max);
-  return max;
-}
-
-bool Sommet::found(int dataSearch) {
-  if(numCar == dataSearch) {
-    return true;
-  }
-  if(left) {
-    bool ret1 = left->found(dataSearch);
-    if(ret1) {
-      return ret1;
-    }
-  }
-  if(right) {
-    return right->found(dataSearch);
-  }
-
-  return false;
-}
+// Sommet* ArbreB::find(int dataSearch) {}
 
 bool Sommet::isLeaf() {
   return (!left && !right);
-}
-
-void Sommet::printPrefix() {
-  std::cout << numCar << ", ";
-  left->printPrefix();
-  right->printPrefix();
 }
 
 void Sommet::printBeautifulTree(int space) {
@@ -254,83 +131,25 @@ void Sommet::printBeautifulTree(int space) {
   for(int i = 0; i < space; i++) {
     std::cout << "   ";
   }
-  std::cout << this->numCar << std::endl;
+  std::cout << this->data << std::endl;
   if(left) {
     left->printBeautifulTree(space + 1);
   }
 }
-
-void Sommet::clean() {
-  if(left) {
-    left->clean();
-  }
-  if(right) {
-    right->clean();
-  }
-
-  delete this;
-}
 /* End printers */
 
-void Sommet::ecritureHeader(){
-  //Si le fichier existe on le supprime cela evite d'ecrire deux fois dans un meme fichier
-  if(std::ifstream("src/out/binary_tree.dot")){
-    remove("src/out/binary_tree.dot");
-    // std::cout << "Suppression de binary_tree.dot" << std::endl;
-  }
-  //On creer le fichier
-  std::string const nomFichier("binary_tree.dot");
-  std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
-
-  if(flux){
-    flux << "digraph{" << std::endl;
-  }
-}
-
-void Sommet::ecritureFichier(Sommet *node){
-  std::string const nomFichier("binary_tree.dot");
-  std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
-
-  if(flux){
-    if(!node){
-      return;
-    }
-    else{
-      if(node->left){
-        flux << node << "->" << std::endl;
-      }
-      else{
-        flux << node << std::endl;
-      }
-      ecritureFichier(node->left);
-      if(node->right){
-        flux << node << "->" << std::endl;
-      }
-      else{
-        flux << node << std::endl;
-      }
-      ecritureFichier(node->right);
-    }
-  }
-  else{
-    std::cout << "Error : opening file";
-  }
-}
-
-void Sommet::ecritureEnder(){
-  std::string const nomFichier("binary_tree.dot");
-  std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
-
-  if(flux){
-      flux << "}" << std::endl;
-  }
-}
-
 /* Destructors */
-Sommet::~Sommet() {}
+Sommet::~Sommet() {
+  if(left) {
+    delete this;
+  }
+  if(right) {
+    delete this;
+  }
+}
 ArbreB::~ArbreB() {
   if(root) {
-    root->clean();
+    delete root;
   }
 }
 /* End destructors */

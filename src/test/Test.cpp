@@ -17,8 +17,6 @@ void Test::allTest() {
   std::cout << "#               test depth                  :" << (testDepth() ? "     succes"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test size                  :" << (testSize() ? "     succes"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test dell                  :" << (testDell() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#             test create dot               :" << (createDot() ? "     succes"  : "       fail") << " ! #" << std::endl;
-
   /* Test Parser.hpp */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
@@ -30,8 +28,7 @@ void Test::allTest() {
 bool Test::testDefaultBuilderSommet() {
   Sommet node;
 
-  bool ret = ( (node.getNumCar() == -1)
-          && (node.getCar() == '\0')
+  bool ret = ( (node.getData() == -1)
           && (node.getLeft() == nullptr)
           && (node.getRight() ==  nullptr) );
 
@@ -73,8 +70,7 @@ bool Test::testCopyBuilderArbreB() {
 bool Test::testBuilderSommetWithNumCarAndCar() {
   Sommet node(2, 'e');
 
-  bool ret = ( (node.getNumCar() == 2)
-          && (node.getCar() == 'e')
+  bool ret = ( (node.getData() == 2)
           && (node.getLeft() == nullptr)
           && (node.getRight() ==  nullptr) );
 
@@ -87,8 +83,7 @@ bool Test::testBuilderSommetWithNumCarAndCar() {
 bool Test::testBuilderSommetWithNum() {
   Sommet node(2);
 
-  bool ret = ( (node.getNumCar() == 2)
-          && (node.getCar() == '\0')
+  bool ret = ( (node.getData() == 2)
           && (node.getLeft() == nullptr)
           && (node.getRight() ==  nullptr) );
 
@@ -103,8 +98,7 @@ bool Test::testBuilderArbreBWithParam() {
   ArbreB tree(node);
   Sommet* root = tree.getRoot();
 
-  bool ret = ( (root->getNumCar() == 2)
-          && (root->getCar() == 'e')
+  bool ret = ( (root->getData() == 2)
           && (root->getLeft() == nullptr)
           && (root->getRight() ==  nullptr) );
 
@@ -118,9 +112,9 @@ bool Test::testGetSommetAtIndex() {
   srand((unsigned int)time(0));
   Sommet *root = new Sommet(1);
   ArbreB tree(root);
-  *root << 2;
-  *root << 0;
-  *root << 3;
+  tree << 2;
+  tree << 0;
+  tree << 3;
 
   bool ret = 0;
 
@@ -135,14 +129,14 @@ bool Test::testAdd() {
   Sommet* root = new Sommet(2);
   ArbreB tree(root);
 
-  *root << 3;
-  *root << 1;
-  *root << 13;
-  *root << 6;
-  *root << 0;
-  *root << 3;
-  *root << 5;
-  *root << 69;
+  tree << 3;
+  tree << 1;
+  tree << 13;
+  tree << 6;
+  tree << 0;
+  tree << 3;
+  tree << 5;
+  tree << 69;
   
   bool ret = 0;
 
@@ -156,9 +150,9 @@ bool Test::testDepth() {
   srand((unsigned int)time(0));
   Sommet *root = new Sommet(1);
   ArbreB tree(root);
-  *root << 2;
-  *root << 0;
-  *root << 3;
+  tree << 2;
+  tree << 0;
+  tree << 3;
 
   bool ret = (root->getDepth() == 3);
 
@@ -181,32 +175,11 @@ bool Test::testDell() {
   srand((unsigned int)time(0));
   Sommet *root = new Sommet(1);
   ArbreB tree(root);
-  *root << 2;
-  *root << 0;
-  *root << 3;
+  tree << 2;
+  tree << 0;
+  tree << 3;
 
-  *root >> 3;
-
-  bool ret = 1;
-
-  sumTest += int(ret);
-  numTestSucced += 1;
-
-  return ret;
-}
-
-bool Test::createDot() {
-  srand((unsigned int)time(0));
-  Sommet *root = new Sommet(2);
-  *root << 5;
-  *root << 1;
-  *root << 7;
-  *root << 6;
-  *root << 4;
-  *root << 0;
-  root->ecritureHeader();
-  root->ecritureFichier(root);
-  root->ecritureEnder();
+  tree >> 3;
 
   bool ret = 1;
 

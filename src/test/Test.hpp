@@ -34,7 +34,6 @@ class Test
     bool testDepth();
     bool testSize();
     bool testDell();
-    bool createDot();
 
     // Test Parser.hpp
     bool testCalculFreqChar();

@@ -14,13 +14,8 @@ class Sommet
 
   private:
     /* Data */
-    int numCar; // if car = '\0', numCar = Sum of char under Sommet,
-                // else numCar = frequency of car
-    char car;
+    int data;
     Sommet *left, *right;
-
-    /* Init */
-    void init(int, char);
 
 public:
     /* Builders */
@@ -29,37 +24,18 @@ public:
     Sommet(int);
 
     /* Overloaded */
-    Sommet& operator<<(int);
-    Sommet& operator>>(int);
-
-    friend std::ostream &operator<<(std::ostream &flux, Sommet s);
+    friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
     
     /* Methodes */
     bool isLeaf();
-
-    void Min(int*);
-    int dataMin();
-
-    void Max(int*);
-    int dataMax();
-
-    bool found(int);
-
-    void printPrefix();
-    void print(Sommet*);
     void printBeautifulTree(int);
-    void clean();
+    int getDepth();
 
     /* Getters */
-    int getNumCar() const;
+    int getData() const;
     char getCar() const;
     Sommet* getLeft() const;
     Sommet* getRight() const;
-    int getDepth();
-
-    void ecritureHeader();
-    void ecritureFichier(Sommet*);
-    void ecritureEnder();
 
     /* Destructor */
     ~Sommet();
@@ -69,8 +45,8 @@ class ArbreB
 {
   private:
     /* Data */
-    Sommet *root;
     int depth, size;
+    Sommet *root;
 
   public:
     /* Builders */
@@ -78,8 +54,16 @@ class ArbreB
     ArbreB(Sommet*);
 
     /* Overloaded */
+    ArbreB& operator<<(int); // Insert
+    ArbreB& operator>>(int); // Dell
+    Sommet* operator[](int);
+
+    friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
     /* Methodes */
+    Sommet* add(int);
+    Sommet* dell(int);
+    Sommet* find(int);
 
     /* Getters */
     Sommet* getRoot() const;
