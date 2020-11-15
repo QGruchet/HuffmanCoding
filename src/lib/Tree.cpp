@@ -88,7 +88,7 @@ void ArbreB::add(Sommet *root, int newData) {
 }
 
 ArbreB& ArbreB::operator>>(int dellData) {
-  Sommet *dellNode = find(root, dellData); // find the first node where is dellData
+  Sommet *dellNode = find(root, dellData); // Find the first node where is dellData
   if(!dellNode || !root) {
     return *this;
   }
@@ -97,41 +97,65 @@ ArbreB& ArbreB::operator>>(int dellData) {
       delete root;
       root = nullptr;
     }
+    else {
+      Sommet *randLeaf = getRandLeaf(root);
+      int swap = randLeaf->data;
+      randLeaf->data = root->data;
+      root->data = swap;
+
+      dell(root, dellData);
+    }
     return *this;
   }
 
-  dell(root, dellNode);
+  dell(root, dellData);
   return *this;
 }
 
-void ArbreB::dell(Sommet *root, Sommet *dellNode) {
-  // Breadth First Search (BFS)
-  // int index = 0;
-  // std::queue<Sommet*> queue;
-  // queue.push(root);
+void ArbreB::dell(Sommet *root, int dellData) {
+  if(!root) {
+    return;
+  }
+  if(root->left) {
+    if(root->left->data == dellData) {
+      if(root->left->isLeaf()) {
+        delete root->left;
+        root->left = nullptr;
+        return;
+      }
+      else{
+        Sommet *randLeaf = getRandLeaf(root->left);
+        int swap = randLeaf->data;
+        randLeaf->data = root->left->data;
+        root->left->data = swap;
 
-  // while(!queue.empty()) {
-  //   Sommet* start = queue.front();
-  //   q.pop();
-    
-  //   if(start->left) {
-  //     index++;
-  //     if(index-1 == index) {
-  //       return start->left;
-  //     }
-      
-  //     queue.push(start->left);
-  //   }
+        dell(root->left, dellData);
+      }
+    }
+    else {
+      dell(root->left, dellData);
+    }
+  }
+  if(root->right) {
+    if(root->right->data == dellData) {
+      if(root->right->isLeaf()) {
+        delete root->right;
+        root->right = nullptr;
+        return;
+      }
+      else{
+        Sommet *randLeaf = getRandLeaf(root->right);
+        int swap = randLeaf->data;
+        randLeaf->data = root->right->data;
+        root->right->data = swap;
 
-  //   if(start->right) {
-  //     index++;
-  //     if(index-1 == index) {
-  //       return start->right;
-  //     }
-
-  //     queue.push(start->right);
-  //   }
-  // }
+        dell(root->right, dellData);
+      }
+    }
+    else {
+      dell(root->right, dellData);
+    }
+  }
 }
 
 std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
@@ -154,15 +178,23 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
 // End operator<<
 
 // Operator+=, operator-=
+ArbreB& ArbreB::operator+=(const ArbreB& other) {
+  return *this;
+}
+
+ArbreB& ArbreB::operator-=(ArbreB other) {
+  return *this;
+}
 // End operator+=, operator-=
 
 // Operator[]
 Sommet* ArbreB::operator[](int index) {
-  if(index-1 < 0 || index-1 >= size) {
+  index--;
+  if(index < 0 || index >= size) {
     std::cout << "ERROR : index out of band" << std::endl;
     return nullptr;
   }
-  else if(index-1 == 0) {
+  else if(index == 0) {
     return root;
   }
 
@@ -170,26 +202,27 @@ Sommet* ArbreB::operator[](int index) {
   int posNodeInTree = 0;
   std::queue<Sommet*> queue;
   queue.push(root);
+  Sommet* start;
   posNodeInTree++;
 
   while(!queue.empty()) {
-    Sommet* start = queue.front();
+    start = queue.front();
     queue.pop();
     
     if(start->left) {
-      posNodeInTree++;
-      if(index-1 == posNodeInTree) {
+      if(index == posNodeInTree) {
         return start->left;
       }
+      posNodeInTree++;
       
       queue.push(start->left);
     }
 
     if(start->right) {
-      posNodeInTree++;
-      if(index-1 == posNodeInTree) {
+      if(index == posNodeInTree) {
         return start->right;
       }
+      posNodeInTree++;
 
       queue.push(start->right);
     }
@@ -253,6 +286,23 @@ int Sommet::countDepth() {
 
 int ArbreB::getSize() const {
   return size;
+}
+
+Sommet* ArbreB::getRandLeaf(Sommet* root) const{
+  if(!root) {
+    return nullptr;
+  }
+  if(root->isLeaf()) {
+    return root;
+  }
+  if(root->left) {
+    return getRandLeaf(root->left);
+  }
+  if(root->right) {
+    return getRandLeaf(root->right);
+  }
+
+  return nullptr;
 }
 /* End getters */
 

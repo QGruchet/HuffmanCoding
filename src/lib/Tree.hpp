@@ -7,6 +7,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>
+#include <ctime>
 
 class Sommet
 {
@@ -63,18 +64,18 @@ class ArbreB
 
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
-    ArbreB& operator+=(Sommet*);
-    ArbreB& operator-=(Sommet*);
+    ArbreB& operator+=(const ArbreB&);
+    ArbreB& operator-=(ArbreB);
 
     /* Methodes */
     void add(Sommet*, int);
-    void dell(Sommet*, Sommet*);
+    void dell(Sommet*, int);
     Sommet* find(Sommet*, int);
 
     /* Getters */
     Sommet* getRoot() const;
     int getSize() const;
-    Sommet *getLast() const;
+    Sommet* getRandLeaf(Sommet*) const;
 
     /* Destructor */
     ~ArbreB();
