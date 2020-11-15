@@ -21,10 +21,9 @@ class Test
 
     // Test Tree.hpp
     bool testDefaultBuilderSommet();
-    bool testCopyBuilderSommet();
-    bool testDefaultBuilderArbreB();
-    bool testCopyBuilderArbreB();
     bool testBuilderSommetWithData();
+    bool testCopyBuilderArbreB();
+    bool testDefaultBuilderArbreB();
     bool testBuilderArbreBWithData();
     bool testTreeToQueue();
     bool testGetSommetAtIndex();

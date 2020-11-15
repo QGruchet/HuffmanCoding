@@ -7,10 +7,9 @@ void Test::allTest() {
   std::cout << "########################### TESTS ##########################" << std::endl;
   std::cout << "#      test default builder 'sommet'        :" << (testDefaultBuilderSommet() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#     test builder 'sommet' with data       :" << (testBuilderSommetWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#        test copy builder 'sommet'         :" << (testCopyBuilderSommet() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#      test default builder 'arbreB'        :" << (testDefaultBuilderArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#        test copy builder 'ArbreB'         :" << (testCopyBuilderArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#     test builder 'arbreB' with data       :" << (testBuilderArbreBWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#        test copy builder 'arbreB'         :" << (testCopyBuilderArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#        test get 'sommet' at index         :" << (testGetSommetAtIndex() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                 test add                  :" << (testAdd() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test dell                  :" << (testDell() ? "     passed"  : "       fail") << " ! #" << std::endl;
@@ -30,8 +29,23 @@ bool Test::testDefaultBuilderSommet() {
   Sommet node;
 
   bool ret = ( (node.getData() == 0)
-          && (node.getLeft() == nullptr)
-          && (node.getRight() ==  nullptr) );
+            && (node.getLeft() == nullptr)
+            && (node.getRight() ==  nullptr)
+            );
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testBuilderSommetWithData() {
+  Sommet node(2);
+
+  bool ret = ( (node.getData() == 2)
+            && (node.getLeft() == nullptr)
+            && (node.getRight() ==  nullptr)
+            );
 
   sumTest += int(ret);
   numTestGlobal += 1;
@@ -50,21 +64,23 @@ bool Test::testDefaultBuilderArbreB() {
   return ret;
 }
 
-bool Test::testBuilderSommetWithData() {
-  Sommet node(2);
+bool Test::testCopyBuilderArbreB() {
+  ArbreB tree(1);
+  tree << 2;
+  tree << 3;
+  tree << 4;
 
-  bool ret = ( (node.getData() == 2)
-          && (node.getLeft() == nullptr)
-          && (node.getRight() ==  nullptr) );
+  ArbreB treeCopy(tree);
 
-  sumTest += int(ret);
-  numTestGlobal += 1;
+  std::cout << "\n" << tree << std::endl;
+  std::cout << treeCopy << std::endl;
 
-  return ret;
-}
-
-bool Test::testCopyBuilderSommet() {
-  bool ret = 0;
+  bool ret = true;
+  if(tree.getSize() == treeCopy.getSize()) {
+    for(int index = 1; index <= tree.getSize(); ++index) {
+      ret &= int(tree[index]->getData() == treeCopy[index]->getData());
+    }
+  }
 
   sumTest += int(ret);
   numTestGlobal += 1;
@@ -78,16 +94,8 @@ bool Test::testBuilderArbreBWithData() {
 
   bool ret = ( (root->getData() == 2)
           && (root->getLeft() == nullptr)
-          && (root->getRight() ==  nullptr) );
-
-  sumTest += int(ret);
-  numTestGlobal += 1;
-
-  return ret;
-}
-
-bool Test::testCopyBuilderArbreB() {
-  bool ret = 0;
+          && (root->getRight() ==  nullptr)
+          );
 
   sumTest += int(ret);
   numTestGlobal += 1;
@@ -117,7 +125,9 @@ bool Test::testAdd() {
   tree << 3;
   
   bool ret = ( (tree.getRoot()->getLeft() && tree.getRoot()->getLeft()->getData() == 3)
-              || (tree.getRoot()->getRight() && tree.getRoot()->getRight()->getData() == 3));
+            || (tree.getRoot()->getRight() && tree.getRoot()->getRight()->getData() == 3)
+            );
+  
   sumTest += int(ret);
   numTestGlobal += 1;
 
@@ -125,7 +135,7 @@ bool Test::testAdd() {
 }
 
 bool Test::testDell() {
-  bool ret = 0;
+  bool ret = false;
 
   sumTest += int(ret);
   numTestGlobal += 1;
@@ -140,7 +150,7 @@ bool Test::testDepth() {
   tree << 3;
   tree << 4;
 
-  bool ret = tree.getRoot()->getDepth() == 3;
+  bool ret = (tree.getRoot()->getDepth() == 3);
 
   sumTest += int(ret);
   numTestGlobal += 1;
@@ -155,7 +165,7 @@ bool Test::testSize() {
   tree << 3;
   tree << 4;
 
-  bool ret = tree.getSize() == 4;
+  bool ret = (tree.getSize() == 4);
 
   sumTest += int(ret);
   numTestGlobal += 1;
@@ -182,7 +192,7 @@ bool Test::testFind() {
 }
 
 bool Test::testSplit() {
-  bool ret = 0;
+  bool ret = false;
 
   sumTest += int(ret);
   numTestGlobal +=1;
@@ -191,7 +201,7 @@ bool Test::testSplit() {
 }
 
 bool Test::testJoin() {
-  bool ret = 0;
+  bool ret = false;
 
   sumTest += int(ret);
   numTestGlobal +=1;

@@ -21,11 +21,9 @@ public:
     /* Builders */
     Sommet(); // Default
     Sommet(int);
-    Sommet(const Sommet&);
 
     /* Overloaded */
-    Sommet& operator=(const Sommet&);
-    friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
+    friend std::ostream &operator<<(std::ostream &, const Sommet&);
     
     /* Methodes */
     bool isLeaf();
@@ -52,12 +50,11 @@ class ArbreB
   public:
     /* Builders */
     ArbreB(); //Default
+    ArbreB(const ArbreB&); // Copy
     ArbreB(int);
-    ArbreB(const ArbreB&);
 
     /* Overloaded */
     ArbreB& operator=(const ArbreB&);
-
     ArbreB& operator<<(int); // Insert
     ArbreB& operator>>(int); // Dell
     Sommet* operator[](int);
@@ -68,6 +65,8 @@ class ArbreB
     void add(Sommet*, int);
     void dell(Sommet*, int);
     Sommet* find(Sommet*, int);
+    void clear(Sommet*);
+    void copy(const Sommet*, Sommet*);
 
     /* Getters */
     Sommet* getRoot() const;

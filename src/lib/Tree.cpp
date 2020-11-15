@@ -7,8 +7,11 @@ ArbreB::ArbreB() : size(0), root(nullptr)  {}
 // End default
 
 // Copy
-Sommet::Sommet(const Sommet& other) {}
-ArbreB::ArbreB(const ArbreB& other) {}
+ArbreB::ArbreB(const ArbreB& other) {
+  root = nullptr;
+  copy(other.root, root);
+  size = other.size;
+}
 // End copy
 
 ArbreB::ArbreB(int rootData) {
@@ -21,6 +24,26 @@ Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
 
 /* Overloaded */
 // Operator=
+void ArbreB::copy(const Sommet* original, Sommet* cpy) {
+  if(!original) {
+    cpy = nullptr;
+  }
+ else {
+   cpy = new Sommet(original->data);
+   copy(original->left, cpy->left);
+   copy(original->right, cpy->right);
+ }
+}
+
+ArbreB& ArbreB::operator=(const ArbreB& other) {
+  if(this != &other) {
+    clear(root);
+    copy(other.root, root);
+    size = other.size;
+  }
+
+  return *this;
+}
 // End operator=
 
 // Operator<<
@@ -95,7 +118,7 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
 // Operator[]
 Sommet* ArbreB::operator[](int index) {
   if(index-1 < 0 || index-1 >= size) {
-    std::cout << "ERROR ; index out of band" << std::endl;
+    std::cout << "ERROR : index out of band" << std::endl;
     return nullptr;
   }
   else if(index-1 == 0) {
@@ -190,6 +213,20 @@ int ArbreB::getSize() const {
 /* End getters */
 
 /* Methodes */
+void ArbreB::clear(Sommet *node) {
+  if(node) {
+    delete node;
+  }
+
+  if(node->left) {
+    clear(node->left);
+  }
+
+  if(node->right) {
+    clear(node->right);
+  }
+}
+
 bool Sommet::isLeaf() {
   return (!left && !right);
 }
