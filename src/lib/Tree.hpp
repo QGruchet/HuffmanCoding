@@ -18,11 +18,14 @@ class Sommet
     Sommet *left, *right;
 
 public:
-    /* Builders */
+    /* Constructors */
     Sommet(); // Default
+    Sommet(const Sommet&); // Copy
     Sommet(int);
 
     /* Overloaded */
+    Sommet& operator=(const Sommet&);
+
     friend std::ostream &operator<<(std::ostream &, const Sommet&);
     
     /* Methodes */
@@ -34,7 +37,8 @@ public:
     char getCar() const;
     Sommet* getLeft() const;
     Sommet* getRight() const;
-    int getDepth();
+    int countDepth();
+    int countSize();
 
     /* Destructor */
     ~Sommet();
@@ -48,25 +52,24 @@ class ArbreB
     Sommet *root;
 
   public:
-    /* Builders */
+    /* Constructors */
     ArbreB(); //Default
-    ArbreB(const ArbreB&); // Copy
     ArbreB(int);
 
     /* Overloaded */
-    ArbreB& operator=(const ArbreB&);
     ArbreB& operator<<(int); // Insert
     ArbreB& operator>>(int); // Dell
     Sommet* operator[](int);
 
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
+    ArbreB& operator+=(Sommet*);
+    ArbreB& operator-=(Sommet*);
+
     /* Methodes */
     void add(Sommet*, int);
     void dell(Sommet*, int);
     Sommet* find(Sommet*, int);
-    void clear(Sommet*);
-    void copy(const Sommet*, Sommet*);
 
     /* Getters */
     Sommet* getRoot() const;

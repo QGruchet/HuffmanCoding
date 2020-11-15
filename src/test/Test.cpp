@@ -5,11 +5,10 @@ Test::Test() : sumTest(0), numTestGlobal(0) {}
 void Test::allTest() {
   /* Test Tree.hpp */
   std::cout << "########################### TESTS ##########################" << std::endl;
-  std::cout << "#      test default builder 'sommet'        :" << (testDefaultBuilderSommet() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#     test builder 'sommet' with data       :" << (testBuilderSommetWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#      test default builder 'arbreB'        :" << (testDefaultBuilderArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#        test copy builder 'ArbreB'         :" << (testCopyBuilderArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#     test builder 'arbreB' with data       :" << (testBuilderArbreBWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#    test default Constructor 'sommet'      :" << (testDefaultConstructorSommet() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#   test Constructor 'sommet' with data     :" << (testConstructorSommetWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#    test default Constructor 'arbreB'      :" << (testDefaultConstructorArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#   test Constructor 'arbreB' with data     :" << (testConstructorArbreBWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#        test get 'sommet' at index         :" << (testGetSommetAtIndex() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                 test add                  :" << (testAdd() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test dell                  :" << (testDell() ? "     passed"  : "       fail") << " ! #" << std::endl;
@@ -25,7 +24,7 @@ void Test::allTest() {
 }
 
 /* Test Tree.hpp */
-bool Test::testDefaultBuilderSommet() {
+bool Test::testDefaultConstructorSommet() {
   Sommet node;
 
   bool ret = ( (node.getData() == 0)
@@ -39,7 +38,7 @@ bool Test::testDefaultBuilderSommet() {
   return ret;
 }
 
-bool Test::testBuilderSommetWithData() {
+bool Test::testConstructorSommetWithData() {
   Sommet node(2);
 
   bool ret = ( (node.getData() == 2)
@@ -53,7 +52,7 @@ bool Test::testBuilderSommetWithData() {
   return ret;
 }
 
-bool Test::testDefaultBuilderArbreB() {
+bool Test::testDefaultConstructorArbreB() {
   ArbreB tree;
 
   bool ret = (tree.getRoot() == nullptr);
@@ -64,31 +63,7 @@ bool Test::testDefaultBuilderArbreB() {
   return ret;
 }
 
-bool Test::testCopyBuilderArbreB() {
-  ArbreB tree(1);
-  tree << 2;
-  tree << 3;
-  tree << 4;
-
-  ArbreB treeCopy(tree);
-
-  std::cout << "\n" << tree << std::endl;
-  std::cout << treeCopy << std::endl;
-
-  bool ret = true;
-  if(tree.getSize() == treeCopy.getSize()) {
-    for(int index = 1; index <= tree.getSize(); ++index) {
-      ret &= int(tree[index]->getData() == treeCopy[index]->getData());
-    }
-  }
-
-  sumTest += int(ret);
-  numTestGlobal += 1;
-
-  return ret;
-}
-
-bool Test::testBuilderArbreBWithData() {
+bool Test::testConstructorArbreBWithData() {
   ArbreB tree(2);
   Sommet* root = tree.getRoot();
 
@@ -150,7 +125,7 @@ bool Test::testDepth() {
   tree << 3;
   tree << 4;
 
-  bool ret = (tree.getRoot()->getDepth() == 3);
+  bool ret = (tree.getRoot()->countDepth() == 3);
 
   sumTest += int(ret);
   numTestGlobal += 1;

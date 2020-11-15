@@ -12,7 +12,7 @@ class Test
     int numTestGlobal;
 
   public:
-    /* Builder */
+    /* Constructor */
     Test();
 
     /* Methodes */
@@ -20,11 +20,10 @@ class Test
     void allTest();
 
     // Test Tree.hpp
-    bool testDefaultBuilderSommet();
-    bool testBuilderSommetWithData();
-    bool testCopyBuilderArbreB();
-    bool testDefaultBuilderArbreB();
-    bool testBuilderArbreBWithData();
+    bool testDefaultConstructorSommet();
+    bool testConstructorSommetWithData();
+    bool testDefaultConstructorArbreB();
+    bool testConstructorArbreBWithData();
     bool testTreeToQueue();
     bool testGetSommetAtIndex();
     bool testAdd();

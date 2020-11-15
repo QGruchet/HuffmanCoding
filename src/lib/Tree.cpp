@@ -1,16 +1,23 @@
 #include "Tree.hpp"
 
-/* Builders */
+/* Constructors */
 // Default
 Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
 ArbreB::ArbreB() : size(0), root(nullptr)  {}
 // End default
 
 // Copy
-ArbreB::ArbreB(const ArbreB& other) {
-  root = nullptr;
-  copy(other.root, root);
-  size = other.size;
+Sommet::Sommet(const Sommet& other) {
+  data = other.data;
+  left = new Sommet;
+  right = new Sommet;
+
+  if(other.left) {
+    *left = *other.left;
+  }
+  if(other.right) {
+    *right = *other.right;
+  }
 }
 // End copy
 
@@ -20,26 +27,27 @@ ArbreB::ArbreB(int rootData) {
 }
 
 Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
-/* End builders */
+/* End Constructors */
 
 /* Overloaded */
 // Operator=
-void ArbreB::copy(const Sommet* original, Sommet* cpy) {
-  if(!original) {
-    cpy = nullptr;
-  }
- else {
-   cpy = new Sommet(original->data);
-   copy(original->left, cpy->left);
-   copy(original->right, cpy->right);
- }
-}
 
-ArbreB& ArbreB::operator=(const ArbreB& other) {
+Sommet& Sommet::operator=(const Sommet& other) {
   if(this != &other) {
-    clear(root);
-    copy(other.root, root);
-    size = other.size;
+    data = other.data;
+
+    if(other.left) {
+      if(!left) {
+        left = new Sommet(other.left->data);
+      }
+      *left = *other.left;
+    }
+    if(other.right) {
+      if(!right) {
+        right = new Sommet(other.right->data);
+      }
+      *right = *other.right;
+    }
   }
 
   return *this;
@@ -196,13 +204,13 @@ int maximum(int a, int b){
   return (a > b) ? a : b;
 }
 
-int Sommet::getDepth() {
+int Sommet::countDepth() {
   int depthLeft = 0, depthRight = 0;
   if(left) {
-    depthLeft = left->getDepth();
+    depthLeft = left->countDepth();
   }
   if(right) {
-    depthRight = right->getDepth();
+    depthRight = right->countDepth();
   }
   return 1 + maximum(depthLeft, depthRight);
 }
@@ -213,20 +221,6 @@ int ArbreB::getSize() const {
 /* End getters */
 
 /* Methodes */
-void ArbreB::clear(Sommet *node) {
-  if(node) {
-    delete node;
-  }
-
-  if(node->left) {
-    clear(node->left);
-  }
-
-  if(node->right) {
-    clear(node->right);
-  }
-}
-
 bool Sommet::isLeaf() {
   return (!left && !right);
 }

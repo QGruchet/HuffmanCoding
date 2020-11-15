@@ -9,7 +9,7 @@ PACKWIN=-std=c++0x `pkg-config --cflags gtkmm-3.0 --cflags --libs`
 ifeq ($(DEBUG), yes)
 	CFLAGS = -std=c++17 -Wall -Wextra -g
 else
-	CFLAGS = -std=c++17 -Wall -Wextra
+	CFLAGS = -std=c++17
 endif
 
 #################################
