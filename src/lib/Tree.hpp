@@ -20,22 +20,23 @@ class Sommet
 public:
     /* Builders */
     Sommet(); // Default
-    Sommet(int, char);
     Sommet(int);
+    Sommet(const Sommet&);
 
     /* Overloaded */
+    Sommet& operator=(const Sommet&);
     friend std::ostream &operator<<(std::ostream &flux, const Sommet&);
     
     /* Methodes */
     bool isLeaf();
     void printBeautifulTree(int);
-    int getDepth();
 
     /* Getters */
     int getData() const;
     char getCar() const;
     Sommet* getLeft() const;
     Sommet* getRight() const;
+    int getDepth();
 
     /* Destructor */
     ~Sommet();
@@ -45,15 +46,18 @@ class ArbreB
 {
   private:
     /* Data */
-    int depth, size;
+    int size;
     Sommet *root;
 
   public:
     /* Builders */
     ArbreB(); //Default
-    ArbreB(Sommet*);
+    ArbreB(int);
+    ArbreB(const ArbreB&);
 
     /* Overloaded */
+    ArbreB& operator=(const ArbreB&);
+
     ArbreB& operator<<(int); // Insert
     ArbreB& operator>>(int); // Dell
     Sommet* operator[](int);
@@ -61,8 +65,8 @@ class ArbreB
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
     /* Methodes */
-    Sommet* add(int);
-    Sommet* dell(int);
+    void add(Sommet*, int);
+    void dell(Sommet*, int);
     Sommet* find(int);
 
     /* Getters */

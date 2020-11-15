@@ -24,10 +24,8 @@ class Test
     bool testCopyBuilderSommet();
     bool testDefaultBuilderArbreB();
     bool testCopyBuilderArbreB();
-    bool testBuilderSommetWithParamFailed();
-    bool testBuilderSommetWithNumCarAndCar();
-    bool testBuilderSommetWithNum();
-    bool testBuilderArbreBWithParam();
+    bool testBuilderSommetWithData();
+    bool testBuilderArbreBWithData();
     bool testTreeToQueue();
     bool testGetSommetAtIndex();
     bool testAdd();

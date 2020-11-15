@@ -27,7 +27,7 @@ $(EXEC) : Main.o Tree.o Test.o Parser.o
 
 run :
 	./src/bin/$(EXEC)
-	mv binary_tree.dot src/out/
+	# mv binary_tree.dot src/out/
 
 dot :
 	dot -Tpng src/out/binary_tree.dot > src/out/test.png
@@ -60,10 +60,13 @@ vg:
 	valgrind ./src/bin/$(EXEC)
 
 vg2:
-	valgrind --leak-check=full ./src/bin/$(EXEC)
+	valgrind --leak-check=full --show-leak-kinds=all ./src/bin/$(EXEC)
 
 vg3:
 	valgrind -v ./src/bin/$(EXEC)
+
+gdb:
+	gdb ./src/bin/$(EXEC)
 
 #################################
 

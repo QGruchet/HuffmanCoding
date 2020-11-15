@@ -4,31 +4,29 @@ Test::Test() : sumTest(0), numTestSucced(0) {}
 
 void Test::allTest() {
   /* Test Tree.hpp */
-  std::cout << "########################## TESTS #########################" << std::endl;
-  std::cout << "#      test default builder 'sommet'        :" << (testDefaultBuilderSommet() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#        test copy builder 'sommet'         :" << (testCopyBuilderSommet() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#      test default builder 'arbreB'        :" << (testDefaultBuilderArbreB() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#        test copy builder 'arbreB'         :" << (testCopyBuilderArbreB() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "# test builder 'sommet' with numCar and car :" << (testBuilderSommetWithNumCarAndCar() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#      test builder 'sommet' with num       :" << (testBuilderSommetWithNum() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#     test builder 'arbreB' with param      :" << (testBuilderArbreBWithParam() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#        test get 'sommet' at index         :" << (testGetSommetAtIndex() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#                 test add                  :" << (testAdd() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#               test depth                  :" << (testDepth() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#                test size                  :" << (testSize() ? "     succes"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#                test dell                  :" << (testDell() ? "     succes"  : "       fail") << " ! #" << std::endl;
+  std::cout << "########################### TESTS ##########################" << std::endl;
+  std::cout << "#      test default builder 'sommet'        :" << (testDefaultBuilderSommet() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#     test builder 'sommet' with data       :" << (testBuilderSommetWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#        test copy builder 'sommet'         :" << (testCopyBuilderSommet() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#      test default builder 'arbreB'        :" << (testDefaultBuilderArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#     test builder 'arbreB' with data       :" << (testBuilderArbreBWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#        test copy builder 'arbreB'         :" << (testCopyBuilderArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#        test get 'sommet' at index         :" << (testGetSommetAtIndex() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                 test add                  :" << (testAdd() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#               test depth                  :" << (testDepth() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                test size                  :" << (testSize() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                test dell                  :" << (testDell() ? "     passed"  : "       fail") << " ! #" << std::endl;
   /* Test Parser.hpp */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
-  std::cout << "################### [";
-  std::cout << sumTest << "/" << numTestSucced << " tests passed !] ##################" << std::endl;
+  std::cout << "################### ["<< sumTest << "/" << numTestSucced << "] tests passed ! ###################" << std::endl;
 }
 
 /* Test Tree.hpp */
 bool Test::testDefaultBuilderSommet() {
   Sommet node;
 
-  bool ret = ( (node.getData() == -1)
+  bool ret = ( (node.getData() == 0)
           && (node.getLeft() == nullptr)
           && (node.getRight() ==  nullptr) );
 
@@ -49,8 +47,35 @@ bool Test::testDefaultBuilderArbreB() {
   return ret;
 }
 
+bool Test::testBuilderSommetWithData() {
+  Sommet node(2);
+
+  bool ret = ( (node.getData() == 2)
+          && (node.getLeft() == nullptr)
+          && (node.getRight() ==  nullptr) );
+
+  sumTest += int(ret);
+  numTestSucced += 1;
+
+  return ret;
+}
+
 bool Test::testCopyBuilderSommet() {
   bool ret = 0;
+
+  sumTest += int(ret);
+  numTestSucced += 1;
+
+  return ret;
+}
+
+bool Test::testBuilderArbreBWithData() {
+  ArbreB tree(2);
+  Sommet* root = tree.getRoot();
+
+  bool ret = ( (root->getData() == 2)
+          && (root->getLeft() == nullptr)
+          && (root->getRight() ==  nullptr) );
 
   sumTest += int(ret);
   numTestSucced += 1;
@@ -67,55 +92,7 @@ bool Test::testCopyBuilderArbreB() {
   return ret;
 }
 
-bool Test::testBuilderSommetWithNumCarAndCar() {
-  Sommet node(2, 'e');
-
-  bool ret = ( (node.getData() == 2)
-          && (node.getLeft() == nullptr)
-          && (node.getRight() ==  nullptr) );
-
-  sumTest += int(ret);
-  numTestSucced += 1;
-
-  return ret;
-}
-
-bool Test::testBuilderSommetWithNum() {
-  Sommet node(2);
-
-  bool ret = ( (node.getData() == 2)
-          && (node.getLeft() == nullptr)
-          && (node.getRight() ==  nullptr) );
-
-  sumTest += int(ret);
-  numTestSucced += 1;
-
-  return ret;
-}
-
-bool Test::testBuilderArbreBWithParam() {
-  Sommet* node = new Sommet(2, 'e');
-  ArbreB tree(node);
-  Sommet* root = tree.getRoot();
-
-  bool ret = ( (root->getData() == 2)
-          && (root->getLeft() == nullptr)
-          && (root->getRight() ==  nullptr) );
-
-  sumTest += int(ret);
-  numTestSucced += 1;
-
-  return ret;
-}
-
 bool Test::testGetSommetAtIndex() {
-  srand((unsigned int)time(0));
-  Sommet *root = new Sommet(1);
-  ArbreB tree(root);
-  tree << 2;
-  tree << 0;
-  tree << 3;
-
   bool ret = 0;
 
   sumTest += int(ret);
@@ -125,20 +102,12 @@ bool Test::testGetSommetAtIndex() {
 }
 
 bool Test::testAdd() {
-  srand((unsigned int)time(0));
-  Sommet* root = new Sommet(2);
-  ArbreB tree(root);
-
+  std::srand((unsigned int)time(0));
+  ArbreB tree(2);
   tree << 3;
-  tree << 1;
-  tree << 13;
-  tree << 6;
-  tree << 0;
-  tree << 3;
-  tree << 5;
-  tree << 69;
   
-  bool ret = 0;
+  bool ret = ( (tree.getRoot()->getLeft() && tree.getRoot()->getLeft()->getData() == 3)
+              || (tree.getRoot()->getRight() && tree.getRoot()->getRight()->getData() == 3));
 
   sumTest += int(ret);
   numTestSucced += 1;
@@ -147,14 +116,7 @@ bool Test::testAdd() {
 }
 
 bool Test::testDepth() {
-  srand((unsigned int)time(0));
-  Sommet *root = new Sommet(1);
-  ArbreB tree(root);
-  tree << 2;
-  tree << 0;
-  tree << 3;
-
-  bool ret = (root->getDepth() == 3);
+  bool ret = 0;
 
   sumTest += int(ret);
   numTestSucced += 1;
@@ -172,16 +134,7 @@ bool Test::testSize() {
 }
 
 bool Test::testDell() {
-  srand((unsigned int)time(0));
-  Sommet *root = new Sommet(1);
-  ArbreB tree(root);
-  tree << 2;
-  tree << 0;
-  tree << 3;
-
-  tree >> 3;
-
-  bool ret = 1;
+  bool ret = 0;
 
   sumTest += int(ret);
   numTestSucced += 1;

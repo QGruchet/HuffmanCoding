@@ -3,13 +3,17 @@
 /* Builders */
 // Default
 Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
-ArbreB::ArbreB() : depth(0), size(0), root(nullptr)  {}
+ArbreB::ArbreB() : size(0), root(nullptr)  {}
 // End default
 
-ArbreB::ArbreB(Sommet *newRoot) {
-  root = newRoot;
-  depth = newRoot->getDepth();
+// Copy
+Sommet::Sommet(const Sommet& other) {}
+ArbreB::ArbreB(const ArbreB& other) {}
+// End copy
+
+ArbreB::ArbreB(int rootData) {
   size = 0;
+  root = new Sommet(rootData);
 }
 
 Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
@@ -25,15 +29,15 @@ ArbreB& ArbreB::operator<<(int newData) {
     root = new Sommet(newData);
   }
   else {
-    root = add(newData);
+    add(root, newData);
   }
   return *this;
 }
 
-Sommet* ArbreB::add(int newData) {
+void ArbreB::add(Sommet *root, int newData) {
   if(rand()%2) {
     if(root->left) {
-      root->left = add(newData);
+      add(root->left, newData);
     }
     else {
       root->left = new Sommet(newData);
@@ -41,17 +45,17 @@ Sommet* ArbreB::add(int newData) {
   }
   else {
     if(root->right) {
-      root->right = add(newData);
+      add(root->right, newData);
     }
     else {
       root->right = new Sommet(newData);
     }
   }
-  return root;
 }
 
-// ArbreB& ArbreB::operator>>(int dellData) {}
-// Sommet* ArbreB::dell(int dellData) {}
+ArbreB& ArbreB::operator>>(int dellData) {}
+
+void ArbreB::dell(Sommet *root, int dellData) {}
 
 std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
   flux << node.data << ", ";
@@ -70,13 +74,16 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
   }
   return flux;
 }
+
+
 // End operator<<
 
 // Operator+=, operator-=
 // End operator+=, operator-=
 
 // Operator[]
-// Sommet* ArbreB::operator[](int) {}
+Sommet* ArbreB::operator[](int) {}
+Sommet* ArbreB::find(int dataSearch) {}
 // End operator[]
 /* End overloaded */
 
@@ -118,8 +125,6 @@ int ArbreB::getSize() const {
 /* End getters */
 
 /* Methodes */
-// Sommet* ArbreB::find(int dataSearch) {}
-
 bool Sommet::isLeaf() {
   return (!left && !right);
 }
@@ -151,5 +156,6 @@ ArbreB::~ArbreB() {
   if(root) {
     delete root;
   }
+  root = nullptr;
 }
 /* End destructors */
