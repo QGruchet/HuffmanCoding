@@ -9,7 +9,7 @@ class Test
   private:
     /* Data */
     int sumTest;
-    int numTestSucced;
+    int numTestGlobal;
 
   public:
     /* Builder */
@@ -29,9 +29,12 @@ class Test
     bool testTreeToQueue();
     bool testGetSommetAtIndex();
     bool testAdd();
+    bool testDell();
     bool testDepth();
     bool testSize();
-    bool testDell();
+    bool testFind();
+    bool testSplit();
+    bool testJoin();
 
     // Test Parser.hpp
     bool testCalculFreqChar();

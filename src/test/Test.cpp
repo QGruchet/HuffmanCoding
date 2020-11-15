@@ -1,6 +1,6 @@
 #include "Test.hpp"
 
-Test::Test() : sumTest(0), numTestSucced(0) {}
+Test::Test() : sumTest(0), numTestGlobal(0) {}
 
 void Test::allTest() {
   /* Test Tree.hpp */
@@ -13,13 +13,16 @@ void Test::allTest() {
   std::cout << "#        test copy builder 'arbreB'         :" << (testCopyBuilderArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#        test get 'sommet' at index         :" << (testGetSommetAtIndex() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                 test add                  :" << (testAdd() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                test dell                  :" << (testDell() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#               test depth                  :" << (testDepth() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test size                  :" << (testSize() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#                test dell                  :" << (testDell() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                test find                  :" << (testFind() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#               test split                  :" << (testSplit() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#                test join                  :" << (testJoin() ? "     passed"  : "       fail") << " ! #" << std::endl;
   /* Test Parser.hpp */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
-  std::cout << "################### ["<< sumTest << "/" << numTestSucced << "] tests passed ! ###################" << std::endl;
+  std::cout << "################### ["<< sumTest << "/" << numTestGlobal << "] tests passed ! ###################" << std::endl;
 }
 
 /* Test Tree.hpp */
@@ -31,7 +34,7 @@ bool Test::testDefaultBuilderSommet() {
           && (node.getRight() ==  nullptr) );
 
   sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
 
   return ret;
 }
@@ -42,7 +45,7 @@ bool Test::testDefaultBuilderArbreB() {
   bool ret = (tree.getRoot() == nullptr);
 
   sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
 
   return ret;
 }
@@ -55,7 +58,7 @@ bool Test::testBuilderSommetWithData() {
           && (node.getRight() ==  nullptr) );
 
   sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
 
   return ret;
 }
@@ -64,7 +67,7 @@ bool Test::testCopyBuilderSommet() {
   bool ret = 0;
 
   sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
 
   return ret;
 }
@@ -78,7 +81,7 @@ bool Test::testBuilderArbreBWithData() {
           && (root->getRight() ==  nullptr) );
 
   sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
 
   return ret;
 }
@@ -87,48 +90,36 @@ bool Test::testCopyBuilderArbreB() {
   bool ret = 0;
 
   sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
 
   return ret;
 }
 
 bool Test::testGetSommetAtIndex() {
-  bool ret = 0;
+  ArbreB tree(1);
+
+  tree << 2;
+  tree << 3;
+  tree << 4;
+
+  Sommet* atPos = tree[3];
+
+  bool ret = atPos->getData() == 2;
 
   sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
 
   return ret;
 }
 
 bool Test::testAdd() {
-  std::srand((unsigned int)time(0));
   ArbreB tree(2);
   tree << 3;
   
   bool ret = ( (tree.getRoot()->getLeft() && tree.getRoot()->getLeft()->getData() == 3)
               || (tree.getRoot()->getRight() && tree.getRoot()->getRight()->getData() == 3));
-
   sumTest += int(ret);
-  numTestSucced += 1;
-
-  return ret;
-}
-
-bool Test::testDepth() {
-  bool ret = 0;
-
-  sumTest += int(ret);
-  numTestSucced += 1;
-
-  return ret;
-}
-
-bool Test::testSize() {
-  bool ret = 0;
-
-  sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
 
   return ret;
 }
@@ -137,7 +128,73 @@ bool Test::testDell() {
   bool ret = 0;
 
   sumTest += int(ret);
-  numTestSucced += 1;
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testDepth() {
+  ArbreB tree(1);
+
+  tree << 2;
+  tree << 3;
+  tree << 4;
+
+  bool ret = tree.getRoot()->getDepth() == 3;
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testSize() {
+  ArbreB tree(1);
+
+  tree << 2;
+  tree << 3;
+  tree << 4;
+
+  bool ret = tree.getSize() == 4;
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testFind() {
+  ArbreB tree(1);
+
+  tree << 2;
+  tree << 3;
+  tree << 4;
+
+  Sommet* tryFind = tree.find(tree.getRoot(), 3);
+  Sommet* tryFind2 = tree.find(tree.getRoot(), 0); 
+
+  bool ret = (tryFind->getData() == 3 && !tryFind2);
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
+
+  return ret;
+}
+
+bool Test::testSplit() {
+  bool ret = 0;
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
+
+  return ret;
+}
+
+bool Test::testJoin() {
+  bool ret = 0;
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
 
   return ret;
 }

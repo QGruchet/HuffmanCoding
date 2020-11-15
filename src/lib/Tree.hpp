@@ -67,7 +67,7 @@ class ArbreB
     /* Methodes */
     void add(Sommet*, int);
     void dell(Sommet*, int);
-    Sommet* find(int);
+    Sommet* find(Sommet*, int);
 
     /* Getters */
     Sommet* getRoot() const;

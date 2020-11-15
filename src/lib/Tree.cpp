@@ -12,7 +12,7 @@ ArbreB::ArbreB(const ArbreB& other) {}
 // End copy
 
 ArbreB::ArbreB(int rootData) {
-  size = 0;
+  size = 1;
   root = new Sommet(rootData);
 }
 
@@ -27,6 +27,7 @@ Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
 ArbreB& ArbreB::operator<<(int newData) {
   if(!root) {
     root = new Sommet(newData);
+    size = 1;
   }
   else {
     add(root, newData);
@@ -41,6 +42,7 @@ void ArbreB::add(Sommet *root, int newData) {
     }
     else {
       root->left = new Sommet(newData);
+      size += 1;
     }
   }
   else {
@@ -49,13 +51,22 @@ void ArbreB::add(Sommet *root, int newData) {
     }
     else {
       root->right = new Sommet(newData);
+      size += 1;
     }
   }
 }
 
-ArbreB& ArbreB::operator>>(int dellData) {}
+ArbreB& ArbreB::operator>>(int dellData) {
+  if(!find(root, dellData)) { // DellData is not in the tree
+    return *this;
+  }
+  dell(root, dellData);
+  return *this;
+}
 
-void ArbreB::dell(Sommet *root, int dellData) {}
+void ArbreB::dell(Sommet *root, int dellData) {
+
+}
 
 std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
   flux << node.data << ", ";
@@ -82,8 +93,62 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
 // End operator+=, operator-=
 
 // Operator[]
-Sommet* ArbreB::operator[](int) {}
-Sommet* ArbreB::find(int dataSearch) {}
+Sommet* ArbreB::operator[](int index) {
+  if(index-1 < 0 || index-1 >= size) {
+    std::cout << "ERROR ; index out of band" << std::endl;
+    return nullptr;
+  }
+  else if(index-1 == 0) {
+    return root;
+  }
+
+  // Breadth First Search (BFS)
+  int posNodeInTree = 0;
+  std::queue<Sommet*> queue;
+  queue.push(root);
+  posNodeInTree++;
+
+  while(!queue.empty()) {
+    Sommet* start = queue.front();
+    
+    if(start->left) {
+      posNodeInTree++;
+      if(index-1 == posNodeInTree) {
+        return start->left;
+      }
+      
+      queue.push(start->left);
+    }
+
+    if(start->right) {
+      posNodeInTree++;
+      if(index-1 == posNodeInTree) {
+        return start->right;
+      }
+
+      queue.push(start->right);
+    }
+  }
+
+  return nullptr;
+}
+
+Sommet* ArbreB::find(Sommet* root, int dataSearch) {
+  if(root->data == dataSearch) {
+    return root;
+  }
+  if(root->left) {
+    Sommet* ret = find(root->left, dataSearch);
+    if(ret) {
+      return ret;
+    }
+  }
+  if(root->right) {
+    return find(root->right, dataSearch);
+  }
+
+  return nullptr;
+}
 // End operator[]
 /* End overloaded */
 
@@ -113,7 +178,7 @@ int Sommet::getDepth() {
   if(left) {
     depthLeft = left->getDepth();
   }
-  else if(right) {
+  if(right) {
     depthRight = right->getDepth();
   }
   return 1 + maximum(depthLeft, depthRight);
@@ -146,10 +211,10 @@ void Sommet::printBeautifulTree(int space) {
 /* Destructors */
 Sommet::~Sommet() {
   if(left) {
-    delete this;
+    delete left;
   }
   if(right) {
-    delete this;
+    delete right;
   }
 }
 ArbreB::~ArbreB() {
