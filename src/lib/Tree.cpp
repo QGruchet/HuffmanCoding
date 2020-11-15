@@ -88,15 +88,50 @@ void ArbreB::add(Sommet *root, int newData) {
 }
 
 ArbreB& ArbreB::operator>>(int dellData) {
-  if(!find(root, dellData)) { // DellData is not in the tree
+  Sommet *dellNode = find(root, dellData); // find the first node where is dellData
+  if(!dellNode || !root) {
     return *this;
   }
-  dell(root, dellData);
+  if(root->data == dellData) { // Dell the root
+    if(root->isLeaf()) {
+      delete root;
+      root = nullptr;
+    }
+    return *this;
+  }
+
+  dell(root, dellNode);
   return *this;
 }
 
-void ArbreB::dell(Sommet *root, int dellData) {
+void ArbreB::dell(Sommet *root, Sommet *dellNode) {
+  // Breadth First Search (BFS)
+  // int index = 0;
+  // std::queue<Sommet*> queue;
+  // queue.push(root);
 
+  // while(!queue.empty()) {
+  //   Sommet* start = queue.front();
+  //   q.pop();
+    
+  //   if(start->left) {
+  //     index++;
+  //     if(index-1 == index) {
+  //       return start->left;
+  //     }
+      
+  //     queue.push(start->left);
+  //   }
+
+  //   if(start->right) {
+  //     index++;
+  //     if(index-1 == index) {
+  //       return start->right;
+  //     }
+
+  //     queue.push(start->right);
+  //   }
+  // }
 }
 
 std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
@@ -116,8 +151,6 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
   }
   return flux;
 }
-
-
 // End operator<<
 
 // Operator+=, operator-=
@@ -141,6 +174,7 @@ Sommet* ArbreB::operator[](int index) {
 
   while(!queue.empty()) {
     Sommet* start = queue.front();
+    queue.pop();
     
     if(start->left) {
       posNodeInTree++;
@@ -165,17 +199,19 @@ Sommet* ArbreB::operator[](int index) {
 }
 
 Sommet* ArbreB::find(Sommet* root, int dataSearch) {
-  if(root->data == dataSearch) {
-    return root;
-  }
-  if(root->left) {
-    Sommet* ret = find(root->left, dataSearch);
-    if(ret) {
-      return ret;
+  if(root) {
+    if(root->data == dataSearch) {
+      return root;
     }
-  }
-  if(root->right) {
-    return find(root->right, dataSearch);
+    if(root->left) {
+      Sommet* ret = find(root->left, dataSearch);
+      if(ret) {
+        return ret;
+      }
+    }
+    if(root->right) {
+      return find(root->right, dataSearch);
+    }
   }
 
   return nullptr;
@@ -216,7 +252,7 @@ int Sommet::countDepth() {
 }
 
 int ArbreB::getSize() const {
-  return this->size;
+  return size;
 }
 /* End getters */
 

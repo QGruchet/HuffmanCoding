@@ -84,10 +84,16 @@ bool Test::testGetSommetAtIndex() {
   tree << 2;
   tree << 3;
   tree << 4;
+  tree << 5;
+  tree << 6;
 
+  std::cout << "\n"
+;  tree.getRoot()->printBeautifulTree(0);
   Sommet* atPos = tree[3];
+  Sommet* atPos2 = tree[5];
+  std::cout << "elem 3 : "<< atPos->getData() << "elem 5 : " << atPos2->getData() << std::endl;
 
-  bool ret = atPos->getData() == 2;
+  bool ret = 0;
 
   sumTest += int(ret);
   numTestGlobal += 1;
@@ -110,6 +116,24 @@ bool Test::testAdd() {
 }
 
 bool Test::testDell() {
+  ArbreB tree(1);
+  // std::cout << "\ttree : " << tree << std::endl;
+  tree >> 1; // dell root without child : ok
+  // std::cout << "\ttree : " << tree << std::endl;
+
+  tree << 1;
+  tree << 2;
+  // std::cout << "\ttree : " << tree << std::endl;
+  tree >> 2; // dell leaf : OK
+  // std::cout << "\ttree : " << tree << std::endl;
+
+  tree << 2;
+  // std::cout << "\ttree : " << tree << std::endl;
+  tree >> 1; // dell root with child : 
+  // std::cout << "\ttree : " << tree << std::endl;
+
+  // ArbreB tree
+
   bool ret = false;
 
   sumTest += int(ret);
@@ -154,11 +178,17 @@ bool Test::testFind() {
   tree << 2;
   tree << 3;
   tree << 4;
+  tree << 5;
+  tree << 6;
 
   Sommet* tryFind = tree.find(tree.getRoot(), 3);
   Sommet* tryFind2 = tree.find(tree.getRoot(), 0); 
+  Sommet* tryFind3 = tree.find(tree.getRoot(), 5); 
 
-  bool ret = (tryFind->getData() == 3 && !tryFind2);
+  bool ret = ( (tryFind->getData() == 3) 
+            && (!tryFind2)
+            && (tryFind3->getData() == 5)
+            );
 
   sumTest += int(ret);
   numTestGlobal +=1;
