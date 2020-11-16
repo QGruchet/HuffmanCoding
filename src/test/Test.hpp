@@ -29,6 +29,7 @@ class Test
     bool testJoin();
     bool testSplit();
     bool testCopy();
+    bool testAssign();
 
     // Test Parser.hpp
     bool testCalculFreqChar();
