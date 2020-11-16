@@ -56,27 +56,27 @@ bool Test::testAdd() {
 
 bool Test::testDell() {
   ArbreB tree(1);
-  std::cout << "tree : " << tree << std::endl;
+  // std::cout << "tree : " << tree << std::endl;
   tree >> 1; // dell root without child : ok
-  std::cout << "tree : " << tree << std::endl;
+  // std::cout << "tree : " << tree << std::endl;
 
   tree << 1;
   tree << 2;
-  std::cout << "tree : " << tree << std::endl;
+  // std::cout << "tree : " << tree << std::endl;
   tree >> 2; // dell leaf : OK
-  std::cout << "tree : " << tree << std::endl;
+  // std::cout << "tree : " << tree << std::endl;
 
   tree << 2;
-  std::cout << "tree : " << tree << std::endl;
+  // std::cout << "tree : " << tree << std::endl;
   tree >> 1; // dell root with child : 
-  std::cout << "tree : " << tree << std::endl;
+  // std::cout << "tree : " << tree << std::endl;
 
   tree << 1;
   tree << 3;
   tree << 4;
 
-  tree.getRoot()->printBeautifulTree(0);
-  std::cout << "tree : " << tree << std::endl;
+  // tree.getRoot()->printBeautifulTree(0);
+  // std::cout << "tree : " << tree << std::endl;
   tree >> 1;
 
   bool ret = false;
@@ -164,7 +164,7 @@ bool Test::testJoin() {
   // std::cout << "tree : \n";
   // tree.getRoot()->printBeautifulTree(0);
 
-  bool ret = false;
+  bool ret = true;
 
   sumTest += int(ret);
   numTestGlobal +=1;
@@ -173,6 +173,38 @@ bool Test::testJoin() {
 }
 
 bool Test::testSplit() {
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+  std::cout << "tree :" << std::endl;
+  tree.getRoot()->printBeautifulTree(0);
+  std::cout << "\n\n";
+
+  ArbreB tree2(1);
+  tree2 << 3;
+  tree2 << 5;
+  tree2 << 7;
+  tree2 << 9;
+  std::cout << "tree2 :" << std::endl;
+  tree2.getRoot()->printBeautifulTree(0);
+  std::cout << "\n\n";
+
+  tree += tree2;
+  std::cout << "tree :" << std::endl;
+  tree.getRoot()->printBeautifulTree(0);
+  std::cout << "\n\n";
+
+  ArbreB tree3;
+  tree -= tree3;
+  std::cout << "tree :" << std::endl;
+  tree.getRoot()->printBeautifulTree(0);
+  std::cout << "\n\n";
+
+  std::cout << "tree3 :" << std::endl;
+  tree3.getRoot()->printBeautifulTree(0);
+
   bool ret = false;
 
   sumTest += int(ret);
@@ -188,13 +220,13 @@ bool Test::testCopy() {
   tree << 8;
   tree << 10;
 
-  std::cout << "tree : \n";
-  tree.getRoot()->printBeautifulTree(0);
-  std::cout << "\n\n";
+  // std::cout << "tree : \n";
+  // tree.getRoot()->printBeautifulTree(0);
+  // std::cout << "\n\n";
 
   Sommet cpyNode2 = *tree.getRoot();
-  std::cout << "treecpy2 : \n" << cpyNode2 << std::endl;
-  cpyNode2.printBeautifulTree(0);
+  // std::cout << "treecpy2 : \n" << cpyNode2 << std::endl;
+  // cpyNode2.printBeautifulTree(0);
 
   bool ret = true;
 

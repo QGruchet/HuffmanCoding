@@ -66,7 +66,7 @@ class ArbreB
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
     ArbreB& operator+=(const ArbreB&);
-    ArbreB& operator-=(ArbreB*);
+    ArbreB& operator-=(ArbreB&);
 
     /* Methodes */
     void add(Sommet*, int);

@@ -181,30 +181,34 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
 
 // Operator+=, operator-=
 ArbreB& ArbreB::operator+=(const ArbreB& other) { // Join two tree with a new root
-  Sommet cpyOther = *other.root; // Copy the other tree
-  Sommet cpyThis = *root;
+  Sommet *cpyOther = other.root->copy();
 
-  std::cout << "ALED";
+  Sommet *newRoot = new Sommet(root->data + cpyOther->data);
+  newRoot->left = root;
+  newRoot->right = cpyOther;
 
-  std::cout << cpyOther;
-  std::cout << cpyThis;
-
-  delete root;
-  root = nullptr;
-
-  root = new Sommet(cpyThis.data + cpyOther.data);
-  root->left = &cpyThis;
-  root->right = &cpyOther;
+  root = newRoot;
 
   return *this;
 }
 
-ArbreB& ArbreB::operator-=(ArbreB* other) {
-  other->root = root->right;
-  Sommet *oldRoot = root;
-  root = root->left;
-  delete oldRoot;
+ArbreB& ArbreB::operator-=(ArbreB& other) {
+  std::cout << "entry operator-=" << std::endl;
+  if(!other.root && root && root->left && root->right) {
+    other.root = root->right->copy();
 
+    std::cout << "other :" << *other.root << std::endl;
+    std::cout << "tree :" << *root << std::endl;
+
+    Sommet *oldRoot = root;
+    root = root->left;
+    std::cout << "tree :" << *root << std::endl;
+    
+    delete oldRoot;
+    oldRoot = nullptr;
+  }
+
+  std::cout << "exit operator-=" << std::endl;
   return *this;
 }
 // End operator+=, operator-=

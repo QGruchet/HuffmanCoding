@@ -4,10 +4,7 @@
 int main(void) {
   Test test;
   // test.allTest();
-
-  // test.testDell();
-  test.testJoin();
-  // test.testCopy();
+  test.testSplit();
 
   return 0;
 }
