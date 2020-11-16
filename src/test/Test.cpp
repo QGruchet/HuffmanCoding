@@ -12,7 +12,7 @@ void Test::allTest() {
   std::cout << "#                test size                  :" << (testSize() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test find                  :" << (testFind() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test join                  :" << (testJoin() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#               test split                  :" << (testSplit() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  //std::cout << "#               test split                  :" << (testSplit() ? "     passed"  : "       fail") << " ! #" << std::endl;
   /* Test Parser.hpp */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
