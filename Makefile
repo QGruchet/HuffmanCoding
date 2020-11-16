@@ -73,9 +73,9 @@ gdb:
 clean:
 	rm src/target/*.o
 	rmdir src/target
-	rm src/out/binary_tree.dot
-	rm src/out/test.png
+	# rm src/out/binary_tree.dot
+	# rm src/out/test.png
 
 mrproper: clean
 	rm src/bin/$(EXEC)
-	rm src/bin/$(WIN)
+	# rm src/bin/$(WIN)

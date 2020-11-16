@@ -5,18 +5,14 @@ Test::Test() : sumTest(0), numTestGlobal(0) {}
 void Test::allTest() {
   /* Test Tree.hpp */
   std::cout << "########################### TESTS ##########################" << std::endl;
-  std::cout << "#    test default Constructor 'sommet'      :" << (testDefaultConstructorSommet() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#   test Constructor 'sommet' with data     :" << (testConstructorSommetWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#    test default Constructor 'arbreB'      :" << (testDefaultConstructorArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#   test Constructor 'arbreB' with data     :" << (testConstructorArbreBWithData() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#        test get 'sommet' at index         :" << (testGetSommetAtIndex() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                 test add                  :" << (testAdd() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test dell                  :" << (testDell() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#               test depth                  :" << (testDepth() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test size                  :" << (testSize() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test find                  :" << (testFind() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#               test split                  :" << (testSplit() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test join                  :" << (testJoin() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#               test split                  :" << (testSplit() ? "     passed"  : "       fail") << " ! #" << std::endl;
   /* Test Parser.hpp */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
@@ -24,60 +20,6 @@ void Test::allTest() {
 }
 
 /* Test Tree.hpp */
-bool Test::testDefaultConstructorSommet() {
-  Sommet node;
-
-  bool ret = ( (node.getData() == 0)
-            && (node.getLeft() == nullptr)
-            && (node.getRight() ==  nullptr)
-            );
-
-  sumTest += int(ret);
-  numTestGlobal += 1;
-
-  return ret;
-}
-
-bool Test::testConstructorSommetWithData() {
-  Sommet node(2);
-
-  bool ret = ( (node.getData() == 2)
-            && (node.getLeft() == nullptr)
-            && (node.getRight() ==  nullptr)
-            );
-
-  sumTest += int(ret);
-  numTestGlobal += 1;
-
-  return ret;
-}
-
-bool Test::testDefaultConstructorArbreB() {
-  ArbreB tree;
-
-  bool ret = (tree.getRoot() == nullptr);
-
-  sumTest += int(ret);
-  numTestGlobal += 1;
-
-  return ret;
-}
-
-bool Test::testConstructorArbreBWithData() {
-  ArbreB tree(2);
-  Sommet* root = tree.getRoot();
-
-  bool ret = ( (root->getData() == 2)
-          && (root->getLeft() == nullptr)
-          && (root->getRight() ==  nullptr)
-          );
-
-  sumTest += int(ret);
-  numTestGlobal += 1;
-
-  return ret;
-}
-
 bool Test::testGetSommetAtIndex() {
   ArbreB tree(1);
 
@@ -199,6 +141,37 @@ bool Test::testFind() {
   return ret;
 }
 
+bool Test::testJoin() {
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+  // std::cout << "tree : \n";
+  // tree.getRoot()->printBeautifulTree(0);
+  // std::cout << "\n\n";
+
+  ArbreB tree2(1);
+  tree2 << 3;
+  tree2 << 5;
+  tree2 << 7;
+  tree2 << 9;
+  // std::cout << "tree2 : \n";
+  // tree2.getRoot()->printBeautifulTree(0);
+  // std::cout << "\n\n";
+
+  tree += tree2;
+  // std::cout << "tree : \n";
+  // tree.getRoot()->printBeautifulTree(0);
+
+  bool ret = false;
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
+
+  return ret;
+}
+
 bool Test::testSplit() {
   bool ret = false;
 
@@ -208,14 +181,29 @@ bool Test::testSplit() {
   return ret;
 }
 
-bool Test::testJoin() {
-  bool ret = false;
+bool Test::testCopy() {
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+
+  std::cout << "tree : \n";
+  tree.getRoot()->printBeautifulTree(0);
+  std::cout << "\n\n";
+
+  Sommet cpyNode2 = *tree.getRoot();
+  std::cout << "treecpy2 : \n" << cpyNode2 << std::endl;
+  cpyNode2.printBeautifulTree(0);
+
+  bool ret = true;
 
   sumTest += int(ret);
   numTestGlobal +=1;
 
   return ret;
 }
+
 /* End Tree.hpp */
 
 /* Test Parser.hpp */

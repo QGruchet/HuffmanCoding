@@ -20,19 +20,15 @@ class Test
     void allTest();
 
     // Test Tree.hpp
-    bool testDefaultConstructorSommet();
-    bool testConstructorSommetWithData();
-    bool testDefaultConstructorArbreB();
-    bool testConstructorArbreBWithData();
-    bool testTreeToQueue();
     bool testGetSommetAtIndex();
     bool testAdd();
     bool testDell();
     bool testDepth();
     bool testSize();
     bool testFind();
-    bool testSplit();
     bool testJoin();
+    bool testSplit();
+    bool testCopy();
 
     // Test Parser.hpp
     bool testCalculFreqChar();

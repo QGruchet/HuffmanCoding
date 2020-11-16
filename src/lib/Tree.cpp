@@ -7,16 +7,28 @@ ArbreB::ArbreB() : size(0), root(nullptr)  {}
 // End default
 
 // Copy
+Sommet* Sommet::copy() {
+  Sommet *newNode = new Sommet(data);
+
+  if(left) {
+    newNode->left = left->copy();
+  }
+  if(right) {
+    newNode->right = right->copy();
+  }
+
+  return newNode;
+}
+
 Sommet::Sommet(const Sommet& other) {
   data = other.data;
-  left = new Sommet;
-  right = new Sommet;
-
+  left = nullptr;
   if(other.left) {
-    *left = *other.left;
+    left = other.left->copy();
   }
+  right = nullptr;
   if(other.right) {
-    *right = *other.right;
+    right = other.right->copy();
   }
 }
 // End copy
@@ -32,22 +44,12 @@ Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
 /* Overloaded */
 // Operator=
 
-Sommet& Sommet::operator=(const Sommet& other) {
+Sommet& Sommet::operator=(Sommet other) {
   if(this != &other) {
+    delete this;
     data = other.data;
-
-    if(other.left) {
-      if(!left) {
-        left = new Sommet(other.left->data);
-      }
-      *left = *other.left;
-    }
-    if(other.right) {
-      if(!right) {
-        right = new Sommet(other.right->data);
-      }
-      *right = *other.right;
-    }
+    left = other.left->copy();
+    right = other.right->copy();
   }
 
   return *this;
@@ -178,11 +180,31 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
 // End operator<<
 
 // Operator+=, operator-=
-ArbreB& ArbreB::operator+=(const ArbreB& other) {
+ArbreB& ArbreB::operator+=(const ArbreB& other) { // Join two tree with a new root
+  Sommet cpyOther = *other.root; // Copy the other tree
+  Sommet cpyThis = *root;
+
+  std::cout << "ALED";
+
+  std::cout << cpyOther;
+  std::cout << cpyThis;
+
+  delete root;
+  root = nullptr;
+
+  root = new Sommet(cpyThis.data + cpyOther.data);
+  root->left = &cpyThis;
+  root->right = &cpyOther;
+
   return *this;
 }
 
-ArbreB& ArbreB::operator-=(ArbreB other) {
+ArbreB& ArbreB::operator-=(ArbreB* other) {
+  other->root = root->right;
+  Sommet *oldRoot = root;
+  root = root->left;
+  delete oldRoot;
+
   return *this;
 }
 // End operator+=, operator-=

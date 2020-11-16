@@ -25,13 +25,14 @@ public:
     Sommet(int);
 
     /* Overloaded */
-    Sommet& operator=(const Sommet&);
+    Sommet& operator=(Sommet);
 
     friend std::ostream &operator<<(std::ostream &, const Sommet&);
     
     /* Methodes */
     bool isLeaf();
     void printBeautifulTree(int);
+    Sommet* copy();
 
     /* Getters */
     int getData() const;
@@ -65,7 +66,7 @@ class ArbreB
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
 
     ArbreB& operator+=(const ArbreB&);
-    ArbreB& operator-=(ArbreB);
+    ArbreB& operator-=(ArbreB*);
 
     /* Methodes */
     void add(Sommet*, int);
