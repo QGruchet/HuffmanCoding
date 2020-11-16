@@ -192,20 +192,20 @@ bool Test::testSplit() {
   std::cout << "\n\n";
 
   tree += tree2;
-  std::cout << "tree :" << std::endl;
+  std::cout << "tree += tree2 :" << std::endl;
   tree.getRoot()->printBeautifulTree(0);
   std::cout << "\n\n";
 
   ArbreB tree3;
   tree -= tree3;
-  std::cout << "tree :" << std::endl;
+  std::cout << "tree -= tree3 :" << std::endl;
   tree.getRoot()->printBeautifulTree(0);
   std::cout << "\n\n";
 
   std::cout << "tree3 :" << std::endl;
   tree3.getRoot()->printBeautifulTree(0);
 
-  bool ret = false;
+  bool ret = true;
 
   sumTest += int(ret);
   numTestGlobal +=1;
