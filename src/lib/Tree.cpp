@@ -193,22 +193,11 @@ ArbreB& ArbreB::operator+=(const ArbreB& other) { // Join two tree with a new ro
 }
 
 ArbreB& ArbreB::operator-=(ArbreB& other) {
-  std::cout << "entry operator-=" << std::endl;
   if(!other.root && root && root->left && root->right) {
-    other.root = root->right->copy();
-
-    std::cout << "other :" << *other.root << std::endl;
-    std::cout << "tree :" << *root << std::endl;
-
-    Sommet *oldRoot = root;
+    *other.root = *root->right->copy();
     root = root->left;
-    std::cout << "tree :" << *root << std::endl;
-    
-    delete oldRoot;
-    oldRoot = nullptr;
   }
 
-  std::cout << "exit operator-=" << std::endl;
   return *this;
 }
 // End operator+=, operator-=

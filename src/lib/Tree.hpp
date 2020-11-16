@@ -36,7 +36,6 @@ public:
 
     /* Getters */
     int getData() const;
-    char getCar() const;
     Sommet* getLeft() const;
     Sommet* getRight() const;
     int countDepth();
