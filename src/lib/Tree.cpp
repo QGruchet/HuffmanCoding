@@ -409,17 +409,17 @@ void Sommet::writeBeautifulTreeInFile(int space) {
   std::string const nomFichier("binary.txt");
   std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
 
+ 
 
   if(right) {
-    right->printBeautifulTreeInFile(space + 1);
+    right->writeBeautifulTreeInFile(space + 1);
   }
-  for(int i = 0; i < space; i++) {
-    std::cout << "   ";
-    flux << "   ";
+   for(int i = 0; i < space; i++) {
+    flux << "      ";
   }
   flux << this->data << std::endl;
   if(left) {
-    left->printBeautifulTreeInFile(space + 1);
+    left->writeBeautifulTreeInFile(space + 1);
   }
 }
 /* End printers */

@@ -25,7 +25,7 @@ void Test::allTest() {
   std::cout << "[ " << (testGetNodeAtIndex() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Get node at index in the tree." << std::endl;
   std::cout << "[ " << (testJoin() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Join the tree with a other." << std::endl;
   std::cout << "[ " << (testSplit() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Split the tree in two." << std::endl;
-  
+  testTxt();
   /* Test Parser */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
@@ -391,6 +391,16 @@ bool Test::testSplit() {
   numTestGlobal +=1;
 
   return ret;
+}
+
+void Test::testTxt(){
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+
+  tree.getRoot()->writeBeautifulTreeInFile(0);
 }
 
 /* End Tree.hpp */

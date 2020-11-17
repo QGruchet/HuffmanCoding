@@ -74,7 +74,7 @@ class Window : public QWidget {
 	public slots:
 		void afficherArbre(){
 			
-			QString fileName = "binary.txt";
+			QString fileName = "src/out/binary.txt";
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
