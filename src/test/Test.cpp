@@ -49,7 +49,7 @@ void Test::allTest() {
   std::cout << "[ " << (testGetNodeAtIndex() ? OK : FAIL) << " ] Get node at index in the tree." << std::endl;
   std::cout << "[ " << (testJoin() ? OK : FAIL) << " ] Join the tree with a other." << std::endl;
   std::cout << "[ " << (testSplit() ? OK : FAIL) << " ] Split the tree in two." << std::endl;
-  
+  testTxt();
 
   /* Test Parser */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;

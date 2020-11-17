@@ -410,14 +410,15 @@ void Sommet::writeBeautifulTreeInFile(int space) {
   std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
 
  
-
+  for(int i = 0; i < space; i++) {
+      flux << "|__";
+    }
+    flux << this->data << std::endl;
+    
   if(right) {
     right->writeBeautifulTreeInFile(space + 1);
   }
-   for(int i = 0; i < space; i++) {
-    flux << "      ";
-  }
-  flux << this->data << std::endl;
+   
   if(left) {
     left->writeBeautifulTreeInFile(space + 1);
   }
