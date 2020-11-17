@@ -33,9 +33,9 @@ dot :
 	dot -Tpng src/out/binary_tree.dot > src/out/test.png
 
 window:
-	cmake src/QtWindow/CMakeLists.txt
-	make -C src/QtWindow
-	src/QtWindow/./main
+	cmake src/windowQT/CMakeLists.txt
+	make -C src/windowQT
+	src/windowQT/./main
 
 #################################
 
@@ -78,12 +78,12 @@ cleantarget:
 	rmdir src/target
 
 cleanQT:
-	rm src/QtWindow/main
-	rm -r src/QtWindow/CMakeFiles
-	rm -r src/QtWindow/main_autogen
-	rm src/QtWindow/CMakeCache.txt
-	rm src/QtWindow/cmake_install.cmake
-	rm src/QtWindow/Makefile
+	rm src/windowQT/main
+	rm -r src/windowQT/CMakeFiles
+	rm -r src/windowQT/main_autogen
+	rm src/windowQT/CMakeCache.txt
+	rm src/windowQT/cmake_install.cmake
+	rm src/windowQT/Makefile
 
 
 clean: cleantarget
