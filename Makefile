@@ -27,8 +27,6 @@ $(EXEC) : Main.o Tree.o Test.o Parser.o
 
 run :
 	./src/bin/$(EXEC)
-	mv binary.txt src/out/
-	mv result.txt src/out/
 
 dot :
 	dot -Tpng src/out/binary_tree.dot > src/out/test.png
@@ -39,6 +37,7 @@ dot :
 window : src/window/window.cpp src/window/window.hpp
 	$(CC) src/window/window.cpp -o src/bin/$@ $(PACKWIN)
 	./src/bin/$(WIN);
+	
 #################################
 
 # $@ ref name of target, here Main.o

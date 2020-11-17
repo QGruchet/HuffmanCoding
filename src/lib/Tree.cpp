@@ -45,8 +45,12 @@ Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
 Sommet& Sommet::operator=(Sommet other) {
   if(this != &other) {
     data = other.data;
-    left = other.left->copy();
-    right = other.right->copy();
+    if(other.left) {
+      left = other.left->copy();
+    }
+    if(other.right) {
+      right = other.right->copy();
+    }
   }
 
   return *this;
@@ -415,45 +419,6 @@ int Sommet::countSize() {
   }
   return 1 + countLeft + countRight;
 }
-
-void Sommet::writeBeautifulTreeInFile(int space) {
-  
-  if(std::ifstream("src/out/binary.txt")){
-    remove("src/out/binary.txt");
-    // std::cout << "Suppression de binary_tree.dot" << std::endl;
-  }
-  //On creer le fichier
-  std::string const nomFichier("binary.txt");
-  std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
-
- 
-  for(int i = 0; i < space; i++) {
-      flux << "|__";
-    }
-    flux << this->data << std::endl;
-
-  if(right) {
-    right->writeBeautifulTreeInFile(space + 1);
-  }
-   
-  if(left) {
-    left->writeBeautifulTreeInFile(space + 1);
-  }
-}
- 
-void writeInFile(std::string Message){
-  if(std::ifstream("src/out/result.txt")){
-      remove("src/out/result.txt");
-    // std::cout << "Suppression de binary_tree.dot" << std::endl;
-  }
-  //On creer le fichier
-  std::string const nomFichier("result.txt");
-  std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
-
-  flux << Message;
-
-  }
-
 /* End printers */
 
 /* Destructors */

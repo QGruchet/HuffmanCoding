@@ -115,13 +115,7 @@ bool Test::testAssignNode() {
   tree << 8;
   tree << 10;
 
-  // std::cout << "tree : " << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
-  // std::cout << "\n\n";
-
   Sommet cpyNode2 = *tree.getRoot();
-  // std::cout << "treecpy2 : " << std::endl;
-  // cpyNode2.printBeautifulTree(0);
 
   bool ret = ((cpyNode2 == *tree.getRoot()) == true);
 
@@ -140,10 +134,6 @@ bool Test::testEqualsNode() {
   node.getRight()->setLeft(6);
   node.getRight()->setRight(7);
 
-  // std::cout << "Node : " << std::endl;
-  // node.printBeautifulTree(0);
-  // std::cout << "\n\n";
-
   Sommet node2(1);
   node2.setLeft(2);
   node2.setRight(3);
@@ -151,9 +141,6 @@ bool Test::testEqualsNode() {
   node2.getLeft()->setRight(5);
   node2.getRight()->setLeft(6);
   node2.getRight()->setRight(7);
-
-  // std::cout << "node2 : " << std::endl;
-  // node2.printBeautifulTree(0);
 
   bool ret = ((node == node2) == true);
 
@@ -230,12 +217,6 @@ bool Test::testAssignTree() {
   ArbreB tree2;
   tree2 = tree;
 
-  // std::cout << "tree : " << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
-
-  // std::cout << "tree2 : " << std::endl;
-  // tree2.getRoot()->printBeautifulTree(0);
-
   bool ret = ((tree == tree2) == true);
 
   sumTest += int(ret);
@@ -281,7 +262,7 @@ bool Test::testAdd() {
   return ret;
 }
 
-bool Test::testDell() {
+bool Test::testDell() { // Not finish
   ArbreB tree(1);
   // std::cout << "tree : " << tree << std::endl;
   tree >> 1; // dell root without child : ok
@@ -341,18 +322,16 @@ bool Test::testFind() {
 
 bool Test::testGetNodeAtIndex() {
   ArbreB tree(1);
+  tree.getRoot()->setLeft(2);
+  tree.getRoot()->getLeft()->setLeft(4);
+  tree.getRoot()->getLeft()->setRight(5);
+  tree.getRoot()->setRight(3);
+  tree.getRoot()->getRight()->setLeft(6);
 
-  tree << 2;
-  tree << 3;
-  tree << 4;
-  tree << 5;
-  tree << 6;
-
-  // std::cout<< tree[3]->getData() << std::endl;
-  // std::cout<< tree[5]->getData() << std::endl;
+  std::cout 
   
-  bool ret = ((tree[1]->getData() == 1)
-          && (tree[2]->getData() == 2)
+  bool ret = ((tree[3]->getData() == 6)
+          && (tree[1]->getData() == 1)
             );
 
   sumTest += int(ret);
@@ -368,22 +347,14 @@ bool Test::testJoin() {
   tree << 8;
   tree << 10;
   int oldDataTree = tree.getRoot()->getData();
-  // std::cout << "tree : " << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
-  // std::cout << "\n\n";
 
   ArbreB tree2(1);
   tree2 << 3;
   tree2 << 5;
   tree2 << 7;
   tree2 << 9;
-  // std::cout << "tree2 : " << std::endl;
-  // tree2.getRoot()->printBeautifulTree(0);
-  // std::cout << "\n\n";
 
   tree += tree2;
-  // std::cout << "tree : " << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
 
   bool ret = ((tree[1]->getData() == (oldDataTree + tree2.getRoot()->getData()))
           && (tree.getRoot()->getRight()->getData() == tree2.getRoot()->getData())
@@ -395,7 +366,7 @@ bool Test::testJoin() {
   return ret;
 }
 
-bool Test::testSplit() {
+bool Test::testSplit() { // leaks need to be delete
   ArbreB tree(2);
   tree << 4;
   tree << 6;
