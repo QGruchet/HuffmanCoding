@@ -13,6 +13,8 @@
 #include <QTextEdit> 
 #include <QLabel>
 #include <QColor>
+#include <QDebug>
+#include <QMessageBox>
 
 
 class Window : public QWidget {
@@ -25,6 +27,7 @@ class Window : public QWidget {
 		QPushButton* quitter;
 		QPushButton* afficher;
 		QPushButton* supprimer;
+		QPushButton* secret;
 		QTextEdit* zoneTexte;
 
 	public:
@@ -51,9 +54,13 @@ class Window : public QWidget {
 			supprimer = new QPushButton("Supprimer l'arbre");
 			connect(supprimer, SIGNAL(clicked()), this, SLOT(supprimerArbre()));
 
+			secret = new QPushButton("Ne pas cliquer !");
+			connect(secret, SIGNAL(clicked()), this, SLOT(secrebutton()));
+
 			layout->addWidget(zoneTexte);
 			layout->addWidget(afficher);
 			layout->addWidget(supprimer);
+			layout->addWidget(secret);
 			layout->addWidget(quitter);
 
 		}
@@ -80,6 +87,11 @@ class Window : public QWidget {
 			zoneTexte->setText(nullptr);
 			resize(200, 200);
 			zoneTexte->show();
+		}
+
+		void secrebutton(){
+			qDebug() << "QU'EST CE QUE J'AI DIS ????";
+			QMessageBox::information(this, "décéption...", "QU'EST CE QUE J'AI DIS ????");
 		}
 
 };
