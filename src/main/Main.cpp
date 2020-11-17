@@ -3,10 +3,9 @@
 
 int main(void) {
   Test test;
-  // test.allTest();
+  test.allTest();
   // test.testSplit();
-  test.testAssignArbreB();
-
+  // test.testAssignArbreB();
 
   return 0;
 }

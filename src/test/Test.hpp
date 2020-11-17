@@ -19,8 +19,10 @@ class Test
     // Global
     void allTest();
 
-    // Test Tree.hpp
-    bool testGetSommetAtIndex();
+    // Test Tree
+    bool testDefaultBuilderNode();
+    bool testDefaultBuilderTree();
+    bool testGetNodeAtIndex();
     bool testAdd();
     bool testDell();
     bool testDepth();
@@ -29,9 +31,10 @@ class Test
     bool testJoin();
     bool testSplit();
     bool testCopy();
-    bool testAssignArbreB();
+    bool testAssignTree();
+    bool TestEqualsTree();
 
-    // Test Parser.hpp
+    // Test Parser
     bool testCalculFreqChar();
 };
 

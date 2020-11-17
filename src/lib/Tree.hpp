@@ -58,7 +58,7 @@ class ArbreB
 
     /* Overloaded */
     ArbreB& operator=(const ArbreB&);
-    bool operator==(const ArbreB);
+    bool operator==(const ArbreB&);
     
     ArbreB& operator<<(int); // Insert
     ArbreB& operator>>(int); // Dell
@@ -73,6 +73,7 @@ class ArbreB
     void add(Sommet*, int);
     void dell(Sommet*, int);
     Sommet* find(Sommet*, int);
+    bool equal(Sommet*, Sommet*);
 
     /* Getters */
     Sommet* getRoot() const;

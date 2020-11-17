@@ -65,7 +65,35 @@ ArbreB& ArbreB::operator=(const ArbreB& other) {
 }
 // End operator=
 
+// Operator==
+bool ArbreB::operator==(const ArbreB& other) {
+  if(!root || !other.root) {
+    return false;
+  }
 
+  return equal(root, other.root);
+}
+
+bool ArbreB::equal(Sommet *node, Sommet* node2) {
+  if(node && node2) {
+    if(node->data != node2->data) {
+      return false;
+    }
+
+    if(node->left && node2->left) {
+      if(!equal(node->left, node2->left)) {
+        return false;
+      }
+    }
+
+    if(node->right && node2->right) {
+      return equal(node->right, node2->right);
+    }
+  }
+
+  return true;
+}
+// End operator==
 
 // Operator<<
 ArbreB& ArbreB::operator<<(int newData) {
