@@ -12,7 +12,8 @@ void Test::allTest() {
   std::cout << "#                test size                  :" << (testSize() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test find                  :" << (testFind() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test join                  :" << (testJoin() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  //std::cout << "#               test split                  :" << (testSplit() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#               test split                  :" << (testSplit() ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#              test assign                  :" << (testAssign () ? "     passed"  : "       fail") << " ! #" << std::endl;
   /* Test Parser.hpp */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
@@ -109,7 +110,7 @@ bool Test::testSize() {
   tree << 3;
   tree << 4;
 
-  bool ret = (tree.getSize() == 4);
+  bool ret = (tree.getRoot()->countSize() == 4);
 
   sumTest += int(ret);
   numTestGlobal += 1;
@@ -229,6 +230,24 @@ bool Test::testCopy() {
   // cpyNode2.printBeautifulTree(0);
 
   bool ret = true;
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
+
+  return ret;
+}
+
+bool Test::testAssign() {
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+
+  ArbreB tree2;
+  *tree2.getRoot() = *tree.getRoot();
+
+  bool ret = false;
 
   sumTest += int(ret);
   numTestGlobal +=1;

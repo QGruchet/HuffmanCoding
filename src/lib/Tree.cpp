@@ -3,7 +3,7 @@
 /* Constructors */
 // Default
 Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
-ArbreB::ArbreB() : size(0), root(nullptr)  {}
+ArbreB::ArbreB() : root(nullptr)  {}
 // End default
 
 // Copy
@@ -34,7 +34,6 @@ Sommet::Sommet(const Sommet& other) {
 // End copy
 
 ArbreB::ArbreB(int rootData) {
-  size = 1;
   root = new Sommet(rootData);
 }
 
@@ -47,11 +46,26 @@ Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
 Sommet& Sommet::operator=(Sommet other) {
   if(this != &other) {
     delete this;
+
     data = other.data;
     left = other.left->copy();
     right = other.right->copy();
   }
 
+  return *this;
+}
+
+ArbreB& ArbreB::operator=(const ArbreB& other) {
+  if(this != &other) {
+    delete this;
+
+    if(!root) {
+      root = new Sommet(other.root->data);
+    }
+
+    *root = *other.root;
+  }
+  
   return *this;
 }
 // End operator=
@@ -60,7 +74,6 @@ Sommet& Sommet::operator=(Sommet other) {
 ArbreB& ArbreB::operator<<(int newData) {
   if(!root) {
     root = new Sommet(newData);
-    size = 1;
   }
   else {
     add(root, newData);
@@ -75,7 +88,6 @@ void ArbreB::add(Sommet *root, int newData) {
     }
     else {
       root->left = new Sommet(newData);
-      size += 1;
     }
   }
   else {
@@ -84,7 +96,6 @@ void ArbreB::add(Sommet *root, int newData) {
     }
     else {
       root->right = new Sommet(newData);
-      size += 1;
     }
   }
 }
@@ -194,7 +205,7 @@ ArbreB& ArbreB::operator+=(const ArbreB& other) { // Join two tree with a new ro
 
 ArbreB& ArbreB::operator-=(ArbreB& other) {
   if(!other.root && root && root->left && root->right) {
-    *other.root = *root->right->copy();
+    other.root = root->right->copy();
     root = root->left;
   }
 
@@ -205,7 +216,7 @@ ArbreB& ArbreB::operator-=(ArbreB& other) {
 // Operator[]
 Sommet* ArbreB::operator[](int index) {
   index--;
-  if(index < 0 || index >= size) {
+  if(index < 0 || index >= root->countSize()) {
     std::cout << "ERROR : index out of band" << std::endl;
     return nullptr;
   }
@@ -299,8 +310,15 @@ int Sommet::countDepth() {
   return 1 + maximum(depthLeft, depthRight);
 }
 
-int ArbreB::getSize() const {
-  return size;
+int Sommet::countSize() {
+  int countLeft = 0, countRight = 0;
+  if(left) {
+    countLeft = left->countSize();
+  }
+  if(right) {
+    countRight = right->countSize();
+  }
+  return 1 + countLeft + countRight;
 }
 
 Sommet* ArbreB::getRandLeaf(Sommet* root) const{

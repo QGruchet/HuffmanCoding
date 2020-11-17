@@ -49,7 +49,6 @@ class ArbreB
 {
   private:
     /* Data */
-    int size;
     Sommet *root;
 
   public:
@@ -58,6 +57,8 @@ class ArbreB
     ArbreB(int);
 
     /* Overloaded */
+    ArbreB& operator=(const ArbreB&);
+    
     ArbreB& operator<<(int); // Insert
     ArbreB& operator>>(int); // Dell
     Sommet* operator[](int);
@@ -74,7 +75,6 @@ class ArbreB
 
     /* Getters */
     Sommet* getRoot() const;
-    int getSize() const;
     Sommet* getRandLeaf(Sommet*) const;
 
     /* Destructor */
