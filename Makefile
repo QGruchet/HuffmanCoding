@@ -28,6 +28,7 @@ $(EXEC) : Main.o Tree.o Test.o Parser.o
 run :
 	./src/bin/$(EXEC)
 	mv binary.txt src/out/
+	mv result.txt src/out/
 
 dot :
 	dot -Tpng src/out/binary_tree.dot > src/out/test.png
