@@ -32,6 +32,7 @@ public:
     /* Methodes */
     bool isLeaf();
     void printBeautifulTree(int);
+    void printBeautifulTreeInFile(int);
     Sommet* copy();
 
     /* Getters */
