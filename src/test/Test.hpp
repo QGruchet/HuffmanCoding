@@ -3,6 +3,7 @@
 
 #include "../lib/Tree.hpp"
 #include "../lib/Parser.hpp"
+#include "../lib/Writer.hpp"
 
 class Test
 {
@@ -40,10 +41,12 @@ class Test
     bool testFind();
     bool testGetNodeAtIndex();
     bool testJoin();
-    bool testSplit(); 
-    void testTxt();
+    bool testSplit();
+
+    // Writer
+    bool testTxt();
     
-    // Test Parser
+    // Parser
     bool testCalculFreqChar();
 };
 

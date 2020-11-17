@@ -30,7 +30,7 @@ void Test::allTest() {
 
   std::cout << "[ " << (testDefaultConstructorTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a default tree." << std::endl;
   std::cout << "[ " << (testParamConstructorTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a tree with the value of the root." << std::endl;
-  // std::cout << "[ " << (testAssignTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Assign a trees in a other." << std::endl;
+  std::cout << "[ " << (testAssignTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Assign a trees in a other." << std::endl;
   std::cout << "[ " << (TestEqualsTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Say if two tree are equals." << std::endl;
   std::cout << "[ " << (testAdd() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Add a new node in the tree." << std::endl;
   std::cout << "[ " << (testDell() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Delete a node in the tree." << std::endl;
@@ -295,7 +295,6 @@ bool Test::testDell() { // Not finish
   return ret;
 }
 
-
 bool Test::testFind() {
   ArbreB tree(1);
 
@@ -328,7 +327,7 @@ bool Test::testGetNodeAtIndex() {
   tree.getRoot()->setRight(3);
   tree.getRoot()->getRight()->setLeft(6);
 
-  std::cout 
+  std::cout << (tree[3]->getData() == 6);
   
   bool ret = ((tree[3]->getData() == 6)
           && (tree[1]->getData() == 1)
@@ -407,7 +406,8 @@ bool Test::testSplit() { // leaks need to be delete
   return ret;
 }
 
-void Test::testTxt(){
+// Writer
+bool Test::testTxt(){
   ArbreB tree(2);
   tree << 4;
   tree << 6;
@@ -420,7 +420,15 @@ void Test::testTxt(){
   tree << 0;
   tree << 4;
 
-  tree.getRoot()->writeBeautifulTreeInFile(0);
+  Writer writer("src/txt/binary.txt");
+  writer.writeBeautifulTreeInFile(tree.getRoot(), 0);
+
+  bool ret = false;
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
+
+  return ret;
 }
 
 /* End Tree.hpp */
