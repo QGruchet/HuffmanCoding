@@ -413,7 +413,7 @@ void Test::testWriteTreeInQt(){
 
 void Test::testWriteAllTest() {
   Writer writer("src/txt/resultTest.txt");
-  // write.write
+  // writer.write
 }
 
 /* End Tree.hpp */
@@ -434,3 +434,13 @@ bool Test::testCalculFreqChar() {
   return true;
 }
 /* End Parser.hpp */
+
+/* Getters */
+int Test::getSumTest() const {
+  return sumTest;
+}
+
+int Test::getNumTestGlobal() const {
+  return numTestGlobal;
+}
+/* End getters */

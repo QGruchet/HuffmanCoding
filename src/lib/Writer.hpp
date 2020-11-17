@@ -2,6 +2,7 @@
 #define Writer_HPP
 
 #include "Tree.hpp"
+#include "../test/Test.hpp"
 
 class Writer
 {
@@ -17,6 +18,7 @@ class Writer
 		/* Methodes */
 		void writeInFile(std::string);
 		void writeBeautifulTreeInFile(Sommet*, int);
+		void writeResultAllTests();
 };
 
 #endif

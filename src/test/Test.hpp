@@ -49,6 +49,10 @@ class Test
     
     // Parser
     bool testCalculFreqChar();
+
+    // Getters
+    int getSumTest() const;
+    int getNumTestGlobal() const;
 };
 
 #endif
