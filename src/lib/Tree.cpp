@@ -411,7 +411,7 @@ void Sommet::writeBeautifulTreeInFile(int space) {
 
 
   if(right) {
-    right->printBeautifulTreeInFile(space + 1);
+    right->writeBeautifulTreeInFile(space + 1);
   }
   for(int i = 0; i < space; i++) {
     std::cout << "   ";
@@ -419,7 +419,7 @@ void Sommet::writeBeautifulTreeInFile(int space) {
   }
   flux << this->data << std::endl;
   if(left) {
-    left->printBeautifulTreeInFile(space + 1);
+    left->writeBeautifulTreeInFile(space + 1);
   }
 }
 /* End printers */
