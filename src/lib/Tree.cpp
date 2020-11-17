@@ -381,6 +381,30 @@ void Sommet::printBeautifulTree(int space) {
     left->printBeautifulTree(space + 1);
   }
 }
+
+void Sommet::printBeautifulTreeInFile(int space) {
+  
+  if(std::ifstream("src/out/binary.txt")){
+    remove("src/out/binary.txt");
+    // std::cout << "Suppression de binary_tree.dot" << std::endl;
+  }
+  //On creer le fichier
+  std::string const nomFichier("binary.txt");
+  std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
+
+
+  if(right) {
+    right->printBeautifulTreeInFile(space + 1);
+  }
+  for(int i = 0; i < space; i++) {
+    std::cout << "   ";
+    flux << "   ";
+  }
+  flux << this->data << std::endl;
+  if(left) {
+    left->printBeautifulTreeInFile(space + 1);
+  }
+}
 /* End printers */
 
 /* Destructors */
