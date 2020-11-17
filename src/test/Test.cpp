@@ -39,7 +39,7 @@ void Test::allTest() {
   std::cout << "[ " << (testSplit() ? OK : FAIL) << " ] Split the tree in two." << std::endl;
 
   // QT
-  std::cout << "[ " << (testWriteTreeInQt() ? OK : FAIL) << " ] Write the tree in QT window." << std::endl;
+  // std::cout << "[ " << (testWriteTreeInQt() ? OK : FAIL) << " ] Write the tree in QT window." << std::endl;
 
   /* Test Parser */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
@@ -394,7 +394,7 @@ bool Test::testSplit() { // leaks need to be delete
 }
 
 // Writer
-bool Test::testWriteTreeInQt(){
+void Test::testWriteTreeInQt(){
   ArbreB tree(2);
   tree << 4;
   tree << 6;
@@ -409,13 +409,11 @@ bool Test::testWriteTreeInQt(){
 
   Writer writer("src/txt/binary.txt");
   writer.writeBeautifulTreeInFile(tree.getRoot(), 0);
+}
 
-  bool ret = false;
-
-  sumTest += int(ret);
-  numTestGlobal +=1;
-
-  return ret;
+void Test::testWriteAllTest() {
+  Writer writer("src/txt/resultTest.txt");
+  // write.write
 }
 
 /* End Tree.hpp */
