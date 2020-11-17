@@ -312,14 +312,12 @@ bool Test::testFind() {
 bool Test::testGetNodeAtIndex() {
   ArbreB tree(1);
   tree.getRoot()->setLeft(2);
+  tree.getRoot()->setRight(3);
   tree.getRoot()->getLeft()->setLeft(4);
   tree.getRoot()->getLeft()->setRight(5);
-  tree.getRoot()->setRight(3);
   tree.getRoot()->getRight()->setLeft(6);
-
-  std::cout << (tree[3]->getData() == 6);
   
-  bool ret = ((tree[3]->getData() == 6)
+  bool ret = ((tree[3]->getData() == 3)
           && (tree[1]->getData() == 1)
             );
 
@@ -331,23 +329,32 @@ bool Test::testGetNodeAtIndex() {
 
 bool Test::testJoin() {
   ArbreB tree(2);
-  tree << 4;
-  tree << 6;
-  tree << 8;
-  tree << 10;
-  int oldDataTree = tree.getRoot()->getData();
+  tree.getRoot()->setLeft(4);
+  tree.getRoot()->setRight(6);
+  tree.getRoot()->getLeft()->setLeft(8);
+  tree.getRoot()->getLeft()->setRight(10);
 
   ArbreB tree2(1);
-  tree2 << 3;
-  tree2 << 5;
-  tree2 << 7;
-  tree2 << 9;
+  tree2.getRoot()->setLeft(3);
+  tree2.getRoot()->setRight(5);
+  tree2.getRoot()->getLeft()->setLeft(7);
+  tree2.getRoot()->getLeft()->setRight(11);
 
   tree += tree2;
 
-  bool ret = ((tree[1]->getData() == (oldDataTree + tree2.getRoot()->getData()))
-          && (tree.getRoot()->getRight()->getData() == tree2.getRoot()->getData())
-            );
+  ArbreB res(3);
+  res.getRoot()->setLeft(2);
+  res.getRoot()->getLeft()->setLeft(4);
+  res.getRoot()->getLeft()->setRight(6);
+  res.getRoot()->getLeft()->getLeft()->setLeft(8);
+  res.getRoot()->getLeft()->getLeft()->setRight(10);
+  res.getRoot()->setRight(1);
+  res.getRoot()->getRight()->setLeft(3);
+  res.getRoot()->getRight()->setRight(5);
+  res.getRoot()->getRight()->getLeft()->setLeft(7);
+  res.getRoot()->getRight()->getLeft()->setRight(11);
+
+  bool ret = ((tree == res) == true);
 
   sumTest += int(ret);
   numTestGlobal +=1;
@@ -356,39 +363,29 @@ bool Test::testJoin() {
 }
 
 bool Test::testSplit() { // leaks need to be delete
-  ArbreB tree(2);
-  tree << 4;
-  tree << 6;
-  tree << 8;
-  tree << 10;
-  // std::cout << "tree :" << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
-  // std::cout << "\n\n";
+  ArbreB tree(3);
+  tree.getRoot()->setLeft(2);
+  tree.getRoot()->getLeft()->setLeft(4);
+  tree.getRoot()->getLeft()->setRight(6);
+  tree.getRoot()->getLeft()->getLeft()->setLeft(8);
+  tree.getRoot()->getLeft()->getLeft()->setRight(10);
+  tree.getRoot()->setRight(1);
+  tree.getRoot()->getRight()->setLeft(3);
+  tree.getRoot()->getRight()->setRight(5);
+  tree.getRoot()->getRight()->getLeft()->setLeft(7);
+  tree.getRoot()->getRight()->getLeft()->setRight(11);
 
-  ArbreB tree2(1);
-  tree2 << 3;
-  tree2 << 5;
-  tree2 << 7;
-  tree2 << 9;
-  // std::cout << "tree2 :" << std::endl;
-  // tree2.getRoot()->printBeautifulTree(0);
-  // std::cout << "\n\n";
+  ArbreB tree2;
 
-  tree += tree2;
-  // std::cout << "tree += tree2 :" << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
-  // std::cout << "\n\n";
+  tree -= tree2;
 
-  ArbreB tree3;
-  tree -= tree3;
-  // std::cout << "tree -= tree3 :" << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
-  // std::cout << "\n\n";
+  ArbreB res(1);
+  res.getRoot()->setLeft(3);
+  res.getRoot()->setRight(5);
+  res.getRoot()->getLeft()->setLeft(7);
+  res.getRoot()->getLeft()->setRight(11);
 
-  // std::cout << "tree3 :" << std::endl;
-  // tree3.getRoot()->printBeautifulTree(0);
-
-  bool ret = false;
+  bool ret = ((tree2 == res) == true);
 
   sumTest += int(ret);
   numTestGlobal +=1;
