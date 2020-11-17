@@ -424,6 +424,12 @@ void Test::testTxt(){
   tree << 6;
   tree << 8;
   tree << 10;
+  tree << 2;
+  tree << 7;
+  tree << 4;
+  tree << 28;
+  tree << 0;
+  tree << 4;
 
   tree.getRoot()->writeBeautifulTreeInFile(0);
 }
