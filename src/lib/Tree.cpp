@@ -76,19 +76,16 @@ bool ArbreB::operator==(const ArbreB& other) {
 
 bool Sommet::operator==(const Sommet& other) {
   if(data == other.data) {
-    if(other.left && other.right) {
-      return ( (data == other.data)
-            && (left->equal(other.left)) 
-            && (right->equal(other.right))
-          );
+    if(left && other.left) {
+      if(!left->equal(other.left)) {
+        return false;
+      }
     }
-    else {
-      return false;
+    if(right && other.right) {
+      return right->equal(other.right);
     }
   }
-  else {
-    return false;
-  }
+  return false;
 }
 
 bool Sommet::equal(Sommet *node) {
@@ -337,6 +334,62 @@ Sommet* ArbreB::getRoot() const {
   return root;
 }
 
+Sommet* ArbreB::getRandLeaf(Sommet* root) const{
+  if(!root) {
+    return nullptr;
+  }
+  if(root->isLeaf()) {
+    return root;
+  }
+  if(root->left) {
+    return getRandLeaf(root->left);
+  }
+  if(root->right) {
+    return getRandLeaf(root->right);
+  }
+
+  return nullptr;
+}
+/* End getters */
+
+/* Setters */
+void Sommet::setLeft(int leftData) {
+  if(left) {
+    left->data = leftData;
+  }
+  else {
+    left = new Sommet(leftData);
+  }
+}
+
+void Sommet::setRight(int rightData) {
+  if(right) {
+    right->data = rightData;
+  }
+  else {
+    right = new Sommet(rightData);
+  }
+}
+/* End setters */
+
+/* Methodes */
+bool Sommet::isLeaf() {
+  return (!left && !right);
+}
+
+void Sommet::printBeautifulTree(int space) {
+  if(right) {
+    right->printBeautifulTree(space + 1);
+  }
+  for(int i = 0; i < space; i++) {
+    std::cout << "   ";
+  }
+  std::cout << this->data << std::endl;
+  if(left) {
+    left->printBeautifulTree(space + 1);
+  }
+}
+
 int maximum(int a, int b){
   return (a > b) ? a : b;
 }
@@ -361,42 +414,6 @@ int Sommet::countSize() {
     countRight = right->countSize();
   }
   return 1 + countLeft + countRight;
-}
-
-Sommet* ArbreB::getRandLeaf(Sommet* root) const{
-  if(!root) {
-    return nullptr;
-  }
-  if(root->isLeaf()) {
-    return root;
-  }
-  if(root->left) {
-    return getRandLeaf(root->left);
-  }
-  if(root->right) {
-    return getRandLeaf(root->right);
-  }
-
-  return nullptr;
-}
-/* End getters */
-
-/* Methodes */
-bool Sommet::isLeaf() {
-  return (!left && !right);
-}
-
-void Sommet::printBeautifulTree(int space) {
-  if(right) {
-    right->printBeautifulTree(space + 1);
-  }
-  for(int i = 0; i < space; i++) {
-    std::cout << "   ";
-  }
-  std::cout << this->data << std::endl;
-  if(left) {
-    left->printBeautifulTree(space + 1);
-  }
 }
 
 void Sommet::writeBeautifulTreeInFile(int space) {
