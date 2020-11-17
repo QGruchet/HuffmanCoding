@@ -1,3 +1,9 @@
 .vscode
 
 target/
+
+/src/QtWindow/CMakeFiles
+/src/QtWindow/main_autogen
+/src/QtWindow/CMakeCache.txt
+/src/QtWindow/cmake_install.cmake
+/src/QtWindow/main

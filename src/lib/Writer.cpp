@@ -1,5 +1,13 @@
 #include "Writer.hpp"
 
+Writer::Writer(){
+  file = '\0';
+}
+
+Writer::Writer(std::string msg){
+  file = msg;
+}
+
 void Writer::writeInFile(std::string msg) {
   if(std::ifstream(file)){
       remove(file.c_str());
@@ -12,7 +20,7 @@ void Writer::writeInFile(std::string msg) {
 }
 
 void Writer::writeBeautifulTreeInFile(Sommet* node, int space) {
-  
+  Writer w;
   if(std::ifstream(file)){
     remove(file.c_str());
   }
@@ -27,11 +35,11 @@ void Writer::writeBeautifulTreeInFile(Sommet* node, int space) {
     flux << node->getData() << std::endl;
 
   if(node->getRight()) {
-    node->getRight()->writeBeautifulTreeInFile(space + 1);
+    w.writeBeautifulTreeInFile(node->getRight(), space + 1);
   }
    
   if(node->getLeft()) {
-    node->getLeft()->writeBeautifulTreeInFile(space + 1);
+    w.writeBeautifulTreeInFile(node->getLeft(), space + 1);
   }
 }
  
