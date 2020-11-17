@@ -31,10 +31,11 @@ class Window : public QWidget {
 
 	public:
 		Window(){
-
+			//on change le titre et la taille de la fenetre principale 
 			setWindowTitle("Binary Tree");
 			setBaseSize(300,300);
 			
+			//On creer la zone principale des widgets
 			layout = new QVBoxLayout(this);
 			setLayout(layout);
 
@@ -43,8 +44,9 @@ class Window : public QWidget {
 			zoneTexte->setFontWeight(QFont::Normal);
 			//zoneTexte->setFontFamily("Yrsa Bold");
 			zoneTexte->setFontPointSize(20);
-			zoneTexte->setReadOnly(true);
+			zoneTexte->setReadOnly(true);	//permet d'interdire l'ecriture dans le layout
 
+			//On creer la zone de texte qui affiche l'arbre
 			infoArbre = new QVBoxLayout(this);
 			infoArbre->setAlignment(Qt::AlignRight);
 			setLayout(infoArbre);
@@ -54,6 +56,7 @@ class Window : public QWidget {
 			zoneInfo->setFontPointSize(30);
 
 
+			/***********CREATION DES BOUTON**********************/
 			test = new QPushButton("Afficher les tests");
 			connect(test, SIGNAL(clicked()), this, SLOT(afficherTest()));
 
@@ -68,6 +71,9 @@ class Window : public QWidget {
 
 			secret = new QPushButton("Ne pas cliquer !");
 			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
+			//on connect le bouton a une fonction
+
+			/*****************FIN CREATION*********************/
 
 			infoArbre->addWidget(zoneInfo);
 			layout->addWidget(zoneTexte);
@@ -90,24 +96,29 @@ class Window : public QWidget {
 
 	public slots:
 		void afficherArbre(){
-			
+			//on ouvre le fichier
 			QString fileName = "src/out/binary.txt";
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
 
+			//on lit la premiere lifne qui correspond a la racine
 			QString ligne;
 			ligne = flux.readLine();
 			int compt = 1;
+			//on compte le nombre de ligne
 			QString ligne2;
 			while(!flux.atEnd()){
 				ligne2 = flux.readLine();
 				compt++;
 			}
+			
 			QString aff("Racine de notre arbre : " + ligne + "\nNombre de noeud : " + QString::number(compt));
+			//on ajoute le texte dans le layout
 			zoneInfo->setText(aff);
 			fichier.close();
 
+			//On affiche l'arbre
 			QFile fichier2(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux2(&fichier);
