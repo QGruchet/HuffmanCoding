@@ -20,19 +20,27 @@ class Test
     void allTest();
 
     // Test Tree
-    bool testDefaultBuilderNode();
-    bool testDefaultBuilderTree();
-    bool testGetNodeAtIndex();
-    bool testAdd();
-    bool testDell();
+    // Sommet
+    bool testDefaultConstructorNode();
+    bool testCopyConstructorNode();
+    bool testParamConstructorNode();
+    bool TestEqualsNode();
+    bool testAssignNode();
+    bool testEqualsNode();
     bool testDepth();
-    bool testSize();
+    bool testSize();   
+    
+    // ArbreB
+    bool testDefaultConstructorTree();
+	bool testParamConstructorTree();
+	bool testAssignTree();
+	bool TestEqualsTree();
+	bool testAdd();
+    bool testDell();
     bool testFind();
+    bool testGetNodeAtIndex();
     bool testJoin();
-    bool testSplit();
-    bool testCopy();
-    bool testAssignTree();
-    bool TestEqualsTree();
+    bool testSplit(); 
 
     // Test Parser
     bool testCalculFreqChar();

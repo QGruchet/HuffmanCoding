@@ -4,17 +4,28 @@ Test::Test() : sumTest(0), numTestGlobal(0) {}
 
 void Test::allTest() {
   /* Test Tree */
+  // Sommet
   std::cout << "\n\t> TESTS <" << std::endl;
-  std::cout << "[ " << (testGetNodeAtIndex() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Get node at index." << std::endl;
-  std::cout << "[ " << (testAdd() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Add a new node in the tree." << std::endl;
-  std::cout << "[ " << (testDell() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Delete a node in the tree." << std::endl;
+  std::cout << "[ " << (testDefaultConstructorNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a default node." << std::endl;
+  std::cout << "[ " << (testCopyConstructorNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a node with a copy." << std::endl;
+  std::cout << "[ " << (testParamConstructorNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a node with a value." << std::endl;
+  std::cout << "[ " << (testAssignNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Assign a node in a other ." << std::endl;
+  std::cout << "[ " << (testEqualsNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Say if two nodes are equals." << std::endl;
   std::cout << "[ " << (testDepth() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Count the tree's depht." << std::endl;
   std::cout << "[ " << (testSize() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Count the number of nodes." << std::endl;
+
+  // ArbreB
+  std::cout << "[ " << (testDefaultConstructorTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a default tree." << std::endl;
+  std::cout << "[ " << (testParamConstructorTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a tree with the value of the root." << std::endl;
+  // std::cout << "[ " << (testAssignTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Assign a trees in a other." << std::endl;
+  std::cout << "[ " << (TestEqualsTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Say if two tree are equals." << std::endl;
+  std::cout << "[ " << (testAdd() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Add a new node in the tree." << std::endl;
+  std::cout << "[ " << (testDell() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Delete a node in the tree." << std::endl;
   std::cout << "[ " << (testFind() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Say if a value is in the tree." << std::endl;
+  std::cout << "[ " << (testGetNodeAtIndex() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Get node at index in the tree." << std::endl;
   std::cout << "[ " << (testJoin() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Join the tree with a other." << std::endl;
   std::cout << "[ " << (testSplit() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Split the tree in two." << std::endl;
-  std::cout << "[ " << (testAssignTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Assign the tree in a other empty tree." << std::endl;
-  std::cout << "[ " << (TestEqualsTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Say if two tree are equals." << std::endl;
+  
   /* Test Parser */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
@@ -26,23 +37,194 @@ void Test::allTest() {
   }
 }
 
-/* Test Tree.hpp */
-bool Test::testGetNodeAtIndex() {
+/* Test Tree */
+// Sommet
+bool Test::testDefaultConstructorNode() {
+  Sommet node;
+
+  bool ret = ( (node.getData() == 0)
+            && (node.getLeft() == nullptr)
+            && (node.getRight() == nullptr)
+            );
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testCopyConstructorNode() {
+  Sommet node(1);
+
+  Sommet node2(node);
+
+  bool ret = ( (node2.getData() == node.getData())
+            && (node2.getLeft() == node.getLeft())
+            && (node2.getRight() == node.getRight())
+            );
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testParamConstructorNode() {
+  Sommet node(1);
+
+  bool ret = ( (node.getData() == 1)
+            && (node.getLeft() == nullptr)
+            && (node.getRight() == nullptr)
+            );
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testAssignNode() {
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+
+  // std::cout << "tree : " << std::endl;
+  // tree.getRoot()->printBeautifulTree(0);
+  // std::cout << "\n\n";
+
+  Sommet cpyNode2 = *tree.getRoot();
+  // std::cout << "treecpy2 : " << std::endl;
+  // cpyNode2.printBeautifulTree(0);
+
+  bool ret = ((cpyNode2 == *tree.getRoot()) == true);
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
+
+  return ret;
+}
+
+bool Test::testEqualsNode() {
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+
+  ArbreB tree2(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+
+  bool ret = ((*tree.getRoot() == *tree2.getRoot()) == true);
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
+
+  return ret;
+}
+
+bool Test::testDepth() {
   ArbreB tree(1);
 
   tree << 2;
   tree << 3;
   tree << 4;
-  tree << 5;
-  tree << 6;
 
-  // std::cout<< tree[3]->getData() << std::endl;
-  // std::cout<< tree[5]->getData() << std::endl;
-  
-  bool ret = 1;
+  bool ret = (tree.getRoot()->countDepth() == 3);
 
   sumTest += int(ret);
   numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testSize() {
+  ArbreB tree(1);
+
+  tree << 2;
+  tree << 3;
+  tree << 4;
+
+  bool ret = (tree.getRoot()->countSize() == 4);
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+// ArbreB
+bool Test::testDefaultConstructorTree() {
+  ArbreB tree;
+
+  bool ret = (tree.getRoot() == nullptr);
+
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testParamConstructorTree() {
+  ArbreB tree(1);
+
+  bool ret = ( (tree.getRoot()->getData() == 1)
+            && (tree.getRoot()->getLeft() == nullptr)
+            && (tree.getRoot()->getRight() == nullptr)
+            );
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
+
+  return ret;
+}
+
+bool Test::testAssignTree() {
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+
+  ArbreB tree2;
+  tree2 = tree;
+
+  // std::cout << "tree : " << std::endl;
+  // tree.getRoot()->printBeautifulTree(0);
+
+  // std::cout << "tree2 : " << std::endl;
+  // tree2.getRoot()->printBeautifulTree(0);
+
+  bool ret = true;
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
+
+  return ret;
+}
+
+bool Test::TestEqualsTree() {
+  ArbreB tree(2);
+  tree << 4;
+  tree << 6;
+  tree << 8;
+  tree << 10;
+
+  ArbreB tree2(2);
+  tree2 << 4;
+  tree2 << 6;
+  tree2 << 8;
+  tree2 << 10;
+
+  bool ret = ((tree == tree2) == true);
+
+  sumTest += int(ret);
+  numTestGlobal +=1;
 
   return ret;
 }
@@ -94,35 +276,6 @@ bool Test::testDell() {
   return ret;
 }
 
-bool Test::testDepth() {
-  ArbreB tree(1);
-
-  tree << 2;
-  tree << 3;
-  tree << 4;
-
-  bool ret = (tree.getRoot()->countDepth() == 3);
-
-  sumTest += int(ret);
-  numTestGlobal += 1;
-
-  return ret;
-}
-
-bool Test::testSize() {
-  ArbreB tree(1);
-
-  tree << 2;
-  tree << 3;
-  tree << 4;
-
-  bool ret = (tree.getRoot()->countSize() == 4);
-
-  sumTest += int(ret);
-  numTestGlobal += 1;
-
-  return ret;
-}
 
 bool Test::testFind() {
   ArbreB tree(1);
@@ -144,6 +297,26 @@ bool Test::testFind() {
 
   sumTest += int(ret);
   numTestGlobal +=1;
+
+  return ret;
+}
+
+bool Test::testGetNodeAtIndex() {
+  ArbreB tree(1);
+
+  tree << 2;
+  tree << 3;
+  tree << 4;
+  tree << 5;
+  tree << 6;
+
+  // std::cout<< tree[3]->getData() << std::endl;
+  // std::cout<< tree[5]->getData() << std::endl;
+  
+  bool ret = true;
+
+  sumTest += int(ret);
+  numTestGlobal += 1;
 
   return ret;
 }
@@ -213,74 +386,6 @@ bool Test::testSplit() {
   // tree3.getRoot()->printBeautifulTree(0);
 
   bool ret = true;
-
-  sumTest += int(ret);
-  numTestGlobal +=1;
-
-  return ret;
-}
-
-bool Test::testCopy() {
-  ArbreB tree(2);
-  tree << 4;
-  tree << 6;
-  tree << 8;
-  tree << 10;
-
-  // std::cout << "tree : " << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
-  // std::cout << "\n\n";
-
-  Sommet cpyNode2 = *tree.getRoot();
-  // std::cout << "treecpy2 : " << std::endl;
-  // cpyNode2.printBeautifulTree(0);
-
-  bool ret = true;
-
-  sumTest += int(ret);
-  numTestGlobal +=1;
-
-  return ret;
-}
-
-bool Test::testAssignTree() {
-  ArbreB tree(2);
-  tree << 4;
-  tree << 6;
-  tree << 8;
-  tree << 10;
-
-  ArbreB tree2;
-  tree2 = tree;
-
-  // std::cout << "tree : " << std::endl;
-  // tree.getRoot()->printBeautifulTree(0);
-
-  // std::cout << "tree2 : " << std::endl;
-  // tree2.getRoot()->printBeautifulTree(0);
-
-  bool ret = true;
-
-  sumTest += int(ret);
-  numTestGlobal +=1;
-
-  return ret;
-}
-
-bool Test::TestEqualsTree() {
-  ArbreB tree(2);
-  tree << 4;
-  tree << 6;
-  tree << 8;
-  tree << 10;
-
-  ArbreB tree2(2);
-  tree2 << 4;
-  tree2 << 6;
-  tree2 << 8;
-  tree2 << 10;
-
-  bool ret = ((tree == tree2) == true);
 
   sumTest += int(ret);
   numTestGlobal +=1;

@@ -71,23 +71,40 @@ bool ArbreB::operator==(const ArbreB& other) {
     return false;
   }
 
-  return equal(root, other.root);
+  return *root == *other.root;
 }
 
-bool ArbreB::equal(Sommet *node, Sommet* node2) {
-  if(node && node2) {
-    if(node->data != node2->data) {
+bool Sommet::operator==(const Sommet& other) {
+  if(data == other.data) {
+    if(other.left && other.right) {
+      return ( (data == other.data)
+            && (left->equal(other.left)) 
+            && (right->equal(other.right))
+          );
+    }
+    else {
+      return false;
+    }
+  }
+  else {
+    return false;
+  }
+}
+
+bool Sommet::equal(Sommet *node) {
+  if(node) {
+    if(data != node->data) {
       return false;
     }
 
-    if(node->left && node2->left) {
-      if(!equal(node->left, node2->left)) {
+    if(left && node->left) {
+      if(!left->equal(node->left)) {
         return false;
       }
     }
 
-    if(node->right && node2->right) {
-      return equal(node->right, node2->right);
+    if(right && node->right) {
+      return right->equal(node->right);
     }
   }
 

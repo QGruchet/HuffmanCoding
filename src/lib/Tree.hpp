@@ -26,6 +26,7 @@ public:
 
     /* Overloaded */
     Sommet& operator=(Sommet);
+    bool operator==(const Sommet&);
 
     friend std::ostream &operator<<(std::ostream &, const Sommet&);
     
@@ -34,6 +35,7 @@ public:
     void printBeautifulTree(int);
     void printBeautifulTreeInFile(int);
     Sommet* copy();
+    bool equal(Sommet*);
 
     /* Getters */
     int getData() const;
@@ -74,7 +76,6 @@ class ArbreB
     void add(Sommet*, int);
     void dell(Sommet*, int);
     Sommet* find(Sommet*, int);
-    bool equal(Sommet*, Sommet*);
 
     /* Getters */
     Sommet* getRoot() const;
