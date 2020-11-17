@@ -4,8 +4,6 @@
 int main(void) {
   Test test;
   test.allTest();
-  // test.testSplit();
-  // test.testAssignArbreB();
 
   return 0;
 }

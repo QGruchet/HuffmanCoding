@@ -37,13 +37,17 @@ public:
     void writeInFile(std::string);
     Sommet* copy();
     bool equal(Sommet*);
+    int countDepth();
+    int countSize();
 
     /* Getters */
     int getData() const;
     Sommet* getLeft() const;
     Sommet* getRight() const;
-    int countDepth();
-    int countSize();
+
+    /* Setters */
+    void setLeft(int leftData);
+    void setRight(int rightData);
 
     /* Destructor */
     ~Sommet();
