@@ -29,7 +29,7 @@ class Test
     bool testJoin();
     bool testSplit();
     bool testCopy();
-    bool testAssign();
+    bool testAssignArbreB();
 
     // Test Parser.hpp
     bool testCalculFreqChar();

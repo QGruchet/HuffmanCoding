@@ -42,11 +42,8 @@ Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
 
 /* Overloaded */
 // Operator=
-
 Sommet& Sommet::operator=(Sommet other) {
   if(this != &other) {
-    delete this;
-
     data = other.data;
     left = other.left->copy();
     right = other.right->copy();
@@ -57,8 +54,6 @@ Sommet& Sommet::operator=(Sommet other) {
 
 ArbreB& ArbreB::operator=(const ArbreB& other) {
   if(this != &other) {
-    delete this;
-
     if(!root) {
       root = new Sommet(other.root->data);
     }
@@ -69,6 +64,8 @@ ArbreB& ArbreB::operator=(const ArbreB& other) {
   return *this;
 }
 // End operator=
+
+
 
 // Operator<<
 ArbreB& ArbreB::operator<<(int newData) {

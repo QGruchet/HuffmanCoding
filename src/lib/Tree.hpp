@@ -58,6 +58,7 @@ class ArbreB
 
     /* Overloaded */
     ArbreB& operator=(const ArbreB&);
+    bool operator==(const ArbreB);
     
     ArbreB& operator<<(int); // Insert
     ArbreB& operator>>(int); // Dell

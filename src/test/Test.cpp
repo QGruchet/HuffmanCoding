@@ -13,7 +13,7 @@ void Test::allTest() {
   std::cout << "#                test find                  :" << (testFind() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#                test join                  :" << (testJoin() ? "     passed"  : "       fail") << " ! #" << std::endl;
   std::cout << "#               test split                  :" << (testSplit() ? "     passed"  : "       fail") << " ! #" << std::endl;
-  std::cout << "#              test assign                  :" << (testAssign () ? "     passed"  : "       fail") << " ! #" << std::endl;
+  std::cout << "#          test assign 'ArbreB'             :" << (testAssignArbreB() ? "     passed"  : "       fail") << " ! #" << std::endl;
   /* Test Parser.hpp */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
@@ -148,7 +148,7 @@ bool Test::testJoin() {
   tree << 6;
   tree << 8;
   tree << 10;
-  // std::cout << "tree : \n";
+  // std::cout << "tree : " << std::endl;
   // tree.getRoot()->printBeautifulTree(0);
   // std::cout << "\n\n";
 
@@ -157,12 +157,12 @@ bool Test::testJoin() {
   tree2 << 5;
   tree2 << 7;
   tree2 << 9;
-  // std::cout << "tree2 : \n";
+  // std::cout << "tree2 : " << std::endl;
   // tree2.getRoot()->printBeautifulTree(0);
   // std::cout << "\n\n";
 
   tree += tree2;
-  // std::cout << "tree : \n";
+  // std::cout << "tree : " << std::endl;
   // tree.getRoot()->printBeautifulTree(0);
 
   bool ret = true;
@@ -221,12 +221,12 @@ bool Test::testCopy() {
   tree << 8;
   tree << 10;
 
-  // std::cout << "tree : \n";
+  // std::cout << "tree : " << std::endl;
   // tree.getRoot()->printBeautifulTree(0);
   // std::cout << "\n\n";
 
   Sommet cpyNode2 = *tree.getRoot();
-  // std::cout << "treecpy2 : \n" << cpyNode2 << std::endl;
+  // std::cout << "treecpy2 : " << std::endl;
   // cpyNode2.printBeautifulTree(0);
 
   bool ret = true;
@@ -237,7 +237,7 @@ bool Test::testCopy() {
   return ret;
 }
 
-bool Test::testAssign() {
+bool Test::testAssignArbreB() {
   ArbreB tree(2);
   tree << 4;
   tree << 6;
@@ -245,9 +245,15 @@ bool Test::testAssign() {
   tree << 10;
 
   ArbreB tree2;
-  *tree2.getRoot() = *tree.getRoot();
+  tree2 = tree;
 
-  bool ret = false;
+  std::cout << "tree : " << std::endl;
+  tree.getRoot()->printBeautifulTree(0);
+
+  std::cout << "tree2 : " << std::endl;
+  tree2.getRoot()->printBeautifulTree(0);
+
+  bool ret = true;
 
   sumTest += int(ret);
   numTestGlobal +=1;

@@ -5,8 +5,7 @@ int main(void) {
   Test test;
   // test.allTest();
   // test.testSplit();
-  // test.testAssign
-  test.testSize();
+  test.testAssignArbreB();
 
   return 0;
 }
