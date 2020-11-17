@@ -236,7 +236,7 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
 // Operator+=, operator-=
 ArbreB& ArbreB::operator+=(const ArbreB& other) { // Join two tree with a new root
   Sommet *cpyOther = other.root->copy();
-
+  
   Sommet *newRoot = new Sommet(root->data + cpyOther->data);
   newRoot->left = root;
   newRoot->right = cpyOther;
