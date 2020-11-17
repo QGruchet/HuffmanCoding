@@ -12,6 +12,8 @@
 #include <QFile>
 #include <QTextEdit> 
 #include <QLabel>
+#include <QColor>
+
 
 class Window : public QWidget {
 
@@ -23,12 +25,19 @@ class Window : public QWidget {
 		QPushButton* quitter;
 		QPushButton* afficher;
 		QPushButton* supprimer;
-		QLabel* label;
+		QTextEdit* zoneTexte;
 
 	public:
 		Window(){
-			label = new QLabel(this);
-			label->move(500, 500);
+
+			setWindowTitle("Binary Tree");
+
+			zoneTexte = new QTextEdit(this);
+			zoneTexte->setTextColor(Qt::green);
+			zoneTexte->setFontWeight(QFont::Black);
+			//zoneTexte->setFontFamily("Yrsa Bold");
+			zoneTexte->setFontPointSize(20);
+			zoneTexte->setReadOnly(true);
 
 			layout = new QVBoxLayout(this);
 			setLayout(layout);
@@ -42,7 +51,7 @@ class Window : public QWidget {
 			supprimer = new QPushButton("Supprimer l'arbre");
 			connect(supprimer, SIGNAL(clicked()), this, SLOT(supprimerArbre()));
 
-			layout->addWidget(label);
+			layout->addWidget(zoneTexte);
 			layout->addWidget(afficher);
 			layout->addWidget(supprimer);
 			layout->addWidget(quitter);
@@ -62,11 +71,15 @@ class Window : public QWidget {
 			QTextStream flux(&fichier);
 
 			QString tout = flux.readAll();
-			label->setText(tout);
+			zoneTexte->setText(tout);
+			resize(1000,1000);
+			zoneTexte->show();
 		}
 
 		void supprimerArbre(){
-			label->setText(" ");
+			zoneTexte->setText(nullptr);
+			resize(200, 200);
+			zoneTexte->show();
 		}
 
 };
