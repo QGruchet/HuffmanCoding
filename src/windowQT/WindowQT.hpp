@@ -34,7 +34,7 @@ class Window : public QWidget {
 		Window(){
 			// On change le titre et la taille de la fenetre principale 
 			setWindowTitle("Binary Tree");
-			setBaseSize(300,300);
+			setBaseSize(360,240);
 			
 			// On creer la zone principale des widgets
 			layout = new QVBoxLayout(this);
@@ -102,7 +102,7 @@ class Window : public QWidget {
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
 
-			//on lit la premiere lifne qui correspond a la racine
+			//on lit la premiere line qui correspond a la racine
 			QString ligne;
 			ligne = flux.readLine();
 			int compt = 0;
@@ -125,17 +125,15 @@ class Window : public QWidget {
 
 			QString tout = flux2.readAll();
 			zoneTexte->setText(tout);
-			resize(1000,1000);
+			resize(720,480);
 			zoneTexte->show();
 			fichier2.close();
-
-			
 		}
 
 		void supprimerArbre(){
 			zoneTexte->setText(nullptr);
 			zoneInfo->setText(nullptr);
-			resize(300, 300);
+			resize(360, 240);
 			zoneTexte->show();
 		}
 
@@ -152,7 +150,7 @@ class Window : public QWidget {
 
 			QString tout = flux.readAll();
 			zoneTexte->setText(tout);
-			resize(1000,1000);
+			resize(720,480);
 			zoneTexte->show();
 			fichier.close();
 		}
