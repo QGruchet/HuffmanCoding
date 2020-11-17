@@ -97,7 +97,7 @@ class Window : public QWidget {
 	public slots:
 		void afficherArbre(){
 			//on ouvre le fichier
-			QString fileName = "src/out/binary.txt";
+			QString fileName = "src/txtQT/binary.txt";
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
@@ -105,7 +105,7 @@ class Window : public QWidget {
 			//on lit la premiere lifne qui correspond a la racine
 			QString ligne;
 			ligne = flux.readLine();
-			int compt = 1;
+			int compt = 0;
 			//on compte le nombre de ligne
 			QString ligne2;
 			while(!flux.atEnd()){
@@ -145,7 +145,7 @@ class Window : public QWidget {
 		}
 
 		void afficherTest(){
-			QString fileName = "src/out/result.txt";
+			QString fileName = "src/txtQT/resultTest.txt";
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);

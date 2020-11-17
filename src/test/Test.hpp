@@ -45,7 +45,7 @@ class Test
 
     // Writer
     void testWriteTreeInQt();
-    void testWriteAllTest();
+    void testWriteAllTests();
     
     // Parser
     bool testCalculFreqChar();

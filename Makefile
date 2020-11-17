@@ -32,7 +32,7 @@ run :
 dot :
 	dot -Tpng src/out/binary_tree.dot > src/out/test.png
 
-window:
+window: run
 	cmake src/windowQT/CMakeLists.txt
 	make -C src/windowQT
 	src/windowQT/./main

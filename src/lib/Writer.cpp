@@ -14,8 +14,7 @@ void Writer::writeBeautifulTreeInFile(Sommet* node, int space) {
     remove(file.c_str());
   }
 
-  std::string const nameFile(file);
-  std::ofstream flux(nameFile.c_str(), std::ios_base::app);
+  std::ofstream flux(file.c_str(), std::ios_base::app);
 
  
   for(int i = 0; i < space; i++) {
@@ -37,8 +36,7 @@ void Writer::writeResultAllTests() {
     remove(file.c_str());
   }
 
-  std::string const nameFile(file);
-  std::ofstream flux(nameFile.c_str(), std::ios_base::app);
+  std::ofstream flux(file.c_str(), std::ios_base::app);
 
   Test test;
   std::string OK = " " + test.inGreen("OK") + " ";
