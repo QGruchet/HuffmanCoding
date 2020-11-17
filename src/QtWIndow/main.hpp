@@ -34,6 +34,7 @@ class Window : public QWidget {
 		Window(){
 
 			setWindowTitle("Binary Tree");
+			setBaseSize(300,300);
 
 			zoneTexte = new QTextEdit(this);
 			zoneTexte->setTextColor(Qt::green);
@@ -85,7 +86,7 @@ class Window : public QWidget {
 
 		void supprimerArbre(){
 			zoneTexte->setText(nullptr);
-			resize(200, 200);
+			resize(300, 300);
 			zoneTexte->show();
 		}
 
