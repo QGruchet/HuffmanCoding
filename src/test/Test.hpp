@@ -44,7 +44,7 @@ class Test
     bool testSplit();
 
     // Writer
-    bool testTxt();
+    bool testWriteTreeInQt();
     
     // Parser
     bool testCalculFreqChar();

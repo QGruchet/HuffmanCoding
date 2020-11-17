@@ -20,8 +20,8 @@ build:
 	./build.sh
 
 # $@ ref name of target, here $(EXEC)
-$(EXEC) : Main.o Tree.o Test.o Parser.o
-	$(CC) src/target/Main.o src/target/Tree.o src/target/Test.o src/target/Parser.o -o src/bin/$@
+$(EXEC) : Main.o Tree.o Test.o Writer.o Parser.o
+	$(CC) src/target/Main.o src/target/Tree.o src/target/Test.o src/target/Writer.o src/target/Parser.o -o src/bin/$@
 
 #################################
 
@@ -37,7 +37,7 @@ dot :
 window : src/window/window.cpp src/window/window.hpp
 	$(CC) src/window/window.cpp -o src/bin/$@ $(PACKWIN)
 	./src/bin/$(WIN);
-	
+
 #################################
 
 # $@ ref name of target, here Main.o
@@ -49,11 +49,15 @@ Main.o: src/main/Main.cpp
 Tree.o: src/lib/Tree.cpp src/lib/Tree.hpp
 	$(CC) -c $(CFLAGS) $< -o src/target/$@
 
+Writer.o: src/lib/Writer.cpp src/lib/Writer.hpp
+	$(CC) -c $(CFLAGS) $< -o src/target/$@
+
 Test.o: src/test/Test.cpp src/test/Test.hpp
 	$(CC) -c $(CFLAGS) $< -o src/target/$@
 
 Parser.o: src/lib/Parser.cpp src/lib/Parser.hpp
 	$(CC) -c $(CFLAGS) $< -o src/target/$@
+
 #################################
 
 vg:
@@ -70,12 +74,14 @@ gdb:
 
 #################################
 
-clean:
+cleantarget:
 	rm src/target/*.o
 	rmdir src/target
-	# rm src/out/binary_tree.dot
-	# rm src/out/test.png
+
+cleanQT:
+	rm main
+
+clean: cleantarget
 
 mrproper: clean
 	rm src/bin/$(EXEC)
-	# rm src/bin/$(WIN)

@@ -8,6 +8,6 @@ if [ ! -d "src/bin" ]; then
 mkdir src/bin;
 fi
 
-if [ ! -d "src/out" ]; then
-mkdir src/out;
+if [ ! -d "src/QtTxt" ]; then
+mkdir src/QtTxt;
 fi
