@@ -6,13 +6,12 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QLineEdit>
-#include <QFormLayout>
-#include <QPainter>
-#include <QTextStream>
 #include <QFile>
 #include <QTextEdit> 
 #include <QLabel>
 #include <QColor>
+#include <QDebug>
+#include <QMessageBox>
 
 
 class Window : public QWidget {
@@ -20,17 +19,18 @@ class Window : public QWidget {
 	Q_OBJECT
 
 	private:
-		QTextEdit* monText;
 		QVBoxLayout* layout;
 		QPushButton* quitter;
 		QPushButton* afficher;
 		QPushButton* supprimer;
+		QPushButton* secret;
 		QTextEdit* zoneTexte;
 
 	public:
 		Window(){
 
 			setWindowTitle("Binary Tree");
+			setBaseSize(300,300);
 
 			zoneTexte = new QTextEdit(this);
 			zoneTexte->setTextColor(Qt::green);
@@ -51,15 +51,24 @@ class Window : public QWidget {
 			supprimer = new QPushButton("Supprimer l'arbre");
 			connect(supprimer, SIGNAL(clicked()), this, SLOT(supprimerArbre()));
 
+			secret = new QPushButton("Ne pas cliquer !");
+			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
+
 			layout->addWidget(zoneTexte);
 			layout->addWidget(afficher);
 			layout->addWidget(supprimer);
+			layout->addWidget(secret);
 			layout->addWidget(quitter);
 
 		}
 
 		~Window(){
-
+			delete zoneTexte;
+			delete quitter;
+			delete afficher;
+			delete supprimer;
+			delete secret;
+			delete layout;
 		}
 
 	public slots:
@@ -74,12 +83,18 @@ class Window : public QWidget {
 			zoneTexte->setText(tout);
 			resize(1000,1000);
 			zoneTexte->show();
+			fichier.close();
 		}
 
 		void supprimerArbre(){
 			zoneTexte->setText(nullptr);
-			resize(200, 200);
+			resize(300, 300);
 			zoneTexte->show();
+		}
+
+		void secretbutton(){
+			qDebug() << "QU'EST CE QUE J'AI DIS ????";
+			QMessageBox::information(this, "décéption...", "QU'EST CE QUE J'AI DIS ????");
 		}
 
 };

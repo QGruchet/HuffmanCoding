@@ -399,7 +399,7 @@ void Sommet::printBeautifulTree(int space) {
   }
 }
 
-void Sommet::printBeautifulTreeInFile(int space) {
+void Sommet::writeBeautifulTreeInFile(int space) {
   
   if(std::ifstream("src/out/binary.txt")){
     remove("src/out/binary.txt");
