@@ -22,12 +22,14 @@ class Window : public QWidget {
 		QVBoxLayout* layout;
 		QPushButton* quitter;
 		QPushButton* afficher;
+		QPushButton* supprimer;
 		QLabel* label;
 
 	public:
 		Window(){
 			label = new QLabel(this);
 			label->move(500, 500);
+
 			layout = new QVBoxLayout(this);
 			setLayout(layout);
 
@@ -36,8 +38,13 @@ class Window : public QWidget {
 
 			afficher = new QPushButton("Afficher l'arbre");
 			connect(afficher, SIGNAL(clicked()), this, SLOT(afficherArbre()));
+
+			supprimer = new QPushButton("Supprimer l'arbre");
+			connect(supprimer, SIGNAL(clicked()), this, SLOT(supprimerArbre()));
+
 			layout->addWidget(label);
 			layout->addWidget(afficher);
+			layout->addWidget(supprimer);
 			layout->addWidget(quitter);
 
 		}
@@ -56,12 +63,10 @@ class Window : public QWidget {
 
 			QString tout = flux.readAll();
 			label->setText(tout);
-			//QString ligne;
-			// while(! flux.atEnd()){
-			// 	ligne = flux.readLine();
-			// 	std::cout << ligne.toStdString() << std::endl;
-			// 	label->setText(ligne);
-			//}
+		}
+
+		void supprimerArbre(){
+			label->setText(" ");
 		}
 
 };
