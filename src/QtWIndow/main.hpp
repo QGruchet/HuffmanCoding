@@ -6,9 +6,6 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QLineEdit>
-#include <QFormLayout>
-#include <QPainter>
-#include <QTextStream>
 #include <QFile>
 #include <QTextEdit> 
 #include <QLabel>
@@ -22,7 +19,6 @@ class Window : public QWidget {
 	Q_OBJECT
 
 	private:
-		QTextEdit* monText;
 		QVBoxLayout* layout;
 		QPushButton* quitter;
 		QPushButton* afficher;
@@ -56,7 +52,7 @@ class Window : public QWidget {
 			connect(supprimer, SIGNAL(clicked()), this, SLOT(supprimerArbre()));
 
 			secret = new QPushButton("Ne pas cliquer !");
-			connect(secret, SIGNAL(clicked()), this, SLOT(secrebutton()));
+			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
 
 			layout->addWidget(zoneTexte);
 			layout->addWidget(afficher);
@@ -67,7 +63,12 @@ class Window : public QWidget {
 		}
 
 		~Window(){
-
+			delete zoneTexte;
+			delete quitter;
+			delete afficher;
+			delete supprimer;
+			delete secret;
+			delete layout;
 		}
 
 	public slots:
@@ -82,6 +83,7 @@ class Window : public QWidget {
 			zoneTexte->setText(tout);
 			resize(1000,1000);
 			zoneTexte->show();
+			fichier.close();
 		}
 
 		void supprimerArbre(){
@@ -90,7 +92,7 @@ class Window : public QWidget {
 			zoneTexte->show();
 		}
 
-		void secrebutton(){
+		void secretbutton(){
 			qDebug() << "QU'EST CE QUE J'AI DIS ????";
 			QMessageBox::information(this, "décéption...", "QU'EST CE QUE J'AI DIS ????");
 		}
