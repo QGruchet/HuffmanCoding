@@ -53,6 +53,10 @@ class Test
     // Getters
     int getSumTest() const;
     int getNumTestGlobal() const;
+
+    // Tools
+    std::string inRed(std::string msg);
+    std::string inGreen(std::string msg);
 };
 
 #endif

@@ -32,14 +32,6 @@ void Writer::writeBeautifulTreeInFile(Sommet* node, int space) {
   }
 }
 
-std::string inRed(std::string msg) {
-  return "\033[0;31m" + msg + "\033[0m";
-}
-
-std::string inGreen(std::string msg) {
-  return "\033[0;32m" + msg + "\033[0m";
-} 
-
 void Writer::writeResultAllTests() {
   if(std::ifstream(file)) {
     remove(file.c_str());
@@ -49,8 +41,8 @@ void Writer::writeResultAllTests() {
   std::ofstream flux(nameFile.c_str(), std::ios_base::app);
 
   Test test;
-  std::string OK = " " + inGreen("OK") + " ";
-  std::string FAIL = inRed("FAIL");
+  std::string OK = " " + test.inGreen("OK") + " ";
+  std::string FAIL = test.inRed("FAIL");
 
   flux << "\n\t> TESTS <" << std::endl;
   flux << "[ " << (test.testDefaultConstructorNode() ? OK : FAIL) << " ] Create a default node.\n";

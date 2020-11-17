@@ -3,11 +3,11 @@
 
 Test::Test() : sumTest(0), numTestGlobal(0) {}
 
-std::string inRed(std::string msg) {
+std::string Test::inRed(std::string msg) {
   return "\033[0;31m" + msg + "\033[0m";
 }
 
-std::string inGreen(std::string msg) {
+std::string Test::inGreen(std::string msg) {
   return "\033[0;32m" + msg + "\033[0m";
 } 
 

@@ -6,11 +6,11 @@ find_package(Qt5 COMPONENTS Widgets Core Gui REQUIRED)
 SET(CMAKE_AUTOMOC True)
 
 SET(SRCS
-	main.cpp
+	WindowQT.cpp
 )
 
 SET(HEADERS
-	main.hpp
+	WindowQT.hpp
 
 )
 
