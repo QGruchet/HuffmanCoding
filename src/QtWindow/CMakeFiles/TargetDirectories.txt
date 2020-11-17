@@ -1,0 +1,4 @@
+/home/user/Documents/HuffmanCoding/src/QtWIndow/CMakeFiles/rebuild_cache.dir
+/home/user/Documents/HuffmanCoding/src/QtWIndow/CMakeFiles/edit_cache.dir
+/home/user/Documents/HuffmanCoding/src/QtWIndow/CMakeFiles/main.dir
+/home/user/Documents/HuffmanCoding/src/QtWIndow/CMakeFiles/main_autogen.dir
