@@ -3,7 +3,9 @@
 
 int main(void) {
   Test test;
-  test.allTest();
-  
+  // test.allTest();
+
+  test.testSplit();
+
   return 0;
 }

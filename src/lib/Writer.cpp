@@ -16,7 +16,6 @@ void Writer::writeBeautifulTreeInFile(Sommet* node, int space) {
 
   std::ofstream flux(file.c_str(), std::ios_base::app);
 
- 
   for(int i = 0; i < space; i++) {
       flux << "|__";
   }
