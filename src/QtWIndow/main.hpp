@@ -34,7 +34,7 @@ class Window : public QWidget {
 
 			zoneTexte = new QTextEdit(this);
 			zoneTexte->setTextColor(Qt::green);
-			zoneTexte->setFontWeight(QFont::Black);
+			zoneTexte->setFontWeight(QFont::Normal);
 			//zoneTexte->setFontFamily("Yrsa Bold");
 			zoneTexte->setFontPointSize(20);
 			zoneTexte->setReadOnly(true);
@@ -74,7 +74,7 @@ class Window : public QWidget {
 	public slots:
 		void afficherArbre(){
 			
-			QString fileName = "binary.txt";
+			QString fileName = "src/out/binary.txt";
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);

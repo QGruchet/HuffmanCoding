@@ -426,19 +426,34 @@ void Sommet::writeBeautifulTreeInFile(int space) {
   std::string const nomFichier("binary.txt");
   std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
 
+ 
+  for(int i = 0; i < space; i++) {
+      flux << "|__";
+    }
+    flux << this->data << std::endl;
 
   if(right) {
     right->writeBeautifulTreeInFile(space + 1);
   }
-  for(int i = 0; i < space; i++) {
-    std::cout << "   ";
-    flux << "   ";
-  }
-  flux << this->data << std::endl;
+   
   if(left) {
     left->writeBeautifulTreeInFile(space + 1);
   }
 }
+ 
+void writeInFile(std::string Message){
+  if(std::ifstream("src/out/result.txt")){
+      remove("src/out/result.txt");
+    // std::cout << "Suppression de binary_tree.dot" << std::endl;
+  }
+  //On creer le fichier
+  std::string const nomFichier("result.txt");
+  std::ofstream flux(nomFichier.c_str(), std::ios_base::app);
+
+  flux << Message;
+
+  }
+
 /* End printers */
 
 /* Destructors */

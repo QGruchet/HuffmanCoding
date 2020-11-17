@@ -41,7 +41,8 @@ class Test
     bool testGetNodeAtIndex();
     bool testJoin();
     bool testSplit(); 
-
+    void testTxt();
+    
     // Test Parser
     bool testCalculFreqChar();
 };
