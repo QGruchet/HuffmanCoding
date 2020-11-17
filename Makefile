@@ -3,6 +3,7 @@ CC=g++
 EXEC=main
 WIN=window
 PACKWIN=-std=c++0x `pkg-config --cflags gtkmm-3.0 --cflags --libs`
+STRC=src/QtWindow
 
 #################################
 
@@ -31,12 +32,10 @@ run :
 dot :
 	dot -Tpng src/out/binary_tree.dot > src/out/test.png
 
-
-#################################
-
-window : src/window/window.cpp src/window/window.hpp
-	$(CC) src/window/window.cpp -o src/bin/$@ $(PACKWIN)
-	./src/bin/$(WIN);
+window:
+	cmake src/QtWindow/CMakeLists.txt
+	make -C src/QtWindow
+	src/QtWindow/./main
 
 #################################
 
@@ -79,7 +78,13 @@ cleantarget:
 	rmdir src/target
 
 cleanQT:
-	rm main
+	rm src/QtWindow/main
+	rm -r src/QtWindow/CMakeFiles
+	rm -r src/QtWindow/main_autogen
+	rm src/QtWindow/CMakeCache.txt
+	rm src/QtWindow/cmake_install.cmake
+	rm src/QtWindow/Makefile
+
 
 clean: cleantarget
 
