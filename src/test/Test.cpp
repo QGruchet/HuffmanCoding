@@ -1,20 +1,33 @@
 #include "Test.hpp"
+#include <string>
 
 Test::Test() : sumTest(0), numTestGlobal(0) {}
 
+std::string inRed(std::string msg) {
+  return "\033[0;31m" + msg + "\033[0m";
+}
+
+std::string inGreen(std::string msg) {
+  return "\033[0;32m" + msg + "\033[0m";
+} 
+
 void Test::allTest() {
+  std::string OK = " " + inGreen("OK") + " ";
+  std::string FAIL = inRed("FAIL");
+
   /* Test Tree */
   // Sommet
   std::cout << "\n\t> TESTS <" << std::endl;
-  std::cout << "[ " << (testDefaultConstructorNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a default node." << std::endl;
-  std::cout << "[ " << (testCopyConstructorNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a node with a copy." << std::endl;
-  std::cout << "[ " << (testParamConstructorNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a node with a value." << std::endl;
-  std::cout << "[ " << (testAssignNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Assign a node in a other ." << std::endl;
-  std::cout << "[ " << (testEqualsNode() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Say if two nodes are equals." << std::endl;
-  std::cout << "[ " << (testDepth() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Count the tree's depht." << std::endl;
-  std::cout << "[ " << (testSize() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Count the number of nodes." << std::endl;
+  std::cout << "[ " << (testDefaultConstructorNode() ? OK : FAIL) << " ] Create a default node." << std::endl;
+  std::cout << "[ " << (testCopyConstructorNode() ? OK : FAIL) << " ] Create a node with a copy." << std::endl;
+  std::cout << "[ " << (testParamConstructorNode() ? OK : FAIL) << " ] Create a node with a value." << std::endl;
+  std::cout << "[ " << (testAssignNode() ? OK : FAIL) << " ] Assign a node in a other ." << std::endl;
+  std::cout << "[ " << (testEqualsNode() ? OK : FAIL) << " ] Say if two nodes are equals." << std::endl;
+  std::cout << "[ " << (testDepth() ? OK : FAIL) << " ] Count the tree's depht." << std::endl;
+  std::cout << "[ " << (testSize() ? OK : FAIL) << " ] Count the number of nodes." << std::endl;
 
   // ArbreB
+
   std::cout << "[ " << (testDefaultConstructorTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a default tree." << std::endl;
   std::cout << "[ " << (testParamConstructorTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Create a tree with the value of the root." << std::endl;
   // std::cout << "[ " << (testAssignTree() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Assign a trees in a other." << std::endl;
@@ -25,15 +38,27 @@ void Test::allTest() {
   std::cout << "[ " << (testGetNodeAtIndex() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Get node at index in the tree." << std::endl;
   std::cout << "[ " << (testJoin() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Join the tree with a other." << std::endl;
   std::cout << "[ " << (testSplit() ? " \033[0;32mOK\033[0m "  : "\033[0;31mFAIL\033[0m") << " ] Split the tree in two." << std::endl;
-  testTxt();
+
+  std::cout << "[ " << (testDefaultConstructorTree() ? OK : FAIL) << " ] Create a default tree." << std::endl;
+  std::cout << "[ " << (testParamConstructorTree() ? OK : FAIL) << " ] Create a tree with the value of the root." << std::endl;
+  std::cout << "[ " << (testAssignTree() ? OK : FAIL) << " ] Assign a trees in a other." << std::endl;
+  std::cout << "[ " << (TestEqualsTree() ? OK : FAIL) << " ] Say if two tree are equals." << std::endl;
+  std::cout << "[ " << (testAdd() ? OK : FAIL) << " ] Add a new node in the tree." << std::endl;
+  std::cout << "[ " << (testDell() ? OK : FAIL) << " ] Delete a node in the tree." << std::endl;
+  std::cout << "[ " << (testFind() ? OK : FAIL) << " ] Say if a value is in the tree." << std::endl;
+  std::cout << "[ " << (testGetNodeAtIndex() ? OK : FAIL) << " ] Get node at index in the tree." << std::endl;
+  std::cout << "[ " << (testJoin() ? OK : FAIL) << " ] Join the tree with a other." << std::endl;
+  std::cout << "[ " << (testSplit() ? OK : FAIL) << " ] Split the tree in two." << std::endl;
+  
+
   /* Test Parser */
   // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
   
   if(sumTest == numTestGlobal) {
-    std::cout << ">TESTS RESULT : \033[0;31m" << sumTest << "\033[0m / << \033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
+    std::cout << "> TESTS RESULT : [ \033[0;31m" << sumTest << "\033[0m/\033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
   }
   else {
-    std::cout << ">TESTS RESULT : \033[0;31m" << sumTest << "\033[0m / << \033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
+    std::cout << "> TESTS RESULT : [ \033[0;31m" << sumTest << "\033[0m/\033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
   }
 }
 
