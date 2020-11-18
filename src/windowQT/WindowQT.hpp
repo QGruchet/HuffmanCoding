@@ -42,7 +42,7 @@ class Window : public QWidget {
 			setWindowTitle("Binary Tree");
 			setBaseSize(littleWinX,littleWinY);
 			setFont(QFont("Arial", 10));
-			
+	
 			// On creer la zone principale des widgets
 			layout = new QVBoxLayout(this);
 			setLayout(layout);
@@ -63,6 +63,7 @@ class Window : public QWidget {
 
 			zoneInfo = new QTextEdit(this);
 			zoneInfo->setFontPointSize(10);
+			zoneInfo->setTextColor(Qt::white);
 			zoneInfo->setStyleSheet("background-color: dark-grey;");
 
 
@@ -189,13 +190,13 @@ class Window : public QWidget {
 		{
 			int largeur = QApplication::desktop()->width();
 			int hauteur = QApplication::desktop()->height();
-			resize(largeur, hauteur);
+			resize(largeur/3, hauteur/2);
 		}
 
 		void resizeHalf(){
 			int largeur = QApplication::desktop()->width();
 			int hauteur = QApplication::desktop()->height();
-			resize(largeur/6, hauteur/2);
+			resize(largeur/6, hauteur/3);
 		}
 };
 
