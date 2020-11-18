@@ -27,13 +27,13 @@ class Window : public QWidget {
 	//1080 720
 	private:
 		QVBoxLayout* layout;
-		QVBoxLayout* infoArbre;
-		QTextEdit* zoneInfo;
-		QPushButton* quitter;
-		QPushButton* afficher;
-		QPushButton* supprimer;
+		QVBoxLayout* infoTree;
+		QTextEdit* printInfo;
+		QPushButton* quit;
+		QPushButton* print;
+		QPushButton* del;
 		QPushButton* secret;
-		QTextEdit* zoneTexte;
+		QTextEdit* printText;
 		QPushButton* test;
 
 	public:
@@ -42,69 +42,82 @@ class Window : public QWidget {
 			setWindowTitle("Binary Tree");
 			setBaseSize(littleWinX,littleWinY);
 			setFont(QFont("Arial", 10));
-			
+	
 			// On creer la zone principale des widgets
 			layout = new QVBoxLayout(this);
 			setLayout(layout);
 
-			zoneTexte = new QTextEdit(this);
-			zoneTexte->setTextColor(Qt::white);
-			zoneTexte->setFontWeight(QFont::Normal);
-			// zoneTexte->setFontFamily("Yrsa Bold");
-			zoneTexte->setFontPointSize(10);
-			zoneTexte->setReadOnly(true);	//permet d'interdire l'ecriture dans le layout
-			zoneTexte->setStyleSheet("background-color: dark-grey;");
+			printText = new QTextEdit(this);
+			printText->setTextColor(Qt::white);
+			printText->setFontWeight(QFont::Normal);
+			// printText->setFontFamily("Yrsa Bold");
+			printText->setFontPointSize(10);
+			printText->setReadOnly(true);	//permet d'interdire l'ecriture dans le layout
+			printText->setStyleSheet("background-color: dark-grey;");
 
 			// On creer la zone de texte qui affiche l'arbre
-			infoArbre = new QVBoxLayout(this);
-			infoArbre->setAlignment(Qt::AlignRight);
-			setLayout(infoArbre);
-			layout->addLayout(infoArbre);
+			infoTree = new QVBoxLayout(this);
+			infoTree->setAlignment(Qt::AlignRight);
+			setLayout(infoTree);
+			layout->addLayout(infoTree);
 
-			zoneInfo = new QTextEdit(this);
-			zoneInfo->setFontPointSize(10);
-			zoneInfo->setStyleSheet("background-color: dark-grey;");
+			printInfo = new QTextEdit(this);
+			printInfo->setFontPointSize(10);
+			printInfo->setTextColor(Qt::white);
+			printInfo->setStyleSheet("background-color: dark-grey;");
 
 
 			/*********** CREATION DES BOUTON ***********/
 			// On connect le bouton a une fonction
-			test = new QPushButton("Afficher les tests");
-			connect(test, SIGNAL(clicked()), this, SLOT(afficherTest()));
+			test = new QPushButton("Print Tests", this);
+			connect(test, SIGNAL(clicked()), this, SLOT(printTest()));
+			int tailleTestX = test->fontMetrics().width("Print Tests") + 10;
+			int tailleTestY = test->fontMetrics().height();
+			test->resize(tailleTestX, tailleTestY);
 
-			quitter = new QPushButton("Quitter");
-			connect(quitter, SIGNAL(clicked()), qApp, SLOT(quit()));
+			quit = new QPushButton("Quit");
+			connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
+			int tailleQuitX = test->fontMetrics().width("Print Tests") + 10;
+			int tailleQuitY = test->fontMetrics().height();
 
-			afficher = new QPushButton("Afficher l'arbre");
-			connect(afficher, SIGNAL(clicked()), this, SLOT(afficherArbre()));
+			print = new QPushButton("Print Tree");
+			connect(print, SIGNAL(clicked()), this, SLOT(printTree()));
+			int taillePrintX = test->fontMetrics().width("Print Tests") + 10;
+			int taillePrintY = test->fontMetrics().height();
 
-			supprimer = new QPushButton("Nettoyer la zone");
-			connect(supprimer, SIGNAL(clicked()), this, SLOT(supprimerArbre()));
+			del = new QPushButton("Clean");
+			connect(del, SIGNAL(clicked()), this, SLOT(delArbre()));
+			int tailleDelX = test->fontMetrics().width("Print Tests") + 10;
+			int tailleDelY = test->fontMetrics().height();
 
-			secret = new QPushButton("Ne pas cliquer !");
+			secret = new QPushButton("Don't click");
 			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
+			int tailleSecretX = test->fontMetrics().width("Print Tests") + 10;
+			int tailleSecretY = test->fontMetrics().height();
+
 			/************* FIN CREATION *************/
 
-			infoArbre->addWidget(zoneInfo);
-			layout->addWidget(zoneTexte);
+			infoTree->addWidget(printInfo);
+			layout->addWidget(printText);
 			layout->addWidget(test);
-			layout->addWidget(afficher);
-			layout->addWidget(supprimer);
+			layout->addWidget(print);
+			layout->addWidget(del);
 			layout->addWidget(secret);
-			layout->addWidget(quitter);
+			layout->addWidget(quit);
 
 		}
 
 		~Window(){
-			delete zoneTexte;
-			delete quitter;
-			delete afficher;
-			delete supprimer;
+			delete printText;
+			delete quit;
+			delete print;
+			delete del;
 			delete secret;
 			delete layout;
 		}
 
 	public slots:
-		void afficherArbre(){
+		void printTree(){
 			//on ouvre le fichier
 			QString fileName = "src/txtQT/binary.txt";
 			QFile fichier(fileName);
@@ -130,72 +143,86 @@ class Window : public QWidget {
 					if(pl.toInt(&ok, 10) < min){
 						min = pl.toInt(&ok, 10);
 					}
-					if(max < pl.toInt(&ok, 10)){
+					else if(max < pl.toInt(&ok, 10)){
 						max = pl.toInt(&ok, 10);
 					}
 				}
 
 			}
 			
-			QString aff("Racine de notre arbre : " + ligne + 
-						"\nNombre de noeud : " + QString::number(compt+1) + 
-						"\nMinimum de l'arbre : " + QString::number(min) + 
-						"\nMaximum de l'arbre : " + QString::number(max));
+			QString aff("Root of the tree : " + ligne + 
+						"\nNumber of node : " + QString::number(compt+1) + 
+						"\nMinimum of tree : " + QString::number(min) + 
+						"\nMaximum of tree : " + QString::number(max));
 			
 			//on ajoute le texte dans le layout
-			zoneInfo->setText(aff);
+			printInfo->setText(aff);
 			fichier.close();
 
 			//On affiche l'arbre
 			QFile fichier2(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux2(&fichier);
-
 			QString tout = flux2.readAll();
-			zoneTexte->setText(tout);
+			//test colorized text
+			/*for (int i = 0; i < tout.length(); ++i)
+			{
+				if(tout.at(i) == '[' && tout.at(i + 1) == 'O'){
+					for (int i; i  < i + 2; ++i)
+					{
+						printText->setHtml(QString("style=color:red"));
+					}
+				}
+				else if(tout.at(i) == '[' && tout.at(i) == 'F'){
+
+				}
+			}
+			*/
+			printText->setText(tout);
 			resizeFull();
-			zoneTexte->show();
+			printText->show();
 			fichier2.close();
 
 
 		}
 
-		void supprimerArbre(){
-			zoneTexte->setText(nullptr);
-			zoneInfo->setText(nullptr);
+		void delArbre(){
+			printText->setText(nullptr);
+			printInfo->setText(nullptr);
 			resizeHalf();
-			zoneTexte->show();
+			printText->show();
 		}
 
 		void secretbutton(){
-			qDebug() << "QU'EST CE QUE J'AI DIS ????";
-			QMessageBox::information(this, "décéption...", "QU'EST CE QUE J'AI DIS ????");
+			qDebug() << "WHAT DID I JUST SAY ????";
+			QMessageBox::information(this, "Disappointment...", "WHAT DID I JUST SAY ????");
 		}
 
-		void afficherTest(){
+		void printTest(){
 			QString fileName = "src/txtQT/resultTest.txt";
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
 
 			QString tout = flux.readAll();
-			zoneTexte->setText(tout);
+			printText->setText(tout);
+			printInfo->setText(nullptr);
 			resizeFull();
-			zoneTexte->show();
+			printText->show();
 			fichier.close();
 		}
 
 		void resizeFull()
 		{
-			int largeur = QApplication::desktop()->width();
-			int hauteur = QApplication::desktop()->height();
-			resize(largeur, hauteur);
+			int width = QApplication::desktop()->width();
+			int height = QApplication::desktop()->height();
+			resize(width/3, height/2);
 		}
 
 		void resizeHalf(){
-			int largeur = QApplication::desktop()->width();
-			int hauteur = QApplication::desktop()->height();
-			resize(largeur/6, hauteur/2);
+			int width = QApplication::desktop()->width();
+			int height = QApplication::desktop()->height();
+			resize(width/6, height/3);
 		}
 };
 
