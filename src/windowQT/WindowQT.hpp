@@ -13,6 +13,7 @@
 #include <QtGui/QColor>
 #include <QtCore/QDebug>
 #include <QtWidgets/QMessageBox>
+#include <QtWidgets/QDesktopWidget>
 
 #define middleWinX 480
 #define middleWinY 720
@@ -50,9 +51,9 @@ class Window : public QWidget {
 			zoneTexte->setTextColor(Qt::white);
 			zoneTexte->setFontWeight(QFont::Normal);
 			// zoneTexte->setFontFamily("Yrsa Bold");
-			//zoneTexte->setFontPointSize(20);
+			zoneTexte->setFontPointSize(10);
 			zoneTexte->setReadOnly(true);	//permet d'interdire l'ecriture dans le layout
-			zoneTexte->setStyleSheet("background-color: black;");
+			zoneTexte->setStyleSheet("background-color: dark-grey;");
 
 			// On creer la zone de texte qui affiche l'arbre
 			infoArbre = new QVBoxLayout(this);
@@ -61,8 +62,8 @@ class Window : public QWidget {
 			layout->addLayout(infoArbre);
 
 			zoneInfo = new QTextEdit(this);
-			zoneInfo->setFontPointSize(30);
-			zoneInfo->setStyleSheet("background-color: black;");
+			zoneInfo->setFontPointSize(10);
+			zoneInfo->setStyleSheet("background-color: dark-grey;");
 
 
 			/*********** CREATION DES BOUTON ***********/
@@ -114,14 +115,33 @@ class Window : public QWidget {
 			QString ligne;
 			ligne = flux.readLine();
 			int compt = 0;
+			int min = 1000;
+			int max = 0;
+			bool ok;
+			QChar dd = '0';
 			//on compte le nombre de ligne
 			QString ligne2;
 			while(!flux.atEnd()){
 				ligne2 = flux.readLine();
 				compt++;
+				for (int i = 0; i < ligne2.length(); ++i)
+				{
+					QString pl = ligne2.at(i);
+					if(pl.toInt(&ok, 10) < min){
+						min = pl.toInt(&ok, 10);
+					}
+					if(max < pl.toInt(&ok, 10)){
+						max = pl.toInt(&ok, 10);
+					}
+				}
+
 			}
 			
-			QString aff("Racine de notre arbre : " + ligne + "\nNombre de noeud : " + QString::number(compt+1));
+			QString aff("Racine de notre arbre : " + ligne + 
+						"\nNombre de noeud : " + QString::number(compt+1) + 
+						"\nMinimum de l'arbre : " + QString::number(min) + 
+						"\nMaximum de l'arbre : " + QString::number(max));
+			
 			//on ajoute le texte dans le layout
 			zoneInfo->setText(aff);
 			fichier.close();
@@ -133,15 +153,17 @@ class Window : public QWidget {
 
 			QString tout = flux2.readAll();
 			zoneTexte->setText(tout);
-			resize(middleWinX,middleWinY);
+			resizeFull();
 			zoneTexte->show();
 			fichier2.close();
+
+
 		}
 
 		void supprimerArbre(){
 			zoneTexte->setText(nullptr);
 			zoneInfo->setText(nullptr);
-			resize(360, 240);
+			resizeHalf();
 			zoneTexte->show();
 		}
 
@@ -158,11 +180,23 @@ class Window : public QWidget {
 
 			QString tout = flux.readAll();
 			zoneTexte->setText(tout);
-			resize(middleWinX,middleWinY);
+			resizeFull();
 			zoneTexte->show();
 			fichier.close();
 		}
 
+		void resizeFull()
+		{
+			int largeur = QApplication::desktop()->width();
+			int hauteur = QApplication::desktop()->height();
+			resize(largeur, hauteur);
+		}
+
+		void resizeHalf(){
+			int largeur = QApplication::desktop()->width();
+			int hauteur = QApplication::desktop()->height();
+			resize(largeur/6, hauteur/2);
+		}
 };
 
 #endif
