@@ -363,7 +363,7 @@ bool Test::testJoin() {
   return ret;
 }
 
-bool Test::testSplit() { // leaks need to be delete
+bool Test::testSplit() {
   ArbreB tree(3);
   tree.getRoot()->setLeft(2);
   tree.getRoot()->getLeft()->setLeft(4);

@@ -5,8 +5,7 @@ int main(void) {
   Test test;
   // test.allTest();
 
-  // test.testSplit();
-  test.testWriteTreeInQt();
+  test.testSplit();
 
   return 0;
 }

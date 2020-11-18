@@ -247,9 +247,12 @@ ArbreB& ArbreB::operator+=(const ArbreB& other) { // Join two tree with a new ro
 }
 
 ArbreB& ArbreB::operator-=(ArbreB& other) {
-  if(!other.root && root && root->left && root->right) {
-    other.root = root->right->copy();
+  if(root && root->left && root->right) {
+    other.root = root->right;
+    Sommet *oldRoot = root;
     root = root->left;
+    oldRoot->left = oldRoot->right = nullptr;
+    delete oldRoot;
   }
 
   return *this;
