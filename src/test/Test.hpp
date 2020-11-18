@@ -33,10 +33,10 @@ class Test
     
     // ArbreB
     bool testDefaultConstructorTree();
-	bool testParamConstructorTree();
-	bool testAssignTree();
-	bool TestEqualsTree();
-	bool testAdd();
+  	bool testParamConstructorTree();
+  	bool testAssignTree();
+  	bool TestEqualsTree();
+  	bool testAdd();
     bool testDell();
     bool testFind();
     bool testGetNodeAtIndex();
