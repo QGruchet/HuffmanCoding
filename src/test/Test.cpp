@@ -143,7 +143,6 @@ bool Test::testEqualsNode() {
 
 bool Test::testDepth() {
   ArbreB tree(1);
-
   tree << 2;
   tree << 3;
   tree << 4;
@@ -158,7 +157,6 @@ bool Test::testDepth() {
 
 bool Test::testSize() {
   ArbreB tree(1);
-
   tree << 2;
   tree << 3;
   tree << 4;
