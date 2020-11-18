@@ -69,20 +69,32 @@ class Window : public QWidget {
 
 			/*********** CREATION DES BOUTON ***********/
 			// On connect le bouton a une fonction
-			test = new QPushButton("Print Tests");
+			test = new QPushButton("Print Tests", this);
 			connect(test, SIGNAL(clicked()), this, SLOT(printTest()));
+			int tailleTestX = test->fontMetrics().width("Print Tests") + 10;
+			int tailleTestY = test->fontMetrics().height();
+			test->resize(tailleTestX, tailleTestY);
 
 			quit = new QPushButton("Quit");
 			connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
+			int tailleQuitX = test->fontMetrics().width("Print Tests") + 10;
+			int tailleQuitY = test->fontMetrics().height();
 
 			print = new QPushButton("Print Tree");
 			connect(print, SIGNAL(clicked()), this, SLOT(printTree()));
+			int taillePrintX = test->fontMetrics().width("Print Tests") + 10;
+			int taillePrintY = test->fontMetrics().height();
 
 			del = new QPushButton("Clean");
 			connect(del, SIGNAL(clicked()), this, SLOT(delArbre()));
+			int tailleDelX = test->fontMetrics().width("Print Tests") + 10;
+			int tailleDelY = test->fontMetrics().height();
 
 			secret = new QPushButton("Don't click");
 			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
+			int tailleSecretX = test->fontMetrics().width("Print Tests") + 10;
+			int tailleSecretY = test->fontMetrics().height();
+
 			/************* FIN CREATION *************/
 
 			infoTree->addWidget(printInfo);
@@ -151,8 +163,21 @@ class Window : public QWidget {
 			QFile fichier2(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux2(&fichier);
-
 			QString tout = flux2.readAll();
+			//test colorized text
+			/*for (int i = 0; i < tout.length(); ++i)
+			{
+				if(tout.at(i) == '[' && tout.at(i + 1) == 'O'){
+					for (int i; i  < i + 2; ++i)
+					{
+						printText->setHtml(QString("style=color:red"));
+					}
+				}
+				else if(tout.at(i) == '[' && tout.at(i) == 'F'){
+
+				}
+			}
+			*/
 			printText->setText(tout);
 			resizeFull();
 			printText->show();
@@ -181,6 +206,7 @@ class Window : public QWidget {
 
 			QString tout = flux.readAll();
 			printText->setText(tout);
+			printInfo->setText(nullptr);
 			resizeFull();
 			printText->show();
 			fichier.close();
