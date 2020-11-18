@@ -14,6 +14,11 @@
 #include <QtCore/QDebug>
 #include <QtWidgets/QMessageBox>
 
+#define middleWinX 480
+#define middleWinY 720
+#define littleWinX middleWinX/2
+#define littleWinY middleWinY/2
+
 
 class Window : public QWidget {
 
@@ -34,7 +39,8 @@ class Window : public QWidget {
 		Window(){
 			// On change le titre et la taille de la fenetre principale 
 			setWindowTitle("Binary Tree");
-			setBaseSize(360,240);
+			setBaseSize(littleWinX,littleWinY);
+			setFont(QFont("Arial", 10));
 			
 			// On creer la zone principale des widgets
 			layout = new QVBoxLayout(this);
@@ -113,7 +119,7 @@ class Window : public QWidget {
 				compt++;
 			}
 			
-			QString aff("Racine de notre arbre : " + ligne + "\nNombre de noeud : " + QString::number(compt));
+			QString aff("Racine de notre arbre : " + ligne + "\nNombre de noeud : " + QString::number(compt+1));
 			//on ajoute le texte dans le layout
 			zoneInfo->setText(aff);
 			fichier.close();
@@ -125,7 +131,7 @@ class Window : public QWidget {
 
 			QString tout = flux2.readAll();
 			zoneTexte->setText(tout);
-			resize(720,480);
+			resize(middleWinX,middleWinY);
 			zoneTexte->show();
 			fichier2.close();
 		}
@@ -150,7 +156,7 @@ class Window : public QWidget {
 
 			QString tout = flux.readAll();
 			zoneTexte->setText(tout);
-			resize(720,480);
+			resize(middleWinX,middleWinY);
 			zoneTexte->show();
 			fichier.close();
 		}

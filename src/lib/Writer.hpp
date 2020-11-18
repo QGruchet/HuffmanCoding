@@ -17,7 +17,8 @@ class Writer
 
 		/* Methodes */
 		void writeInFile(std::string);
-		void writeBeautifulTreeInFile(Sommet*, int);
+		void writeBeautifulTreeInFile(Sommet*);
+		void writeBeautifulTreeInFileRec(Sommet*, int, std::ofstream&);
 		void writeResultAllTests();
 };
 

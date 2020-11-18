@@ -406,10 +406,10 @@ void Test::testWriteTreeInQt(){
   tree << 4;
   tree << 28;
   tree << 0;
-  tree << 4;
+  // tree << 4;
 
   Writer writer("src/txtQT/binary.txt");
-  writer.writeBeautifulTreeInFile(tree.getRoot(), 0);
+  writer.writeBeautifulTreeInFile(tree.getRoot());
 }
 
 void Test::testWriteAllTests() {

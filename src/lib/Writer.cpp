@@ -9,28 +9,34 @@ Writer::Writer(std::string msg) : file(msg) {}
 /* End constructors */
 
 /* Methodes */
-void Writer::writeBeautifulTreeInFile(Sommet* node, int space) {
+void Writer::writeBeautifulTreeInFile(Sommet* node) {
   // Setup flux and open file
-  std::ofstream flux(file.c_str(), std::ios::out | std::ios::out);
+  std::ofstream flux;
+  flux.open(file.c_str(), std::ios::trunc);
 
   // If the file is open
   if(flux) {
-    for(int i = 0; i < space; i++) {
-        flux << "|__";
-    }
-    flux << node->getData() << std::endl;
-    if(node->getRight()) {
-      writeBeautifulTreeInFile(node->getRight(), space + 1);
-    }
-    if(node->getLeft()) {
-      writeBeautifulTreeInFile(node->getLeft(), space + 1);
-    }
-      flux.close();
-    }
-    else {
-      std::cout << "ERROR : can't open file" << std::endl;
-    }
+    writeBeautifulTreeInFileRec(node, 0, flux);
+  }
+  else {
+    std::cout << "ERROR : can't open file" << std::endl;
+  }
+}
 
+void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream& flux) {
+  for(int i = 0; i < space; i++) {
+      flux << "|__";
+  }
+  flux << node->getData() << std::endl;
+  if(node->getRight()) {
+    writeBeautifulTreeInFileRec(node->getRight(), space + 1, flux);
+  }
+  if(node->getLeft()) {
+    writeBeautifulTreeInFileRec(node->getLeft(), space + 1, flux);
+  }
+  if(space == 0) {
+    flux.close();
+  }
 }
 
 void Writer::writeResultAllTests() {

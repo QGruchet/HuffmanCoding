@@ -2,8 +2,9 @@
 
 target/
 
-/src/QtWindow/CMakeFiles
-/src/QtWindow/main_autogen
-/src/QtWindow/CMakeCache.txt
-/src/QtWindow/cmake_install.cmake
-/src/QtWindow/main
+src/windowQT/CMakeFiles
+src/windowQT/Makefile
+src/windowQT/main_autogen
+src/windowQT/CMakeCache.txt
+src/windowQT/cmake_install.cmake
+src/windowQT/main
