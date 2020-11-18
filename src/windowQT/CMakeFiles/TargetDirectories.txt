@@ -1,0 +1,4 @@
+/home/user/Bureau/fac/L3/S5/Langages_Avancés/Projet/HuffmanCoding/src/windowQT/CMakeFiles/rebuild_cache.dir
+/home/user/Bureau/fac/L3/S5/Langages_Avancés/Projet/HuffmanCoding/src/windowQT/CMakeFiles/edit_cache.dir
+/home/user/Bureau/fac/L3/S5/Langages_Avancés/Projet/HuffmanCoding/src/windowQT/CMakeFiles/main.dir
+/home/user/Bureau/fac/L3/S5/Langages_Avancés/Projet/HuffmanCoding/src/windowQT/CMakeFiles/main_autogen.dir
