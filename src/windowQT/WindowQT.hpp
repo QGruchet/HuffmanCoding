@@ -23,7 +23,7 @@
 class Window : public QWidget {
 
 	Q_OBJECT
-
+	//1080 720
 	private:
 		QVBoxLayout* layout;
 		QVBoxLayout* infoArbre;
@@ -50,8 +50,9 @@ class Window : public QWidget {
 			zoneTexte->setTextColor(Qt::white);
 			zoneTexte->setFontWeight(QFont::Normal);
 			// zoneTexte->setFontFamily("Yrsa Bold");
-			zoneTexte->setFontPointSize(20);
+			//zoneTexte->setFontPointSize(20);
 			zoneTexte->setReadOnly(true);	//permet d'interdire l'ecriture dans le layout
+			zoneTexte->setStyleSheet("background-color: black;");
 
 			// On creer la zone de texte qui affiche l'arbre
 			infoArbre = new QVBoxLayout(this);
@@ -61,6 +62,7 @@ class Window : public QWidget {
 
 			zoneInfo = new QTextEdit(this);
 			zoneInfo->setFontPointSize(30);
+			zoneInfo->setStyleSheet("background-color: black;");
 
 
 			/*********** CREATION DES BOUTON ***********/
