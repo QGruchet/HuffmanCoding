@@ -9,14 +9,20 @@ Writer::Writer(std::string msg) : file(msg) {}
 /* End constructors */
 
 /* Methodes */
-void Writer::writeBeautifulTreeInFile(Sommet* node) {
+void Writer::writeBeautifulTreeInFile(ArbreB tree) {
   // Setup flux and open file
   std::ofstream flux;
   flux.open(file.c_str(), std::ios::trunc);
 
   // If the file is open
   if(flux) {
-    writeBeautifulTreeInFileRec(node, 0, flux);
+    Sommet *root = tree.getRoot();
+    flux << root->countSize() << "\n";
+    flux << root->getData() << "\n";
+    flux << root->countDepth() << "\n";
+    flux << root->dataMin() << "\n";
+    flux << root->dataMax() << "\n";
+    writeBeautifulTreeInFileRec(root, 0, flux);
   }
   else {
     std::cout << "ERROR : can't open file" << std::endl;
@@ -46,10 +52,8 @@ void Writer::writeResultAllTests() {
   // If the file is open
   if(flux) {
     Test test;
-    //std::string OK = " " + test.inGreen("OK") + " ";
-    //std::string FAIL = test.inRed("FAIL");
 
-    flux << "\n\t> TESTS <" << std::endl;
+    flux << "\t> TESTS <" << std::endl;
     flux << "[ " << (test.testDefaultConstructorNode() ? "OK" : "FAIL") << " ] Create a default node.\n";
     flux << "[ " << (test.testCopyConstructorNode() ? "OK" : "FAIL") << " ] Create a node with a copy.\n";
     flux << "[ " << (test.testParamConstructorNode() ? "OK" : "FAIL") << " ] Create a node with a value.\n";
@@ -71,10 +75,10 @@ void Writer::writeResultAllTests() {
     flux << "[ " << (test.testSplit() ? "OK" : "FAIL") << " ] Split the tree in two.\n";
 
     if(test.getSumTest() == test.getNumTestGlobal()) {
-      flux << "> TESTS RESULT : [ \033[0;31m" << test.getSumTest() << "\033[0m/\033[0;32m" << test.getNumTestGlobal() << "\033[0m ] tests passed ! <\n";
+      flux << "> TESTS RESULT : [ " << test.getSumTest() << "/" << test.getNumTestGlobal() << " ] tests passed ! <\n";
     }
     else {
-      flux << "> TESTS RESULT : [ \033[0;31m" << test.getSumTest() << "\033[0m/\033[0;32m" << test.getNumTestGlobal() << "\033[0m ] tests passed ! <\n";
+      flux << "> TESTS RESULT : [ " << test.getSumTest() << "/" << test.getNumTestGlobal() << " ] tests passed ! <\n";
     }
 
     flux.close();

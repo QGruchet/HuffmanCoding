@@ -1,4 +1,3 @@
-
 	> TESTS <
 [ OK ] Create a default node.
 [ OK ] Create a node with a copy.
@@ -17,4 +16,4 @@
 [ OK ] Get node at index in the tree.
 [ OK ] Join the tree with a other.
 [ OK ] Split the tree in two.
-> TESTS RESULT : [ [0;31m16[0m/[0;32m17[0m ] tests passed ! <
+> TESTS RESULT : [ 16/17 ] tests passed ! <

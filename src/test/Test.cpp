@@ -3,11 +3,11 @@
 
 Test::Test() : sumTest(0), numTestGlobal(0) {}
 
-std::string Test::inRed(std::string msg) {
+std::string inRed(std::string msg) {
   return "\033[0;31m" + msg + "\033[0m";
 }
 
-std::string Test::inGreen(std::string msg) {
+std::string inGreen(std::string msg) {
   return "\033[0;32m" + msg + "\033[0m";
 } 
 
@@ -404,10 +404,10 @@ void Test::testWriteTreeInQt(){
   tree << 4;
   tree << 28;
   tree << 0;
-  // tree << 4;
+  tree << 4;
 
   Writer writer("src/txtQT/binary.txt");
-  writer.writeBeautifulTreeInFile(tree.getRoot());
+  writer.writeBeautifulTreeInFile(tree);
 }
 
 void Test::testWriteAllTests() {

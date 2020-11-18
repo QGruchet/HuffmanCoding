@@ -31,6 +31,12 @@ public:
     friend std::ostream &operator<<(std::ostream &, const Sommet&);
     
     /* Methodes */
+    void Min(int*);
+    int dataMin();
+
+    void Max(int*);
+    int dataMax();
+
     bool isLeaf();
     void printBeautifulTree(int);
     void writeBeautifulTreeInFile(int);
@@ -62,6 +68,7 @@ class ArbreB
   public:
     /* Constructors */
     ArbreB(); //Default
+    ArbreB(const ArbreB&);
     ArbreB(int);
 
     /* Overloaded */

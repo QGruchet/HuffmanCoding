@@ -15,12 +15,6 @@
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QDesktopWidget>
 
-#define middleWinX 480
-#define middleWinY 720
-#define littleWinX middleWinX/2
-#define littleWinY middleWinY/2
-
-
 class Window : public QWidget {
 
 	Q_OBJECT
@@ -38,24 +32,23 @@ class Window : public QWidget {
 
 	public:
 		Window(){
-			// On change le titre et la taille de la fenetre principale 
+			// Setup window title, size, and fond
 			setWindowTitle("Binary Tree");
-			setBaseSize(littleWinX,littleWinY);
+			setBaseSize(480,720);
 			setFont(QFont("Arial", 10));
 	
-			// On creer la zone principale des widgets
+			// Setup layout
 			layout = new QVBoxLayout(this);
 			setLayout(layout);
 
 			printText = new QTextEdit(this);
 			printText->setTextColor(Qt::white);
 			printText->setFontWeight(QFont::Normal);
-			// printText->setFontFamily("Yrsa Bold");
 			printText->setFontPointSize(10);
-			printText->setReadOnly(true);	//permet d'interdire l'ecriture dans le layout
+			printText->setReadOnly(true);	// USer can't write in the layout
 			printText->setStyleSheet("background-color: dark-grey;");
 
-			// On creer la zone de texte qui affiche l'arbre
+			// Create place for write the tree
 			infoTree = new QVBoxLayout(this);
 			infoTree->setAlignment(Qt::AlignRight);
 			setLayout(infoTree);
@@ -68,7 +61,7 @@ class Window : public QWidget {
 
 
 			/*********** CREATION DES BOUTON ***********/
-			// On connect le bouton a une fonction
+			// Link button to function
 			test = new QPushButton("Print Tests", this);
 			connect(test, SIGNAL(clicked()), this, SLOT(printTest()));
 			int tailleTestX = test->fontMetrics().width("Print Tests") + 10;
@@ -104,7 +97,6 @@ class Window : public QWidget {
 			layout->addWidget(del);
 			layout->addWidget(secret);
 			layout->addWidget(quit);
-
 		}
 
 		~Window(){
@@ -118,52 +110,29 @@ class Window : public QWidget {
 
 	public slots:
 		void printTree(){
-			//on ouvre le fichier
+			// Open file for read the tree
 			QString fileName = "src/txtQT/binary.txt";
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
 
-			//on lit la premiere line qui correspond a la racine
-			QString ligne;
-			ligne = flux.readLine();
-			int compt = 0;
-			int min = 1000;
-			int max = 0;
-			bool ok;
-			QChar dd = '0';
-			//on compte le nombre de ligne
-			QString ligne2;
-			while(!flux.atEnd()){
-				ligne2 = flux.readLine();
-				compt++;
-				for (int i = 0; i < ligne2.length(); ++i)
-				{
-					QString pl = ligne2.at(i);
-					if(pl.toInt(&ok, 10) < min){
-						min = pl.toInt(&ok, 10);
-					}
-					else if(max < pl.toInt(&ok, 10)){
-						max = pl.toInt(&ok, 10);
-					}
-				}
-
-			}
+			// Read the root, numer of node, min and max
+			QString valRoot = flux.readLine();
+			QString depth = flux.readLine();
+			QString numNode = flux.readLine();
+			QString min = flux.readLine();
+			QString max = flux.readLine();
 			
-			QString aff("Root of the tree : " + ligne + 
-						"\nNumber of node : " + QString::number(compt+1) + 
-						"\nMinimum of tree : " + QString::number(min) + 
-						"\nMaximum of tree : " + QString::number(max));
+			QString aff("Some informations about the tree : \n\t > Root of the tree : " + valRoot + 
+						"\n\t > Depth of the tree" + depth +
+						"\n\t > Number of node : " + numNode + 
+						"\n\t > Minimum of tree : " + min + 
+						"\n\t > Maximum of tree : " + max);
 			
-			//on ajoute le texte dans le layout
+			// Set the layout with a text
 			printInfo->setText(aff);
-			fichier.close();
+			QString tout = flux.readAll();
 
-			//On affiche l'arbre
-			QFile fichier2(fileName);
-			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
-			QTextStream flux2(&fichier);
-			QString tout = flux2.readAll();
 			//test colorized text
 			/*for (int i = 0; i < tout.length(); ++i)
 			{
@@ -181,15 +150,13 @@ class Window : public QWidget {
 			printText->setText(tout);
 			resizeFull();
 			printText->show();
-			fichier2.close();
-
-
+			fichier.close();
 		}
 
 		void delArbre(){
 			printText->setText(nullptr);
 			printInfo->setText(nullptr);
-			resizeHalf();
+			resizeFull();
 			printText->show();
 		}
 
@@ -215,14 +182,11 @@ class Window : public QWidget {
 		void resizeFull()
 		{
 			int width = QApplication::desktop()->width();
+			if(width > 1920) {
+				width = 1920;
+			}
 			int height = QApplication::desktop()->height();
-			resize(width/3, height/2);
-		}
-
-		void resizeHalf(){
-			int width = QApplication::desktop()->width();
-			int height = QApplication::desktop()->height();
-			resize(width/6, height/3);
+			resize(height/2, width/4);
 		}
 };
 

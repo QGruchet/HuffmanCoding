@@ -31,6 +31,11 @@ Sommet::Sommet(const Sommet& other) {
     right = other.right->copy();
   }
 }
+
+ArbreB::ArbreB(const ArbreB& other) {
+  root = new Sommet;
+  *root = *other.root;
+}
 // End copy
 
 ArbreB::ArbreB(int rootData) {
@@ -380,6 +385,42 @@ void Sommet::setRight(int rightData) {
 /* End setters */
 
 /* Methodes */
+void Sommet::Min(int *min) {
+  if(data <= *min) {
+    *min = data;
+  }
+  if(left) {
+    left->Min(min);
+  }
+  if(right) {
+    right->Min(min);
+  }
+}
+
+int Sommet::dataMin() {
+  int min = INT32_MAX; // Init min with the max value for int
+  Min(&min);
+  return min;
+}
+
+void Sommet::Max(int *max) {
+  if(data >= *max) {
+    *max = data;
+  }
+  if(left) {
+    left->Max(max);
+  }
+  if(right) {
+    right->Max(max);
+  }
+}
+
+int Sommet::dataMax() {
+  int max = INT32_MIN; // Init min with the min value for int
+  Max(&max);
+  return max;
+}
+
 bool Sommet::isLeaf() {
   return (!left && !right);
 }
