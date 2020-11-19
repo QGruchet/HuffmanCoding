@@ -190,13 +190,6 @@ class Window : public QWidget {
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
 			QString tout = flux.readAll();
-			/* Don't delete, it's for detail of result
-			QString fileName = "src/txtQT/detailTest.txt";
-			QFile fichier2(fileName);
-			fichier2.open(QIODevice::ReadOnly | QIODevice::Text);
-			QTextStream flux2(&fichier2);
-			QString tout2 = flux2.readAll();
-			*/
 
 			printText->setText(tout);
 			//printInfo->setText(tout2);
