@@ -4,21 +4,48 @@
  **/
 #include "Test.hpp"
 #include <string>
-
+/**
+ * Function : Constructor by default.
+ * Return : 'Test'.
+ * Description : Create an object 'Test' with default parameters.
+ * */
 Test::Test() : sumTest(0), numTestGlobal(0), inColor(true) {}
+
+/**
+ * Function : Constructor by default.
+ * Return : 'Test'.
+ * Description : Create an object 'Test' with default parameters and color.
+ * */
 Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
 
+/**
+ * Function : inRed.
+ * * Arguments : 'std::string' msg
+ * Return : 'std::string'.
+ * Description : Colorized the string 'msg' in red.
+ * */
 std::string inRed(std::string msg) {
     return "\033[0;31m" + msg + "\033[0m";
 }
 
+/**
+ * Function : inGreen.
+ * Arguments : 'std::string' msg
+ * Return : 'std::string'.
+ * Description : Colorized the string 'msg' in green.
+ * */
 std::string inGreen(std::string msg) {
     return "\033[0;32m" + msg + "\033[0m";
 } 
 
 std::string OK = " " + inGreen("OK") + " ";
 std::string FAIL = inRed("FAIL");
-  
+
+/**
+ * Function : allTest.
+ * Return : 'Test'.
+ * Description : Print all results of test in our terminal.
+ * */
 void Test::allTest() {
     /* Test Tree */
     // Sommet
@@ -62,6 +89,12 @@ void Test::allTest() {
 
 /* Test Tree */
 // Sommet
+
+/**
+ * Function : testDefaultConstructorNode.
+ * Return : 'std::string'.
+ * Description : Test if constructor by defaut is a success. Return 'OK' if yes, 'FAIL' if no.
+ * */
 std::string Test::testDefaultConstructorNode() {
     Sommet node;
     bool ret = ( (node.getData() == 0)
@@ -78,6 +111,11 @@ std::string Test::testDefaultConstructorNode() {
     return "[ " + tmp + " ] Create a default node.\n";
 }
 
+/**
+ * Function : testCopyConstructorNode.
+ * Return : 'std::string'.
+ * Description : Check if constructor by copy is a success.
+ * */
 std::string Test::testCopyConstructorNode() { 
     Sommet node(1);
     Sommet node2(node);
@@ -95,6 +133,11 @@ std::string Test::testCopyConstructorNode() {
     return "[ " + tmp + " ] Create a node with a copy.\n";
 }
 
+/**
+ * Function : testParamConstructorNode.
+ * Return : 'std::string'.
+ * Description : Check if constructor by defaut without child is a success.
+ * */
 std::string Test::testParamConstructorNode() {
     Sommet node(1);
     bool ret = ( (node.getData() == 1)
@@ -111,6 +154,11 @@ std::string Test::testParamConstructorNode() {
     return "[ " + tmp + " ] Create a node with a value.\n";
 }
 
+/**
+ * Function : testASsignNode.
+ * Return : 'std::string'.
+ * Description : Check if the node worked is a success.
+ * */
 std::string Test::testAssignNode() {
     ArbreB tree2(2);
     tree2 << 4;
@@ -129,6 +177,11 @@ std::string Test::testAssignNode() {
     return "[ " + tmp + " ] Assign a node in a other .\n";
 }
 
+/**
+ * Function : testEqualsNode.
+ * Return : 'std::string'.
+ * Description : Check if two node are equals is a success.
+ * */
 std::string Test::testEqualsNode() {
     std::string retStr, retStr2, tmp;
     Sommet emptyNode;
@@ -202,6 +255,11 @@ std::string Test::testEqualsNode() {
     }
 }
 
+/**
+ * Function : testDepth.
+ * Return : 'std::string'.
+ * Description : Check the depth of the tree.
+ * */
 std::string Test::testDepth() {
     std::string retStr, retStr2, tmp;
     ArbreB tree(1);
@@ -239,6 +297,11 @@ std::string Test::testDepth() {
     }
 }
 
+/**
+ * Function : testSize.
+ * Return : 'std::string'.
+ * Description : Check the size of tree. One node => size = 1, two nodes => size = 2...
+ * */
 std::string Test::testSize() {
     std::string retStr, retStr2, tmp;
     ArbreB tree(1);
@@ -277,6 +340,12 @@ std::string Test::testSize() {
 }
 
 // ArbreB
+
+/**
+ * Function : testCopyConstructorNode.
+ * Return : 'std::string'.
+ * Description : Check if constructor by defaut is a success.
+ * */
 std::string Test::testDefaultConstructorTree() {
     ArbreB tree;
     bool ret = (tree.getRoot() == nullptr);
@@ -290,6 +359,11 @@ std::string Test::testDefaultConstructorTree() {
     return "[ " + tmp + " ] Create a default tree.\n";
 }
 
+/**
+ * Function : testParamConstructorTree.
+ * Return : 'std::string'.
+ * Description : Check the defaut constructor of a tree.
+ * */
 std::string Test::testParamConstructorTree() {
     ArbreB tree(1);
     bool ret = ( (tree.getRoot()->getData() == 1)
@@ -306,6 +380,11 @@ std::string Test::testParamConstructorTree() {
     return "[ " + tmp + " ] Create a tree with the value of the root.\n";
 }
 
+/**
+ * Function : testAssignTree
+ * Return : 'std::string'.
+ * Description : Check if the copy of a tree in another is a success.
+ * */
 std::string Test::testAssignTree() {
     ArbreB tree(2);
     tree << 4;
@@ -325,6 +404,11 @@ std::string Test::testAssignTree() {
     return "[ " + tmp + " ] Assign a tree in a other.\n";
 }
 
+/**
+ * Function : testEqualsTree.
+ * Return : 'std::string'.
+ * Description : Check if two are equals (same nodes, sames size, same depth).
+ * */
 std::string Test::TestEqualsTree() {
     std::string retStr, retStr2, tmp;
     ArbreB emptyTree;
@@ -380,6 +464,11 @@ std::string Test::TestEqualsTree() {
     }
 }
 
+/**
+ * Function : testAdd.
+ * Return : 'std::string'.
+ * Description : Check if we can add a node in a tree.
+ * */
 std::string Test::testAdd() {
     ArbreB tree(2);
     tree << 3;
@@ -396,6 +485,11 @@ std::string Test::testAdd() {
     return "[ " + tmp + " ] Add a new node in the tree.\n";
 }
 
+/**
+ * Function : testDell.
+ * Return : 'std::string'.
+ * Description : Check if deletion on a node is a success.
+ * */
 std::string Test::testDell() {
     std::string retStr, retStr2, tmp;
     ArbreB tree(1);
@@ -472,6 +566,11 @@ std::string Test::testDell() {
     return retStr2 + "[ " + tmp + " ] Delete a node in the tree.\n";
 }
 
+/**
+ * Function : testFind.
+ * Return : 'std::string'.
+ * Description : Check if we can find a specific node by his value in the tree.
+ * */
 std::string Test::testFind() {
     std::string retStr, retStr2, tmp;
     ArbreB tree(1);
@@ -520,6 +619,11 @@ std::string Test::testFind() {
     return retStr2 + "[ " + tmp + " ] Say if a value is in the tree.\n";
 }
 
+/**
+ * Function : testGetNodeAtIndex.
+ * Return : 'std::string'.
+ * Description : Check if we can find a specific node by his position in the tree.
+ * */
 std::string Test::testGetNodeAtIndex() {
     ArbreB tree(1);
     tree.getRoot()->setLeft(2);
@@ -538,6 +642,11 @@ std::string Test::testGetNodeAtIndex() {
     return "[ " + tmp + " ] Get node at index in the tree.\n";
 }
 
+/**
+ * Function : testJoin.
+ * Return : 'std::string'.
+ * Description : Check if we can make a fusion with two tree.
+ * */
 std::string Test::testJoin() {
     ArbreB tree(2);
     tree.getRoot()->setLeft(4);
@@ -575,6 +684,11 @@ std::string Test::testJoin() {
     return "[ " + tmp + " ] Join the tree with a other.\n";
 }
 
+/**
+ * Function : testGetNodeAtIndex.
+ * Return : 'std::string'.
+ * Description : Check if we can make a split of a tree. We should have two tree at the end.
+ * */
 std::string Test::testSplit() {
     ArbreB tree(3);
     tree.getRoot()->setLeft(2);

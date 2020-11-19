@@ -7,7 +7,16 @@ Implementation of Huffman coding in cpp.
 
 ***
 
-## Directory hierarchy
+# Table of contents
+- [Directory hierarchy](#Directory-hierarchy)  
+- [Needed](#Needed)  
+- [Installation](#Installation)  
+- [Launch](#Launch)  
+- [Some idea for amelioration](#Some-idea-for-amelioration)
+- [Authors](#Authors)  
+
+
+# Directory hierarchy
 
 The project is split in many sub directories like the hierarchy as below : 
 ```bash
@@ -39,37 +48,41 @@ The project is split in many sub directories like the hierarchy as below :
 * src/lib : Contains all librairies using by the projet.
 * src/main : Contains the main file.
 * src/test : Contains the tests files.
-* src/windowQT : Contains application files.
+* src/windowQT : Contains application files.  
 
-***
+# Needed
 
-### Pré-requis
 
-For our program to work, we need a few programs :
+Our program is made in C++ and use Qt for the graphic interface. Also, for our program to work, we need two or three little things :
 
-- [cmake](https://cmake.org/install/) version 3.0.0 required
-- [Qt libraries](https://doc.ubuntu-fr.org/qt) version 5 required
-- A C++ compiler like [g++](https://doc.ubuntu-fr.org/gcc) or [Clang](https://clang.llvm.org/get_started.html)
+- [cmake](https://cmake.org/install/) version superior to 3.0.0 is required
+- [Qt libraries](https://doc.ubuntu-fr.org/qt) version superior to 5.0 is required
+- A C++ compiler like [g++](https://doc.ubuntu-fr.org/gcc) (recommanded) or [Clang](https://clang.llvm.org/get_started.html)
 
-### Installation
+
+# Installation
 
 To build our program, just needed to tape this in a terminal :
 
 - ``` make ```
 
 
-## Démarrage
+# Launch
 
-To start or program, two options are given :
+To start our program, two options are given :
 
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
-## Contributing
 
-Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://example.org) pour savoir comment le faire.
+# Some idea for amelioration
 
-## Auteurs
+Here some idea for future version :
+- Our interface can interact with the painting tree, like adding node, deleting node, spliting tree, fusion of two differents tree...
+- Dell root in the millde of the tree isn't working. We have to fix it.
+- Solve memory leaks in the graphic interface.
+
+# Authors
 * **LE DENMAT Mickael 21804355**
 * **GRUCHET Quentin 21605636**
 
