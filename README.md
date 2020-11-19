@@ -74,7 +74,7 @@ To start our program, two options are given :
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
-### Some ideas for amelioration
+### Some idea for amelioration
 
 
 ### Authors
