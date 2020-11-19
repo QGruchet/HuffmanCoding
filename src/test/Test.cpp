@@ -1,6 +1,6 @@
 /**
- * Test.cpp : You can found here all functions implemented for the Test class
- * Author : Mickael
+ * Test.cpp : You can found here all functions implemented for the Test class.
+ * Author : Mickael.
  **/
 #include "Test.hpp"
 #include <string>

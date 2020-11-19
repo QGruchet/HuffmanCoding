@@ -1,33 +1,44 @@
 /**
- * Tree.cpp : You can found here all functions implemented for the Tree class
- * Author : Mickael
+ * Tree.cpp : You can found here all functions implemented for the Tree class.
+ * Author : Mickael.
  * */
 #include "Tree.hpp"
 
-/* Constructors */
-// Default
+/**
+ * Function : Constructor by copy.
+ * Return : 'Sommet'.
+ * Description : Create an object 'Sommet' with default parameters.
+ * */
 Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
-ArbreB::ArbreB() : root(nullptr)  {}
-// End default
 
 /**
- * Function : copy
- * Return : Sommet*
- * Resume : Return a deep copy of this
+ * Function : Constructor by copy.
+ * Return : 'ArbreB'.
+ * Description : Create an object 'ArbreB' with default parameters.
+ * */
+ArbreB::ArbreB() : root(nullptr)  {}
+
+/**
+ * Function : Copy.
+ * Return : 'Sommet'*.
+ * Description : Return a deep copy of this.
  * */
 Sommet* Sommet::copy() {
     Sommet *newNode = new Sommet(data);
-
     if(left) {
         newNode->left = left->copy();
     }
     if(right) {
         newNode->right = right->copy();
     }
-
     return newNode;
 }
 
+/**
+ * Function : Constructor by copy.
+ * Return : 'Sommet'.
+ * Description : Create an object 'Sommet' with an other.
+ * */
 Sommet::Sommet(const Sommet& other) {
     data = other.data;
     left = nullptr;
@@ -40,21 +51,33 @@ Sommet::Sommet(const Sommet& other) {
     }
 }
 
+/** Function : Constructor by copy.
+ * Return : 'ArbreB'.
+ * Description : Create a object 'ArbreB' with an other.
+ * */
 ArbreB::ArbreB(const ArbreB& other) {
     root = new Sommet;
     *root = *other.root;
 }
-// End copy
 
+/** Function : Constructor with parameter.
+ * Return : 'Sommet'.
+ * Description : Create a object 'Sommet' by initializing the data.
+ * */
+Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
+
+/** Function : Constructor with parameter.
+ * Return : 'ArbreB'.
+ * Description : Create a object 'ArbreB' by initializing the root.
+ * */
 ArbreB::ArbreB(int rootData) {
     root = new Sommet(rootData);
 }
 
-Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
-/* End Constructors */
-
-/* Overloaded */
-// Operator=
+/** Function : Overloading operator=.
+ * Return : 'Sommet'.
+ * Description : Copy a object 'Sommet' with an other.
+ * */
 Sommet& Sommet::operator=(Sommet other) {
     if(this != &other) {
         data = other.data;
@@ -65,40 +88,37 @@ Sommet& Sommet::operator=(Sommet other) {
             right = other.right->copy();
         }
     }
-
     return *this;
 }
 
+/** Function : Overloading operator=.
+ * Return : 'ArbreB'.
+ * Description : Swap the value of the 'Sommet' with newData.
+ * */
 Sommet& Sommet::operator=(int newData) {
     data = newData;
     return *this;
 }
 
+
+/** Function : Overloading operator=.
+ * Return : 'ArbreB'.
+ * Description : Copy a object 'ArbreB' with an other.
+ * */
 ArbreB& ArbreB::operator=(const ArbreB& other) {
     if(this != &other) {
         if(!root) {
             root = new Sommet(other.root->data);
         }
-
         *root = *other.root;
     }
-    
     return *this;
 }
-// End operator=
 
-// Operator==
-bool ArbreB::operator==(const ArbreB& other) {
-    if(!root && !other.root) {
-        return true;
-    }
-    if((!root && other.root) || (root && !other.root)) {
-        return false;
-    }
-
-    return *root == *other.root;
-}
-
+/** Function : Overloading operator==.
+ * Return : boolean.
+ * Description : Say if the 'Sommet' is equal to an other.
+ * */
 bool Sommet::operator==(const Sommet& other) {
     if(data == other.data) {
         if(left && other.left) {
@@ -116,38 +136,60 @@ bool Sommet::operator==(const Sommet& other) {
     return false;
 }
 
+/** Function : Overloading operator==.
+ * Return : boolean.
+ * Description : Say if the 'Sommet' is equal to an other, recursive version.
+ * */
 bool Sommet::equal(Sommet *node) {
     if(node) {
         if(data != node->data) {
             return false;
         }
-
         if(left && node->left) {
             if(!left->equal(node->left)) {
                 return false;
             }
         }
-
         if(right && node->right) {
             return right->equal(node->right);
         }
     }
-
     return true;
 }
-// End operator==
 
-// Operator<<
+
+/** Function : Overloading operator==.
+ * Return : boolean.
+ * Description : Say if the 'ArbreB' is equal to an other.
+ * */
+bool ArbreB::operator==(const ArbreB& other) {
+    if(!root && !other.root) { // Two empty trees is always equal
+        return true;
+    }
+    if((!root && other.root) || (root && !other.root)) {
+        return false;
+    }
+    return *root == *other.root;
+}
+
+/** Function : Overloading operator<<.
+ * Return : 'ArbreB'.
+ * Description : Add a node with the value 'newData' in the tree.
+ * */
 ArbreB& ArbreB::operator<<(int newData) {
     if(!root) {
         root = new Sommet(newData);
     }
     else {
-        add(root, newData);
+        add(root, newData); // Call recursive function
     }
     return *this;
 }
 
+/** Function : add.
+ * Return : 'ArbreB'.
+ * Description : Add a node with the value 'newData' in the tree, recursive version.
+ * */
 void ArbreB::add(Sommet *root, int newData) {
     if(rand()%2) {
         if(root->left) {
@@ -167,6 +209,11 @@ void ArbreB::add(Sommet *root, int newData) {
     }
 }
 
+/** Function : Overloading operator>>.
+ * Return : 'ArbreB'.
+ * Description : Dell a node with the value 'dellData' in the tree, if
+ * the node with 'dellData' existe.
+ * */
 ArbreB& ArbreB::operator>>(int dellData) {
     Sommet *dellNode = find(root, dellData);
     if(!dellNode || !root) {
@@ -192,6 +239,11 @@ ArbreB& ArbreB::operator>>(int dellData) {
     return *this;
 }
 
+/** Function : dell.
+ * Return : 'ArbreB'.
+ * Description : Dell a node with the value 'dellData' in the tree, if
+ * the node with 'dellData' existe, recursive version.
+ * */
 void ArbreB::dell(Sommet *root, int dellData) {
     if(!root) {
         return;
