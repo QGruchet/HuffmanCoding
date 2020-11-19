@@ -54,7 +54,7 @@ void Writer::writeResultAllTests() {
     bool withColor = false;
     Test test(withColor);
     // Sommet
-    flux<< "\n\t> TESTS <\n";
+    flux<< "\t> TESTS <\n";
     flux << test.testDefaultConstructorNode();
     flux << test.testCopyConstructorNode();
     flux << test.testParamConstructorNode();
