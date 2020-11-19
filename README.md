@@ -7,6 +7,9 @@ Implementation of Huffman coding in cpp.
 
 ***
 
+## Table of contents
+    -[Démarrage](#Démarrage)
+
 ## Directory hierarchy
 
 The project is split in many sub directories like the hierarchy as below : 
