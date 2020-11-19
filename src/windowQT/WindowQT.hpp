@@ -210,10 +210,13 @@ class Window : public QWidget {
 		{
 			//Resize the main window depending on the size display
 			int width = QApplication::desktop()->width();
+			int height = QApplication::desktop()->height();
 			if(width > 1920) {
 				width = 1920;
 			}
-			int height = QApplication::desktop()->height();
+			if(height > 1080) {
+				height = 1080;
+			}
 			resize(height/1.5, width/3.5);
 		}
 };
