@@ -74,6 +74,124 @@ To start our program, two options are given :
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
+# Details of functions
+## Tree.cpp
+```cpp
+/**
+ * Function : Constructor by copy.
+ * Return : 'Sommet'.
+ * Description : Create an object 'Sommet' with default parameters.
+ * */ 
+Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
+
+/**
+ * Function : Constructor by copy.
+ * Return : 'ArbreB'.
+ * Description : Create an object 'ArbreB' with default parameters.
+ * */  
+ArbreB::ArbreB() : root(nullptr)  {}
+
+/**
+ * Function : Copy.
+ * Return : 'Sommet'*.
+ * Description : Return a deep copy of this.
+ * */  
+Sommet* Sommet::copy()
+
+/**
+ * Function : Constructor by copy.
+ * Return : 'Sommet'.
+ * Description : Create an object 'Sommet' with an other.
+ * */  
+Sommet::Sommet(const Sommet& other) {}
+
+/** Function : Constructor by copy.
+ * Return : 'ArbreB'.
+ * Description : Create a object 'ArbreB' with an other.
+ * */  
+ArbreB::ArbreB(const ArbreB& other) {}
+
+/** Function : Constructor with parameter.
+ * Return : 'Sommet'.
+ * Description : Create a object 'Sommet' by initializing the data.
+ * */  
+Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
+
+/** Function : Constructor with parameter.
+ * Return : 'ArbreB'.
+ * Description : Create a object 'ArbreB' by initializing the root.
+ * */  
+ArbreB::ArbreB(int rootData) {}
+
+/** Function : Overloading operator=.
+ * Return : 'Sommet'.
+ * Description : Copy a object 'Sommet' with an other.
+ * */  
+Sommet& Sommet::operator=(Sommet other) {}
+
+/** Function : Overloading operator=.
+ * Return : 'ArbreB'.
+ * Description : Swap the value of the 'Sommet' with newData.
+ * */  
+Sommet& Sommet::operator=(int newData) {}
+
+
+/** Function : Overloading operator=.
+ * Return : 'ArbreB'.
+ * Description : Copy a object 'ArbreB' with an other.
+ * */  
+ArbreB& ArbreB::operator=(const ArbreB& other) {}
+
+/** Function : Overloading operator==.
+ * Return : boolean.
+ * Description : Say if the 'Sommet' is equal to an other.
+ * */  
+bool Sommet::operator==(const Sommet& other) {}
+
+/** Function : Overloading operator==.
+ * Return : boolean.
+ * Description : Say if the 'Sommet' is equal to an other, recursive version.
+ * */  
+bool Sommet::equal(Sommet *node) {}
+
+
+/** Function : Overloading operator==.
+ * Return : boolean.
+ * Description : Say if the 'ArbreB' is equal to an other.
+ * */  
+bool ArbreB::operator==(const ArbreB& other) {}
+
+/** Function : Overloading operator<<.
+ * Return : 'ArbreB'.
+ * Description : Add a node with the value 'newData' in the tree.
+ * */  
+ArbreB& ArbreB::operator<<(int newData) {}
+
+/** Function : add.
+ * Return : 'ArbreB'.
+ * Description : Add a node with the value 'newData' in the tree, recursive version.
+ * */  
+void ArbreB::add(Sommet *root, int newData) {}
+
+/** Function : Overloading operator>>.
+ * Return : 'ArbreB'.
+ * Description : Dell a node with the value 'dellData' in the tree, if
+ * the node with 'dellData' existe.
+ * */
+ArbreB& ArbreB::operator>>(int dellData) {}
+
+/** Function : dell.
+ * Return : 'ArbreB'.
+ * Description : Dell a node with the value 'dellData' in the tree, if
+ * the node with 'dellData' existe, recursive version.
+ * */
+void ArbreB::dell(Sommet *root, int dellData) {}
+
+## Writer.cpp
+
+## Test.cpp
+
+## WindowQT.cpp
 
 # Some idea for amelioration
 
