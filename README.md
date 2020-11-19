@@ -12,6 +12,7 @@ Implementation of Huffman coding in cpp.
 - [Needed](#Needed)  
 - [Installation](#Installation)  
 - [Launch](#Launch)  
+- [Usage](#Usage)
 - [Details of functions](Details-of-functions)  
     - [Tree.cpp](#Tree)
     - [Writer.cpp](#Writer)
@@ -80,6 +81,14 @@ To start our program, two options are given :
 
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
+
+# Usage
+![interface](Screenshots/interface.png)  Here a first look of the interface for the project. All buttons were to clickable.  
+![Print Test](Screenshots/print_test.png) This button print all tests in the interface.
+![print Tree](Screenshots/print_tree.png)  This button print the tree in the interface.
+![clean](Screenshots/clean.png)  This button clean all the window.
+![quit](Screenshots/quit.png)  This button close the window.  
+All buttons are connect to functions that have description in windowQT file (see below).
 
 # Details of functions
 
