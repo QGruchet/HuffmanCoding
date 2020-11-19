@@ -13,10 +13,10 @@ Implementation of Huffman coding in cpp.
 - [Installation](#Installation)  
 - [Launch](#Launch)  
 - [Details of functions](Details-of-functions)  
-    - [Tree.cpp](Tree)
-    - [Writer.cpp](Writer)
-    - [Test.cpp](Test)
-    - [WindowQT.cpp](WindowQT)
+    - [Tree.cpp](#Tree.cpp)
+    - [Writer.cpp](#Writer.cpp)
+    - [Test.cpp](#Test.cpp)
+    - [WindowQT.cpp](#WindowQT.cpp)
 - [Some idea for amelioration](#Some-idea-for-amelioration)
 - [Authors](#Authors)  
 
@@ -81,16 +81,16 @@ To start our program, two options are given :
 
 # Details of functions
 
-## Tree
+## Tree.cpp
 ```cpp
 
 ```
 
-## Writer
+## Writer.cpp
 ```cpp
 
 ```
-## Test
+## Test.cpp
 ```cpp
 /**
  * Function : Constructor by default.
@@ -263,7 +263,7 @@ int Test::getNumTestGlobal() const {
 }
 /* End getters */
 ```
-## WindowQT
+## WindowQT.cpp
 ```cpp
 
 /** Function : Window().
