@@ -43,10 +43,6 @@ class Test
     std::string testGetNodeAtIndex();
     std::string testJoin();
     std::string testSplit();
-
-    // Writer
-    void testWriteTreeInQt();
-    void testWriteAllTests();
     
     // Parser
     void testCalculFreqChar();
