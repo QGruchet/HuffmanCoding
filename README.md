@@ -588,7 +588,15 @@ void resizeFull(){}
 ```
 # Status
 
+20/11/2020 : version 3.0 => End part1
+
 # Explanation of the project
+
+- Part1 : Implementation of a tree.  
+For the first part we were to implement a tree and a graphic interface.
+The word has been split in two. Mickael had to implement the tree and Quentin had to implement the interface.
+For the tree
+
 
 # Some idea for amelioration
 
