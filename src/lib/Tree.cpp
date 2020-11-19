@@ -1,3 +1,7 @@
+/**
+ * Tree.cpp : You can found here all functions implemented for the Tree class
+ * Author : Mickael
+ * */
 #include "Tree.hpp"
 
 /* Constructors */
@@ -6,7 +10,11 @@ Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
 ArbreB::ArbreB() : root(nullptr)  {}
 // End default
 
-// Copy
+/**
+ * Function : copy
+ * Return : Sommet*
+ * Resume : Return a deep copy of this
+ * */
 Sommet* Sommet::copy() {
     Sommet *newNode = new Sommet(data);
 

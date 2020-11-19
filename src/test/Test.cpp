@@ -1,3 +1,7 @@
+/**
+ * Test.cpp : You can found here all functions implemented for the Test class
+ * Author : Mickael
+ **/
 #include "Test.hpp"
 #include <string>
 
@@ -607,20 +611,20 @@ std::string Test::testSplit() {
 /* End Tree.hpp */
 
 /* Test Parser.hpp */
-void Test::testCalculFreqChar() {
-    std::vector<int> freq = {'h', 1, 'e', 1, 'l', 3, 'o', 2, ' ', 1, 'w', 1, 'r', 1, 'd', 1};
+// void Test::testCalculFreqChar() {
+//     std::vector<int> freq = {'h', 1, 'e', 1, 'l', 3, 'o', 2, ' ', 1, 'w', 1, 'r', 1, 'd', 1};
 
-    Parser parser;
-    std::vector<int> freq2;
-    parser.freqChar("textTest.txt", freq2);
+//     Parser parser;
+//     std::vector<int> freq2;
+//     parser.freqChar("textTest.txt", freq2);
 
-    for(int i = 0; i < 9; ++i) {
-        if(freq[i] != freq2[i]) {
-        return;
-        }
-    }
-    return;
-}
+//     for(int i = 0; i < 9; ++i) {
+//         if(freq[i] != freq2[i]) {
+//         return;
+//         }
+//     }
+//     return;
+// }
 /* End Parser.hpp */
 
 /* Getters */
