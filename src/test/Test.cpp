@@ -131,11 +131,11 @@ std::string Test::testEqualsNode() {
     Sommet emptyNode2;
     bool ret1 = (emptyNode == emptyNode2);
     if(inColor) {
-        retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Two empty nodes equals.\n";
+        retStr = "\t|_ [ " + (ret1 ? OK : FAIL) + " ] Two empty nodes equals.\n";
     }
     else {
         tmp = (ret1 ? " OK " : "FAIL");
-        retStr2 = "\t[ " + tmp + " ] Two empty nodes equals.\n";
+        retStr2 = "\t|_ [ " + tmp + " ] Two empty nodes equals.\n";
     }
 
     Sommet node(1);
@@ -147,11 +147,11 @@ std::string Test::testEqualsNode() {
     node.getRight()->setRight(7);
     bool ret2 = ((emptyNode == node) == false);
     if(inColor) {
-        retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] One empty and one full.\n";
+        retStr += "\t|_ [ " + (ret2 ? OK : FAIL) + " ] One empty and one full.\n";
     }
     else {
         tmp = (ret2 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] One empty and one full.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] One empty and one full.\n";
     }
 
     Sommet node2(1);
@@ -163,11 +163,11 @@ std::string Test::testEqualsNode() {
     node2.getRight()->setRight(7);
     bool ret3 = (node == node2);
     if(inColor) {
-        retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Two full nodes equals.\n";
+        retStr += "\t|_ [ " + (ret3 ? OK : FAIL) + " ] Two full nodes equals.\n";
     }
     else {
         tmp = (ret3 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Two full nodes equals.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Two full nodes equals.\n";
     }
 
     Sommet nodes3(1);
@@ -179,11 +179,11 @@ std::string Test::testEqualsNode() {
     node2.getRight()->setRight(7);
     bool ret4 = ((node == node2) == false);
     if(inColor) {
-        retStr += "\t[ " + (ret4 ? OK : FAIL) + " ] Two full nodes not equal.\n";
+        retStr += "\t|_ [ " + (ret4 ? OK : FAIL) + " ] Two full nodes not equal.\n";
     }
     else {
         tmp = (ret4 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Two full nodes not equal.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Two full nodes not equal.\n";
     }
 
     bool ret = ret1 & ret2 & ret3 & ret4;
@@ -203,11 +203,11 @@ std::string Test::testDepth() {
     ArbreB tree(1);
     bool ret1 = (tree.getRoot()->countDepth() == 1);
     if(inColor) {
-        retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Root tree depth.\n";
+        retStr = "\t|_ [ " + (ret1 ? OK : FAIL) + " ] Root tree depth.\n";
     }
     else {
         tmp = (ret1 ? " OK " : "FAIL");
-        retStr2 = "\t[ " + tmp + " ] Root tree depth.\n";
+        retStr2 = "\t|_ [ " + tmp + " ] Root tree depth.\n";
     }
 
     ArbreB tree2(1);
@@ -216,11 +216,11 @@ std::string Test::testDepth() {
     tree2.getRoot()->getLeft()->setLeft(4);
     bool ret2 = (tree2.getRoot()->countDepth() == 3);
     if(inColor) {
-        retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Full tree depth.\n";
+        retStr += "\t|_ [ " + (ret2 ? OK : FAIL) + " ] Full tree depth.\n";
     }
     else {
         tmp = (ret2 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Full tree depth.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Full tree depth.\n";
     }
 
     bool ret = ret1 & ret2;
@@ -240,11 +240,11 @@ std::string Test::testSize() {
     ArbreB tree(1);
     bool ret1 = (tree.getRoot()->countSize() == 1);
     if(inColor) {
-        retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Root tree size.\n";
+        retStr = "\t|_ [ " + (ret1 ? OK : FAIL) + " ] Root tree size.\n";
     }
     else {
         tmp = (ret1 ? " OK " : "FAIL");
-        retStr2 = "\t[ " + tmp + " ] Root tree size.\n";
+        retStr2 = "\t|_ [ " + tmp + " ] Root tree size.\n";
     }
 
     ArbreB tree2(1);
@@ -253,11 +253,11 @@ std::string Test::testSize() {
     tree2 << 4;
     bool ret2 = (tree2.getRoot()->countSize() == 4);
     if(inColor) {
-        retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Full tree size.\n";
+        retStr += "\t|_ [ " + (ret2 ? OK : FAIL) + " ] Full tree size.\n";
     }
     else {
         tmp = (ret2 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Full tree size.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Full tree size.\n";
     }
 
     bool ret = ret1 & ret2;
@@ -327,11 +327,11 @@ std::string Test::TestEqualsTree() {
     ArbreB emptyTree2;
     bool ret1 = (emptyTree == emptyTree2);
     if(inColor) {
-        retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Two empty trees equals.\n";
+        retStr = "\t|_ [ " + (ret1 ? OK : FAIL) + " ] Two empty trees equals.\n";
     }
     else {
         tmp = (ret1 ? " OK " : "FAIL");
-        retStr2 = "\t[ " + tmp + " ] Two empty trees equals.\n";
+        retStr2 = "\t|_ [ " + tmp + " ] Two empty trees equals.\n";
     }
 
     ArbreB tree(2);
@@ -342,11 +342,11 @@ std::string Test::TestEqualsTree() {
     tree.getRoot()->getRight()->setLeft(12);
     bool ret2 = ((emptyTree == tree) == false);
     if(inColor) {
-        retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] One empty and one full.\n";
+        retStr += "\t|_ [ " + (ret2 ? OK : FAIL) + " ] One empty and one full.\n";
     }
     else {
         tmp = (ret2 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] One empty and one full.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] One empty and one full.\n";
     }
 
     ArbreB tree2(2);
@@ -357,11 +357,11 @@ std::string Test::TestEqualsTree() {
     tree2.getRoot()->getRight()->setLeft(12);
     bool ret3 = (tree == tree2);
     if(inColor) {
-        retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Two full trees equals.\n";
+        retStr += "\t|_ [ " + (ret3 ? OK : FAIL) + " ] Two full trees equals.\n";
     }
     else {
         tmp = (ret3 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Two full trees equals.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Two full trees equals.\n";
     }
 
     bool ret = ret1 & ret2 & ret3;
@@ -398,11 +398,11 @@ std::string Test::testDell() {
     tree >> 1;
     bool ret1 = (!tree.getRoot());
     if(inColor) {
-        retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Dell root in empty tree.\n";
+        retStr = "\t|_ [ " + (ret1 ? OK : FAIL) + " ] Dell root in empty tree.\n";
     }
     else {
         tmp = (ret1 ? " OK " : "FAIL");
-        retStr2 = "\t[ " + tmp + " ] Dell root in empty tree.\n";
+        retStr2 = "\t|_ [ " + tmp + " ] Dell root in empty tree.\n";
     }
 
     ArbreB tree2(1);
@@ -411,11 +411,11 @@ std::string Test::testDell() {
     ArbreB res2(2);
     bool ret2 = (tree2 == res2);
     if(inColor) {
-        retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Dell root in tree with one children.\n";
+        retStr += "\t|_ [ " + (ret2 ? OK : FAIL) + " ] Dell root in tree with one children.\n";
     }
     else {
         tmp = (ret2 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Dell root in tree with one children.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Dell root in tree with one children.\n";
     }
 
     ArbreB tree3(1);
@@ -428,11 +428,11 @@ std::string Test::testDell() {
                 || (tree3.getRoot()->getData() == 4)
                 );
     if(inColor) {
-        retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Dell root in tree with child.\n";
+        retStr += "\t|_ [ " + (ret3 ? OK : FAIL) + " ] Dell root in tree with child.\n";
     }
     else {
         tmp = (ret3 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Dell root in tree with child.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Dell root in tree with child.\n";
     }
 
     ArbreB tree4(1);
@@ -451,11 +451,11 @@ std::string Test::testDell() {
     res4.getRoot()->getRight()->setRight(7);
     bool ret4 = false;
     if(inColor) {
-        retStr += "\t[ " + (ret4 ? OK : FAIL) + " ] Dell root in the millde of the tree.\n";
+        retStr += "\t|_ [ " + (ret4 ? OK : FAIL) + " ] Dell root in the millde of the tree.\n";
     }
     else {
         tmp = (ret4 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Dell root in the millde of the tree.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Dell root in the millde of the tree.\n";
     }
 
     bool ret = ret1 & ret2 & ret3 & ret4;
@@ -479,31 +479,31 @@ std::string Test::testFind() {
     Sommet* tryFind = tree.find(tree.getRoot(), 3);
     bool ret1 = (tryFind->getData() == 3);
     if(inColor) {
-     retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Find value in middle the tree.\n";
+     retStr = "\t|_ [ " + (ret1 ? OK : FAIL) + " ] Find value in middle the tree.\n";
     }
     else {
         tmp = (ret1 ? " OK " : "FAIL");
-        retStr2 = "\t[ " + tmp + " ] Find value in middle the tree.\n";
+        retStr2 = "\t|_ [ " + tmp + " ] Find value in middle the tree.\n";
     }
 
     Sommet* tryFind2 = tree.find(tree.getRoot(), 0);
     bool ret2 = (!tryFind2);
     if(inColor) {
-     retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Find value not in the tree.\n";
+     retStr += "\t|_ [ " + (ret2 ? OK : FAIL) + " ] Find value not in the tree.\n";
     }
     else {
         tmp = (ret2 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Find value not in the tree.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Find value not in the tree.\n";
     }
 
     Sommet* tryFind3 = tree.find(tree.getRoot(), 1);
     bool ret3 = (tryFind3->getData() == 1);
     if(inColor) {
-     retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Find root value of the tree.\n";
+     retStr += "\t|_ [ " + (ret3 ? OK : FAIL) + " ] Find root value of the tree.\n";
     }
     else {
         tmp = (ret3 ? " OK " : "FAIL");
-        retStr2 += "\t[ " + tmp + " ] Find root value of the tree.\n";
+        retStr2 += "\t|_ [ " + tmp + " ] Find root value of the tree.\n";
     }
 
     bool ret = ret1 & ret2 & ret3;
