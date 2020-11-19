@@ -1,7 +1,15 @@
+/**
+ * Writer.cpp : You can found here all functions implemented for the Writer class.
+ * Author : Mickael.
+ **/
+
 #include "Writer.hpp"
 
-/* Constructors */
-// Default
+/**
+ * Function : Default constructor
+ * Return : Writer
+ * Description : 
+ * */
 Writer::Writer() : file("\0") {}
 
 // With param
