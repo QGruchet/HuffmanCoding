@@ -43,30 +43,27 @@ The project is split in many sub directories like the hierarchy as below :
 
 ***
 
-### Pré-requis (Quentin)
+### Pré-requis
 
-Ce qu'il est requis pour commencer avec votre projet...
+For our program to work, we need a few programs :
 
-- Programme 1
-- Programme 2
-- etc...
+- [cmake](https://cmake.org/install/) version 3.0.0 required
+- [Qt libraries](https://doc.ubuntu-fr.org/qt) version 5 required
+- A C++ compiler like [g++](https://doc.ubuntu-fr.org/gcc) or [Clang](https://clang.llvm.org/get_started.html)
 
-### Installation (Quentin)
+### Installation
 
-Les étapes pour installer votre programme....
+To build our program, just needed to tape this in a terminal :
 
-Dites ce qu'il faut faire...
-
-_exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
+- ``` make ```
 
 
-Ensuite vous pouvez montrer ce que vous obtenez au final...
+## Démarrage
 
-## Démarrage (Quentin)
+To start or program, two options are given :
 
-Dites comment faire pour lancer votre projet
-
-***
+- ``` make run ``` to have a display in the terminal.
+- ``` make window ``` to run a graphic interface where you can interact with our program.
 
 ## Contributing
 
