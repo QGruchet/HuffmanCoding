@@ -12,6 +12,11 @@ Implementation of Huffman coding in cpp.
 - [Needed](#Needed)  
 - [Installation](#Installation)  
 - [Launch](#Launch)  
+- [Details of functions](Details-of-functions)  
+    - [Tree.cpp](#Tree)
+    - [Writer.cpp](#Writer)
+    - [Test.cpp](#Test)
+    - [WindowQT.cpp](#WindowQT)
 - [Some idea for amelioration](#Some-idea-for-amelioration)
 - [Authors](#Authors)  
 
@@ -75,124 +80,228 @@ To start our program, two options are given :
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
 # Details of functions
-## Tree.cpp
+
+## Tree
+```cpp
+
+```
+
+## Writer
+```cpp
+
+```
+## Test
 ```cpp
 /**
- * Function : Constructor by copy.
- * Return : 'Sommet'.
- * Description : Create an object 'Sommet' with default parameters.
- * */ 
-Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
-
-/**
- * Function : Constructor by copy.
- * Return : 'ArbreB'.
- * Description : Create an object 'ArbreB' with default parameters.
- * */  
-ArbreB::ArbreB() : root(nullptr)  {}
-
-/**
- * Function : Copy.
- * Return : 'Sommet'*.
- * Description : Return a deep copy of this.
- * */  
-Sommet* Sommet::copy()
-
-/**
- * Function : Constructor by copy.
- * Return : 'Sommet'.
- * Description : Create an object 'Sommet' with an other.
- * */  
-Sommet::Sommet(const Sommet& other) {}
-
-/** Function : Constructor by copy.
- * Return : 'ArbreB'.
- * Description : Create a object 'ArbreB' with an other.
- * */  
-ArbreB::ArbreB(const ArbreB& other) {}
-
-/** Function : Constructor with parameter.
- * Return : 'Sommet'.
- * Description : Create a object 'Sommet' by initializing the data.
- * */  
-Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
-
-/** Function : Constructor with parameter.
- * Return : 'ArbreB'.
- * Description : Create a object 'ArbreB' by initializing the root.
- * */  
-ArbreB::ArbreB(int rootData) {}
-
-/** Function : Overloading operator=.
- * Return : 'Sommet'.
- * Description : Copy a object 'Sommet' with an other.
- * */  
-Sommet& Sommet::operator=(Sommet other) {}
-
-/** Function : Overloading operator=.
- * Return : 'ArbreB'.
- * Description : Swap the value of the 'Sommet' with newData.
- * */  
-Sommet& Sommet::operator=(int newData) {}
-
-
-/** Function : Overloading operator=.
- * Return : 'ArbreB'.
- * Description : Copy a object 'ArbreB' with an other.
- * */  
-ArbreB& ArbreB::operator=(const ArbreB& other) {}
-
-/** Function : Overloading operator==.
- * Return : boolean.
- * Description : Say if the 'Sommet' is equal to an other.
- * */  
-bool Sommet::operator==(const Sommet& other) {}
-
-/** Function : Overloading operator==.
- * Return : boolean.
- * Description : Say if the 'Sommet' is equal to an other, recursive version.
- * */  
-bool Sommet::equal(Sommet *node) {}
-
-
-/** Function : Overloading operator==.
- * Return : boolean.
- * Description : Say if the 'ArbreB' is equal to an other.
- * */  
-bool ArbreB::operator==(const ArbreB& other) {}
-
-/** Function : Overloading operator<<.
- * Return : 'ArbreB'.
- * Description : Add a node with the value 'newData' in the tree.
- * */  
-ArbreB& ArbreB::operator<<(int newData) {}
-
-/** Function : add.
- * Return : 'ArbreB'.
- * Description : Add a node with the value 'newData' in the tree, recursive version.
- * */  
-void ArbreB::add(Sommet *root, int newData) {}
-
-/** Function : Overloading operator>>.
- * Return : 'ArbreB'.
- * Description : Dell a node with the value 'dellData' in the tree, if
- * the node with 'dellData' existe.
+ * Function : Constructor by default.
+ * Return : 'Test'.
+ * Description : Create an object 'Test' with default parameters.
  * */
-ArbreB& ArbreB::operator>>(int dellData) {}
+Test::Test() : sumTest(0), numTestGlobal(0), inColor(true) {}
 
-/** Function : dell.
- * Return : 'ArbreB'.
- * Description : Dell a node with the value 'dellData' in the tree, if
- * the node with 'dellData' existe, recursive version.
+/**
+ * Function : Constructor with parameters.
+ * Return : 'Test'.
+ * Argument : withColor, boolean say if we want print tests in color or not.
+ * Description : Create an object 'Test' with default parameters and color.
  * */
-void ArbreB::dell(Sommet *root, int dellData) {}
+Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
 
-## Writer.cpp
+/**
+ * Function : inRed.
+ * Arguments : std::string msg.
+ * Return : std::string.
+ * Description : Colorized the string 'msg' in red.
+ * */
+std::string inRed(std::string msg) {}
 
-## Test.cpp
+/**
+ * Function : inGreen.
+ * Arguments : std::string msg.
+ * Return : std::string.
+ * Description : Colorized the string 'msg' in green.
+ * */
+std::string inGreen(std::string msg) {} 
 
-## WindowQT.cpp
+/* Global variables */
+std::string OK = " " + inGreen("OK") + " ";
+std::string FAIL = inRed("FAIL");
 
+/**
+ * Function : allTest.
+ * Description : Print all results of test in our terminal.
+ * */
+void Test::allTest() {}
+
+/**
+ * Function : testDefaultConstructorNode.
+ * Return : std::string.
+ * Description : Test if constructor by defautl is a success. Return 'OK' if yes, 'FAIL' if no.
+ * */
+std::string Test::testDefaultConstructorNode() {}
+
+/**
+ * Function : testCopyConstructorNode.
+ * Return : std::string.
+ * Description : Check if constructor by copy is a success.
+ * */
+std::string Test::testCopyConstructorNode() {}
+
+/**
+ * Function : testParamConstructorNode.
+ * Return : std::string.
+ * Description : Check if constructor by default without child is a success.
+ * */
+std::string Test::testParamConstructorNode() {}
+
+/**
+ * Function : testAssignNode.
+ * Return : std::string.
+ * Description : Check if operator= is a success.
+ * */
+std::string Test::testAssignNode() {}
+
+/**
+ * Function : testEqualsNode.
+ * Return : std::string.
+ * Description : Check if two node are equals is a success.
+ * */
+std::string Test::testEqualsNode() {}
+
+/**
+ * Function : testDepth.
+ * Return : 'std::string'.
+ * Description : Check the depth of the tree. If the tree has no child, depth = 1. If he has child, depth  = 2. If child has child, depth = 3.....
+ * */
+std::string Test::testDepth() {}
+
+/**
+ * Function : testSize.
+ * Return : std::string.
+ * Description : Check the size of tree. One node => size = 1, two nodes => size = 2...
+ * */
+std::string Test::testSize() {}
+
+// ArbreB
+/**
+ * Function : testCopyConstructorNode.
+ * Return : std::string.
+ * Description : Check if constructor by default is a success.
+ * */
+std::string Test::testDefaultConstructorTree() {}
+
+/**
+ * Function : testParamConstructorTree.
+ * Return : std::string.
+ * Description : Check the constructor with parameter of a tree.
+ * */
+std::string Test::testParamConstructorTree() {}
+
+/**
+ * Function : testAssignTree
+ * Return : std::string.
+ * Description : Check if the copy of a tree in another is a success.
+ * */
+std::string Test::testAssignTree() {}
+
+/**
+ * Function : testEqualsTree.
+ * Return : std::string.
+ * Description : Check if two are equals (same nodes, sames size, same depth).
+ * */
+std::string Test::TestEqualsTree() {}
+
+/**
+ * Function : testAdd.
+ * Return : std::string.
+ * Description : Check if we can add a node in a tree.
+ * */
+std::string Test::testAdd() {}
+
+/**
+ * Function : testDell.
+ * Return : std::string.
+ * Description : Check if deletion on a node is a success.
+ * */
+std::string Test::testDell() {}
+
+/**
+ * Function : testFind.
+ * Return : std::string.
+ * Description : Check if we can find a specific node by his value in the tree.
+ * */
+std::string Test::testFind() {}
+
+/**
+ * Function : testGetNodeAtIndex.
+ * Return : std::string.
+ * Description : Check if we can find a specific node by his position in the tree.
+ * */
+std::string Test::testGetNodeAtIndex() {}
+
+/**
+ * Function : testJoin.
+ * Return : 'std::string'.
+ * Description : Check if we can make a fusion with two trees.
+ * */
+std::string Test::testJoin() {}
+
+/**
+ * Function : testGetNodeAtIndex.
+ * Return : std::string.
+ * Description : Check if we can make a split of a tree. We should have two trees at the end.
+ * */
+std::string Test::testSplit() {}
+
+/* Getters */
+int Test::getSumTest() const {
+    return sumTest;
+}
+
+int Test::getNumTestGlobal() const {
+    return numTestGlobal;
+}
+/* End getters */
+```
+## WindowQT
+```cpp
+
+/** Function : Window().
+* Description : Default constructor for window. It put layout, button, and text area inside the window.
+ * */
+Window(){}
+
+/** Function : ~Window().
+* Description : Destructor for Window.
+* */
+~Window(){
+
+/** Function : printTree().
+* Description : Print the tree and his informations in the window.
+* */
+void printTree(){}
+            
+/** Function : delArbre().
+* Description : Clean all the window.
+* */
+void delArbre(){}
+
+/** Function : secretButton().
+ * Description : Configure the secret button.
+ * */
+void secretbutton(){}
+
+/** Function : printTest().
+ * Description : Print all test in the window.
+ * */
+void printTest(){}
+
+/** Function : resizeFull().
+ * Description : Resize the window with the size of current display.
+ * */
+void resizeFull(){}
+
+```
 # Some idea for amelioration
 
 Here some idea for future version :
