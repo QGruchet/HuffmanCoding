@@ -119,6 +119,15 @@ class Window : public QWidget {
 		}
 
 		~Window(){
+			delete test;
+			delete quit;
+			delete print;
+			delete del;
+			delete secret;
+			delete infoTree;
+			delete printText;
+			delete printInfo;
+			delete layout;
 		}
 
 	public slots:
