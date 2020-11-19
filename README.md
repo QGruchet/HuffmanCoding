@@ -13,10 +13,11 @@ Implementation of Huffman coding in cpp.
 - [Installation](#Installation)  
 - [Launch](#Launch)  
 - [Details of functions](Details-of-functions)  
-    - [Tree.cpp](#Tree)
-    - [Writer.cpp](#Writer)
-    - [Test.cpp](#Test)
-    - [WindowQT.cpp](#WindowQT)
+    - [Tree.cpp](#Tree.cpp)
+    - [Tree.hpp](#Tree.hpp)
+    - [Writer.cpp](#Writer.cpp)
+    - [Test.cpp](#Test.cpp)
+    - [WindowQT.cpp](#WindowQT.cpp)
 - [Some idea for amelioration](#Some-idea-for-amelioration)
 - [Authors](#Authors)  
 
@@ -81,16 +82,268 @@ To start our program, two options are given :
 
 # Details of functions
 
-## Tree
+## Tree.cpp
+```cpp
+
+/**
+ * Function : Constructor by copy.
+ * Return : 'Sommet'.
+ * Description : Create an object 'Sommet' with default parameters.
+ * */
+Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
+
+/**
+ * Function : Constructor by copy.
+ * Return : 'ArbreB'.
+ * Description : Create an object 'ArbreB' with default parameters.
+ * */
+ArbreB::ArbreB() : root(nullptr)  {}
+
+/**
+ * Function : Copy.
+ * Return : 'Sommet'*.
+ * Description : Return a deep copy of this.
+ * */
+Sommet* Sommet::copy() {}
+
+/**
+ * Function : Constructor by copy.
+ * Return : 'Sommet'.
+ * Parameter : other, the other tree for the copy.
+ * Description : Create an object 'Sommet' with an other.
+ * */
+Sommet::Sommet(const Sommet& other) {}
+
+/** Function : Constructor by copy.
+ * Return : 'ArbreB'.
+ * Parameter : other, the other tree for the copy.
+ * Description : Create a object 'ArbreB' with an other.
+ * */
+ArbreB::ArbreB(const ArbreB& other) {}
+
+/** Function : Constructor with parameter.
+ * Return : 'Sommet'.
+ * Paramter : newData, the data to init the node.
+ * Description : Create a object 'Sommet' by initializing the data.
+ * */
+Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
+
+/** Function : Constructor with parameter.
+ * Return : 'ArbreB'.
+ * Parameter : rootData, tha data to init the root of the tree.
+ * Description : Create a object 'ArbreB' by initializing the root.
+ * */
+ArbreB::ArbreB(int rootData) {}
+
+/** Function : Overloading operator=.
+ * Return : 'Sommet'.
+ * Parameter : other, the node for the copy.
+ * Description : Copy a object 'Sommet' with an other.
+ * */
+Sommet& Sommet::operator=(Sommet other) {}
+
+/** Function : Overloading operator=.
+ * Return : 'ArbreB'.
+ * Parameter : newData, the data for swap.
+ * Description : Swap the value of the 'Sommet' with newData.
+ * */
+Sommet& Sommet::operator=(int newData) {}
+
+/** Function : Overloading operator=.
+ * Return : 'ArbreB'.
+ * Parameter : other, the other tree for the copy.
+ * Description : Copy a object 'ArbreB' with an other.
+ * */
+ArbreB& ArbreB::operator=(const ArbreB& other) {}
+
+/** Function : Overloading operator==.
+ * Return : Boolean.
+ * Parameter : other, the other node for compare.
+ * Description : Say if the 'Sommet' is equal to an other.
+ * */
+bool Sommet::operator==(const Sommet& other) {}
+
+/** Function : Overloading operator==.
+ * Return : Boolean.
+ * Parameter : node, the other node for compare.
+ * Description : Say if the 'Sommet' is equal to an other, recursive version.
+ * */
+bool Sommet::equal(Sommet *node) {}
+
+/** Function : Overloading operator==.
+ * Return : Boolean.
+ * Parameter : other, the other tree for compare.
+ * Description : Say if the 'ArbreB' is equal to an other.
+ * */
+bool ArbreB::operator==(const ArbreB& other) {}
+
+/** Function : Overloading operator<<.
+ * Return : 'ArbreB'.
+ * Parameter : newData, the value to add in the tree.
+ * Description : Add a node with the value newData in the tree.
+ * */
+ArbreB& ArbreB::operator<<(int newData) {}
+
+/** Function : add.
+ * Return : 'ArbreB'.
+ * Parameter : node, for recursive call,
+ *              newData, the value ot add.
+ * Description : Add a node with the value 'newData' in the tree, recursive version.
+ * */
+void ArbreB::add(Sommet *root, int newData) {}
+
+/** Function : Overloading operator>>.
+ * Return : 'ArbreB'.
+ * Parameter : dellData, data need to be deleted.
+ * Description : Dell a node with the value 'dellData' in the tree, if
+ * the node with 'dellData' existe.
+ * */
+ArbreB& ArbreB::operator>>(int dellData) {}
+
+/** Function : dell.
+ * Return : 'ArbreB'.
+ * Parameters : root, node used for recursif,
+ *              dellData, data need to be deleted.
+ * Description : Delete a node with the value 'dellData' in the tree, if
+ * the node with 'dellData' existe, recursive version.
+ * */
+void ArbreB::dell(Sommet *root, int dellData) {}
+
+
+/** Function : Overloading operator<<.
+ * Return : std::ostream.
+ * Parameter : flux, where we write, node we print.
+ * Description : Print the node recursively.
+ * */
+std::ostream &operator<<(std::ostream &flux, const Sommet& node) {}
+
+/** Function : Overloading operator<<.
+ * Return : std::ostream.
+ * Parameter : flux, where we write, tree we print.
+ * Description : Print the tree.
+ * */
+std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {}
+
+/** Function : Overloading operator+=.
+ * Return : 'ArbreB'.
+ * Parameter : other, for merge two trees.
+ * Description : Merge two trees.
+ * */
+ArbreB& ArbreB::operator+=(const ArbreB& other) {}
+
+/** Function : Overloading operator-=.
+ * Return : 'ArbreB'.
+ * Parameter : other, for split two trees.
+ * Description : Split two trees.
+ * */
+ArbreB& ArbreB::operator-=(ArbreB& other) {}
+
+/** Function : Overloading operator[].
+ * Return : 'Sommet*'.
+ * Parameter : index, the position of the node in the tree we need to get.
+ * Description : Get a precise node in the tree.
+ * */
+Sommet* ArbreB::operator[](int index) {}
+
+/** Function : find.
+ * Return : 'Sommet*'.
+ * Parameter : root, for recursiv call, 
+ *             dataSearch, the value we want to find.
+ * Description : Split two trees.
+ * */
+Sommet* ArbreB::find(Sommet* root, int dataSearch) {}
+
+/* Getters */
+int Sommet::getData() const {}
+
+Sommet* Sommet::getLeft() const {}
+
+Sommet* Sommet::getRight() const {}
+
+Sommet* ArbreB::getRoot() const {}
+
+Sommet* ArbreB::getRandLeaf(Sommet* root) const{}
+/* End getters */
+
+/* Setters */
+void Sommet::setLeft(int leftData) {}
+
+void Sommet::setRight(int rightData) {}
+/* End setters */
+
+/* Methodes */
+/** Function : Min.
+ * Parameter : min, the minimum of the tree.
+ * Description : Found the minimum value in the tree, recursive version.
+ * */
+void Sommet::Min(int *min) {}
+
+/** Function : dataMin
+ * Return : int.
+ * Description : Found the minimum value in the tree.
+ * */
+int Sommet::dataMin() {}
+
+/** Function : Max.
+ * Parameter : max, the maximum of the tree.
+ * Description : Found the maximum value in the tree, recursive version.
+ * */
+void Sommet::Max(int *max) {}
+
+/** Function : dataMax
+ * Return : int.
+ * Description : Found the maximum value in the tree.
+ * */
+int Sommet::dataMax() {}
+
+/** Function : isLeaf
+ * Return : Boolean.
+ * Description : Say if the node is a leaf.
+ * */
+bool Sommet::isLeaf() {}
+
+/** Function : printBeautifulTree
+ * Description : Print tree like the next pattern.
+ *                  right right child ...
+ *      right child
+ *                  right left child ...
+ * root
+ *                  left right child ...
+ *      left child
+ *                 left left child ...
+ * */
+void Sommet::printBeautifulTree(int space) {}
+
+int maximum(int a, int b){}
+
+/** Function : countDepht.
+ * Return : int.
+ * Description : Count the depth of the tree.
+ * */
+int Sommet::countDepth() {}
+
+/** Function : countSize.
+ * Return : int.
+ * Description : Count the size of the tree.
+ * */
+int Sommet::countSize() {}
+/* End printers */
+
+/* Destructors */
+Sommet::~Sommet() {}
+/* End destructors */
+```
+
+## Tree.hpp
 ```cpp
 
 ```
 
-## Writer
+## Writer.cpp
 ```cpp
 
 ```
-## Test
+## Test.cpp
 ```cpp
 /**
  * Function : Constructor by default.
@@ -263,7 +516,7 @@ int Test::getNumTestGlobal() const {
 }
 /* End getters */
 ```
-## WindowQT
+## WindowQT.cpp
 ```cpp
 
 /** Function : Window().
