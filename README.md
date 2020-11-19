@@ -51,14 +51,14 @@ For our program to work, we need a few programs :
 - [Qt libraries](https://doc.ubuntu-fr.org/qt) version 5 required
 - A C++ compiler like [g++](https://doc.ubuntu-fr.org/gcc) or [Clang](https://clang.llvm.org/get_started.html)
 
-### Installation me
+### Installation
 
 To build our program, just needed to tape this in a terminal :
 
 - ``` make ```
 
 
-## Démarrage me
+## Démarrage
 
 To start or program, two options are given :
 
