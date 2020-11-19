@@ -64,34 +64,41 @@ class Window : public QWidget {
 			// Link button to function
 			test = new QPushButton("Print Tests", this);
 			connect(test, SIGNAL(clicked()), this, SLOT(printTest()));
+
+			quit = new QPushButton("Quit");
+			connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
+
+			print = new QPushButton("Print Tree");
+			connect(print, SIGNAL(clicked()), this, SLOT(printTree()));
+
+			del = new QPushButton("Clean");
+			connect(del, SIGNAL(clicked()), this, SLOT(delArbre()));
+
+			secret = new QPushButton("Don't click");
+			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
+
+
+			// Resize and replaced button
 			int tailleTestX = test->fontMetrics().width("Print Tests") + 10;
 			int tailleTestY = test->fontMetrics().height();
 			const QSize sizeTest = QSize(tailleTestX + 100, tailleTestY + 15);
 			test->setFixedSize(sizeTest);
 
-			quit = new QPushButton("Quit");
-			connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
 			int tailleQuitX = quit->fontMetrics().width("Print Tests") + 10;
 			int tailleQuitY = quit->fontMetrics().height();
 			const QSize sizeQuit = QSize(tailleQuitX + 100, tailleQuitY + 15);
 			quit->setFixedSize(sizeQuit);
 
-			print = new QPushButton("Print Tree");
-			connect(print, SIGNAL(clicked()), this, SLOT(printTree()));
 			int taillePrintX = print->fontMetrics().width("Print Tests") + 10;
 			int taillePrintY = print->fontMetrics().height();
 			const QSize sizePrint = QSize(taillePrintX + 100, taillePrintY + 15);
 			print->setFixedSize(sizePrint);
 
-			del = new QPushButton("Clean");
-			connect(del, SIGNAL(clicked()), this, SLOT(delArbre()));
 			int tailleDelX = del->fontMetrics().width("Print Tests") + 10;
 			int tailleDelY = del->fontMetrics().height();
 			const QSize sizeDel = QSize(tailleDelX + 100, tailleDelY + 15);
 			del->setFixedSize(sizeDel);
 
-			secret = new QPushButton("Don't click");
-			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
 			int tailleSecretX = secret->fontMetrics().width("Print Tests") + 10;
 			int tailleSecretY = secret->fontMetrics().height();
 			const QSize sizeSecret = QSize(tailleSecretX + 100, tailleSecretY + 15);
@@ -99,6 +106,7 @@ class Window : public QWidget {
 
 			/************* FIN CREATION *************/
 
+			//Adding widget to the main widget
 			infoTree->addWidget(printInfo);
 			layout->addWidget(printText);
 			layout->addWidget(test, 0, Qt::AlignCenter);
@@ -125,7 +133,7 @@ class Window : public QWidget {
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
 
-			// Read the root, numer of node, min and max
+			// Read the root, number of node, min and max
 			QString depth = flux.readLine();
 			QString valRoot = flux.readLine();
 			QString numNode = flux.readLine();
@@ -142,7 +150,7 @@ class Window : public QWidget {
 			printInfo->setText(aff);
 			QString tout = flux.readAll();
 
-			//test colorized text
+			//test colorized text not working
 			/*for (int i = 0; i < tout.length(); ++i)
 			{
 				if(tout.at(i) == '[' && tout.at(i + 1) == 'O'){
@@ -163,6 +171,7 @@ class Window : public QWidget {
 		}
 
 		void delArbre(){
+			//clear tree and info area
 			printText->setText(nullptr);
 			printInfo->setText(nullptr);
 			resizeFull();
@@ -170,11 +179,13 @@ class Window : public QWidget {
 		}
 
 		void secretbutton(){
+			//Just a little features 
 			qDebug() << "WHAT DID I JUST SAY ????";
 			QMessageBox::information(this, "Disappointment...", "WHAT DID I JUST SAY ????");
 		}
 
 		void printTest(){
+			// Open file for read test
 			QString fileName = "src/txtQT/resultTest.txt";
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -197,6 +208,7 @@ class Window : public QWidget {
 
 		void resizeFull()
 		{
+			//Resize the main window depending on the size display
 			int width = QApplication::desktop()->width();
 			if(width > 1920) {
 				width = 1920;
