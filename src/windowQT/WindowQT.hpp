@@ -66,37 +66,46 @@ class Window : public QWidget {
 			connect(test, SIGNAL(clicked()), this, SLOT(printTest()));
 			int tailleTestX = test->fontMetrics().width("Print Tests") + 10;
 			int tailleTestY = test->fontMetrics().height();
-			test->resize(tailleTestX, tailleTestY);
+			const QSize sizeTest = QSize(tailleTestX + 100, tailleTestY + 15);
+			test->setFixedSize(sizeTest);
 
 			quit = new QPushButton("Quit");
 			connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
-			int tailleQuitX = test->fontMetrics().width("Print Tests") + 10;
-			int tailleQuitY = test->fontMetrics().height();
+			int tailleQuitX = quit->fontMetrics().width("Print Tests") + 10;
+			int tailleQuitY = quit->fontMetrics().height();
+			const QSize sizeQuit = QSize(tailleQuitX + 100, tailleQuitY + 15);
+			quit->setFixedSize(sizeQuit);
 
 			print = new QPushButton("Print Tree");
 			connect(print, SIGNAL(clicked()), this, SLOT(printTree()));
-			int taillePrintX = test->fontMetrics().width("Print Tests") + 10;
-			int taillePrintY = test->fontMetrics().height();
+			int taillePrintX = print->fontMetrics().width("Print Tests") + 10;
+			int taillePrintY = print->fontMetrics().height();
+			const QSize sizePrint = QSize(taillePrintX + 100, taillePrintY + 15);
+			print->setFixedSize(sizePrint);
 
 			del = new QPushButton("Clean");
 			connect(del, SIGNAL(clicked()), this, SLOT(delArbre()));
-			int tailleDelX = test->fontMetrics().width("Print Tests") + 10;
-			int tailleDelY = test->fontMetrics().height();
+			int tailleDelX = del->fontMetrics().width("Print Tests") + 10;
+			int tailleDelY = del->fontMetrics().height();
+			const QSize sizeDel = QSize(tailleDelX + 100, tailleDelY + 15);
+			del->setFixedSize(sizeDel);
 
 			secret = new QPushButton("Don't click");
 			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
-			int tailleSecretX = test->fontMetrics().width("Print Tests") + 10;
-			int tailleSecretY = test->fontMetrics().height();
+			int tailleSecretX = secret->fontMetrics().width("Print Tests") + 10;
+			int tailleSecretY = secret->fontMetrics().height();
+			const QSize sizeSecret = QSize(tailleSecretX + 100, tailleSecretY + 15);
+			secret->setFixedSize(sizeSecret);
 
 			/************* FIN CREATION *************/
 
 			infoTree->addWidget(printInfo);
 			layout->addWidget(printText);
-			layout->addWidget(test);
-			layout->addWidget(print);
-			layout->addWidget(del);
-			layout->addWidget(secret);
-			layout->addWidget(quit);
+			layout->addWidget(test, 0, Qt::AlignCenter);
+			layout->addWidget(print, 0, Qt::AlignCenter);
+			layout->addWidget(del, 0, Qt::AlignCenter);
+			layout->addWidget(secret, 0, Qt::AlignCenter);
+			layout->addWidget(quit, 0, Qt::AlignCenter);
 		}
 
 		~Window(){
@@ -117,14 +126,14 @@ class Window : public QWidget {
 			QTextStream flux(&fichier);
 
 			// Read the root, numer of node, min and max
-			QString valRoot = flux.readLine();
 			QString depth = flux.readLine();
+			QString valRoot = flux.readLine();
 			QString numNode = flux.readLine();
 			QString min = flux.readLine();
 			QString max = flux.readLine();
 			
 			QString aff("Some informations about the tree : \n\t > Root of the tree : " + valRoot + 
-						"\n\t > Depth of the tree" + depth +
+						"\n\t > Depth of the tree : " + depth +
 						"\n\t > Number of node : " + numNode + 
 						"\n\t > Minimum of tree : " + min + 
 						"\n\t > Maximum of tree : " + max);
@@ -170,10 +179,17 @@ class Window : public QWidget {
 			QFile fichier(fileName);
 			fichier.open(QIODevice::ReadOnly | QIODevice::Text);
 			QTextStream flux(&fichier);
-
 			QString tout = flux.readAll();
+			/* Don't delete, it's for detail of result
+			QString fileName = "src/txtQT/detailTest.txt";
+			QFile fichier2(fileName);
+			fichier2.open(QIODevice::ReadOnly | QIODevice::Text);
+			QTextStream flux2(&fichier2);
+			QString tout2 = flux2.readAll();
+			*/
+
 			printText->setText(tout);
-			printInfo->setText(nullptr);
+			//printInfo->setText(tout2);
 			resizeFull();
 			printText->show();
 			fichier.close();

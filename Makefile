@@ -75,6 +75,7 @@ gdb:
 
 cleantarget:
 	rm src/target/*.o
+	rm src/txtQt/*.txt
 	rmdir src/target
 
 cleanQT:
