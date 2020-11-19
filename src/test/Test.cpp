@@ -15,6 +15,7 @@ Test::Test() : sumTest(0), numTestGlobal(0), inColor(true) {}
 /**
  * Function : Constructor with parameters.
  * Return : 'Test'.
+ * Argument : withColor, boolean say if we want print tests in color or not.
  * Description : Create an object 'Test' with default parameters and color.
  * */
 Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
