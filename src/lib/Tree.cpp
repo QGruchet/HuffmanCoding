@@ -37,6 +37,7 @@ Sommet* Sommet::copy() {
 /**
  * Function : Constructor by copy.
  * Return : 'Sommet'.
+ * Parameter : other, the other tree for the copy.
  * Description : Create an object 'Sommet' with an other.
  * */
 Sommet::Sommet(const Sommet& other) {
@@ -53,6 +54,7 @@ Sommet::Sommet(const Sommet& other) {
 
 /** Function : Constructor by copy.
  * Return : 'ArbreB'.
+ * Parameter : other, the other tree for the copy.
  * Description : Create a object 'ArbreB' with an other.
  * */
 ArbreB::ArbreB(const ArbreB& other) {
@@ -62,12 +64,14 @@ ArbreB::ArbreB(const ArbreB& other) {
 
 /** Function : Constructor with parameter.
  * Return : 'Sommet'.
+ * Paramter : newData, the data to init the node.
  * Description : Create a object 'Sommet' by initializing the data.
  * */
 Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
 
 /** Function : Constructor with parameter.
  * Return : 'ArbreB'.
+ * Parameter : rootData, tha data to init the root of the tree.
  * Description : Create a object 'ArbreB' by initializing the root.
  * */
 ArbreB::ArbreB(int rootData) {
@@ -76,6 +80,7 @@ ArbreB::ArbreB(int rootData) {
 
 /** Function : Overloading operator=.
  * Return : 'Sommet'.
+ * Parameter : other, the node for the copy.
  * Description : Copy a object 'Sommet' with an other.
  * */
 Sommet& Sommet::operator=(Sommet other) {
@@ -93,6 +98,7 @@ Sommet& Sommet::operator=(Sommet other) {
 
 /** Function : Overloading operator=.
  * Return : 'ArbreB'.
+ * Parameter : newData, the data for swap.
  * Description : Swap the value of the 'Sommet' with newData.
  * */
 Sommet& Sommet::operator=(int newData) {
@@ -100,9 +106,9 @@ Sommet& Sommet::operator=(int newData) {
     return *this;
 }
 
-
 /** Function : Overloading operator=.
  * Return : 'ArbreB'.
+ * Parameter : other, the other tree for the copy.
  * Description : Copy a object 'ArbreB' with an other.
  * */
 ArbreB& ArbreB::operator=(const ArbreB& other) {
@@ -211,6 +217,7 @@ void ArbreB::add(Sommet *root, int newData) {
 
 /** Function : Overloading operator>>.
  * Return : 'ArbreB'.
+ * Parameters : dellData, data need to be deleted.
  * Description : Dell a node with the value 'dellData' in the tree, if
  * the node with 'dellData' existe.
  * */
@@ -220,11 +227,11 @@ ArbreB& ArbreB::operator>>(int dellData) {
         return *this;
     }
     if(root->data == dellData) {
-        if(root->isLeaf()) { // Dell the root
+        if(root->isLeaf()) { // Delete the root
             delete root;
             root = nullptr;
         }
-        else {
+        else { // Swap the root with a random leaf
             Sommet *randLeaf = getRandLeaf(root);
             int swap = randLeaf->data;
             randLeaf->data = root->data;
@@ -241,7 +248,9 @@ ArbreB& ArbreB::operator>>(int dellData) {
 
 /** Function : dell.
  * Return : 'ArbreB'.
- * Description : Dell a node with the value 'dellData' in the tree, if
+ * Parameters : root, node used for recursif,
+ *              dellData, data need to be deleted.
+ * Description : Delete a node with the value 'dellData' in the tree, if
  * the node with 'dellData' existe, recursive version.
  * */
 void ArbreB::dell(Sommet *root, int dellData) {
@@ -250,7 +259,7 @@ void ArbreB::dell(Sommet *root, int dellData) {
     }
     if(root->left) {
         if(root->left->data == dellData) {
-            if(root->left->isLeaf()) {
+            if(root->left->isLeaf()) { // Delete the left child
                 delete root->left;
                 root->left = nullptr;
                 return;
@@ -270,7 +279,7 @@ void ArbreB::dell(Sommet *root, int dellData) {
     }
     if(root->right) {
         if(root->right->data == dellData) {
-            if(root->right->isLeaf()) {
+            if(root->right->isLeaf()) { // Delete the right child
                 delete root->right;
                 root->right = nullptr;
                 return;
@@ -290,6 +299,11 @@ void ArbreB::dell(Sommet *root, int dellData) {
     }
 }
 
+
+/** Function : operator<<.
+ * Description : Delete a node with the value 'dellData' in the tree, if
+ * the node with 'dellData' existe, recursive version.
+ * */
 std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
     flux << node.data << ", ";
     if(node.left) {
