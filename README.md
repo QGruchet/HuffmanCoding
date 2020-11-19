@@ -74,6 +74,14 @@ To start our program, two options are given :
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
+# Details of functions
+## Tree.cpp
+
+## Writer.cpp
+
+## Test.cpp
+
+## WindowQT.cpp
 
 # Some idea for amelioration
 
