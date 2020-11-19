@@ -2,15 +2,15 @@ DEBUG=yes
 CC=g++
 EXEC=main
 WIN=window
-PACKWIN=-std=c++0x `pkg-config --cflags gtkmm-3.0 --cflags --libs`
+PACKWIN=-std=c++0x `pkg-config --CXXFLAGS gtkmm-3.0 --CXXFLAGS --libs`
 STRC=src/QtWindow
 
 #################################
 
 ifeq ($(DEBUG), yes)
-	CFLAGS = -std=c++17 -Wall -Wextra -g
+	CXXFLAGS = -std=c++17 -Wall -Wextra -g
 else
-	CFLAGS = -std=c++17
+	CXXFLAGS = -std=c++17 -Ofast
 endif
 
 #################################
@@ -42,20 +42,20 @@ window: run
 # $@ ref name of target, here Main.o
 # $< ref first dependency, here src/main/Main.cpp
 Main.o: src/main/Main.cpp
-	$(CC) -c $(CFLAGS) $< -o src/target/$@
+	$(CC) -c $(CXXFLAGS) $< -o src/target/$@
 
 # $< ref first dependency, here src/lib/Tree.cpp
 Tree.o: src/lib/Tree.cpp src/lib/Tree.hpp
-	$(CC) -c $(CFLAGS) $< -o src/target/$@
+	$(CC) -c $(CXXFLAGS) $< -o src/target/$@
 
 Writer.o: src/lib/Writer.cpp src/lib/Writer.hpp
-	$(CC) -c $(CFLAGS) $< -o src/target/$@
+	$(CC) -c $(CXXFLAGS) $< -o src/target/$@
 
 Test.o: src/test/Test.cpp src/test/Test.hpp
-	$(CC) -c $(CFLAGS) $< -o src/target/$@
+	$(CC) -c $(CXXFLAGS) $< -o src/target/$@
 
 Parser.o: src/lib/Parser.cpp src/lib/Parser.hpp
-	$(CC) -c $(CFLAGS) $< -o src/target/$@
+	$(CC) -c $(CXXFLAGS) $< -o src/target/$@
 
 #################################
 
@@ -75,8 +75,9 @@ gdb:
 
 cleantarget:
 	rm src/target/*.o
-	rm src/txtQt/*.txt
 	rmdir src/target
+	rm src/txtQT/*.txt
+	rmdir src/txtQT
 
 cleanQT:
 	rm src/windowQT/main
@@ -87,7 +88,8 @@ cleanQT:
 	rm src/windowQT/Makefile
 
 
-clean: cleantarget
+clean: cleantarget cleanQT
 
-mrproper: clean
+mrproper: clean cleanQT
 	rm src/bin/$(EXEC)
+	rmdir src/bin
