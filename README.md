@@ -55,15 +55,15 @@ For our program to work, we need a few programs :
 
 To build our program, just needed to tape this in a terminal :
 
-- ```bash make ```
+- ``` make ```
 
 
 ## Démarrage me
 
 To start or program, two options are given :
 
-- ```bash make run ``` to have a dinteisplay in the terminal.
-- ```bash make window ``` to run a graphic interface where you can interact with our program.
+- ``` make run ``` to have a dinteisplay in the terminal.
+- ``` make window ``` to run a graphic interface where you can interact with our program.
 
 ## Contributing
 
