@@ -9,9 +9,9 @@ class Test
 {
   private:
     /* Data */
-    int sumTest;
-    int numTestGlobal;
-    bool inColor;
+    int sumTest;        // Number tests is passed.
+    int numTestGlobal;  // Number test in global
+    bool inColor;       // Print test in color
 
   public:
     /* Constructor */

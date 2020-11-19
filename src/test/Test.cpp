@@ -4,6 +4,7 @@
  **/
 #include "Test.hpp"
 #include <string>
+
 /**
  * Function : Constructor by default.
  * Return : 'Test'.
@@ -12,7 +13,7 @@
 Test::Test() : sumTest(0), numTestGlobal(0), inColor(true) {}
 
 /**
- * Function : Constructor by default.
+ * Function : Constructor with parameters.
  * Return : 'Test'.
  * Description : Create an object 'Test' with default parameters and color.
  * */
@@ -20,8 +21,8 @@ Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
 
 /**
  * Function : inRed.
- * * Arguments : 'std::string' msg
- * Return : 'std::string'.
+ * Arguments : std::string msg.
+ * Return : std::string.
  * Description : Colorized the string 'msg' in red.
  * */
 std::string inRed(std::string msg) {
@@ -30,20 +31,20 @@ std::string inRed(std::string msg) {
 
 /**
  * Function : inGreen.
- * Arguments : 'std::string' msg
- * Return : 'std::string'.
+ * Arguments : std::string msg.
+ * Return : std::string.
  * Description : Colorized the string 'msg' in green.
  * */
 std::string inGreen(std::string msg) {
     return "\033[0;32m" + msg + "\033[0m";
 } 
 
+/* Global variables */
 std::string OK = " " + inGreen("OK") + " ";
 std::string FAIL = inRed("FAIL");
 
 /**
  * Function : allTest.
- * Return : 'Test'.
  * Description : Print all results of test in our terminal.
  * */
 void Test::allTest() {
@@ -87,13 +88,10 @@ void Test::allTest() {
     
 }
 
-/* Test Tree */
-// Sommet
-
 /**
  * Function : testDefaultConstructorNode.
- * Return : 'std::string'.
- * Description : Test if constructor by defaut is a success. Return 'OK' if yes, 'FAIL' if no.
+ * Return : std::string.
+ * Description : Test if constructor by defautl is a success. Return 'OK' if yes, 'FAIL' if no.
  * */
 std::string Test::testDefaultConstructorNode() {
     Sommet node;
@@ -113,7 +111,7 @@ std::string Test::testDefaultConstructorNode() {
 
 /**
  * Function : testCopyConstructorNode.
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check if constructor by copy is a success.
  * */
 std::string Test::testCopyConstructorNode() { 
@@ -135,8 +133,8 @@ std::string Test::testCopyConstructorNode() {
 
 /**
  * Function : testParamConstructorNode.
- * Return : 'std::string'.
- * Description : Check if constructor by defaut without child is a success.
+ * Return : std::string.
+ * Description : Check if constructor by default without child is a success.
  * */
 std::string Test::testParamConstructorNode() {
     Sommet node(1);
@@ -155,9 +153,9 @@ std::string Test::testParamConstructorNode() {
 }
 
 /**
- * Function : testASsignNode.
- * Return : 'std::string'.
- * Description : Check if the node worked is a success.
+ * Function : testAssignNode.
+ * Return : std::string.
+ * Description : Check if operator= is a success.
  * */
 std::string Test::testAssignNode() {
     ArbreB tree2(2);
@@ -179,11 +177,13 @@ std::string Test::testAssignNode() {
 
 /**
  * Function : testEqualsNode.
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check if two node are equals is a success.
  * */
 std::string Test::testEqualsNode() {
     std::string retStr, retStr2, tmp;
+
+    // Test with two empty nodes
     Sommet emptyNode;
     Sommet emptyNode2;
     bool ret1 = (emptyNode == emptyNode2);
@@ -195,8 +195,9 @@ std::string Test::testEqualsNode() {
         retStr2 = "\t[ " + tmp + " ] Two empty nodes equals.\n";
     }
 
+    // Test one empty and one full
     Sommet node(1);
-    node.setLeft(2);
+    node.setLeft(2); // Set manually all nodes because operator<< add randomly, more hard to check if their equals
     node.setRight(3);
     node.getLeft()->setLeft(4);
     node.getLeft()->setRight(5);
@@ -211,6 +212,7 @@ std::string Test::testEqualsNode() {
         retStr2 += "\t[ " + tmp + " ] One empty and one full.\n";
     }
 
+    // Test two full nodes equals
     Sommet node2(1);
     node2.setLeft(2);
     node2.setRight(3);
@@ -227,6 +229,7 @@ std::string Test::testEqualsNode() {
         retStr2 += "\t[ " + tmp + " ] Two full nodes equals.\n";
     }
 
+    // Test two full nodes not equal
     Sommet nodes3(1);
     node2.setLeft(2);
     node2.setRight(3);
@@ -243,6 +246,7 @@ std::string Test::testEqualsNode() {
         retStr2 += "\t[ " + tmp + " ] Two full nodes not equal.\n";
     }
 
+    // Return all sub tests
     bool ret = ret1 & ret2 & ret3 & ret4;
     sumTest += int(ret);
     numTestGlobal +=1;
@@ -257,11 +261,13 @@ std::string Test::testEqualsNode() {
 
 /**
  * Function : testDepth.
- * Return : 'std::string'.
- * Description : Check the depth of the tree.
+ * Return : std::string.
+ * Description : Check the depth of the tree. Root depth = 1, ...
  * */
 std::string Test::testDepth() {
     std::string retStr, retStr2, tmp;
+
+    // Test with only root
     ArbreB tree(1);
     bool ret1 = (tree.getRoot()->countDepth() == 1);
     if(inColor) {
@@ -272,6 +278,7 @@ std::string Test::testDepth() {
         retStr2 = "\t[ " + tmp + " ] Root tree depth.\n";
     }
 
+    // Test with full tree
     ArbreB tree2(1);
     tree2.getRoot()->setLeft(2);
     tree2.getRoot()->setRight(3);
@@ -285,6 +292,7 @@ std::string Test::testDepth() {
         retStr2 += "\t[ " + tmp + " ] Full tree depth.\n";
     }
 
+    // Return all sub tests
     bool ret = ret1 & ret2;
     sumTest += int(ret);
     numTestGlobal += 1;
@@ -299,11 +307,13 @@ std::string Test::testDepth() {
 
 /**
  * Function : testSize.
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check the size of tree. One node => size = 1, two nodes => size = 2...
  * */
 std::string Test::testSize() {
     std::string retStr, retStr2, tmp;
+
+    // Test size with only root
     ArbreB tree(1);
     bool ret1 = (tree.getRoot()->countSize() == 1);
     if(inColor) {
@@ -314,6 +324,7 @@ std::string Test::testSize() {
         retStr2 = "\t[ " + tmp + " ] Root tree size.\n";
     }
 
+    // Test size with full tree
     ArbreB tree2(1);
     tree2 << 2;
     tree2 << 3;
@@ -327,6 +338,7 @@ std::string Test::testSize() {
         retStr2 += "\t[ " + tmp + " ] Full tree size.\n";
     }
 
+    // Return all sub tests
     bool ret = ret1 & ret2;
     sumTest += int(ret);
     numTestGlobal += 1;
@@ -340,11 +352,10 @@ std::string Test::testSize() {
 }
 
 // ArbreB
-
 /**
  * Function : testCopyConstructorNode.
- * Return : 'std::string'.
- * Description : Check if constructor by defaut is a success.
+ * Return : std::string.
+ * Description : Check if constructor by default is a success.
  * */
 std::string Test::testDefaultConstructorTree() {
     ArbreB tree;
@@ -361,8 +372,8 @@ std::string Test::testDefaultConstructorTree() {
 
 /**
  * Function : testParamConstructorTree.
- * Return : 'std::string'.
- * Description : Check the defaut constructor of a tree.
+ * Return : std::string.
+ * Description : Check the constructor with parameter of a tree.
  * */
 std::string Test::testParamConstructorTree() {
     ArbreB tree(1);
@@ -382,7 +393,7 @@ std::string Test::testParamConstructorTree() {
 
 /**
  * Function : testAssignTree
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check if the copy of a tree in another is a success.
  * */
 std::string Test::testAssignTree() {
@@ -406,11 +417,13 @@ std::string Test::testAssignTree() {
 
 /**
  * Function : testEqualsTree.
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check if two are equals (same nodes, sames size, same depth).
  * */
 std::string Test::TestEqualsTree() {
     std::string retStr, retStr2, tmp;
+
+    // Test with empty tree
     ArbreB emptyTree;
     ArbreB emptyTree2;
     bool ret1 = (emptyTree == emptyTree2);
@@ -422,6 +435,7 @@ std::string Test::TestEqualsTree() {
         retStr2 = "\t[ " + tmp + " ] Two empty trees equals.\n";
     }
 
+    // Test one empty and one full
     ArbreB tree(2);
     tree.getRoot()->setLeft(4);
     tree.getRoot()->setRight(6);
@@ -437,6 +451,7 @@ std::string Test::TestEqualsTree() {
         retStr2 += "\t[ " + tmp + " ] One empty and one full.\n";
     }
 
+    // Test two full trees equals
     ArbreB tree2(2);
     tree2.getRoot()->setLeft(4);
     tree2.getRoot()->setRight(6);
@@ -452,21 +467,20 @@ std::string Test::TestEqualsTree() {
         retStr2 += "\t[ " + tmp + " ] Two full trees equals.\n";
     }
 
+    // Return all sub tests
     bool ret = ret1 & ret2 & ret3;
     sumTest += int(ret);
     numTestGlobal +=1;
     if(inColor) {
         return retStr + "[ " + (ret ? OK : FAIL) + " ] Say if two tree are equals.";
     }
-    else {
-        tmp = (ret ? " OK " : "FAIL");
-        return retStr2 + "[ " + tmp + " ] Say if two tree are equals.\n";
-    }
+    tmp = (ret ? " OK " : "FAIL");
+    return retStr2 + "[ " + tmp + " ] Say if two tree are equals.\n";
 }
 
 /**
  * Function : testAdd.
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check if we can add a node in a tree.
  * */
 std::string Test::testAdd() {
@@ -487,11 +501,13 @@ std::string Test::testAdd() {
 
 /**
  * Function : testDell.
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check if deletion on a node is a success.
  * */
 std::string Test::testDell() {
     std::string retStr, retStr2, tmp;
+
+    // Test delete the node
     ArbreB tree(1);
     tree >> 1;
     bool ret1 = (!tree.getRoot());
@@ -503,6 +519,7 @@ std::string Test::testDell() {
         retStr2 = "\t[ " + tmp + " ] Dell root in empty tree.\n";
     }
 
+    // Test delete the root in tree with one children
     ArbreB tree2(1);
     tree2 << 2;
     tree2 >> 1;
@@ -516,6 +533,7 @@ std::string Test::testDell() {
         retStr2 += "\t[ " + tmp + " ] Dell root in tree with one children.\n";
     }
 
+    // Test delete the root in tree with child
     ArbreB tree3(1);
     tree3.getRoot()->setLeft(2);
     tree3.getRoot()->setRight(3);
@@ -533,6 +551,7 @@ std::string Test::testDell() {
         retStr2 += "\t[ " + tmp + " ] Dell root in tree with child.\n";
     }
 
+    // test delete the root in the millde of the tree
     ArbreB tree4(1);
     tree4.getRoot()->setLeft(2);
     tree4.getRoot()->setRight(3);
@@ -556,6 +575,7 @@ std::string Test::testDell() {
         retStr2 += "\t[ " + tmp + " ] Dell root in the millde of the tree.\n";
     }
 
+    // Return all sub test
     bool ret = ret1 & ret2 & ret3 & ret4;
     sumTest += int(ret);
     numTestGlobal += 1;
@@ -568,11 +588,13 @@ std::string Test::testDell() {
 
 /**
  * Function : testFind.
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check if we can find a specific node by his value in the tree.
  * */
 std::string Test::testFind() {
     std::string retStr, retStr2, tmp;
+
+    // Test find a value in the middle of the tree
     ArbreB tree(1);
     tree << 2;
     tree << 3;
@@ -589,6 +611,7 @@ std::string Test::testFind() {
         retStr2 = "\t[ " + tmp + " ] Find value in middle the tree.\n";
     }
 
+    // Test find value not in the tree
     Sommet* tryFind2 = tree.find(tree.getRoot(), 0);
     bool ret2 = (!tryFind2);
     if(inColor) {
@@ -599,6 +622,7 @@ std::string Test::testFind() {
         retStr2 += "\t[ " + tmp + " ] Find value not in the tree.\n";
     }
 
+    // Test find the root value of the tree 
     Sommet* tryFind3 = tree.find(tree.getRoot(), 1);
     bool ret3 = (tryFind3->getData() == 1);
     if(inColor) {
@@ -609,6 +633,7 @@ std::string Test::testFind() {
         retStr2 += "\t[ " + tmp + " ] Find root value of the tree.\n";
     }
 
+    // Return all sub tests
     bool ret = ret1 & ret2 & ret3;
     sumTest += int(ret);
     numTestGlobal +=1;
@@ -621,7 +646,7 @@ std::string Test::testFind() {
 
 /**
  * Function : testGetNodeAtIndex.
- * Return : 'std::string'.
+ * Return : std::string.
  * Description : Check if we can find a specific node by his position in the tree.
  * */
 std::string Test::testGetNodeAtIndex() {
@@ -645,7 +670,7 @@ std::string Test::testGetNodeAtIndex() {
 /**
  * Function : testJoin.
  * Return : 'std::string'.
- * Description : Check if we can make a fusion with two tree.
+ * Description : Check if we can make a fusion with two trees.
  * */
 std::string Test::testJoin() {
     ArbreB tree(2);
@@ -686,8 +711,8 @@ std::string Test::testJoin() {
 
 /**
  * Function : testGetNodeAtIndex.
- * Return : 'std::string'.
- * Description : Check if we can make a split of a tree. We should have two tree at the end.
+ * Return : std::string.
+ * Description : Check if we can make a split of a tree. We should have two trees at the end.
  * */
 std::string Test::testSplit() {
     ArbreB tree(3);
