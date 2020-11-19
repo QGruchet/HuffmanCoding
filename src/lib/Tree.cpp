@@ -220,7 +220,7 @@ ArbreB& ArbreB::operator>>(int dellData) {
         return *this;
     }
     if(root->data == dellData) {
-        if(root->isLeaf()) {
+        if(root->isLeaf()) { // Dell the root
             delete root;
             root = nullptr;
         }
