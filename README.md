@@ -60,9 +60,9 @@ The project is split in many sub directories like the hierarchy as below :
 
 Our program is made in C++ and use Qt for the graphic interface. Also, for our program to work, we need two or three little things :
 
-- [cmake](https://cmake.org/install/) version superior to 3.0.0 is required
-- [Qt libraries](https://doc.ubuntu-fr.org/qt) version superior to 5.0 is required
-- A C++ compiler like [g++](https://doc.ubuntu-fr.org/gcc) (recommanded) or [Clang](https://clang.llvm.org/get_started.html)
+- [cmake](https://cmake.org/install/) version superior to 3.0.0 is required.
+- [Qt libraries](https://doc.ubuntu-fr.org/qt) version superior to 5.0 is required.
+- A C++ compiler like [g++](https://doc.ubuntu-fr.org/gcc) (recommanded) or [Clang](https://clang.llvm.org/get_started.html).
 
 
 # Installation

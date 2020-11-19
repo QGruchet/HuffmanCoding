@@ -1,3 +1,8 @@
+/**
+ * Tree.cpp : You can found here all functions implemented for the Tree class.
+ * Author : Mickael.
+ * */
+
 #ifndef Tree_HPP
 #define Tree_HPP
 
@@ -11,12 +16,13 @@
 
 class Sommet
 {
-  friend class ArbreB;
+  friend class ArbreB; // For used 'Sommet' int 'ArbreB' without 
+                      // getters or setters
 
   private:
     /* Data */
-    int data;
-    Sommet *left, *right;
+    int data; // The value of the node
+    Sommet *left, *right; // Left child and right child
 
 public:
     /* Constructors */

@@ -19,9 +19,6 @@ int main(void) {
     tree << 0;
     tree << 4;
 
-    *tree.getRoot() = tree.getRoot()->getData() * 10;
-    *tree.getRoot()->getLeft() = tree.getRoot()->getLeft()->getData() * 10;
-
     Writer writer("src/txtQT/binary.txt");
     writer.writeBeautifulTreeInFile(tree);
 

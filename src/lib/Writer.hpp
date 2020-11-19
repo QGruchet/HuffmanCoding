@@ -8,7 +8,7 @@ class Writer
 {
 	private:
 		/* Data */
-		std::string file;
+		std::string file; // The name of the file
 
 	public:
 		/* Constructor */
@@ -16,7 +16,6 @@ class Writer
 		Writer(std::string);
 
 		/* Methodes */
-		void writeInFile(std::string);
 		void writeBeautifulTreeInFile(ArbreB);
 		void writeBeautifulTreeInFileRec(Sommet*, int, std::ofstream&);
 		void writeResultAllTests();

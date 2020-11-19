@@ -6,17 +6,25 @@
 #include "Writer.hpp"
 
 /**
- * Function : Default constructor
- * Return : Writer
- * Description : 
+ * Function : Default constructor.
+ * Return : Writer.
+ * Description : Default constructor.
  * */
 Writer::Writer() : file("\0") {}
 
-// With param
-Writer::Writer(std::string msg) : file(msg) {}
-/* End constructors */
+/**
+ * Function : Constructor with parameter.
+ * Return : Writer.
+ * Parameter : nameFile : the name of the file.
+ * Description : Constructor with parameter.
+ * */
+Writer::Writer(std::string nameFile) : file(nameFile) {}
 
-/* Methodes */
+/**
+ * Function : writeBeautifulTreeInFile.
+ * Parameter : Tree, the tree need to write in a file.
+ * Description : Write a tree in a file.
+ * */
 void Writer::writeBeautifulTreeInFile(ArbreB tree) {
     // Setup flux and open file
     std::ofstream flux;
@@ -24,12 +32,15 @@ void Writer::writeBeautifulTreeInFile(ArbreB tree) {
 
     // If the file is open
     if(flux) {
+        // Write some informations
         Sommet *root = tree.getRoot();
         flux << root->countSize() << "\n";
         flux << root->getData() << "\n";
         flux << root->countDepth() << "\n";
         flux << root->dataMin() << "\n";
         flux << root->dataMax() << "\n";
+
+        // Write the tree
         writeBeautifulTreeInFileRec(root, 0, flux);
     }
     else {
@@ -37,6 +48,12 @@ void Writer::writeBeautifulTreeInFile(ArbreB tree) {
     }
 }
 
+/**
+ * Function : writeBeautifulTreeInFileRec.
+ * Parameter : node, the node need to write in a file, recursive version.
+ *                 flux, where we write.
+ * Description : Write a tree in a file.
+ * */
 void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream& flux) {
     for(int i = 0; i < space; i++) {
         flux << "|__";
@@ -53,6 +70,10 @@ void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream&
     }
 }
 
+/**
+ * Function : writeResultAllTests.
+ * Description : Write result of tests.
+ * */
 void Writer::writeResultAllTests() {
   // Setup flux and open file
   std::ofstream flux(file.c_str(), std::ios::out | std::ios::trunc);
@@ -96,16 +117,4 @@ void Writer::writeResultAllTests() {
     std::cout << "ERROR : can't open file" << std::endl;
   }
 }
-
-void Writer::writeInFile(std::string msg) {
-    if(std::ifstream(file)){
-        remove(file.c_str());
-    }
-
-    std::string const nameFile(file);
-    std::ofstream flux(nameFile.c_str(), std::ios_base::app);
-
-    flux << msg;
-}
-/* End methodes */
  
