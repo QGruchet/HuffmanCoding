@@ -18,7 +18,6 @@
 class Window : public QWidget {
 
 	Q_OBJECT
-	//1080 720
 	private:
 		QVBoxLayout* layout;
 		QVBoxLayout* infoTree;

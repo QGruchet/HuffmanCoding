@@ -9,5 +9,5 @@ mkdir src/bin;
 fi
 
 if [ ! -d "src/txtQT" ]; then
-mkdir src/QtTxt;
+mkdir src/txtQT;
 fi

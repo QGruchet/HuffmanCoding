@@ -26,6 +26,7 @@ public:
 
     /* Overloaded */
     Sommet& operator=(Sommet);
+    Sommet& operator=(int);
     bool operator==(const Sommet&);
 
     friend std::ostream &operator<<(std::ostream &, const Sommet&);
