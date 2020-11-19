@@ -38,7 +38,7 @@ void Test::allTest() {
     std::cout << testGetNodeAtIndex() << std::endl;
     std::cout << testJoin() << std::endl;
     std::cout << testSplit() << std::endl;
-    
+
     /* Test Parser */
     // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
     
@@ -130,7 +130,7 @@ std::string Test::testEqualsNode() {
     Sommet emptyNode;
     Sommet emptyNode2;
     bool ret1 = (emptyNode == emptyNode2);
-    if(inColor) {
+    if(inColor) { 
         retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Two empty nodes equals.\n";
     }
     else {

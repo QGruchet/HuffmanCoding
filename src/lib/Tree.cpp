@@ -61,6 +61,11 @@ Sommet& Sommet::operator=(Sommet other) {
     return *this;
 }
 
+Sommet& Sommet::operator=(int newData) {
+    data = newData;
+    return *this;
+}
+
 ArbreB& ArbreB::operator=(const ArbreB& other) {
     if(this != &other) {
         if(!root) {
@@ -155,11 +160,11 @@ void ArbreB::add(Sommet *root, int newData) {
 }
 
 ArbreB& ArbreB::operator>>(int dellData) {
-    Sommet *dellNode = find(root, dellData); // Find the first node where is dellData
+    Sommet *dellNode = find(root, dellData);
     if(!dellNode || !root) {
         return *this;
     }
-    if(root->data == dellData) { // Dell the root
+    if(root->data == dellData) {
         if(root->isLeaf()) {
             delete root;
             root = nullptr;
