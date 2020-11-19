@@ -62,7 +62,7 @@ To build our program, just needed to tape this in a terminal :
 
 To start or program, two options are given :
 
-- ``` make run ``` to have a dinteisplay in the terminal.
+- ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
 ## Contributing
