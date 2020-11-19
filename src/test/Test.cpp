@@ -258,7 +258,7 @@ std::string Test::testEqualsNode() {
 /**
  * Function : testDepth.
  * Return : 'std::string'.
- * Description : Check the depth of the tree.
+ * Description : Check the depth of the tree. If the tree has no child, depth = 1. If he has child, depth  = 2. If child has child, depth = 3.....
  * */
 std::string Test::testDepth() {
     std::string retStr, retStr2, tmp;
