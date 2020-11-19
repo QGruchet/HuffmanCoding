@@ -1,19 +1,21 @@
+
 	> TESTS <
-[ OK ] Create a default node.
-[ OK ] Create a node with a copy.
-[ OK ] Create a node with a value.
-[ OK ] Assign a node in a other .
-[ OK ] Say if two nodes are equals.
-[ OK ] Count the tree's depht.
-[ OK ] Count the number of nodes.
-[ OK ] Create a default tree.
-[ OK ] Create a tree with the value of the root.
-[ OK ] Assign a trees in a other.
-[ OK ] Say if two tree are equals.
-[ OK ] Add a new node in the tree.
-[ FAIL ] Delete a node in the tree.
-[ OK ] Say if a value is in the tree.
-[ OK ] Get node at index in the tree.
-[ OK ] Join the tree with a other.
-[ OK ] Split the tree in two.
-> TESTS RESULT : [ 16/17 ] tests passed ! <
+[  [0;32mOK[0m  ] Create a default node.[  [0;32mOK[0m  ] Create a node with a copy.[  [0;32mOK[0m  ] Create a node with a value.	[  [0;32mOK[0m  ] Two empty nodes equals.
+	[  [0;32mOK[0m  ] One empty and one full.
+	[  [0;32mOK[0m  ] Two full nodes equals.
+	[  [0;32mOK[0m  ] Two full nodes not equal.
+[  [0;32mOK[0m  ] Say if two nodes are equals.[  [0;32mOK[0m  ] Assign a node in a other .	[  [0;32mOK[0m  ] Root tree depth.
+	[  [0;32mOK[0m  ] Full tree depth.
+[  [0;32mOK[0m  ] Count the tree's depht.	[  [0;32mOK[0m  ] Root tree size.
+	[  [0;32mOK[0m  ] Full tree size.
+[  [0;32mOK[0m  ] Count the number of nodes.[  [0;32mOK[0m  ] Create a default tree.[  [0;32mOK[0m  ] Create a tree with the value of the root.[  [0;32mOK[0m  ] Assign a tree in a other.	[  [0;32mOK[0m  ] Two empty trees equals.
+	[  [0;32mOK[0m  ] One empty and one full.
+	[  [0;32mOK[0m  ] Two full trees equals.
+[  [0;32mOK[0m  ] Say if two tree are equals.[  [0;32mOK[0m  ] Add a new node in the tree.	[  [0;32mOK[0m  ] Dell root in empty tree.
+	[  [0;32mOK[0m  ] Dell root in tree with one children.
+	[  [0;32mOK[0m  ] Dell root in tree with child.
+	[ [0;31mFAIL[0m ] Dell root in the millde of the tree.
+[ [0;31mFAIL[0m ] Delete a node in the tree.	[  [0;32mOK[0m  ] Find value in middle the tree.
+	[  [0;32mOK[0m  ] Find value not in the tree.
+	[  [0;32mOK[0m  ] Find root value of the tree.
+[  [0;32mOK[0m  ] Say if a value is in the tree.[  [0;32mOK[0m  ] Get node at index in the tree.[  [0;32mOK[0m  ] Join the tree with a other.[  [0;32mOK[0m  ] Split the tree in two.> TESTS RESULT : [ 16/17 ] tests passed ! <

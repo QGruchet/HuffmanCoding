@@ -22,33 +22,32 @@ class Test
 
     // Test Tree
     // Sommet
-    bool testDefaultConstructorNode();
-    bool testCopyConstructorNode();
-    bool testParamConstructorNode();
-    bool TestEqualsNode();
-    bool testAssignNode();
-    bool testEqualsNode();
-    bool testDepth();
-    bool testSize();   
+    std::string testDefaultConstructorNode();
+    std::string testCopyConstructorNode();
+    std::string testParamConstructorNode();
+    std::string testAssignNode();
+    std::string testEqualsNode();
+    std::string testDepth();
+    std::string testSize();   
     
     // ArbreB
-    bool testDefaultConstructorTree();
-  	bool testParamConstructorTree();
-  	bool testAssignTree();
-  	bool TestEqualsTree();
-  	bool testAdd();
-    bool testDell();
-    bool testFind();
-    bool testGetNodeAtIndex();
-    bool testJoin();
-    bool testSplit();
+    std::string testDefaultConstructorTree();
+  	std::string testParamConstructorTree();
+  	std::string testAssignTree();
+  	std::string TestEqualsTree();
+  	std::string testAdd();
+    std::string testDell();
+    std::string testFind();
+    std::string testGetNodeAtIndex();
+    std::string testJoin();
+    std::string testSplit();
 
     // Writer
     void testWriteTreeInQt();
     void testWriteAllTests();
     
     // Parser
-    bool testCalculFreqChar();
+    void testCalculFreqChar();
 
     // Getters
     int getSumTest() const;
