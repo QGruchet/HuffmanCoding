@@ -12,6 +12,11 @@ Implementation of Huffman coding in cpp.
 - [Needed](#Needed)  
 - [Installation](#Installation)  
 - [Launch](#Launch)  
+- [Details of functions](Details-of-functions)  
+    - [Tree.cpp](Tree.cpp)
+    - [Writer.cpp](Writer.cpp)
+    - [Test.cpp](Test.cpp)
+    - [WindowQT.cpp](WindowQT.cpp)
 - [Some idea for amelioration](#Some-idea-for-amelioration)
 - [Authors](#Authors)  
 
