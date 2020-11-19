@@ -30,6 +30,9 @@ class Window : public QWidget {
 		QPushButton* test;
 
 	public:
+	/** Function : Window().
+	 * Description : Default constructor for window. It put layout, button, and text area inside the window.
+	 * */
 		Window(){
 			// Setup window title, size, and fond
 			setWindowTitle("Binary Tree");
@@ -131,6 +134,9 @@ class Window : public QWidget {
 		}
 
 	public slots:
+	/** Function : printTree().
+	 * Description : Print the tree and his informations in the window.
+	 * */
 		void printTree(){
 			// Open file for read the tree
 			QString fileName = "src/txtQT/binary.txt";
@@ -161,7 +167,9 @@ class Window : public QWidget {
 			printText->show();
 			fichier.close();
 		}
-
+		/** Function : delArbre().
+		 * Description : Clean all the window.
+		 * */
 		void delArbre(){
 			// Clear tree and info area
 			printText->setText(nullptr);
@@ -169,13 +177,17 @@ class Window : public QWidget {
 			resizeFull();
 			printText->show();
 		}
-
+		/** Function : secretButton().
+		 * Description : Configure the secret button.
+		 * */
 		void secretbutton(){
 			// Just a little features 
 			qDebug() << "WHAT DID I JUST SAY ????";
 			QMessageBox::information(this, "Disappointment...", "WHAT DID I JUST SAY ????");
 		}
-
+		/** Function : printTest().
+		 * Description : Print all test in the window.
+		 * */
 		void printTest(){
 			// Open file for read test
 			QString fileName = "src/txtQT/resultTest.txt";
@@ -191,6 +203,9 @@ class Window : public QWidget {
 			fichier.close();
 		}
 
+		/** Function : resizeFull().
+		 * Description : Resize the window with the size of current display.
+		 * */
 		void resizeFull()
 		{
 			// Resize the main window depending on the size display

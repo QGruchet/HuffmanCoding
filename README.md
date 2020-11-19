@@ -186,11 +186,183 @@ ArbreB& ArbreB::operator>>(int dellData) {}
  * the node with 'dellData' existe, recursive version.
  * */
 void ArbreB::dell(Sommet *root, int dellData) {}
-
+```
 ## Writer.cpp
 
 ## Test.cpp
+```cpp
 
+/**
+ * Function : Constructor by default.
+ * Return : 'Test'.
+ * Description : Create an object 'Test' with default parameters.
+ * */
+Test::Test() : sumTest(0), numTestGlobal(0), inColor(true) {}
+
+/**
+ * Function : Constructor with parameters.
+ * Return : 'Test'.
+ * Argument : withColor, boolean say if we want print tests in color or not.
+ * Description : Create an object 'Test' with default parameters and color.
+ * */
+Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
+
+/**
+ * Function : inRed.
+ * Arguments : std::string msg.
+ * Return : std::string.
+ * Description : Colorized the string 'msg' in red.
+ * */
+std::string inRed(std::string msg) {}
+
+/**
+ * Function : inGreen.
+ * Arguments : std::string msg.
+ * Return : std::string.
+ * Description : Colorized the string 'msg' in green.
+ * */
+std::string inGreen(std::string msg) {} 
+
+/* Global variables */
+std::string OK = " " + inGreen("OK") + " ";
+std::string FAIL = inRed("FAIL");
+
+/**
+ * Function : allTest.
+ * Description : Print all results of test in our terminal.
+ * */
+void Test::allTest() {}
+
+/**
+ * Function : testDefaultConstructorNode.
+ * Return : std::string.
+ * Description : Test if constructor by defautl is a success. Return 'OK' if yes, 'FAIL' if no.
+ * */
+std::string Test::testDefaultConstructorNode() {}
+
+/**
+ * Function : testCopyConstructorNode.
+ * Return : std::string.
+ * Description : Check if constructor by copy is a success.
+ * */
+std::string Test::testCopyConstructorNode() {}
+
+/**
+ * Function : testParamConstructorNode.
+ * Return : std::string.
+ * Description : Check if constructor by default without child is a success.
+ * */
+std::string Test::testParamConstructorNode() {}
+
+/**
+ * Function : testAssignNode.
+ * Return : std::string.
+ * Description : Check if operator= is a success.
+ * */
+std::string Test::testAssignNode() {}
+
+/**
+ * Function : testEqualsNode.
+ * Return : std::string.
+ * Description : Check if two node are equals is a success.
+ * */
+std::string Test::testEqualsNode() {}
+
+/**
+ * Function : testDepth.
+ * Return : 'std::string'.
+ * Description : Check the depth of the tree. If the tree has no child, depth = 1. If he has child, depth  = 2. If child has child, depth = 3.....
+ * */
+std::string Test::testDepth() {}
+
+/**
+ * Function : testSize.
+ * Return : std::string.
+ * Description : Check the size of tree. One node => size = 1, two nodes => size = 2...
+ * */
+std::string Test::testSize() {}
+
+// ArbreB
+/**
+ * Function : testCopyConstructorNode.
+ * Return : std::string.
+ * Description : Check if constructor by default is a success.
+ * */
+std::string Test::testDefaultConstructorTree() {}
+
+/**
+ * Function : testParamConstructorTree.
+ * Return : std::string.
+ * Description : Check the constructor with parameter of a tree.
+ * */
+std::string Test::testParamConstructorTree() {}
+
+/**
+ * Function : testAssignTree
+ * Return : std::string.
+ * Description : Check if the copy of a tree in another is a success.
+ * */
+std::string Test::testAssignTree() {}
+
+/**
+ * Function : testEqualsTree.
+ * Return : std::string.
+ * Description : Check if two are equals (same nodes, sames size, same depth).
+ * */
+std::string Test::TestEqualsTree() {}
+
+/**
+ * Function : testAdd.
+ * Return : std::string.
+ * Description : Check if we can add a node in a tree.
+ * */
+std::string Test::testAdd() {}
+
+/**
+ * Function : testDell.
+ * Return : std::string.
+ * Description : Check if deletion on a node is a success.
+ * */
+std::string Test::testDell() {}
+
+/**
+ * Function : testFind.
+ * Return : std::string.
+ * Description : Check if we can find a specific node by his value in the tree.
+ * */
+std::string Test::testFind() {}
+
+/**
+ * Function : testGetNodeAtIndex.
+ * Return : std::string.
+ * Description : Check if we can find a specific node by his position in the tree.
+ * */
+std::string Test::testGetNodeAtIndex() {}
+
+/**
+ * Function : testJoin.
+ * Return : 'std::string'.
+ * Description : Check if we can make a fusion with two trees.
+ * */
+std::string Test::testJoin() {}
+
+/**
+ * Function : testGetNodeAtIndex.
+ * Return : std::string.
+ * Description : Check if we can make a split of a tree. We should have two trees at the end.
+ * */
+std::string Test::testSplit() {}
+
+/* Getters */
+int Test::getSumTest() const {
+    return sumTest;
+}
+
+int Test::getNumTestGlobal() const {
+    return numTestGlobal;
+}
+/* End getters */
+```
 ## WindowQT.cpp
 
 # Some idea for amelioration
