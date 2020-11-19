@@ -60,14 +60,10 @@ To build our program, just needed to tape this in a terminal :
 
 ## Démarrage
 
-To start or program, two options are given :
+To start our program, two options are given :
 
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
-
-## Contributing
-
-Si vous souhaitez contribuer, lisez le fichier [CONTRIBUTING.md](https://example.org) pour savoir comment le faire.
 
 ## Auteurs
 * **LE DENMAT Mickael 21804355**
