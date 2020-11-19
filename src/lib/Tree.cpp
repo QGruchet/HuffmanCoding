@@ -191,7 +191,7 @@ ArbreB& ArbreB::operator<<(int newData) {
  * Description : Add a node with the value 'newData' in the tree, recursive version.
  * */
 void ArbreB::add(Sommet *root, int newData) {
-    if(rand()%2) {
+    if(rand()%2) { // Add randomly the new root 
         if(root->left) {
             add(root->left, newData);
         }
@@ -216,7 +216,7 @@ void ArbreB::add(Sommet *root, int newData) {
  * */
 ArbreB& ArbreB::operator>>(int dellData) {
     Sommet *dellNode = find(root, dellData);
-    if(!dellNode || !root) {
+    if(!dellNode || !root) { // If haven't root or the value dellData wasen't found
         return *this;
     }
     if(root->data == dellData) {
