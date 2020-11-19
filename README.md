@@ -7,16 +7,16 @@ Implementation of Huffman coding in cpp.
 
 ***
 
-## Table of contents
+### Table of contents
 - [Directory hierarchy](#Directory-hierarchy)  
-- [Démarrage](#Démarrage)  
-- [Pré-requis](#Pré-requis)  
+- [Needed](#Needed)  
 - [Installation](#Installation)  
-- [Démarrage](#Démarrage)  
-- [Auteurs](#Auteurs)  
+- [Launch](#Launch)  
+- [Some idea for amelioration](#Some-idea-for-amelioration)
+- [Authors](#Authors)  
 
 
-## Directory hierarchy
+### Directory hierarchy
 
 The project is split in many sub directories like the hierarchy as below : 
 ```bash
@@ -52,7 +52,7 @@ The project is split in many sub directories like the hierarchy as below :
 
 ***
 
-### Pré-requis
+### Needed
 
 For our program to work, we need a few programs :
 
@@ -67,14 +67,17 @@ To build our program, just needed to tape this in a terminal :
 - ``` make ```
 
 
-## Démarrage
+### Launch
 
 To start our program, two options are given :
 
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
-## Auteurs
+### Some ideas for amelioration
+
+
+### Authors
 * **LE DENMAT Mickael 21804355**
 * **GRUCHET Quentin 21605636**
 
