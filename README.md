@@ -14,7 +14,6 @@ Implementation of Huffman coding in cpp.
 - [Launch](#Launch)  
 - [Details of functions](Details-of-functions)  
     - [Tree.cpp](#Tree)
-    - [Tree.hpp](#Tree-Headers)
     - [Writer.cpp](#Writer)
     - [Test.cpp](#Test)
     - [WindowQT.cpp](#WindowQT)
@@ -336,14 +335,44 @@ Sommet::~Sommet() {}
 /* End destructors */
 ```
 
-## Tree Headers
-```cpp
-
-```
-
 ## Writer
 ```cpp
+/**
+ * Function : Default constructor.
+ * Return : Writer.
+ * Description : Default constructor.
+ * */
+Writer::Writer() : file("\0") {}
 
+/**
+ * Function : Constructor with parameter.
+ * Return : Writer.
+ * Parameter : nameFile : the name of the file.
+ * Description : Constructor with parameter.
+ * */
+Writer::Writer(std::string nameFile) : file(nameFile) {}
+
+/**
+ * Function : writeBeautifulTreeInFile.
+ * Parameter : Tree, the tree need to write in a file.
+ * Description : Write a tree in a file.
+ * */
+void Writer::writeBeautifulTreeInFile(ArbreB tree) {}
+
+/**
+ * Function : writeBeautifulTreeInFileRec.
+ * Parameter : node, the node need to write in a file, recursive version.
+ *                 flux, where we write.
+ * Description : Write a tree in a file.
+ * */
+void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream& flux) {}
+
+/**
+ * Function : writeResultAllTests.
+ * Description : Write result of tests.
+ * */
+void Writer::writeResultAllTests() {}
+ 
 ```
 ## Test
 ```cpp
@@ -518,7 +547,7 @@ int Test::getNumTestGlobal() const {
 }
 /* End getters */
 ```
-## WindowQT.cpp
+## WindowQT
 ```cpp
 
 /** Function : Window().
