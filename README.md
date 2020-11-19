@@ -80,7 +80,7 @@ To start our program, two options are given :
 Here some idea for future version :
 - Our interface can interact with the painting tree, like adding node, deleting node, spliting tree, fusion of two differents tree...
 - Dell root in the millde of the tree isn't working. We have to fix it.
-- To solve memory leaks in the graphic interface
+- Solve memory leaks in the graphic interface.
 
 # Authors
 * **LE DENMAT Mickael 21804355**
