@@ -83,7 +83,8 @@ To start our program, two options are given :
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
 # Usage
-![interface](Screenshots/interface.png)  Here a first look of the interface for the project. All buttons were to clickable.  
+![interface](Screenshots/interface.png)  
+Here a first look of the interface for the project. All buttons were to clickable.  
 ![Print Test](Screenshots/print_test.png) This button print all tests in the interface.  
 ![print Tree](Screenshots/print_tree.png)  This button print the tree in the interface.  
 ![clean](Screenshots/clean.png)  This button clean all the window.  
