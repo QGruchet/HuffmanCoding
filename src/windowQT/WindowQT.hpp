@@ -40,6 +40,7 @@ class Window : public QWidget {
 			layout = new QVBoxLayout(this);
 			setLayout(layout);
 
+			//Add some esthetic function to the text
 			printText = new QTextEdit(this);
 			printText->setTextColor(Qt::white);
 			printText->setFontWeight(QFont::Normal);
@@ -47,19 +48,21 @@ class Window : public QWidget {
 			printText->setReadOnly(true);	// USer can't write in the layout
 			printText->setStyleSheet("background-color: dark-grey;");
 
+			printInfo = new QTextEdit(this);
+			printInfo->setFontPointSize(10);
+			printInfo->setTextColor(Qt::white);
+			printInfo->setStyleSheet("background-color: dark-grey;");
+
 			// Create place for write the tree
 			infoTree = new QVBoxLayout(this);
 			infoTree->setAlignment(Qt::AlignRight);
 			setLayout(infoTree);
 			layout->addLayout(infoTree);
 
-			printInfo = new QTextEdit(this);
-			printInfo->setFontPointSize(10);
-			printInfo->setTextColor(Qt::white);
-			printInfo->setStyleSheet("background-color: dark-grey;");
+			
 
 
-			/*********** CREATION DES BOUTON ***********/
+			/*********** CREATION OF BUTTON ***********/
 			// Link button to function
 			test = new QPushButton("Print Tests", this);
 			connect(test, SIGNAL(clicked()), this, SLOT(printTest()));
@@ -116,12 +119,6 @@ class Window : public QWidget {
 		}
 
 		~Window(){
-			delete printText;
-			delete quit;
-			delete print;
-			delete del;
-			delete secret;
-			delete layout;
 		}
 
 	public slots:
@@ -149,20 +146,7 @@ class Window : public QWidget {
 			printInfo->setText(aff);
 			QString tout = flux.readAll();
 
-			//test colorized text not working
-			/*for (int i = 0; i < tout.length(); ++i)
-			{
-				if(tout.at(i) == '[' && tout.at(i + 1) == 'O'){
-					for (int i; i  < i + 2; ++i)
-					{
-						printText->setHtml(QString("style=color:red"));
-					}
-				}
-				else if(tout.at(i) == '[' && tout.at(i) == 'F'){
-
-				}
-			}
-			*/
+			// Print all informations of the tree in the texts zone
 			printText->setText(tout);
 			resizeFull();
 			printText->show();
@@ -170,7 +154,7 @@ class Window : public QWidget {
 		}
 
 		void delArbre(){
-			//clear tree and info area
+			// Clear tree and info area
 			printText->setText(nullptr);
 			printInfo->setText(nullptr);
 			resizeFull();
@@ -178,7 +162,7 @@ class Window : public QWidget {
 		}
 
 		void secretbutton(){
-			//Just a little features 
+			// Just a little features 
 			qDebug() << "WHAT DID I JUST SAY ????";
 			QMessageBox::information(this, "Disappointment...", "WHAT DID I JUST SAY ????");
 		}
@@ -191,8 +175,8 @@ class Window : public QWidget {
 			QTextStream flux(&fichier);
 			QString tout = flux.readAll();
 
+			// Print all the test in the tests zone
 			printText->setText(tout);
-			//printInfo->setText(tout2);
 			resizeFull();
 			printText->show();
 			fichier.close();
@@ -200,7 +184,7 @@ class Window : public QWidget {
 
 		void resizeFull()
 		{
-			//Resize the main window depending on the size display
+			// Resize the main window depending on the size display
 			int width = QApplication::desktop()->width();
 			int height = QApplication::desktop()->height();
 			if(width > 1920) {
