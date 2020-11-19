@@ -18,6 +18,8 @@ Implementation of Huffman coding in cpp.
     - [Writer.cpp](#Writer)
     - [Test.cpp](#Test)
     - [WindowQT.cpp](#WindowQT)
+- [Status](#Status)
+- [Explanation of the project](#Explanation-of-the-project)
 - [Some idea for amelioration](#Some-idea-for-amelioration)
 - [Authors](#Authors)  
 
@@ -555,6 +557,10 @@ void printTest(){}
 void resizeFull(){}
 
 ```
+# Status
+
+# Explanation of the project
+
 # Some idea for amelioration
 
 Here some idea for future version :
