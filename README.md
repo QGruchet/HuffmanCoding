@@ -364,7 +364,44 @@ int Test::getNumTestGlobal() const {
 /* End getters */
 ```
 ## WindowQT.cpp
+```cpp
 
+/** Function : Window().
+* Description : Default constructor for window. It put layout, button, and text area inside the window.
+ * */
+Window(){}
+
+/** Function : ~Window().
+* Description : Destructor for Window.
+* */
+~Window(){
+
+/** Function : printTree().
+* Description : Print the tree and his informations in the window.
+* */
+void printTree(){}
+            
+/** Function : delArbre().
+* Description : Clean all the window.
+* */
+void delArbre(){}
+
+/** Function : secretButton().
+ * Description : Configure the secret button.
+ * */
+void secretbutton(){}
+
+/** Function : printTest().
+ * Description : Print all test in the window.
+ * */
+void printTest(){}
+
+/** Function : resizeFull().
+ * Description : Resize the window with the size of current display.
+ * */
+void resizeFull(){}
+
+```
 # Some idea for amelioration
 
 Here some idea for future version :

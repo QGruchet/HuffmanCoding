@@ -120,7 +120,9 @@ class Window : public QWidget {
 			layout->addWidget(secret, 0, Qt::AlignCenter);
 			layout->addWidget(quit, 0, Qt::AlignCenter);
 		}
-
+		/** Function : ~Window().
+	 * Description : Destructor for Window.
+	 * */
 		~Window(){
 			delete test;
 			delete quit;
