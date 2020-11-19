@@ -62,7 +62,7 @@ Our program is made in C++ and use Qt for the graphic interface. Also, for our p
 
 # Installation
 
-To build our program, just needed to tape this in a terminal :
+To build our program, just needed to write this in a terminal :
 
 - ``` make ```
 
