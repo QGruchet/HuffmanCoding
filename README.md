@@ -8,7 +8,11 @@ Implementation of Huffman coding in cpp.
 ***
 
 ## Table of contents
-    -[Démarrage](#Démarrage)
+-[Directory hierarchy](#Directory-hierarchy)
+-[Démarrage](#Démarrage)
+-[Pré-requis](#Pré-requis)
+-[Installation](#Installation)
+-[Auteurs](#Auteurs)
 
 ## Directory hierarchy
 
