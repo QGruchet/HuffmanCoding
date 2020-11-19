@@ -39,10 +39,6 @@ void Test::allTest() {
     std::cout << testJoin() << std::endl;
     std::cout << testSplit() << std::endl;
     
-    // QT
-    testWriteTreeInQt();
-    testWriteAllTests();
-
     /* Test Parser */
     // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
     
@@ -608,30 +604,6 @@ std::string Test::testSplit() {
         return "[ " + tmp + " ] Split the tree in two.\n";
     }
 }
-
-// Writer
-void Test::testWriteTreeInQt(){
-    ArbreB tree(2);
-    tree << 4;
-    tree << 6;
-    tree << 8;
-    tree << 10;
-    tree << 2;
-    tree << 7;
-    tree << 4;
-    tree << 28;
-    tree << 0;
-    tree << 4;
-
-    Writer writer("src/txtQT/binary.txt");
-    writer.writeBeautifulTreeInFile(tree);
-}
-
-void Test::testWriteAllTests() {
-    Writer writer("src/txtQT/resultTest.txt");
-    writer.writeResultAllTests();
-}
-
 /* End Tree.hpp */
 
 /* Test Parser.hpp */
