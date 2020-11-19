@@ -53,7 +53,7 @@ The project is split in many sub directories like the hierarchy as below :
 # Needed
 
 
-For our program to work, we need two or three little things :
+Our program is made in C++ and use Qt for the graphic interface. Also, for our program to work, we need two or three little things :
 
 - [cmake](https://cmake.org/install/) version superior to 3.0.0 is required
 - [Qt libraries](https://doc.ubuntu-fr.org/qt) version superior to 5.0 is required
@@ -80,7 +80,7 @@ To start our program, two options are given :
 Here some idea for future version :
 - Our interface can interact with the painting tree, like adding node, deleting node, spliting tree, fusion of two differents tree...
 - Dell root in the millde of the tree isn't working. We have to fix it.
-
+- To solve memory leaks in the graphic interface
 
 # Authors
 * **LE DENMAT Mickael 21804355**
