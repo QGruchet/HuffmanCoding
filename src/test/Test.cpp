@@ -1,7 +1,8 @@
 #include "Test.hpp"
 #include <string>
 
-Test::Test() : sumTest(0), numTestGlobal(0) {}
+Test::Test() : sumTest(0), numTestGlobal(0), inColor(true) {}
+Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
 
 std::string inRed(std::string msg) {
     return "\033[0;31m" + msg + "\033[0m";
@@ -45,12 +46,18 @@ void Test::allTest() {
     /* Test Parser */
     // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
     
-    if(sumTest == numTestGlobal) {
-        std::cout << "> TESTS RESULT : [ \033[0;31m" << sumTest << "\033[0m/\033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
+    if(inColor) {
+        if(sumTest == numTestGlobal) {
+            std::cout << "> TESTS RESULT : [ \033[0;31m" << sumTest << "\033[0m/\033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
+        }
+        else {
+            std::cout << "> TESTS RESULT : [ \033[0;31m" << sumTest << "\033[0m/\033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
+        }
     }
     else {
-        std::cout << "> TESTS RESULT : [ \033[0;31m" << sumTest << "\033[0m/\033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
+        std::cout << "> TESTS RESULT : [ " << sumTest << "/" << numTestGlobal << " ] tests passed ! <\n" << std::endl;
     }
+    
 }
 
 /* Test Tree */
@@ -64,7 +71,11 @@ std::string Test::testDefaultConstructorNode() {
 
     sumTest += int(ret);
     numTestGlobal += 1;
-    return "[ " + (ret ? OK : FAIL) + " ] Create a default node.";
+    if(inColor) {
+        return "[ " + (ret ? OK : FAIL) + " ] Create a default node.";
+    }
+    std::string retStr = (ret ? " OK " : "FAIL");
+    return "[ " + retStr + " ] Create a default node.";
 }
 
 std::string Test::testCopyConstructorNode() { 
@@ -77,7 +88,11 @@ std::string Test::testCopyConstructorNode() {
 
     sumTest += int(ret);
     numTestGlobal += 1;
-    return "[ " + (ret ? OK : FAIL) + " ] Create a node with a copy.";
+    if(inColor) {
+        return "[ " + (ret ? OK : FAIL) + " ] Create a node with a copy.";
+    }
+    std::string retStr = (ret ? " OK " : "FAIL");
+    return "[ " + retStr + " ] Create a node with a copy.";
 }
 
 std::string Test::testParamConstructorNode() {
@@ -89,7 +104,11 @@ std::string Test::testParamConstructorNode() {
 
     sumTest += int(ret);
     numTestGlobal += 1;
-    return "[ " + (ret ? OK : FAIL) + " ] Create a node with a value.";
+    if(inColor) {
+        return "[ " + (ret ? OK : FAIL) + " ] Create a node with a value.";
+    }
+    std::string retStr = (ret ? " OK " : "FAIL");
+    return "[ " + retStr + " ] Create a node with a value.";
 }
 
 std::string Test::testAssignNode() {
@@ -103,15 +122,25 @@ std::string Test::testAssignNode() {
 
     sumTest += int(ret);
     numTestGlobal +=1;
-    return "[ " + (ret ? OK : FAIL) + " ] Assign a node in a other .";
+    if(inColor) {
+        return "[ " + (ret ? OK : FAIL) + " ] Assign a node in a other .";
+    }
+    std::string retStr = (ret ? " OK " : "FAIL");
+    return "[ " + retStr + " ] Assign a node in a other .";
 }
 
 std::string Test::testEqualsNode() {
-    std::string retur;
+    std::string retStr, retStr2, tmp;
     Sommet emptyNode;
     Sommet emptyNode2;
     bool ret1 = (emptyNode == emptyNode2);
-    retur =  "\t[ " + (ret1 ? OK : FAIL) + " ] Two empty nodes equals.\n";
+    if(inColor) {
+        retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Two empty nodes equals.\n";
+    }
+    else {
+        tmp = (ret1 ? " OK " : "FAIL");
+        retStr2 = "\t[ " + tmp + " ] Two empty nodes equals.\n";
+    }
 
     Sommet node(1);
     node.setLeft(2);
@@ -121,7 +150,13 @@ std::string Test::testEqualsNode() {
     node.getRight()->setLeft(6);
     node.getRight()->setRight(7);
     bool ret2 = ((emptyNode == node) == false);
-    retur += "\t[ " + (ret2 ? OK : FAIL) + " ] One empty and one full.\n";
+    if(inColor) {
+        retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] One empty and one full.\n";
+    }
+    else {
+        tmp = (ret2 ? " OK " : "FAIL");
+        retStr2 += "\t[ " + tmp + " ] One empty and one full.\n";
+    }
 
     Sommet node2(1);
     node2.setLeft(2);
@@ -131,7 +166,13 @@ std::string Test::testEqualsNode() {
     node2.getRight()->setLeft(6);
     node2.getRight()->setRight(7);
     bool ret3 = (node == node2);
-    retur += "\t[ " + (ret3 ? OK : FAIL) + " ] Two full nodes equals.\n";
+    if(inColor) {
+        retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Two full nodes equals.\n";
+    }
+    else {
+        tmp = (ret3 ? " OK " : "FAIL");
+        retStr2 += "\t[ " + tmp + " ] Two full nodes equals.\n";
+    }
 
     Sommet nodes3(1);
     node2.setLeft(2);
@@ -141,50 +182,92 @@ std::string Test::testEqualsNode() {
     node2.getRight()->setLeft(6);
     node2.getRight()->setRight(7);
     bool ret4 = ((node == node2) == false);
-    retur += "\t[ " + (ret4 ? OK : FAIL) + " ] Two full nodes not equal.\n";
+    if(inColor) {
+        retStr += "\t[ " + (ret4 ? OK : FAIL) + " ] Two full nodes not equal.\n";
+    }
+    else {
+        tmp = (ret4 ? " OK " : "FAIL");
+        retStr2 += "\t[ " + (ret4 ? OK : FAIL) + " ] Two full nodes not equal.\n";
+    }
 
     bool ret = ret1 & ret2 & ret3 & ret4;
     sumTest += int(ret);
     numTestGlobal +=1;
-    return retur + "[ " + (ret? OK : FAIL) + " ] Say if two nodes are equals.";
+    if(inColor) {
+        return retStr + "[ " + (ret? OK : FAIL) + " ] Say if two nodes are equals.";
+    }
+    else {
+        tmp = (ret ? " OK " : "FAIL");
+        return retStr2 + "[ " + tmp + " ] Say if two nodes are equals.";
+    }
 }
 
 std::string Test::testDepth() {
-    std::string retur;
+    std::string retStr, retStr2, tmp;
     ArbreB tree(1);
     bool ret1 = (tree.getRoot()->countDepth() == 1);
-    retur = "\t[ " + (ret1 ? OK : FAIL) + " ] Root tree depth.\n";
+    if(inColor) {
+        retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Root tree depth.\n";
+    }
+    else {
+        tmp = (ret1 ? " OK " : "FAIL");
+        retStr2 = "\t[ " + tmp + " ] Root tree depth.\n";
+    }
 
     ArbreB tree2(1);
     tree2.getRoot()->setLeft(2);
     tree2.getRoot()->setRight(3);
     tree2.getRoot()->getLeft()->setLeft(4);
     bool ret2 = (tree2.getRoot()->countDepth() == 3);
-    retur += "\t[ " + (ret2 ? OK : FAIL) + " ] Full tree depth.\n";
+    if(inColor) {
+        retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Full tree depth.\n";
+    }
+    else {
+        tmp = (ret2 ? " OK " : "FAIL");
+        retStr2 += "\t[ " + tmp + " ] Full tree depth.\n";
+    }
 
     bool ret = ret1 & ret2;
     sumTest += int(ret);
     numTestGlobal += 1;
-    return retur + "[ " + (ret ? OK : FAIL) + " ] Count the tree's depht.";
+    if(inColor) {
+        return retStr + "[ " + (ret ? OK : FAIL) + " ] Count the tree's depht.";
+    }
+    else {
+        tmp = (ret ? " OK " : "FAIL");
+        return retStr2 + "[ " + tmp + " ] Count the tree's depht.";
+    }
 }
 
 std::string Test::testSize() {
-    std::string retur;
+    std::string retStr, retStr2, tmp;
     ArbreB tree(1);
     bool ret1 = (tree.getRoot()->countSize() == 1);
-    retur = "\t[ " + (ret1 ? OK : FAIL) + " ] Root tree size.\n";
+    if(inColor) {
+        retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Root tree size.\n";
+    }
+    else {
+        tmp = (ret1 ? " OK " : "FAIL");
+        retStr2 = "\t[ " + tmp + " ] Root tree size.\n";
+    }
 
     ArbreB tree2(1);
     tree2 << 2;
     tree2 << 3;
     tree2 << 4;
     bool ret2 = (tree2.getRoot()->countSize() == 4);
-    retur += "\t[ " + (ret2 ? OK : FAIL) + " ] Full tree size.\n";
+    if(inColor) {
+        retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Full tree size.\n";
+    }
+    else {
+        tmp = (ret2 ? " OK " : "FAIL");
+        retStr2 += "\t[ " + tmp + " ] Full tree size.\n";
+    }
 
     bool ret = ret1 & ret2;
     sumTest += int(ret);
     numTestGlobal += 1;
-    return retur + "[ " + (ret ? OK : FAIL) + " ] Count the number of nodes.";
+    return retStr + "[ " + (ret ? OK : FAIL) + " ] Count the number of nodes.";
 }
 
 // ArbreB

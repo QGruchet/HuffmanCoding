@@ -51,7 +51,8 @@ void Writer::writeResultAllTests() {
 
   // If the file is open
   if(flux) {
-    Test test;
+    bool withColor = false;
+    Test test(withColor);
     // Sommet
     flux<< "\n\t> TESTS <\n";
     flux << test.testDefaultConstructorNode();

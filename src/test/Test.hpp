@@ -11,10 +11,12 @@ class Test
     /* Data */
     int sumTest;
     int numTestGlobal;
+    bool inColor;
 
   public:
     /* Constructor */
     Test();
+    Test(bool withColor);
 
     /* Methodes */
     // Global
