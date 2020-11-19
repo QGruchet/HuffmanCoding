@@ -20,8 +20,9 @@ Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
 
 /**
  * Function : inRed.
+ * * Arguments : 'std::string' msg
  * Return : 'std::string'.
- * Description : Colorized the text in red.
+ * Description : Colorized the string 'msg' in red.
  * */
 std::string inRed(std::string msg) {
     return "\033[0;31m" + msg + "\033[0m";
