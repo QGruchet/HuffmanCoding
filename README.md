@@ -13,11 +13,11 @@ Implementation of Huffman coding in cpp.
 - [Installation](#Installation)  
 - [Launch](#Launch)  
 - [Details of functions](Details-of-functions)  
-    - [Tree.cpp](#Tree.cpp)
-    - [Tree.hpp](#Tree.hpp)
-    - [Writer.cpp](#Writer.cpp)
-    - [Test.cpp](#Test.cpp)
-    - [WindowQT.cpp](#WindowQT.cpp)
+    - [Tree.cpp](#Tree)
+    - [Tree.hpp](#Tree-Headers)
+    - [Writer.cpp](#Writer)
+    - [Test.cpp](#Test)
+    - [WindowQT.cpp](#WindowQT)
 - [Some idea for amelioration](#Some-idea-for-amelioration)
 - [Authors](#Authors)  
 
@@ -82,7 +82,7 @@ To start our program, two options are given :
 
 # Details of functions
 
-## Tree.cpp
+## Tree
 ```cpp
 
 /**
@@ -334,16 +334,16 @@ Sommet::~Sommet() {}
 /* End destructors */
 ```
 
-## Tree.hpp
+## Tree Headers
 ```cpp
 
 ```
 
-## Writer.cpp
+## Writer
 ```cpp
 
 ```
-## Test.cpp
+## Test
 ```cpp
 /**
  * Function : Constructor by default.
