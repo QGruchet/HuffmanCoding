@@ -71,29 +71,29 @@ class Window : public QWidget {
 
 			quit = new QPushButton("Quit");
 			connect(quit, SIGNAL(clicked()), qApp, SLOT(quit()));
-			int tailleQuitX = test->fontMetrics().width("Print Tests") + 10;
-			int tailleQuitY = test->fontMetrics().height();
+			int tailleQuitX = quit->fontMetrics().width("Print Tests") + 10;
+			int tailleQuitY = quit->fontMetrics().height();
 			const QSize sizeQuit = QSize(tailleQuitX + 100, tailleQuitY + 15);
 			quit->setFixedSize(sizeQuit);
 
 			print = new QPushButton("Print Tree");
 			connect(print, SIGNAL(clicked()), this, SLOT(printTree()));
-			int taillePrintX = test->fontMetrics().width("Print Tests") + 10;
-			int taillePrintY = test->fontMetrics().height();
+			int taillePrintX = print->fontMetrics().width("Print Tests") + 10;
+			int taillePrintY = print->fontMetrics().height();
 			const QSize sizePrint = QSize(taillePrintX + 100, taillePrintY + 15);
 			print->setFixedSize(sizePrint);
 
 			del = new QPushButton("Clean");
 			connect(del, SIGNAL(clicked()), this, SLOT(delArbre()));
-			int tailleDelX = test->fontMetrics().width("Print Tests") + 10;
-			int tailleDelY = test->fontMetrics().height();
+			int tailleDelX = del->fontMetrics().width("Print Tests") + 10;
+			int tailleDelY = del->fontMetrics().height();
 			const QSize sizeDel = QSize(tailleDelX + 100, tailleDelY + 15);
 			del->setFixedSize(sizeDel);
 
 			secret = new QPushButton("Don't click");
 			connect(secret, SIGNAL(clicked()), this, SLOT(secretbutton()));
-			int tailleSecretX = test->fontMetrics().width("Print Tests") + 10;
-			int tailleSecretY = test->fontMetrics().height();
+			int tailleSecretX = secret->fontMetrics().width("Print Tests") + 10;
+			int tailleSecretY = secret->fontMetrics().height();
 			const QSize sizeSecret = QSize(tailleSecretX + 100, tailleSecretY + 15);
 			secret->setFixedSize(sizeSecret);
 
@@ -101,11 +101,11 @@ class Window : public QWidget {
 
 			infoTree->addWidget(printInfo);
 			layout->addWidget(printText);
-			layout->addWidget(test);
-			layout->addWidget(print);
-			layout->addWidget(del);
-			layout->addWidget(secret);
-			layout->addWidget(quit);
+			layout->addWidget(test, 0, Qt::AlignCenter);
+			layout->addWidget(print, 0, Qt::AlignCenter);
+			layout->addWidget(del, 0, Qt::AlignCenter);
+			layout->addWidget(secret, 0, Qt::AlignCenter);
+			layout->addWidget(quit, 0, Qt::AlignCenter);
 		}
 
 		~Window(){
