@@ -1,3 +1,8 @@
+/**
+ * Parser.hpp : You can found here all functions implemented for the Parser class.
+ * Author : Mickael.
+ **/
+
 #ifndef Parser_HPP
 #define Parser_HPP
 
