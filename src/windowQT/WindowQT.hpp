@@ -214,7 +214,7 @@ class Window : public QWidget {
 				width = 1920;
 			}
 			int height = QApplication::desktop()->height();
-			resize(height/2, width/4);
+			resize(height/1.5, width/3.5);
 		}
 };
 
