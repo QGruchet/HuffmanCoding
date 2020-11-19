@@ -122,7 +122,8 @@ ArbreB& ArbreB::operator=(const ArbreB& other) {
 }
 
 /** Function : Overloading operator==.
- * Return : boolean.
+ * Return : Boolean.
+ * Parameter : other, the other node for compare.
  * Description : Say if the 'Sommet' is equal to an other.
  * */
 bool Sommet::operator==(const Sommet& other) {
@@ -143,7 +144,8 @@ bool Sommet::operator==(const Sommet& other) {
 }
 
 /** Function : Overloading operator==.
- * Return : boolean.
+ * Return : Boolean.
+ * Parameter : node, the other node for compare.
  * Description : Say if the 'Sommet' is equal to an other, recursive version.
  * */
 bool Sommet::equal(Sommet *node) {
@@ -163,9 +165,9 @@ bool Sommet::equal(Sommet *node) {
     return true;
 }
 
-
 /** Function : Overloading operator==.
- * Return : boolean.
+ * Return : Boolean.
+ * Parameter : other, the other tree for compare.
  * Description : Say if the 'ArbreB' is equal to an other.
  * */
 bool ArbreB::operator==(const ArbreB& other) {
@@ -180,7 +182,8 @@ bool ArbreB::operator==(const ArbreB& other) {
 
 /** Function : Overloading operator<<.
  * Return : 'ArbreB'.
- * Description : Add a node with the value 'newData' in the tree.
+ * Parameter : newData, the value to add in the tree.
+ * Description : Add a node with the value newData in the tree.
  * */
 ArbreB& ArbreB::operator<<(int newData) {
     if(!root) {
@@ -194,6 +197,8 @@ ArbreB& ArbreB::operator<<(int newData) {
 
 /** Function : add.
  * Return : 'ArbreB'.
+ * Parameter : node, for recursive call,
+ *              newData, the value ot add.
  * Description : Add a node with the value 'newData' in the tree, recursive version.
  * */
 void ArbreB::add(Sommet *root, int newData) {
@@ -217,7 +222,7 @@ void ArbreB::add(Sommet *root, int newData) {
 
 /** Function : Overloading operator>>.
  * Return : 'ArbreB'.
- * Parameters : dellData, data need to be deleted.
+ * Parameter : dellData, data need to be deleted.
  * Description : Dell a node with the value 'dellData' in the tree, if
  * the node with 'dellData' existe.
  * */
@@ -300,9 +305,10 @@ void ArbreB::dell(Sommet *root, int dellData) {
 }
 
 
-/** Function : operator<<.
- * Description : Delete a node with the value 'dellData' in the tree, if
- * the node with 'dellData' existe, recursive version.
+/** Function : Overloading operator<<.
+ * Return : std::ostream.
+ * Parameter : flux, where we write, node we print.
+ * Description : Print the node recursively.
  * */
 std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
     flux << node.data << ", ";
@@ -315,15 +321,23 @@ std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
     return flux;
 }
 
+/** Function : Overloading operator<<.
+ * Return : std::ostream.
+ * Parameter : flux, where we write, tree we print.
+ * Description : Print the tree.
+ * */
 std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
     if(tree.root) {
         flux << *tree.root;
     }
     return flux;
 }
-// End operator<<
 
-// Operator+=, operator-=
+/** Function : Overloading operator+=.
+ * Return : 'ArbreB'.
+ * Parameter : other, for merge two trees.
+ * Description : Merge two trees.
+ * */
 ArbreB& ArbreB::operator+=(const ArbreB& other) {
     Sommet *cpyOther = other.root->copy();
     
@@ -332,10 +346,14 @@ ArbreB& ArbreB::operator+=(const ArbreB& other) {
     newRoot->right = cpyOther;
 
     root = newRoot;
-
     return *this;
 }
 
+/** Function : Overloading operator-=.
+ * Return : 'ArbreB'.
+ * Parameter : other, for split two trees.
+ * Description : Split two trees.
+ * */
 ArbreB& ArbreB::operator-=(ArbreB& other) {
     if(root && root->left && root->right) {
         other.root = root->right;
@@ -347,9 +365,12 @@ ArbreB& ArbreB::operator-=(ArbreB& other) {
 
     return *this;
 }
-// End operator+=, operator-=
 
-// Operator[]
+/** Function : Overloading operator[].
+ * Return : 'Sommet*'.
+ * Parameter : index, the position of the node in the tree we need to get.
+ * Description : Get a precise node in the tree.
+ * */
 Sommet* ArbreB::operator[](int index) {
     index--;
     if(index < 0 || index >= root->countSize()) {
@@ -393,15 +414,21 @@ Sommet* ArbreB::operator[](int index) {
     return nullptr;
 }
 
+/** Function : find.
+ * Return : 'Sommet*'.
+ * Parameter : root, for recursiv call, 
+ *             dataSearch, the value we want to find.
+ * Description : Split two trees.
+ * */
 Sommet* ArbreB::find(Sommet* root, int dataSearch) {
     if(root) {
         if(root->data == dataSearch) {
             return root;
         }
-        if(root->left) {
+        if(root->left) { // If we find at the left.
             Sommet* ret = find(root->left, dataSearch);
             if(ret) {
-                return ret;
+                return ret; // Don't need to search at the right, return answer.
             }
         }
         if(root->right) {
@@ -411,8 +438,6 @@ Sommet* ArbreB::find(Sommet* root, int dataSearch) {
 
     return nullptr;
 }
-// End operator[]
-/* End overloaded */
 
 /* Getters */
 int Sommet::getData() const {
@@ -470,6 +495,10 @@ void Sommet::setRight(int rightData) {
 /* End setters */
 
 /* Methodes */
+/** Function : Min.
+ * Parameter : min, the minimum of the tree.
+ * Description : Found the minimum value in the tree, recursive version.
+ * */
 void Sommet::Min(int *min) {
     if(data <= *min) {
         *min = data;
@@ -482,12 +511,20 @@ void Sommet::Min(int *min) {
     }
 }
 
+/** Function : dataMin
+ * Return : int.
+ * Description : Found the minimum value in the tree.
+ * */
 int Sommet::dataMin() {
     int min = INT32_MAX; // Init min with the max value for int
     Min(&min);
     return min;
 }
 
+/** Function : Max.
+ * Parameter : max, the maximum of the tree.
+ * Description : Found the maximum value in the tree, recursive version.
+ * */
 void Sommet::Max(int *max) {
     if(data >= *max) {
         *max = data;
@@ -500,16 +537,34 @@ void Sommet::Max(int *max) {
     }
 }
 
+/** Function : dataMax
+ * Return : int.
+ * Description : Found the maximum value in the tree.
+ * */
 int Sommet::dataMax() {
     int max = INT32_MIN; // Init min with the min value for int
     Max(&max);
     return max;
 }
 
+/** Function : isLeaf
+ * Return : Boolean.
+ * Description : Say if the node is a leaf.
+ * */
 bool Sommet::isLeaf() {
     return (!left && !right);
 }
 
+/** Function : printBeautifulTree
+ * Description : Print tree like the next pattern.
+ *                  right right child ...
+ *      right child
+ *                  right left child ...
+ * root
+ *                  left right child ...
+ *      left child
+ *                 left left child ...
+ * */
 void Sommet::printBeautifulTree(int space) {
     if(right) {
         right->printBeautifulTree(space + 1);
@@ -527,6 +582,10 @@ int maximum(int a, int b){
     return (a > b) ? a : b;
 }
 
+/** Function : countDepht.
+ * Return : int.
+ * Description : Count the depth of the tree.
+ * */
 int Sommet::countDepth() {
     int depthLeft = 0, depthRight = 0;
     if(left) {
@@ -538,6 +597,10 @@ int Sommet::countDepth() {
     return 1 + maximum(depthLeft, depthRight);
 }
 
+/** Function : countSize.
+ * Return : int.
+ * Description : Count the size of the tree.
+ * */
 int Sommet::countSize() {
     int countLeft = 0, countRight = 0;
     if(left) {
