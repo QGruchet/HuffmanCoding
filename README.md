@@ -7,7 +7,7 @@ Implementation of Huffman coding in cpp.
 
 ***
 
-### Table of contents
+# Table of contents
 - [Directory hierarchy](#Directory-hierarchy)  
 - [Needed](#Needed)  
 - [Installation](#Installation)  
@@ -16,7 +16,7 @@ Implementation of Huffman coding in cpp.
 - [Authors](#Authors)  
 
 
-### Directory hierarchy
+# Directory hierarchy
 
 The project is split in many sub directories like the hierarchy as below : 
 ```bash
@@ -52,7 +52,7 @@ The project is split in many sub directories like the hierarchy as below :
 
 ***
 
-### Needed
+# Needed
 
 For our program to work, we need a few programs :
 
@@ -60,24 +60,29 @@ For our program to work, we need a few programs :
 - [Qt libraries](https://doc.ubuntu-fr.org/qt) version 5 required
 - A C++ compiler like [g++](https://doc.ubuntu-fr.org/gcc) or [Clang](https://clang.llvm.org/get_started.html)
 
-### Installation
+***
+# Installation
 
 To build our program, just needed to tape this in a terminal :
 
 - ``` make ```
 
-
-### Launch
+***
+# Launch
 
 To start our program, two options are given :
 
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
-### Some idea for amelioration
+***
+# Some idea for amelioration
 
-
-### Authors
+Here some idea for future version :
+- Our interface can interact with the painting tree, like adding node, deleting node, spliting tree, fusion of two differents tree...
+-
+***
+# Authors
 * **LE DENMAT Mickael 21804355**
 * **GRUCHET Quentin 21605636**
 
