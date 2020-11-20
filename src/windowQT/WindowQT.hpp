@@ -170,7 +170,7 @@ class Window : public QWidget {
 			fichier.close();
 		}
 		/** Function : delArbre().
-		 * Description : Clean all the window.
+		 * Description : Clean the entire window.
 		 * */
 		void delArbre(){
 			// Clear tree and info area

@@ -10,7 +10,7 @@ Implementation of Huffman coding in cpp.
 # Table of contents
 - [Directory hierarchy](#Directory-hierarchy)  
 - [Needed](#Needed)  
-- [Installation](#Installation)  
+- [Build](#Build)  
 - [Launch](#Launch)  
 - [Usage](#Usage)
 - [Details of functions](Details-of-functions)  
@@ -20,13 +20,13 @@ Implementation of Huffman coding in cpp.
     - [WindowQT.cpp](#WindowQT)
 - [Status](#Status)
 - [Explanation of the project](#Explanation-of-the-project)
-- [Some idea for amelioration](#Some-idea-for-amelioration)
+- [Some ideas for amelioration](#Some-ideas-for-amelioration)
 - [Authors](#Authors)  
 
 
 # Directory hierarchy
 
-The project is split in many sub directories like the hierarchy as below : 
+We split the project in many sub directories like the hierarchy as below : 
 ```bash
 .
 ├── build.sh
@@ -68,28 +68,28 @@ Our program is made in C++ and use Qt for the graphic interface. Also, for our p
 - A C++ compiler like [g++](https://doc.ubuntu-fr.org/gcc) (recommanded) or [Clang](https://clang.llvm.org/get_started.html).
 
 
-# Installation
+# Build
 
-To build our program, just needed to write this in a terminal :
+To build our program, you just needed to write this in a terminal :
 
 - ``` make ```
 
 
 # Launch
 
-To start our program, two options are given :
+To start our program, you have two options :
 
 - ``` make run ``` to have a display in the terminal.
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
 # Usage
 ![interface](Screenshots/interface.png)  
-Here a first look of the interface for the project (when you print the tree). All buttons were to clickable.  
-![Print Test](Screenshots/print_test.png) This button print all tests in the interface.  
-![print Tree](Screenshots/print_tree.png)  This button print the tree in the interface.  
+Here is a first look of the interface for the project (when you print the tree). All buttons are clickable.  
+![Print Test](Screenshots/print_test.png) This button prints all the tests in the interface.  
+![print Tree](Screenshots/print_tree.png)  This button prints the tree in the interface.  
 ![clean](Screenshots/clean.png)  This button clean all the window.  
 ![quit](Screenshots/quit.png)  This button close the window.  
-All buttons are connect to functions that have description in windowQT file [see here](#windowQT).  
+All buttons are connected to functions that have a description in windowQT file [see here](#windowQT).  
 
 # Details of functions
 
@@ -576,7 +576,7 @@ Window(){}
 void printTree(){}
             
 /** Function : delArbre().
-* Description : Clean all the window.
+* Description : Clean the entire window.
 * */
 void delArbre(){}
 
@@ -604,21 +604,21 @@ void resizeFull(){}
 
 
 - Part1 : Implementation of a tree and graphic interface.  
-For the first part we were to implement a tree and a graphic interface. The work has been split in two. Mickael had to implement the tree and Quentin had to implement the interface, but at many times we swap the work if someone need some help and sometime we work together online.  
-For the tree we have decide to use two classes, 'Sommet' and 'ArbreB'.
+For the first part we were suppose to implement a tree and a graphic interface. The work has been split in two. Mickael had to implement the tree and Quentin had to implement the interface. But we helped each other when help was needed, and we sometimes worked together online.  
+For the tree we decided to use two classes, 'Sommet' and 'ArbreB'.
 'Sommet' represent a node with a data, a left child and a right child.
-With this  data structure we can find the minimum, the maximum, count the detph, count the number of element.
-And we have 'ArbreB' who represent a tree, with the root, it's a node.
-With this tree we can add node, delete a node (swap the node with a leaf and delete the leaf), find a node, add two trees, and split a tree in two.
-For the interface, we have decide to make the interface with Gtk librairies but some bug (a lot actualy) appeared because we had none  knowledge about Gtk and it appear to be more difficult than were are thinking. Furthermore the result was very not aesthetic.  That why we have decide to use Qt librairies instead. The is not paint in interface but in fact the tree is store in a .txt file and the interface just print it. The tree is display hierarchically and not like we use to represent a tree. 
+With this data structure we can find the minimum, the maximum, count the detph and count the number of element.
+And we have 'ArbreB' who represent a tree, with the root which is also a node.
+With this tree we can add a node, delete one (swap the node with a leaf and delete the leaf), find a node, add two trees, and split a tree in two.  
+For the interface, we decided to make the interface with Gtk librairies but some bug, a lot actually, appeared because we didn't have more informations about Gtk. It turned out harder than we thougth. Furthermore results were aesthetically pleasant. That why we decided to use Qt librairies instead. The tree is not depicted in the interface but the tree is stored in a .txt file and the interface just displays it. It is not represented has a usual tree but it is displayed hierarchically.
 
 
-# Some idea for amelioration
+# Some ideas for amelioration
 
-Here some idea for future version :
-- Our interface can interact with the painting tree, like adding node, deleting node, spliting tree, fusion of two differents tree...
-- Dell root in the millde of the tree isn't working. We have to fix it.
-- Solve memory leaks in the graphic interface.
+Heres are some ideas for future versions :
+- Our interface can interact with the painting tree : adding node, deleting node, splitting tree, merge two different trees, ...
+- We can't delete node from the midlle of the tree. We'll have to fix it.
+- We should solve memory leaks in the graphic interface.
 
 # Authors
 * **LE DENMAT Mickael 21804355**
