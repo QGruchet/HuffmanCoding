@@ -1,3 +1,7 @@
+/**
+ * WindowQT.cpp : You can found here all functions implemented for the graphic interface.
+ * Author : Quentin.
+ * */
 #include "WindowQT.hpp"
 
 #include <QtWidgets/QApplication>

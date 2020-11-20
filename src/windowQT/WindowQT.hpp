@@ -1,6 +1,10 @@
 #ifndef WindowQT_HPP
 #define WindowQT_HPP
 
+/**
+ * WindowQT.cpp : You can found here all functions implemented for the graphic interface.
+ * Author : Quentin.
+ * */
 #include <iostream>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QWidget>

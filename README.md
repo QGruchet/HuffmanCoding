@@ -97,14 +97,14 @@ All buttons are connected to functions that have a description in windowQT file 
 ```cpp
 
 /**
- * Function : Constructor by copy.
+ * Function : Constructor by default.
  * Return : 'Sommet'.
  * Description : Create an object 'Sommet' with default parameters.
  * */
 Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
 
 /**
- * Function : Constructor by copy.
+ * Function : Constructor by default.
  * Return : 'ArbreB'.
  * Description : Create an object 'ArbreB' with default parameters.
  * */
@@ -112,15 +112,15 @@ ArbreB::ArbreB() : root(nullptr)  {}
 
 /**
  * Function : Copy.
- * Return : 'Sommet'*.
- * Description : Return a deep copy of this.
+ * Return : 'Sommet *'.
+ * Description : Return a deep copy of the current object.
  * */
 Sommet* Sommet::copy() {}
 
 /**
  * Function : Constructor by copy.
  * Return : 'Sommet'.
- * Parameter : other, the other tree for the copy.
+ * Parameter : other, the other node for the copy.
  * Description : Create an object 'Sommet' with an other.
  * */
 Sommet::Sommet(const Sommet& other) {}
@@ -184,7 +184,7 @@ bool Sommet::equal(Sommet *node) {}
 /** Function : Overloading operator==.
  * Return : Boolean.
  * Parameter : other, the other tree for compare.
- * Description : Say if the 'ArbreB' is equal to an other.
+ * Description : Say if the 'ArbreB' is equal to an other. 
  * */
 bool ArbreB::operator==(const ArbreB& other) {}
 
@@ -196,18 +196,16 @@ bool ArbreB::operator==(const ArbreB& other) {}
 ArbreB& ArbreB::operator<<(int newData) {}
 
 /** Function : add.
- * Return : 'ArbreB'.
  * Parameter : node, for recursive call,
- *              newData, the value ot add.
- * Description : Add a node with the value 'newData' in the tree, recursive version.
+ *              newData, the value to add.
+ * Description : Add a node with the value newData in the tree, recursive version.
  * */
 void ArbreB::add(Sommet *root, int newData) {}
 
 /** Function : Overloading operator>>.
  * Return : 'ArbreB'.
  * Parameter : dellData, data need to be deleted.
- * Description : Dell a node with the value 'dellData' in the tree, if
- * the node with 'dellData' existe.
+ * Description : Dell a node with the value dellData in the tree, if the node with dellData exist.
  * */
 ArbreB& ArbreB::operator>>(int dellData) {}
 
@@ -216,7 +214,7 @@ ArbreB& ArbreB::operator>>(int dellData) {}
  * Parameters : root, node used for recursif,
  *              dellData, data need to be deleted.
  * Description : Delete a node with the value 'dellData' in the tree, if
- * the node with 'dellData' existe, recursive version.
+ * the node with 'dellData' exist, recursive version.
  * */
 void ArbreB::dell(Sommet *root, int dellData) {}
 
@@ -258,8 +256,7 @@ Sommet* ArbreB::operator[](int index) {}
 
 /** Function : find.
  * Return : 'Sommet*'.
- * Parameter : root, for recursiv call, 
- *             dataSearch, the value we want to find.
+ * Parameter : root, for recursive call, dataSearch, the value we want to find.
  * Description : Split two trees.
  * */
 Sommet* ArbreB::find(Sommet* root, int dataSearch) {}
@@ -372,7 +369,7 @@ void Writer::writeBeautifulTreeInFile(ArbreB tree) {}
 /**
  * Function : writeBeautifulTreeInFileRec.
  * Parameter : node, the node need to write in a file, recursive version.
- *                 flux, where we write.
+ *             flux, where we write.
  * Description : Write a tree in a file.
  * */
 void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream& flux) {}
@@ -403,7 +400,7 @@ Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
 
 /**
  * Function : inRed.
- * Arguments : std::string msg.
+ * Arguments :  msg, the message we want to color.
  * Return : std::string.
  * Description : Colorized the string 'msg' in red.
  * */
@@ -411,7 +408,7 @@ std::string inRed(std::string msg) {}
 
 /**
  * Function : inGreen.
- * Arguments : std::string msg.
+ * Arguments : msg, the message we want to color.
  * Return : std::string.
  * Description : Colorized the string 'msg' in green.
  * */
@@ -458,14 +455,14 @@ std::string Test::testAssignNode() {}
 /**
  * Function : testEqualsNode.
  * Return : std::string.
- * Description : Check if two node are equals is a success.
+ * Description : Check if two nodes are equals is a success.
  * */
 std::string Test::testEqualsNode() {}
 
 /**
  * Function : testDepth.
  * Return : 'std::string'.
- * Description : Check the depth of the tree. If the tree has no child, depth = 1. If he has child, depth  = 2. If child has child, depth = 3.....
+ * Description : Check the depth of the tree. If the tree has no child, depth = 1, if he has child, depth  = 2, if child has child, depth = 3, ....
  * */
 std::string Test::testDepth() {}
 
@@ -501,7 +498,7 @@ std::string Test::testAssignTree() {}
 /**
  * Function : testEqualsTree.
  * Return : std::string.
- * Description : Check if two are equals (same nodes, sames size, same depth).
+ * Description : Check if two trees are equals.
  * */
 std::string Test::TestEqualsTree() {}
 
@@ -536,14 +533,14 @@ std::string Test::testGetNodeAtIndex() {}
 /**
  * Function : testJoin.
  * Return : 'std::string'.
- * Description : Check if we can make a fusion with two trees.
+ * Description : Check if we can merge two trees.
  * */
 std::string Test::testJoin() {}
 
 /**
  * Function : testGetNodeAtIndex.
  * Return : std::string.
- * Description : Check if we can make a split of a tree. We should have two trees at the end.
+ * Description : Check if we can split a tree. We should have two trees at the end.
  * */
 std::string Test::testSplit() {}
 
