@@ -1,4 +1,4 @@
-DEBUG=yes
+DEBUG=no
 CC=g++
 EXEC=main
 WIN=window
@@ -86,7 +86,6 @@ cleanQT:
 	rm src/windowQT/CMakeCache.txt
 	rm src/windowQT/cmake_install.cmake
 	rm src/windowQT/Makefile
-
 
 clean: cleantarget cleanQT
 

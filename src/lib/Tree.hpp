@@ -1,5 +1,5 @@
 /**
- * Tree.cpp : You can found here all functions implemented for the Tree class.
+ * Tree.cpp : You can found here the Tree class.
  * Author : Mickael.
  * */
 
@@ -81,8 +81,8 @@ class ArbreB
     ArbreB& operator=(const ArbreB&);
     bool operator==(const ArbreB&);
     
-    ArbreB& operator<<(int); // Insert
-    ArbreB& operator>>(int); // Dell
+    ArbreB& operator<<(int);
+    ArbreB& operator>>(int);
     Sommet* operator[](int);
 
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);

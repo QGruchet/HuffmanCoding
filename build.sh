@@ -1,5 +1,10 @@
 #!/bin/bash
 
+#
+# build.sh : this is a configuration file, don't need to be modifie.
+# Author : Mickael.
+#
+
 if [ ! -d "src/target" ];then
 mkdir src/target;
 fi

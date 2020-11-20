@@ -22,7 +22,7 @@ Test::Test(bool withColor) : sumTest(0), numTestGlobal(0), inColor(withColor) {}
 
 /**
  * Function : inRed.
- * Arguments : std::string msg.
+ * Arguments : msg, the message we want to color.
  * Return : std::string.
  * Description : Colorized the string 'msg' in red.
  * */
@@ -32,7 +32,7 @@ std::string inRed(std::string msg) {
 
 /**
  * Function : inGreen.
- * Arguments : std::string msg.
+ * Arguments : msg, the message we want to color.
  * Return : std::string.
  * Description : Colorized the string 'msg' in green.
  * */
@@ -179,7 +179,7 @@ std::string Test::testAssignNode() {
 /**
  * Function : testEqualsNode.
  * Return : std::string.
- * Description : Check if two node are equals is a success.
+ * Description : Check if two nodes are equals is a success.
  * */
 std::string Test::testEqualsNode() {
     std::string retStr, retStr2, tmp;
@@ -263,7 +263,7 @@ std::string Test::testEqualsNode() {
 /**
  * Function : testDepth.
  * Return : 'std::string'.
- * Description : Check the depth of the tree. If the tree has no child, depth = 1. If he has child, depth  = 2. If child has child, depth = 3.....
+ * Description : Check the depth of the tree. If the tree has no child, depth = 1, if he has child, depth  = 2, if child has child, depth = 3, ....
  * */
 std::string Test::testDepth() {
     std::string retStr, retStr2, tmp;
@@ -419,7 +419,7 @@ std::string Test::testAssignTree() {
 /**
  * Function : testEqualsTree.
  * Return : std::string.
- * Description : Check if two are equals (same nodes, sames size, same depth).
+ * Description : Check if two trees are equals.
  * */
 std::string Test::TestEqualsTree() {
     std::string retStr, retStr2, tmp;
@@ -671,7 +671,7 @@ std::string Test::testGetNodeAtIndex() {
 /**
  * Function : testJoin.
  * Return : 'std::string'.
- * Description : Check if we can make a fusion with two trees.
+ * Description : Check if we can merge two trees.
  * */
 std::string Test::testJoin() {
     ArbreB tree(2);
@@ -713,7 +713,7 @@ std::string Test::testJoin() {
 /**
  * Function : testGetNodeAtIndex.
  * Return : std::string.
- * Description : Check if we can make a split of a tree. We should have two trees at the end.
+ * Description : Check if we can split a tree. We should have two trees at the end.
  * */
 std::string Test::testSplit() {
     ArbreB tree(3);

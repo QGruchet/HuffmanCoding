@@ -1,3 +1,8 @@
+/**
+ * Writer.hpp : You can found here the Writer class.
+ * Author : Mickael.
+ **/
+
 #ifndef Writer_HPP
 #define Writer_HPP
 

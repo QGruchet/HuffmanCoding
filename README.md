@@ -32,7 +32,15 @@ We split the project in many sub directories like the hierarchy as below :
 ├── build.sh
 ├── Makefile
 ├── README.md
+├── screenshots
+│   ├── clean.png
+│   ├── interface.png
+│   ├── print_test.png
+│   ├── print_tree.png
+│   └── quit.png
 └── src
+    ├── bin
+    │   └── main
     ├── lib
     │   ├── Parser.cpp
     │   ├── Parser.hpp
@@ -50,7 +58,8 @@ We split the project in many sub directories like the hierarchy as below :
         ├── WindowQT.cpp
         └── WindowQT.hpp
 
-5 directories, 15 files
+7 directories, 21 files
+
 ```
 * src : Contains all sources codes.
 * src/lib : Contains all librairies using by the projet.
