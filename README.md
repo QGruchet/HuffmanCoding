@@ -602,10 +602,15 @@ void resizeFull(){}
 
 # Explanation of the project
 
-- Part1 : Implementation of a tree.  
-For the first part we were to implement a tree and a graphic interface.
-The word has been split in two. Mickael had to implement the tree and Quentin had to implement the interface.
-For the tree
+
+- Part1 : Implementation of a tree and graphic interface.  
+For the first part we were to implement a tree and a graphic interface. The work has been split in two. Mickael had to implement the tree and Quentin had to implement the interface, but at many times we swap the work if someone need some help and sometime we work together online.  
+For the tree we have decide to use two classes, 'Sommet' and 'ArbreB'.
+'Sommet' represent a node with a data, a left child and a right child.
+With this  data structure we can find the minimum, the maximum, count the detph, count the number of element.
+And we have 'ArbreB' who represent a tree, with the root, it's a node.
+With this tree we can add node, delete a node (swap the node with a leaf and delete the leaf), find a node, add two trees, and split a tree in two.
+For the interface, we have decide to make the interface with Gtk librairies but some bug (a lot actualy) appeared because we had none  knowledge about Gtk and it appear to be more difficult than were are thinking. Furthermore the result was very not aesthetic.  That why we have decide to use Qt librairies instead. The is not paint in interface but in fact the tree is store in a .txt file and the interface just print it. The tree is display hierarchically and not like we use to represent a tree. 
 
 
 # Some idea for amelioration

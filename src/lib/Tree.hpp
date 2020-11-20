@@ -47,7 +47,6 @@ public:
     bool isLeaf();
     void printBeautifulTree(int);
     void writeBeautifulTreeInFile(int);
-    void writeInFile(std::string);
     Sommet* copy();
     bool equal(Sommet*);
     int countDepth();
