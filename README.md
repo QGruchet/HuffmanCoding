@@ -92,12 +92,12 @@ To start our program, you have two options :
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
 # Usage
-![interface](Screenshots/interface.png)  
+![interface](screenshots/interface.png)  
 Here is a first look of the interface for the project (when you print the tree). All buttons are clickable.  
-![Print Test](Screenshots/print_test.png) This button prints all the tests in the interface.  
-![print Tree](Screenshots/print_tree.png)  This button prints the tree in the interface.  
-![clean](Screenshots/clean.png)  This button clean all the window.  
-![quit](Screenshots/quit.png)  This button close the window.  
+![Print Test](screenshots/print_test.png) This button prints all the tests in the interface.  
+![print Tree](screenshots/print_tree.png)  This button prints the tree in the interface.  
+![clean](screenshots/clean.png)  This button clean all the window.  
+![quit](screenshots/quit.png)  This button close the window.  
 All buttons are connected to functions that have a description in windowQT file [see here](#windowQT).  
 
 # Details of functions
