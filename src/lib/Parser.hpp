@@ -1,5 +1,5 @@
 /**
- * Parser.hpp : You can found here all functions implemented for the Parser class.
+ * Parser.hpp : You can found here the Parser class.
  * Author : Mickael.
  **/
 

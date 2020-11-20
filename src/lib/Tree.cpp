@@ -5,14 +5,14 @@
 #include "Tree.hpp"
 
 /**
- * Function : Constructor by copy.
+ * Function : Constructor by default.
  * Return : 'Sommet'.
  * Description : Create an object 'Sommet' with default parameters.
  * */
 Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
 
 /**
- * Function : Constructor by copy.
+ * Function : Constructor by default.
  * Return : 'ArbreB'.
  * Description : Create an object 'ArbreB' with default parameters.
  * */
@@ -20,8 +20,8 @@ ArbreB::ArbreB() : root(nullptr)  {}
 
 /**
  * Function : Copy.
- * Return : 'Sommet'*.
- * Description : Return a deep copy of this.
+ * Return : 'Sommet*'.
+ * Description : Return a deep copy of the current object.
  * */
 Sommet* Sommet::copy() {
     Sommet *newNode = new Sommet(data);
@@ -37,7 +37,7 @@ Sommet* Sommet::copy() {
 /**
  * Function : Constructor by copy.
  * Return : 'Sommet'.
- * Parameter : other, the other tree for the copy.
+ * Parameter : other, the other node for the copy.
  * Description : Create an object 'Sommet' with an other.
  * */
 Sommet::Sommet(const Sommet& other) {
@@ -177,7 +177,7 @@ bool ArbreB::operator==(const ArbreB& other) {
     if((!root && other.root) || (root && !other.root)) {
         return false;
     }
-    return *root == *other.root;
+    return *root == *other.root; // Use operator== for 'Sommet'
 }
 
 /** Function : Overloading operator<<.
@@ -196,10 +196,9 @@ ArbreB& ArbreB::operator<<(int newData) {
 }
 
 /** Function : add.
- * Return : 'ArbreB'.
  * Parameter : node, for recursive call,
- *              newData, the value ot add.
- * Description : Add a node with the value 'newData' in the tree, recursive version.
+ *              newData, the value to add.
+ * Description : Add a node with the value newData in the tree, recursive version.
  * */
 void ArbreB::add(Sommet *root, int newData) {
     if(rand()%2) { // Add randomly the new root 
@@ -223,8 +222,8 @@ void ArbreB::add(Sommet *root, int newData) {
 /** Function : Overloading operator>>.
  * Return : 'ArbreB'.
  * Parameter : dellData, data need to be deleted.
- * Description : Dell a node with the value 'dellData' in the tree, if
- * the node with 'dellData' existe.
+ * Description : Dell a node with the value dellData in the tree, if
+ *              the node with dellData exist.
  * */
 ArbreB& ArbreB::operator>>(int dellData) {
     Sommet *dellNode = find(root, dellData);
@@ -253,10 +252,10 @@ ArbreB& ArbreB::operator>>(int dellData) {
 
 /** Function : dell.
  * Return : 'ArbreB'.
- * Parameters : root, node used for recursif,
+ * Parameters : root, node used for recursive call,
  *              dellData, data need to be deleted.
- * Description : Delete a node with the value 'dellData' in the tree, if
- * the node with 'dellData' existe, recursive version.
+ * Description : Delete a node with the value dellData in the tree, if
+ *              the node with dellData exist, recursive version.
  * */
 void ArbreB::dell(Sommet *root, int dellData) {
     if(!root) {
@@ -307,7 +306,8 @@ void ArbreB::dell(Sommet *root, int dellData) {
 
 /** Function : Overloading operator<<.
  * Return : std::ostream.
- * Parameter : flux, where we write, node we print.
+ * Parameter : flux, where we write, 
+ *             node we print.
  * Description : Print the node recursively.
  * */
 std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
@@ -323,7 +323,8 @@ std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
 
 /** Function : Overloading operator<<.
  * Return : std::ostream.
- * Parameter : flux, where we write, tree we print.
+ * Parameter : flux, where we write,
+ *              tree we print.
  * Description : Print the tree.
  * */
 std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
@@ -416,7 +417,7 @@ Sommet* ArbreB::operator[](int index) {
 
 /** Function : find.
  * Return : 'Sommet*'.
- * Parameter : root, for recursiv call, 
+ * Parameter : root, for recursive call, 
  *             dataSearch, the value we want to find.
  * Description : Split two trees.
  * */

@@ -1,3 +1,8 @@
+/**
+ * Test.hpp : You can found here the Test class.
+ * Author : Mickael.
+ **/
+
 #ifndef Test_HPP
 #define Test_HPP
 
