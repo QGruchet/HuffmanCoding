@@ -1,9 +1,9 @@
-DEBUG=no
+DEBUG=yes
 CC=g++
 EXEC=main
-WIN=window
-PACKWIN=-std=c++0x `pkg-config --CXXFLAGS gtkmm-3.0 --CXXFLAGS --libs`
-STRC=src/QtWindow
+# WIN=window
+# PACKWIN=-std=c++0x `pkg-config --CXXFLAGS gtkmm-3.0 --CXXFLAGS --libs`
+# STRC=src/windowQt
 
 #################################
 
@@ -30,9 +30,9 @@ run :
 	./src/bin/$(EXEC)
 
 window: run
-	cmake src/windowQT/CMakeLists.txt
-	make -C src/windowQT
-	src/windowQT/./main
+	cmake src/windowQt/CMakeLists.txt
+	make -C src/windowQt
+	src/windowQt/./windowQt
 
 #################################
 
@@ -80,12 +80,11 @@ cleantarget:
 	rmdir src/txtQT
 
 cleanQT:
-	rm src/windowQT/main
-	rm -r src/windowQT/CMakeFiles
-	rm -r src/windowQT/main_autogen
-	rm src/windowQT/CMakeCache.txt
-	rm src/windowQT/cmake_install.cmake
-	rm src/windowQT/Makefile
+	rm src/windowQt/windowQt
+	rm -r src/windowQt/CMakeFiles
+	rm src/windowQt/CMakeCache.txt
+	rm src/windowQt/cmake_install.cmake
+	rm src/windowQt/Makefile
 
 clean: cleantarget cleanQT
 
