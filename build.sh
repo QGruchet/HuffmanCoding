@@ -13,6 +13,6 @@ if [ ! -d "src/bin" ]; then
 mkdir src/bin;
 fi
 
-if [ ! -d "src/txtQT" ]; then
-mkdir src/txtQT;
+if [ ! -d "src/txtQt" ]; then
+mkdir src/txtQt;
 fi

@@ -87,7 +87,8 @@ void MainWindow::encoding()
     read = reader->toPlainText();
 
     //
-
+    Writer writer("../txtQt/textToCode.txt");
+    writer.
 }
 
 void MainWindow::printDecoding()

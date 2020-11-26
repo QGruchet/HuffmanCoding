@@ -24,6 +24,8 @@ class Writer
 		void writeBeautifulTreeInFile(ArbreB);
 		void writeBeautifulTreeInFileRec(Sommet*, int, std::ofstream&);
 		void writeResultAllTests();
+		void writeTextNoEncoding(std::string);
+		void writeTextCoding();
 };
 
 #endif

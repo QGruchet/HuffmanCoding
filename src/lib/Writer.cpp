@@ -42,9 +42,11 @@ void Writer::writeBeautifulTreeInFile(ArbreB tree) {
 
         // Write the tree
         writeBeautifulTreeInFileRec(root, 0, flux);
+
+        flux.close();
     }
     else {
-        std::cout << "ERROR : can't open file" << std::endl;
+        std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
     }
 }
 
@@ -64,9 +66,6 @@ void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream&
     }
     if(node->getLeft()) {
         writeBeautifulTreeInFileRec(node->getLeft(), space + 1, flux);
-    }
-    if(space == 0) {
-        flux.close();
     }
 }
 
@@ -114,7 +113,36 @@ void Writer::writeResultAllTests() {
     flux.close();
   }
   else {
-    std::cout << "ERROR : can't open file" << std::endl;
+    std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
   }
+}
+
+void Writer::writeTextNoEncoding(std::string text) {
+    std::ofstream flux;
+    flux.open(file.c_str(), std::ios::trunc);
+    if(flux) {
+        flux << text;
+        flux.close();
+    }
+    else {
+        std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
+    }
+}
+
+void Writer::writeTextCoding() {
+    // Convert
+    std::string convert = "text convert";
+
+    //
+    std::ofstream flux;
+    flux.open(file.c_str(), std::ios::trunc);
+    if(flux) {
+        flux << convert;
+        flux.close();
+    }
+    else {
+        std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
+    }
+
 }
  
