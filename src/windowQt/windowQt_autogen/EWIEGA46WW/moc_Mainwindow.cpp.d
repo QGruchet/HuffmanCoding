@@ -1,6 +1,12 @@
 /home/user/Documents/HuffmanCoding/src/windowQt/windowQt_autogen/EWIEGA46WW/moc_Mainwindow.cpp: /home/user/Documents/HuffmanCoding/src/windowQt/Mainwindow.hpp \
   /home/user/Documents/HuffmanCoding/src/windowQt/windowQt_autogen/moc_predefs.h \
+  /home/user/Documents/HuffmanCoding/src/lib/Parser.hpp \
+  /home/user/Documents/HuffmanCoding/src/lib/Tree.hpp \
+  /home/user/Documents/HuffmanCoding/src/lib/Writer.hpp \
+  /home/user/Documents/HuffmanCoding/src/test/Test.hpp \
   /home/user/Documents/HuffmanCoding/src/windowQt/Tiltewidget.hpp \
+  /usr/include/asm-generic/errno-base.h \
+  /usr/include/asm-generic/errno.h \
   /usr/include/assert.h \
   /usr/include/c++/10/algorithm \
   /usr/include/c++/10/array \
@@ -21,20 +27,24 @@
   /usr/include/c++/10/bits/c++0x_warning.h \
   /usr/include/c++/10/bits/char_traits.h \
   /usr/include/c++/10/bits/charconv.h \
+  /usr/include/c++/10/bits/codecvt.h \
   /usr/include/c++/10/bits/concept_check.h \
   /usr/include/c++/10/bits/cpp_type_traits.h \
   /usr/include/c++/10/bits/cxxabi_forced.h \
   /usr/include/c++/10/bits/cxxabi_init_exception.h \
+  /usr/include/c++/10/bits/deque.tcc \
   /usr/include/c++/10/bits/enable_special_members.h \
   /usr/include/c++/10/bits/erase_if.h \
   /usr/include/c++/10/bits/exception.h \
   /usr/include/c++/10/bits/exception_defines.h \
   /usr/include/c++/10/bits/exception_ptr.h \
+  /usr/include/c++/10/bits/fstream.tcc \
   /usr/include/c++/10/bits/functexcept.h \
   /usr/include/c++/10/bits/functional_hash.h \
   /usr/include/c++/10/bits/hash_bytes.h \
   /usr/include/c++/10/bits/invoke.h \
   /usr/include/c++/10/bits/ios_base.h \
+  /usr/include/c++/10/bits/istream.tcc \
   /usr/include/c++/10/bits/iterator_concepts.h \
   /usr/include/c++/10/bits/list.tcc \
   /usr/include/c++/10/bits/locale_classes.h \
@@ -66,6 +76,7 @@
   /usr/include/c++/10/bits/stl_algobase.h \
   /usr/include/c++/10/bits/stl_bvector.h \
   /usr/include/c++/10/bits/stl_construct.h \
+  /usr/include/c++/10/bits/stl_deque.h \
   /usr/include/c++/10/bits/stl_function.h \
   /usr/include/c++/10/bits/stl_heap.h \
   /usr/include/c++/10/bits/stl_iterator.h \
@@ -76,6 +87,7 @@
   /usr/include/c++/10/bits/stl_multimap.h \
   /usr/include/c++/10/bits/stl_numeric.h \
   /usr/include/c++/10/bits/stl_pair.h \
+  /usr/include/c++/10/bits/stl_queue.h \
   /usr/include/c++/10/bits/stl_raw_storage_iter.h \
   /usr/include/c++/10/bits/stl_relops.h \
   /usr/include/c++/10/bits/stl_tempbuf.h \
@@ -92,16 +104,20 @@
   /usr/include/c++/10/bits/uses_allocator.h \
   /usr/include/c++/10/bits/vector.tcc \
   /usr/include/c++/10/cctype \
+  /usr/include/c++/10/cerrno \
   /usr/include/c++/10/clocale \
   /usr/include/c++/10/compare \
   /usr/include/c++/10/concepts \
   /usr/include/c++/10/cstddef \
   /usr/include/c++/10/cstdint \
+  /usr/include/c++/10/cstdio \
   /usr/include/c++/10/cstdlib \
+  /usr/include/c++/10/ctime \
   /usr/include/c++/10/cwchar \
   /usr/include/c++/10/cwctype \
   /usr/include/c++/10/debug/assertions.h \
   /usr/include/c++/10/debug/debug.h \
+  /usr/include/c++/10/deque \
   /usr/include/c++/10/exception \
   /usr/include/c++/10/ext/aligned_buffer.h \
   /usr/include/c++/10/ext/alloc_traits.h \
@@ -111,10 +127,13 @@
   /usr/include/c++/10/ext/numeric_traits.h \
   /usr/include/c++/10/ext/string_conversions.h \
   /usr/include/c++/10/ext/type_traits.h \
+  /usr/include/c++/10/fstream \
   /usr/include/c++/10/functional \
   /usr/include/c++/10/initializer_list \
   /usr/include/c++/10/ios \
   /usr/include/c++/10/iosfwd \
+  /usr/include/c++/10/iostream \
+  /usr/include/c++/10/istream \
   /usr/include/c++/10/iterator \
   /usr/include/c++/10/limits \
   /usr/include/c++/10/list \
@@ -128,6 +147,7 @@
   /usr/include/c++/10/pstl/glue_algorithm_defs.h \
   /usr/include/c++/10/pstl/glue_memory_defs.h \
   /usr/include/c++/10/pstl/glue_numeric_defs.h \
+  /usr/include/c++/10/queue \
   /usr/include/c++/10/ranges \
   /usr/include/c++/10/stdexcept \
   /usr/include/c++/10/stdlib.h \
@@ -141,7 +161,9 @@
   /usr/include/c++/10/utility \
   /usr/include/c++/10/vector \
   /usr/include/ctype.h \
+  /usr/include/errno.h \
   /usr/include/features.h \
+  /usr/include/linux/errno.h \
   /usr/include/locale.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
@@ -152,9 +174,11 @@
   /usr/include/time.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
+  /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
@@ -183,6 +207,7 @@
   /usr/include/x86_64-linux-gnu/bits/types/clock_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h \
+  /usr/include/x86_64-linux-gnu/bits/types/error_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/mbstate_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h \
@@ -199,8 +224,10 @@
   /usr/include/x86_64-linux-gnu/bits/wctype-wchar.h \
   /usr/include/x86_64-linux-gnu/bits/wordsize.h \
   /usr/include/x86_64-linux-gnu/c++/10/bits/atomic_word.h \
+  /usr/include/x86_64-linux-gnu/c++/10/bits/basic_file.h \
   /usr/include/x86_64-linux-gnu/c++/10/bits/c++allocator.h \
   /usr/include/x86_64-linux-gnu/c++/10/bits/c++config.h \
+  /usr/include/x86_64-linux-gnu/c++/10/bits/c++io.h \
   /usr/include/x86_64-linux-gnu/c++/10/bits/c++locale.h \
   /usr/include/x86_64-linux-gnu/c++/10/bits/cpu_defines.h \
   /usr/include/x86_64-linux-gnu/c++/10/bits/ctype_base.h \

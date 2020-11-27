@@ -14,30 +14,38 @@
 #include <cstdlib>
 #include <ctime>
 
+struct Data {
+  int freq; 
+  char car;
+};
+
 class Sommet
 {
-  friend class ArbreB; // For used 'Sommet' int 'ArbreB' without 
-                      // getters or setters
+  friend class ArbreB;  // For used 'Sommet' in 'ArbreB' without 
+                        // getters or setters
 
   private:
     /* Data */
-    int data; // The value of the node
+    Data data;
     Sommet *left, *right; // Left child and right child
 
 public:
     /* Constructors */
     Sommet(); // Default
     Sommet(const Sommet&); // Copy
-    Sommet(int);
+    Sommet(int, char);
+    Sommet(Data);
 
     /* Overloaded */
     Sommet& operator=(Sommet);
-    Sommet& operator=(int);
+    Sommet& operator=(Data);
     bool operator==(const Sommet&);
 
     friend std::ostream &operator<<(std::ostream &, const Sommet&);
     
     /* Methodes */
+    bool equalsData(Data);
+
     void Min(int*);
     int dataMin();
 
@@ -53,13 +61,13 @@ public:
     int countSize();
 
     /* Getters */
-    int getData() const;
+    Data getData() const;
     Sommet* getLeft() const;
     Sommet* getRight() const;
 
     /* Setters */
-    void setLeft(int leftData);
-    void setRight(int rightData);
+    void setLeft(Data leftData);
+    void setRight(Data rightData);
 
     /* Destructor */
     ~Sommet();
@@ -75,14 +83,15 @@ class ArbreB
     /* Constructors */
     ArbreB(); //Default
     ArbreB(const ArbreB&);
-    ArbreB(int);
+    ArbreB(int, char);
+    ArbreB(Data);
 
     /* Overloaded */
     ArbreB& operator=(const ArbreB&);
     bool operator==(const ArbreB&);
     
-    ArbreB& operator<<(int);
-    ArbreB& operator>>(int);
+    ArbreB& operator<<(Data);
+    ArbreB& operator>>(Data);
     Sommet* operator[](int);
 
     friend std::ostream &operator<<(std::ostream &flux, const ArbreB&);
@@ -91,9 +100,9 @@ class ArbreB
     ArbreB& operator-=(ArbreB&);
 
     /* Methodes */
-    void add(Sommet*, int);
-    void dell(Sommet*, int);
-    Sommet* find(Sommet*, int);
+    void add(Sommet*, Data);
+    void dell(Sommet*, Data);
+    Sommet* find(Sommet*, Data);
 
     /* Getters */
     Sommet* getRoot() const;

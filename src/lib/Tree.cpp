@@ -9,7 +9,12 @@
  * Return : 'Sommet'.
  * Description : Create an object 'Sommet' with default parameters.
  * */
-Sommet::Sommet() : data(0), left(nullptr), right(nullptr) {}
+Sommet::Sommet() {
+    data.freq = 0;
+    data.car = '\0';
+    left = nullptr;
+    right = nullptr;
+}
 
 /**
  * Function : Constructor by default.
@@ -67,15 +72,22 @@ ArbreB::ArbreB(const ArbreB& other) {
  * Paramter : newData, the data to init the node.
  * Description : Create a object 'Sommet' by initializing the data.
  * */
-Sommet::Sommet(int newData) : data(newData), left(nullptr), right(nullptr) {}
+Sommet::Sommet(int newData, char newCar) {
+    data.freq = newData;
+    data.car = newCar;
+    left = nullptr;
+    right = nullptr;
+}
+
+Sommet::Sommet(Data newData) : data(newData), left(nullptr), right(nullptr) {}
 
 /** Function : Constructor with parameter.
  * Return : 'ArbreB'.
  * Parameter : rootData, tha data to init the root of the tree.
  * Description : Create a object 'ArbreB' by initializing the root.
  * */
-ArbreB::ArbreB(int rootData) {
-    root = new Sommet(rootData);
+ArbreB::ArbreB(int rootData, char charRoot) {
+    root = new Sommet(rootData, charRoot);
 }
 
 /** Function : Overloading operator=.
@@ -101,7 +113,7 @@ Sommet& Sommet::operator=(Sommet other) {
  * Parameter : newData, the data for swap.
  * Description : Swap the value of the 'Sommet' with newData.
  * */
-Sommet& Sommet::operator=(int newData) {
+Sommet& Sommet::operator=(Data newData) {
     data = newData;
     return *this;
 }
@@ -127,7 +139,7 @@ ArbreB& ArbreB::operator=(const ArbreB& other) {
  * Description : Say if the 'Sommet' is equal to an other.
  * */
 bool Sommet::operator==(const Sommet& other) {
-    if(data == other.data) {
+    if(data.freq == other.data.freq && data.car == other.data.car) {
         if(left && other.left) {
             if(!left->equal(other.left)) {
                 return false;
@@ -150,7 +162,7 @@ bool Sommet::operator==(const Sommet& other) {
  * */
 bool Sommet::equal(Sommet *node) {
     if(node) {
-        if(data != node->data) {
+        if(data.freq != node->data.freq || data.car != node->data.car) {
             return false;
         }
         if(left && node->left) {
@@ -185,7 +197,7 @@ bool ArbreB::operator==(const ArbreB& other) {
  * Parameter : newData, the value to add in the tree.
  * Description : Add a node with the value newData in the tree.
  * */
-ArbreB& ArbreB::operator<<(int newData) {
+ArbreB& ArbreB::operator<<(Data newData) {
     if(!root) {
         root = new Sommet(newData);
     }
@@ -200,7 +212,7 @@ ArbreB& ArbreB::operator<<(int newData) {
  *              newData, the value to add.
  * Description : Add a node with the value newData in the tree, recursive version.
  * */
-void ArbreB::add(Sommet *root, int newData) {
+void ArbreB::add(Sommet *root, Data newData) {
     if(rand()%2) { // Add randomly the new root 
         if(root->left) {
             add(root->left, newData);
@@ -225,19 +237,19 @@ void ArbreB::add(Sommet *root, int newData) {
  * Description : Dell a node with the value dellData in the tree, if
  *              the node with dellData exist.
  * */
-ArbreB& ArbreB::operator>>(int dellData) {
+ArbreB& ArbreB::operator>>(Data dellData) {
     Sommet *dellNode = find(root, dellData);
     if(!dellNode || !root) { // If haven't root or the value dellData wasen't found
         return *this;
     }
-    if(root->data == dellData) {
+    if(root->data.freq == dellData.freq && root->data.car == dellData.car) {
         if(root->isLeaf()) { // Delete the root
             delete root;
             root = nullptr;
         }
         else { // Swap the root with a random leaf
             Sommet *randLeaf = getRandLeaf(root);
-            int swap = randLeaf->data;
+            Data swap = randLeaf->data;
             randLeaf->data = root->data;
             root->data = swap;
 
@@ -257,12 +269,12 @@ ArbreB& ArbreB::operator>>(int dellData) {
  * Description : Delete a node with the value dellData in the tree, if
  *              the node with dellData exist, recursive version.
  * */
-void ArbreB::dell(Sommet *root, int dellData) {
+void ArbreB::dell(Sommet *root, Data dellData) {
     if(!root) {
         return;
     }
     if(root->left) {
-        if(root->left->data == dellData) {
+        if(root->left->data.freq == dellData.freq && root->left->data.car == dellData.car) {
             if(root->left->isLeaf()) { // Delete the left child
                 delete root->left;
                 root->left = nullptr;
@@ -282,7 +294,7 @@ void ArbreB::dell(Sommet *root, int dellData) {
         // }
     }
     if(root->right) {
-        if(root->right->data == dellData) {
+        if(root->right->data.freq == dellData.freq && root->right->data.car == dellData.car) {
             if(root->right->isLeaf()) { // Delete the right child
                 delete root->right;
                 root->right = nullptr;
@@ -311,7 +323,7 @@ void ArbreB::dell(Sommet *root, int dellData) {
  * Description : Print the node recursively.
  * */
 std::ostream &operator<<(std::ostream &flux, const Sommet& node) {
-    flux << node.data << ", ";
+    flux << "(" << node.data.car << ", " << node.data.freq << "), ";
     if(node.left) {
         flux << *node.left;
     }
@@ -342,7 +354,10 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
 ArbreB& ArbreB::operator+=(const ArbreB& other) {
     Sommet *cpyOther = other.root->copy();
     
-    Sommet *newRoot = new Sommet(root->data + cpyOther->data);
+    Data newRootData;
+    newRootData.freq = root->data.freq + cpyOther->data.freq;
+    newRootData.car = '\0';
+    Sommet *newRoot = new Sommet(newRootData);
     newRoot->left = root;
     newRoot->right = cpyOther;
 
@@ -421,9 +436,9 @@ Sommet* ArbreB::operator[](int index) {
  *             dataSearch, the value we want to find.
  * Description : Split two trees.
  * */
-Sommet* ArbreB::find(Sommet* root, int dataSearch) {
+Sommet* ArbreB::find(Sommet* root, Data dataSearch) {
     if(root) {
-        if(root->data == dataSearch) {
+        if(root->data.freq == dataSearch.freq && root->data.car == dataSearch.car) {
             return root;
         }
         if(root->left) { // If we find at the left.
@@ -441,7 +456,7 @@ Sommet* ArbreB::find(Sommet* root, int dataSearch) {
 }
 
 /* Getters */
-int Sommet::getData() const {
+Data Sommet::getData() const {
     return data;
 }
 
@@ -476,18 +491,20 @@ Sommet* ArbreB::getRandLeaf(Sommet* root) const{
 /* End getters */
 
 /* Setters */
-void Sommet::setLeft(int leftData) {
+void Sommet::setLeft(Data leftData) {
     if(left) {
-        left->data = leftData;
+        left->data.freq = leftData.freq;
+        left->data.car = leftData.car;
     }
     else {
         left = new Sommet(leftData);
     }
 }
 
-void Sommet::setRight(int rightData) {
+void Sommet::setRight(Data rightData) {
     if(right) {
-        right->data = rightData;
+        right->data.freq = rightData.freq;
+        right->data.car = rightData.car;
     }
     else {
         right = new Sommet(rightData);
@@ -496,13 +513,19 @@ void Sommet::setRight(int rightData) {
 /* End setters */
 
 /* Methodes */
+
+bool Sommet::equalsData(Data other) {
+    return ((data.freq == other.freq)
+        && (data.car == other.car));
+}
+
 /** Function : Min.
  * Parameter : min, the minimum of the tree.
  * Description : Found the minimum value in the tree, recursive version.
  * */
 void Sommet::Min(int *min) {
-    if(data <= *min) {
-        *min = data;
+    if(data.freq <= *min) {
+        *min = data.freq;
     }
     if(left) {
         left->Min(min);
@@ -527,8 +550,8 @@ int Sommet::dataMin() {
  * Description : Found the maximum value in the tree, recursive version.
  * */
 void Sommet::Max(int *max) {
-    if(data >= *max) {
-        *max = data;
+    if(data.freq >= *max) {
+        *max = data.freq;
     }
     if(left) {
         left->Max(max);
@@ -573,7 +596,7 @@ void Sommet::printBeautifulTree(int space) {
     for(int i = 0; i < space; i++) {
         std::cout << "   ";
     }
-    std::cout << this->data << std::endl;
+    std::cout << "(" << data.car << ", " << data.freq << "), " << std::endl;
     if(left) {
         left->printBeautifulTree(space + 1);
     }

@@ -35,7 +35,7 @@ void Writer::writeBeautifulTreeInFile(ArbreB tree) {
         // Write some informations
         Sommet *root = tree.getRoot();
         flux << root->countSize() << "\n";
-        flux << root->getData() << "\n";
+        flux << root->getData().freq << "\n";
         flux << root->countDepth() << "\n";
         flux << root->dataMin() << "\n";
         flux << root->dataMax() << "\n";
@@ -60,7 +60,8 @@ void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream&
     for(int i = 0; i < space; i++) {
         flux << "|__";
     }
-    flux << node->getData() << std::endl;
+    Data getNodeData = node->getData();
+    flux << "(" << getNodeData.car << ", " << getNodeData.freq << "), " << std::endl;
     if(node->getRight()) {
         writeBeautifulTreeInFileRec(node->getRight(), space + 1, flux);
     }

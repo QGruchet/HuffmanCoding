@@ -96,7 +96,8 @@ void Test::allTest() {
  * */
 std::string Test::testDefaultConstructorNode() {
     Sommet node;
-    bool ret = ( (node.getData() == 0)
+    Data res; res.freq = 0;  res.car = '\0';
+    bool ret = ( (node.equalsData(res))
                 && (node.getLeft() == nullptr)
                 && (node.getRight() == nullptr)
                 );
@@ -116,9 +117,10 @@ std::string Test::testDefaultConstructorNode() {
  * Description : Check if constructor by copy is a success.
  * */
 std::string Test::testCopyConstructorNode() { 
-    Sommet node(1);
+    Sommet node(1, 'e');
+    Data res; res.freq = 1;  res.car = 'e';
     Sommet node2(node);
-    bool ret = ( (node2.getData() == node.getData())
+    bool ret = ( (node2.equalsData(res))
                 && (node2.getLeft() == node.getLeft())
                 && (node2.getRight() == node.getRight())
                 );
@@ -138,8 +140,9 @@ std::string Test::testCopyConstructorNode() {
  * Description : Check if constructor by default without child is a success.
  * */
 std::string Test::testParamConstructorNode() {
-    Sommet node(1);
-    bool ret = ( (node.getData() == 1)
+    Sommet node(1, 'a');
+    Data res; res.freq = 1;  res.car = 'a';
+    bool ret = ( (node.equalsData(res))
                 && (node.getLeft() == nullptr)
                 && (node.getRight() == nullptr)
                 );
@@ -159,11 +162,17 @@ std::string Test::testParamConstructorNode() {
  * Description : Check if operator= is a success.
  * */
 std::string Test::testAssignNode() {
-    ArbreB tree2(2);
-    tree2 << 4;
-    tree2 << 6;
-    tree2 << 8;
-    tree2 << 10;
+    ArbreB tree2(2, '\0');
+    Data newData;
+    newData.freq = 4;
+    newData.car = '\0';
+    tree2 << newData;
+    newData.freq = 6;
+    tree2 << newData;
+    newData.freq = 8;
+    tree2 << newData;
+    newData.freq = 10;
+    tree2 << newData;
     Sommet cpyTree2 = *tree2.getRoot();
     bool ret = (cpyTree2 == *tree2.getRoot());
 
@@ -197,13 +206,21 @@ std::string Test::testEqualsNode() {
     }
 
     // Test one empty and one full
-    Sommet node(1);
-    node.setLeft(2); // Set manually all nodes because operator<< add randomly, more hard to check if their equals
-    node.setRight(3);
-    node.getLeft()->setLeft(4);
-    node.getLeft()->setRight(5);
-    node.getRight()->setLeft(6);
-    node.getRight()->setRight(7);
+    Sommet node(1, '\0');
+    Data newData;
+    newData.freq = 2;
+    newData.car = '\0';
+    node.setLeft(newData); // Set manually all nodes because operator<< add randomly, more hard to check if their equals
+    newData.freq = 3;
+    node.setRight(newData);
+    newData.freq = 4;
+    node.getLeft()->setLeft(newData);
+    newData.freq = 5;
+    node.getLeft()->setRight(newData);
+    newData.freq = 6;
+    node.getRight()->setLeft(newData);
+    newData.freq = 7;
+    node.getRight()->setRight(newData);
     bool ret2 = ((emptyNode == node) == false);
     if(inColor) {
         retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] One empty and one full.\n";
@@ -214,13 +231,19 @@ std::string Test::testEqualsNode() {
     }
 
     // Test two full nodes equals
-    Sommet node2(1);
-    node2.setLeft(2);
-    node2.setRight(3);
-    node2.getLeft()->setLeft(4);
-    node2.getLeft()->setRight(5);
-    node2.getRight()->setLeft(6);
-    node2.getRight()->setRight(7);
+    Sommet node2(1, '\0');
+    newData.freq = 2;
+    node2.setLeft(newData);
+    newData.freq = 3;
+    node2.setRight(newData);
+    newData.freq = 4;
+    node2.getLeft()->setLeft(newData);
+    newData.freq = 5;
+    node2.getLeft()->setRight(newData);
+    newData.freq = 6;
+    node2.getRight()->setLeft(newData);
+    newData.freq = 7;
+    node2.getRight()->setRight(newData);
     bool ret3 = (node == node2);
     if(inColor) {
         retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Two full nodes equals.\n";
@@ -231,13 +254,19 @@ std::string Test::testEqualsNode() {
     }
 
     // Test two full nodes not equal
-    Sommet nodes3(1);
-    node2.setLeft(2);
-    node2.setRight(3);
-    node2.getLeft()->setLeft(4);
-    node2.getLeft()->setRight(10);
-    node2.getRight()->setLeft(6);
-    node2.getRight()->setRight(7);
+    Sommet nodes3(1, '\0');
+    newData.freq = 2;
+    node2.setLeft(newData);
+    newData.freq = 3;
+    node2.setRight(newData);
+    newData.freq = 4;
+    node2.getLeft()->setLeft(newData);
+    newData.freq = 5;
+    node2.getLeft()->setRight(newData);
+    newData.freq = 6;
+    node2.getRight()->setLeft(newData);
+    newData.freq = 7;
+    node2.getRight()->setRight(newData);
     bool ret4 = ((node == node2) == false);
     if(inColor) {
         retStr += "\t[ " + (ret4 ? OK : FAIL) + " ] Two full nodes not equal.\n";
@@ -269,7 +298,7 @@ std::string Test::testDepth() {
     std::string retStr, retStr2, tmp;
 
     // Test with only root
-    ArbreB tree(1);
+    ArbreB tree(1, '\0');
     bool ret1 = (tree.getRoot()->countDepth() == 1);
     if(inColor) {
         retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Root tree depth.\n";
@@ -280,10 +309,15 @@ std::string Test::testDepth() {
     }
 
     // Test with full tree
-    ArbreB tree2(1);
-    tree2.getRoot()->setLeft(2);
-    tree2.getRoot()->setRight(3);
-    tree2.getRoot()->getLeft()->setLeft(4);
+    ArbreB tree2(1, '\0');
+    Data newData;
+    newData.freq = 2;
+    newData.car = '\0';
+    tree2.getRoot()->setLeft(newData);
+    newData.freq = 3;
+    tree2.getRoot()->setRight(newData);
+    newData.freq = 4;
+    tree2.getRoot()->getLeft()->setLeft(newData);
     bool ret2 = (tree2.getRoot()->countDepth() == 3);
     if(inColor) {
         retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Full tree depth.\n";
@@ -315,7 +349,7 @@ std::string Test::testSize() {
     std::string retStr, retStr2, tmp;
 
     // Test size with only root
-    ArbreB tree(1);
+    ArbreB tree(1, '\0');
     bool ret1 = (tree.getRoot()->countSize() == 1);
     if(inColor) {
         retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Root tree size.\n";
@@ -326,10 +360,15 @@ std::string Test::testSize() {
     }
 
     // Test size with full tree
-    ArbreB tree2(1);
-    tree2 << 2;
-    tree2 << 3;
-    tree2 << 4;
+    ArbreB tree2(1, '\0');
+    Data newData;
+    newData.car = '\0';
+    newData.freq = 2;
+    tree2 << newData;
+    newData.freq = 3;
+    tree2 << newData;
+    newData.freq = 4;
+    tree2 << newData;
     bool ret2 = (tree2.getRoot()->countSize() == 4);
     if(inColor) {
         retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Full tree size.\n";
@@ -377,8 +416,9 @@ std::string Test::testDefaultConstructorTree() {
  * Description : Check the constructor with parameter of a tree.
  * */
 std::string Test::testParamConstructorTree() {
-    ArbreB tree(1);
-    bool ret = ( (tree.getRoot()->getData() == 1)
+    ArbreB tree(1, '\0');
+    Data res; res.freq = 1; res.car = '\0';
+    bool ret = ( (tree.getRoot()->equalsData(res))
                 && (tree.getRoot()->getLeft() == nullptr)
                 && (tree.getRoot()->getRight() == nullptr)
                 );
@@ -398,11 +438,17 @@ std::string Test::testParamConstructorTree() {
  * Description : Check if the copy of a tree in another is a success.
  * */
 std::string Test::testAssignTree() {
-    ArbreB tree(2);
-    tree << 4;
-    tree << 6;
-    tree << 8;
-    tree << 10;
+    ArbreB tree(2, '\0');
+    Data newData;
+    newData.car = '\0';
+    newData.freq = 4;
+    tree << newData;
+    newData.freq = 6;
+    tree << newData;
+    newData.freq = 8;
+    tree << newData;
+    newData.freq = 10;
+    tree << newData;
     ArbreB tree2;
     tree2 = tree;
     bool ret = (tree == tree2);
@@ -437,12 +483,19 @@ std::string Test::TestEqualsTree() {
     }
 
     // Test one empty and one full
-    ArbreB tree(2);
-    tree.getRoot()->setLeft(4);
-    tree.getRoot()->setRight(6);
-    tree.getRoot()->getLeft()->setLeft(8);
-    tree.getRoot()->getLeft()->setRight(10);
-    tree.getRoot()->getRight()->setLeft(12);
+    ArbreB tree(2, '\0');
+    Data newData;
+    newData.car = '\0';
+    newData.freq = 4;
+    tree.getRoot()->setLeft(newData);
+    newData.freq = 6;
+    tree.getRoot()->setRight(newData);
+    newData.freq = 8;
+    tree.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 10;
+    tree.getRoot()->getLeft()->setRight(newData);
+    newData.freq = 12;
+    tree.getRoot()->getRight()->setLeft(newData);
     bool ret2 = ((emptyTree == tree) == false);
     if(inColor) {
         retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] One empty and one full.\n";
@@ -453,12 +506,17 @@ std::string Test::TestEqualsTree() {
     }
 
     // Test two full trees equals
-    ArbreB tree2(2);
-    tree2.getRoot()->setLeft(4);
-    tree2.getRoot()->setRight(6);
-    tree2.getRoot()->getLeft()->setLeft(8);
-    tree2.getRoot()->getLeft()->setRight(10);
-    tree2.getRoot()->getRight()->setLeft(12);
+    ArbreB tree2(2, '\0');
+    newData.freq = 4;
+    tree2.getRoot()->setLeft(newData);
+    newData.freq = 6;
+    tree2.getRoot()->setRight(newData);
+    newData.freq = 8;
+    tree2.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 10;
+    tree2.getRoot()->getLeft()->setRight(newData);
+    newData.freq = 12;
+    tree2.getRoot()->getRight()->setLeft(newData);
     bool ret3 = (tree == tree2);
     if(inColor) {
         retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Two full trees equals.\n";
@@ -485,10 +543,12 @@ std::string Test::TestEqualsTree() {
  * Description : Check if we can add a node in a tree.
  * */
 std::string Test::testAdd() {
-    ArbreB tree(2);
-    tree << 3;
-    bool ret = ( (tree.getRoot()->getLeft() && tree.getRoot()->getLeft()->getData() == 3)
-                || (tree.getRoot()->getRight() && tree.getRoot()->getRight()->getData() == 3)
+    ArbreB tree(2, '\0');
+    Data newData; newData.freq = 3; newData.car = '\0';
+    tree << newData;
+    Data res; res.freq = 3; res.car = '\0'; 
+    bool ret = ( (tree.getRoot()->getLeft() && tree.getRoot()->getLeft()->equalsData(res))
+                || (tree.getRoot()->getRight() && tree.getRoot()->getRight()->equalsData(res))
                 );
     
     sumTest += int(ret);
@@ -509,8 +569,9 @@ std::string Test::testDell() {
     std::string retStr, retStr2, tmp;
 
     // Test delete the node
-    ArbreB tree(1);
-    tree >> 1;
+    ArbreB tree(1, '\0');
+    Data dellData; dellData.freq = 1; dellData.car = '\0';
+    tree >> dellData;
     bool ret1 = (!tree.getRoot());
     if(inColor) {
         retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Dell root in empty tree.\n";
@@ -521,10 +582,12 @@ std::string Test::testDell() {
     }
 
     // Test delete the root in tree with one children
-    ArbreB tree2(1);
-    tree2 << 2;
-    tree2 >> 1;
-    ArbreB res2(2);
+    ArbreB tree2(1, '\0');
+    Data newData; newData.freq = 2; newData.car = '\0';
+    tree2 << newData;
+    dellData.freq = 1; dellData.car = '\0';
+    tree2 >> dellData;
+    ArbreB res2(2, '\0');
     bool ret2 = (tree2 == res2);
     if(inColor) {
         retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Dell root in tree with one children.\n";
@@ -535,14 +598,21 @@ std::string Test::testDell() {
     }
 
     // Test delete the root in tree with child
-    ArbreB tree3(1);
-    tree3.getRoot()->setLeft(2);
-    tree3.getRoot()->setRight(3);
-    tree3.getRoot()->getLeft()->setLeft(4);
-    tree3 >> 1;
-    bool ret3 = ( (tree3.getRoot()->getData() == 2) 
-                || (tree3.getRoot()->getData() == 3)
-                || (tree3.getRoot()->getData() == 4)
+    ArbreB tree3(1, '\0');
+    newData.freq = 2; newData.car = '\0';
+    tree3.getRoot()->setLeft(newData);
+    newData.freq = 3;
+    tree3.getRoot()->setRight(newData);
+    newData.freq = 4;
+    tree3.getRoot()->getLeft()->setLeft(newData);
+    dellData.freq = 1; dellData.car = '\0';
+    tree3 >> dellData;
+    Data dataRes, dataRes2, dataRes3;
+    dataRes.car = dataRes2.car = dataRes3.car = '\0';
+    dataRes.freq = 1; dataRes2.freq = 2; dataRes3.freq = 3;
+    bool ret3 = ( (tree3.getRoot()->equalsData(dataRes)) 
+                || (tree3.getRoot()->equalsData(dataRes2))
+                || (tree3.getRoot()->equalsData(dataRes3))
                 );
     if(inColor) {
         retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Dell root in tree with child.\n";
@@ -553,20 +623,32 @@ std::string Test::testDell() {
     }
 
     // test delete the root in the millde of the tree
-    ArbreB tree4(1);
-    tree4.getRoot()->setLeft(2);
-    tree4.getRoot()->setRight(3);
-    tree4.getRoot()->getLeft()->setLeft(4);
-    tree4.getRoot()->getLeft()->setRight(5);
-    tree4.getRoot()->getRight()->setLeft(6);
-    tree4.getRoot()->getRight()->setRight(7);
-    tree4 >> 3;
-    ArbreB res4(1);
-    res4.getRoot()->setLeft(2);
-    res4.getRoot()->setRight(4);
-    res4.getRoot()->getLeft()->setRight(5);
-    res4.getRoot()->getRight()->setLeft(6);
-    res4.getRoot()->getRight()->setRight(7);
+    ArbreB tree4(1, '\0');
+    newData.freq = 2; newData.car = '\0';
+    tree4.getRoot()->setLeft(newData);
+    newData.freq = 3;
+    tree4.getRoot()->setRight(newData);
+    newData.freq = 4;
+    tree4.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 5;
+    tree4.getRoot()->getLeft()->setRight(newData);
+    newData.freq = 6;
+    tree4.getRoot()->getRight()->setLeft(newData);
+    newData.freq = 7;
+    tree4.getRoot()->getRight()->setRight(newData);
+    dellData.freq = 3; dellData.car = '\0';
+    tree4 >> dellData;
+    ArbreB res4(1, '\0');
+    newData.freq = 2;
+    res4.getRoot()->setLeft(newData);
+    newData.freq = 4;
+    res4.getRoot()->setRight(newData);
+    newData.freq = 5;
+    res4.getRoot()->getLeft()->setRight(newData);
+    newData.freq = 6;
+    res4.getRoot()->getRight()->setLeft(newData);
+    newData.freq = 7;
+    res4.getRoot()->getRight()->setRight(newData);
     bool ret4 = false;
     if(inColor) {
         retStr += "\t[ " + (ret4 ? OK : FAIL) + " ] Dell root in the millde of the tree.\n";
@@ -596,14 +678,21 @@ std::string Test::testFind() {
     std::string retStr, retStr2, tmp;
 
     // Test find a value in the middle of the tree
-    ArbreB tree(1);
-    tree << 2;
-    tree << 3;
-    tree << 4;
-    tree << 5;
-    tree << 6;
-    Sommet* tryFind = tree.find(tree.getRoot(), 3);
-    bool ret1 = (tryFind->getData() == 3);
+    ArbreB tree(1, '\0');
+    Data newData; newData.car = '\0'; newData.freq = 2;
+    tree << newData;
+    newData.freq = 3;
+    tree << newData;
+    newData.freq = 4;
+    tree << newData;
+    newData.freq = 5;
+    tree << newData;
+    newData.freq = 6;
+    tree << newData;
+    newData.freq = 3;
+    Sommet* tryFind = tree.find(tree.getRoot(), newData);
+    Data res; res.freq = 3; res.car = '\0';
+    bool ret1 = (tryFind->equalsData(res));
     if(inColor) {
      retStr = "\t[ " + (ret1 ? OK : FAIL) + " ] Find value in middle the tree.\n";
     }
@@ -613,7 +702,8 @@ std::string Test::testFind() {
     }
 
     // Test find value not in the tree
-    Sommet* tryFind2 = tree.find(tree.getRoot(), 0);
+    res.freq = 0;
+    Sommet* tryFind2 = tree.find(tree.getRoot(), res);
     bool ret2 = (!tryFind2);
     if(inColor) {
      retStr += "\t[ " + (ret2 ? OK : FAIL) + " ] Find value not in the tree.\n";
@@ -624,8 +714,9 @@ std::string Test::testFind() {
     }
 
     // Test find the root value of the tree 
-    Sommet* tryFind3 = tree.find(tree.getRoot(), 1);
-    bool ret3 = (tryFind3->getData() == 1);
+    res.freq = 1;
+    Sommet* tryFind3 = tree.find(tree.getRoot(), res);
+    bool ret3 = (tryFind3->equalsData(res));
     if(inColor) {
      retStr += "\t[ " + (ret3 ? OK : FAIL) + " ] Find root value of the tree.\n";
     }
@@ -651,14 +742,20 @@ std::string Test::testFind() {
  * Description : Check if we can find a specific node by his position in the tree.
  * */
 std::string Test::testGetNodeAtIndex() {
-    ArbreB tree(1);
-    tree.getRoot()->setLeft(2);
-    tree.getRoot()->setRight(3);
-    tree.getRoot()->getLeft()->setLeft(4);
-    tree.getRoot()->getLeft()->setRight(5);
-    tree.getRoot()->getRight()->setLeft(6);
+    ArbreB tree(1, '\0');
+    Data newData; newData.car = '\0'; newData.freq = 2;
+    tree.getRoot()->setLeft(newData);
+    newData.freq = 3;
+    tree.getRoot()->setRight(newData);
+    newData.freq = 4;
+    tree.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 5;
+    tree.getRoot()->getLeft()->setRight(newData);
+    newData.freq = 6;
+    tree.getRoot()->getRight()->setLeft(newData);
     
-    bool ret = (tree[3]->getData() == 3);
+    Data res; res.freq = 3; res.car = '\0';
+    bool ret = (tree[3]->equalsData(res));
     sumTest += int(ret);
     numTestGlobal += 1;
     if(inColor) {
@@ -674,31 +771,49 @@ std::string Test::testGetNodeAtIndex() {
  * Description : Check if we can merge two trees.
  * */
 std::string Test::testJoin() {
-    ArbreB tree(2);
-    tree.getRoot()->setLeft(4);
-    tree.getRoot()->setRight(6);
-    tree.getRoot()->getLeft()->setLeft(8);
-    tree.getRoot()->getLeft()->setRight(10);
+    ArbreB tree(2, '\0');
+    Data newData; newData.car = '\0'; newData.freq = 4;
+    tree.getRoot()->setLeft(newData);
+    newData.freq = 6;
+    tree.getRoot()->setRight(newData);
+    newData.freq = 8;
+    tree.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 10;
+    tree.getRoot()->getLeft()->setRight(newData);
 
-    ArbreB tree2(1);
-    tree2.getRoot()->setLeft(3);
-    tree2.getRoot()->setRight(5);
-    tree2.getRoot()->getLeft()->setLeft(7);
-    tree2.getRoot()->getLeft()->setRight(11);
+    ArbreB tree2(1, '\0');
+    newData.freq = 3;
+    tree2.getRoot()->setLeft(newData);
+    newData.freq = 5;
+    tree2.getRoot()->setRight(newData);
+    newData.freq = 7;
+    tree2.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 11;
+    tree2.getRoot()->getLeft()->setRight(newData);
 
     tree += tree2;
 
-    ArbreB res(3);
-    res.getRoot()->setLeft(2);
-    res.getRoot()->getLeft()->setLeft(4);
-    res.getRoot()->getLeft()->setRight(6);
-    res.getRoot()->getLeft()->getLeft()->setLeft(8);
-    res.getRoot()->getLeft()->getLeft()->setRight(10);
-    res.getRoot()->setRight(1);
-    res.getRoot()->getRight()->setLeft(3);
-    res.getRoot()->getRight()->setRight(5);
-    res.getRoot()->getRight()->getLeft()->setLeft(7);
-    res.getRoot()->getRight()->getLeft()->setRight(11);
+    ArbreB res(3, '\0');
+    newData.freq = 2;
+    res.getRoot()->setLeft(newData);
+    newData.freq = 4;
+    res.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 6;
+    res.getRoot()->getLeft()->setRight(newData);
+    newData.freq = 8;
+    res.getRoot()->getLeft()->getLeft()->setLeft(newData);
+    newData.freq = 10;
+    res.getRoot()->getLeft()->getLeft()->setRight(newData);
+    newData.freq = 1;
+    res.getRoot()->setRight(newData);
+    newData.freq = 3;
+    res.getRoot()->getRight()->setLeft(newData);
+    newData.freq = 5;
+    res.getRoot()->getRight()->setRight(newData);
+    newData.freq = 7;
+    res.getRoot()->getRight()->getLeft()->setLeft(newData);
+    newData.freq = 11;
+    res.getRoot()->getRight()->getLeft()->setRight(newData);
 
     bool ret = ((tree == res) == true);
     sumTest += int(ret);
@@ -716,26 +831,40 @@ std::string Test::testJoin() {
  * Description : Check if we can split a tree. We should have two trees at the end.
  * */
 std::string Test::testSplit() {
-    ArbreB tree(3);
-    tree.getRoot()->setLeft(2);
-    tree.getRoot()->getLeft()->setLeft(4);
-    tree.getRoot()->getLeft()->setRight(6);
-    tree.getRoot()->getLeft()->getLeft()->setLeft(8);
-    tree.getRoot()->getLeft()->getLeft()->setRight(10);
-    tree.getRoot()->setRight(1);
-    tree.getRoot()->getRight()->setLeft(3);
-    tree.getRoot()->getRight()->setRight(5);
-    tree.getRoot()->getRight()->getLeft()->setLeft(7);
-    tree.getRoot()->getRight()->getLeft()->setRight(11);
+    ArbreB tree(3, '\0');
+    Data newData; newData.car = '\0'; newData.freq = 2;
+    tree.getRoot()->setLeft(newData);
+    newData.freq = 4;
+    tree.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 6;
+    tree.getRoot()->getLeft()->setRight(newData);
+    newData.freq = 8;
+    tree.getRoot()->getLeft()->getLeft()->setLeft(newData);
+    newData.freq = 10;
+    tree.getRoot()->getLeft()->getLeft()->setRight(newData);
+    newData.freq = 1;
+    tree.getRoot()->setRight(newData);
+    newData.freq = 3;
+    tree.getRoot()->getRight()->setLeft(newData);
+    newData.freq = 5;
+    tree.getRoot()->getRight()->setRight(newData);
+    newData.freq = 7;
+    tree.getRoot()->getRight()->getLeft()->setLeft(newData);
+    newData.freq = 11;
+    tree.getRoot()->getRight()->getLeft()->setRight(newData);
 
     ArbreB tree2;
     tree -= tree2;
 
-    ArbreB res(1);
-    res.getRoot()->setLeft(3);
-    res.getRoot()->setRight(5);
-    res.getRoot()->getLeft()->setLeft(7);
-    res.getRoot()->getLeft()->setRight(11);
+    ArbreB res(1, '\0');
+    newData.freq = 3;
+    res.getRoot()->setLeft(newData);
+    newData.freq = 5;
+    res.getRoot()->setRight(newData);
+    newData.freq = 7;
+    res.getRoot()->getLeft()->setLeft(newData);
+    newData.freq = 11;
+    res.getRoot()->getLeft()->setRight(newData);
 
     bool ret = ((tree2 == res) == true);
     sumTest += int(ret);
