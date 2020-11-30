@@ -8,14 +8,17 @@
 
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <vector>
+#include <string>
+
+#include "Tree.hpp"
 
 class Parser
 {
     public:
         /* Methodes */
-        void freqChar(std::string nameFile, std::vector<int> freq) const;
+        std::vector<struct Data> freqChar(std::string nameFile) const;
+        ArbreB creatHuffmanTree(std::vector<Data>);
 };
 
 #endif

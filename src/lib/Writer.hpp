@@ -7,6 +7,8 @@
 #define Writer_HPP
 
 #include "Tree.hpp"
+#include "Parser.hpp"
+#include <fstream>
 #include "../test/Test.hpp"
 
 class Writer

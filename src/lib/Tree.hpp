@@ -6,11 +6,11 @@
 #ifndef Tree_HPP
 #define Tree_HPP
 
-#include "Parser.hpp"
-#include "queue"
 #include <iostream>
-#include <fstream>
+
+#include "queue"
 #include <string>
+
 #include <cstdlib>
 #include <ctime>
 

@@ -7,8 +7,6 @@
 #define Test_HPP
 
 #include "../lib/Tree.hpp"
-#include "../lib/Parser.hpp"
-#include "../lib/Writer.hpp"
 
 class Test
 {
@@ -48,9 +46,6 @@ class Test
     std::string testGetNodeAtIndex();
     std::string testJoin();
     std::string testSplit();
-    
-    // Parser
-    void testCalculFreqChar();
 
     // Getters
     int getSumTest() const;

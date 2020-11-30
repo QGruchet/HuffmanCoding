@@ -76,7 +76,7 @@ void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream&
  * */
 void Writer::writeResultAllTests() {
   // Setup flux and open file
-  std::ofstream flux(file.c_str(), std::ios::out | std::ios::trunc);
+  std::ofstream flux(file.c_str(), std::ios::trunc);
 
   // If the file is open
   if(flux) {
@@ -120,7 +120,7 @@ void Writer::writeResultAllTests() {
 
 void Writer::writeTextNoEncoding(std::string text) {
     std::ofstream flux;
-    flux.open(file.c_str(), std::ios::trunc);
+    flux.open(file.c_str(), std::ios::out | std::ios::trunc);
     if(flux) {
         flux << text;
         flux.close();
@@ -128,15 +128,19 @@ void Writer::writeTextNoEncoding(std::string text) {
     else {
         std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
     }
+    
+
+    Parser parser; ArbreB tree;
+    parser.creatHuffmanTree(parser.freqChar(file.c_str()));
 }
 
 void Writer::writeTextCoding() {
     // Convert
-    std::string convert = "text convert";
+    std::string convert = "01000010000100111010100101110\n001010001000110101010101010010101";
 
     //
     std::ofstream flux;
-    flux.open(file.c_str(), std::ios::trunc);
+    flux.open(file.c_str(), std::ios::out | std::ios::trunc);
     if(flux) {
         flux << convert;
         flux.close();

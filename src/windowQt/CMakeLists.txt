@@ -42,6 +42,14 @@ else()
     Mainwindow.hpp
     Tiltewidget.cpp
     Tiltewidget.hpp
+    ../lib/Parser.cpp
+    ../lib/Parser.hpp
+    ../lib/Tree.cpp
+    ../lib/Tree.hpp
+    ../lib/Writer.hpp
+    ../lib/Writer.cpp
+    ../test/Test.cpp
+    ../test/Test.hpp
   )
 endif()
 

@@ -72,9 +72,6 @@ void Test::allTest() {
     std::cout << testJoin() << std::endl;
     std::cout << testSplit() << std::endl;
 
-    /* Test Parser */
-    // std::cout << "testCalculFreqChar : " << ((testCalculFreqChar()) ? "s ucced" : "fail") << " ! " << std::endl;
-    
     if(inColor) {
         if(sumTest == numTestGlobal) {
             std::cout << "> TESTS RESULT : [ \033[0;31m" << sumTest << "\033[0m/\033[0;32m" << numTestGlobal << "\033[0m ] tests passed ! <\n" << std::endl;
@@ -254,20 +251,20 @@ std::string Test::testEqualsNode() {
     }
 
     // Test two full nodes not equal
-    Sommet nodes3(1, '\0');
+    Sommet node3(1, '\0');
     newData.freq = 2;
-    node2.setLeft(newData);
+    node3.setLeft(newData);
     newData.freq = 3;
-    node2.setRight(newData);
+    node3.setRight(newData);
     newData.freq = 4;
-    node2.getLeft()->setLeft(newData);
+    node3.getLeft()->setLeft(newData);
     newData.freq = 5;
-    node2.getLeft()->setRight(newData);
+    node3.getLeft()->setRight(newData);
     newData.freq = 6;
-    node2.getRight()->setLeft(newData);
-    newData.freq = 7;
-    node2.getRight()->setRight(newData);
-    bool ret4 = ((node == node2) == false);
+    node3.getRight()->setLeft(newData);
+    newData.freq = 8;
+    node3.getRight()->setRight(newData);
+    bool ret4 = ((node == node3) == false);
     if(inColor) {
         retStr += "\t[ " + (ret4 ? OK : FAIL) + " ] Two full nodes not equal.\n";
     }
@@ -609,7 +606,8 @@ std::string Test::testDell() {
     tree3 >> dellData;
     Data dataRes, dataRes2, dataRes3;
     dataRes.car = dataRes2.car = dataRes3.car = '\0';
-    dataRes.freq = 1; dataRes2.freq = 2; dataRes3.freq = 3;
+    dataRes.freq = 2; dataRes2.freq = 3; dataRes3.freq = 4;
+
     bool ret3 = ( (tree3.getRoot()->equalsData(dataRes)) 
                 || (tree3.getRoot()->equalsData(dataRes2))
                 || (tree3.getRoot()->equalsData(dataRes3))
@@ -878,23 +876,6 @@ std::string Test::testSplit() {
     }
 }
 /* End Tree.hpp */
-
-/* Test Parser.hpp */
-// void Test::testCalculFreqChar() {
-//     std::vector<int> freq = {'h', 1, 'e', 1, 'l', 3, 'o', 2, ' ', 1, 'w', 1, 'r', 1, 'd', 1};
-
-//     Parser parser;
-//     std::vector<int> freq2;
-//     parser.freqChar("textTest.txt", freq2);
-
-//     for(int i = 0; i < 9; ++i) {
-//         if(freq[i] != freq2[i]) {
-//         return;
-//         }
-//     }
-//     return;
-// }
-/* End Parser.hpp */
 
 /* Getters */
 int Test::getSumTest() const {

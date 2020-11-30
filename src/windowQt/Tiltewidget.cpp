@@ -26,7 +26,7 @@ void TilteWidget::paintEvent(QPaintEvent *event)
     painter.setFont(QFont("Helvetica", police/4));
     int littlePolice = police/4;
     painter.drawText(5, widgetHeight - littlePolice, "LE DENMAT Mickael");
-    painter.drawText(widgetWidth - 110, littlePolice + 5, "GRUCHET Quentin");
+    painter.drawText(widgetWidth - widgetWidth/4, littlePolice + 5, "GRUCHET Quentin");
 
     if(DEBUG) {
         painter.setPen(Qt::red);

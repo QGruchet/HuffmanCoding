@@ -31,7 +31,7 @@ void MainWindow::printMenu() {
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(printEncoding()));
     listButton.at(0)->setToolTip("Encoding a text");
     listButton.at(1)->setText("Decoding");
-    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(printDecoding()));
+//    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(printDecoding()));
     listButton.at(1)->setToolTip("Decoding a text");
 
     //
@@ -87,8 +87,8 @@ void MainWindow::encoding()
     read = reader->toPlainText();
 
     //
-    // Writer writer("../txtQt/textToCode.txt");
-    // writer.
+    Writer writer("src/txtQt/textToCode.txt");
+    writer.writeTextNoEncoding(read.toStdString());
 }
 
 void MainWindow::printDecoding()

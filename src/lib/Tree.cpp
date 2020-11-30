@@ -90,6 +90,10 @@ ArbreB::ArbreB(int rootData, char charRoot) {
     root = new Sommet(rootData, charRoot);
 }
 
+ArbreB::ArbreB(Data newData) {
+    root = new Sommet(newData);
+}
+
 /** Function : Overloading operator=.
  * Return : 'Sommet'.
  * Parameter : other, the node for the copy.
@@ -513,7 +517,6 @@ void Sommet::setRight(Data rightData) {
 /* End setters */
 
 /* Methodes */
-
 bool Sommet::equalsData(Data other) {
     return ((data.freq == other.freq)
         && (data.car == other.car));
