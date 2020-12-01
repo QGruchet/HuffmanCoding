@@ -75,43 +75,28 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
     //     std::cout << tabFreq[i].car << ", " << tabFreq[i].freq << std::endl;
     // }
 
-    std::vector<ArbreB> forest;
-    forest.reserve(size);
-    for(int i=0; i<size; ++i) { // Init the tree vector
+    std::stack<ArbreB> forest;
+    for(int i=size-1; i<=0; --i) { // Init the tree vector
         ArbreB newtree(tabFreq[i]);
-        forest.push_back(newtree);
+        forest.push(newtree);
     }
 
-    int min, min2;
-    int posMin, posMin2;
-    bool tabSee[size];
-    for(int i=0; i<size; ++i) {
-        tabSee[i] = false;
+    ArbreB tmp, tmp2;
+
+    while(forest.size() >= 1) {
+
+        tmp = forest.top();
+        forest.pop();
+
+        tmp2 = forest.top();
+        forest.pop();
+
+        forest.push(tmp2 += tmp);
+
     }
+    std::cout << forest.size() << std::endl;
+    forest.top().getRoot()->printBeautifulTree(0);
 
-    while(int(forest.size()) > 2) {
+    return forest.top();
 
-        // Found the min
-        min = forest[0].getRoot()->getData().freq;
-        for(int i=1; i<int(forest.size()); ++i) {
-            if(forest[i].getRoot()->getData().freq <= min && tabSee[i]) {
-                min = forest[i].getRoot()->getData().freq;
-                posMin = i;
-            }
-        }
-
-        // Found the min2
-        min2 = forest[0].getRoot()->getData().freq;
-        for(int i=1; i<int(forest.size()); ++i) {
-            if(forest[i].getRoot()->getData().freq <= min2 && forest[i].getRoot()->getData().freq != min && tabSee[i]) {
-                min2 = forest[i].getRoot()->getData().freq;
-                posMin2 = i;
-            }
-        }
-
-        // Create new tree
-        // forest[posMin] += forest[posMin2];
-    }
-
-    return forest[0];
 }
