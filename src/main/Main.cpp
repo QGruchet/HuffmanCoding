@@ -6,8 +6,8 @@ int main(void) {
     Test test;
     test.allTest();
 
-    // Writer writer("src/txtQt/textToCode.txt");
-    // writer.writeTextNoEncoding("Ceci est un texte");
+    Writer writer("src/txtQt/textToCode.txt");
+    writer.writeTextNoEncoding("Ceci est un texte");
 
     return 0;
 }
