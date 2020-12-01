@@ -74,17 +74,19 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
     // for(int i=0; i<int(tabFreq.size()); ++i) {
     //     std::cout << tabFreq[i].car << ", " << tabFreq[i].freq << std::endl;
     // }
-
+    
     std::stack<ArbreB> forest;
-    for(int i=size-1; i<=0; --i) { // Init the tree vector
+    for(int i = size-1; i <= 0; --i) { // Init the tree vector
+        std::cout << " test " << std::endl;
         ArbreB newtree(tabFreq[i]);
         forest.push(newtree);
+        std::cout << forest.top() << " top element " << std::endl;
     }
 
     ArbreB tmp, tmp2;
-
-    while(forest.size() >= 1) {
-
+    std::cout << forest.size() << std::endl;
+    while(forest.size() >= 2) {
+        
         tmp = forest.top();
         forest.pop();
 
@@ -92,11 +94,11 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
         forest.pop();
 
         forest.push(tmp2 += tmp);
-
+        std::cout << forest.size() << " element of stack " << std::endl;
     }
-    std::cout << forest.size() << std::endl;
-    forest.top().getRoot()->printBeautifulTree(0);
+    
+    //forest.top().getRoot()->printBeautifulTree(0);
 
-    return forest.top();
+    return tmp;
 
 }
