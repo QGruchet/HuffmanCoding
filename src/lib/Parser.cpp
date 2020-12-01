@@ -51,8 +51,8 @@ std::vector<Data> Parser::freqChar(std::string nameFile) const {
     return tabFreq;
 }
 
-ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
-    // Trie
+ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
+    // Trie.
     int size = 0;
     for(int i=0; i<int(tabFreq.size()); ++i) {
         for(int j=i+1; j<int(tabFreq.size()); ++j)
@@ -66,31 +66,50 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
         size++;
     }
 
-    // std::cout << "tabFreq : size = " << size << std::endl;
-    // for(int i=0; i<int(tabFreq.size()); ++i) {
-    //     std::cout << "( " << tabFreq[i].car << ", " << tabFreq[i].freq << " ) " << std::endl;
-    // }
-
+    // Create forest.
     std::vector<ArbreB> forest;
     forest.reserve(size);
     for(Data newData : tabFreq) {
         forest.push_back(ArbreB(newData));
     }
-    std::cout << size << std::endl;
 
+    // Merge all tree in one.
+    if(size%2) {
+        forest[size-2]+=forest[size-1];
+    }
     int gap = 1;
     while(gap <= size/2) {
-        for(int i=0; i<size; i+=gap) {
-            std::cout << i << std::endl;
+        for(int i=0; i<size-gap; i+=gap) {
             forest[i]+=forest[i+gap];
-            for (size_t i = 0; i < forest.size(); i++)
-            {
-                std::cout << forest[i] << std::endl;
-            }
         }
         gap*=2;
     }
 
-
+    // Return the final tree.
+    // forest[0].getRoot()->printBeautifulTree(0);
     return forest[0];
+}
+
+std::string Parser::readHuffmanTreeRec(Sommet* node) const{
+    if(node->isLeaf()) {
+        std::string res(1, node->getData().car);
+        return res;
+    }
+    else {
+        std::string res;
+        if(node->getLeft()) {
+            std::cout << "0";
+            return res + readHuffmanTreeRec(node->getLeft());
+        }
+        if(node->getRight()) {
+            std::cout << "1";
+            return res + readHuffmanTreeRec(node->getLeft());
+        }
+    }
+
+    return "\0";
+}
+
+std::string Parser::readHuffmanTree(ArbreB huffmanTree) const {
+    return readHuffmanTreeRec(huffmanTree.getRoot());
 }

@@ -129,9 +129,10 @@ void Writer::writeTextNoEncoding(std::string text) {
         std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
     }
     
-
-    Parser parser; ArbreB tree;
-    parser.creatHuffmanTree(parser.freqChar(file.c_str()));
+    Parser parser; ArbreB huffmanTree;
+    huffmanTree = parser.creatHuffmanTree(parser.freqChar(file.c_str()));
+    huffmanTree.getRoot()->printBeautifulTree(0);
+    std::cout << parser.readHuffmanTree(huffmanTree) << std::endl;
 }
 
 void Writer::writeTextCoding() {

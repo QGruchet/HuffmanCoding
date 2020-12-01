@@ -3,11 +3,11 @@
 #include "../test/Test.hpp"
 
 int main(void) {
-    Test test;
-    test.allTest();
+    // Test test;
+    // test.allTest();
 
     Writer writer("src/txtQt/textToCode.txt");
-    writer.writeTextNoEncoding("Ceci est un message, si tu ne le lit pas je te marave");
-
+    writer.writeTextNoEncoding("Ceeciiiz");
+    
     return 0;
 }

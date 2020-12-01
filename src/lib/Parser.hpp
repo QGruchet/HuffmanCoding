@@ -17,8 +17,10 @@ class Parser
 {
     public:
         /* Methodes */
-        std::vector<struct Data> freqChar(std::string nameFile) const;
-        ArbreB creatHuffmanTree(std::vector<Data>);
+        std::vector<struct Data> freqChar(std::string) const;
+        ArbreB creatHuffmanTree(std::vector<Data>) const;
+        std::string readHuffmanTreeRec(Sommet*) const;
+        std::string readHuffmanTree(ArbreB) const;
 };
 
 #endif
