@@ -83,9 +83,14 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
         for(int i=0; i<size; i+=gap) {
             std::cout << i << std::endl;
             forest[i]+=forest[i+gap];
+            for (size_t i = 0; i < forest.size(); i++)
+            {
+                std::cout << forest[i] << std::endl;
+            }
         }
         gap*=2;
     }
+
 
     return forest[0];
 }
