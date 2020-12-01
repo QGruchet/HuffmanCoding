@@ -56,6 +56,10 @@ std::vector<Data> Parser::freqChar(std::string nameFile) const {
     return tabFreq;
 }
 
+bool allSee(bool* tabSee, int size) {
+    for(int i)
+}
+
 ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
     int size = 0;
     for(int i=0; i<int(tabFreq.size()); ++i) {
@@ -110,7 +114,7 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
         }
 
         // Create new tree
-        // forest[posMin] += forest[posMin2];
+        forest[posMin] += forest[posMin2];
     }
 
     return forest[0];
