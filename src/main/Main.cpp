@@ -7,7 +7,7 @@ int main(void) {
     test.allTest();
 
     Writer writer("src/txtQt/textToCode.txt");
-    writer.writeTextNoEncoding("Ceci est un texte");
+    writer.writeTextNoEncoding("Ceci est un message, si tu ne le lit pas je te marave");
 
     return 0;
 }

@@ -25,12 +25,6 @@ std::vector<Data> Parser::freqChar(std::string nameFile) const {
     if(flux) {
         while(flux.get(read)) { // Read the file
             seeChar = false;
-            if(posCharRead == buffSize) {
-                buffSize += buffSize/2;
-                tabFreq.resize(buffSize); // Too many charactere, need to resize
-            }
-            posCharRead++;
-
             for(int i=0; i<int(tabFreq.size()); ++i) {
                 if(read == tabFreq[i].car) {  // Char found, add freq
                     tabFreq[i].freq++;
@@ -40,6 +34,7 @@ std::vector<Data> Parser::freqChar(std::string nameFile) const {
             if(!seeChar) { // Char not found, add char
                 Data newData; newData.freq = 1; newData.car = read;
                 tabFreq.push_back(newData);
+                posCharRead++;
             }
         }
         flux.close();
@@ -57,6 +52,7 @@ std::vector<Data> Parser::freqChar(std::string nameFile) const {
 }
 
 ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
+    // Trie
     int size = 0;
     for(int i=0; i<int(tabFreq.size()); ++i) {
         for(int j=i+1; j<int(tabFreq.size()); ++j)
@@ -70,35 +66,26 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) {
         size++;
     }
 
-    // std::cout << size << std::endl;
+    // std::cout << "tabFreq : size = " << size << std::endl;
     // for(int i=0; i<int(tabFreq.size()); ++i) {
-    //     std::cout << tabFreq[i].car << ", " << tabFreq[i].freq << std::endl;
+    //     std::cout << "( " << tabFreq[i].car << ", " << tabFreq[i].freq << " ) " << std::endl;
     // }
-    
-    std::stack<ArbreB> forest;
-    for(int i = size-1; i <= 0; --i) { // Init the tree vector
-        std::cout << " test " << std::endl;
-        ArbreB newtree(tabFreq[i]);
-        forest.push(newtree);
-        std::cout << forest.top() << " top element " << std::endl;
+
+    std::vector<ArbreB> forest;
+    forest.reserve(size);
+    for(Data newData : tabFreq) {
+        forest.push_back(ArbreB(newData));
+    }
+    std::cout << size << std::endl;
+
+    int gap = 1;
+    while(gap <= size/2) {
+        for(int i=0; i<size; i+=gap) {
+            std::cout << i << std::endl;
+            forest[i]+=forest[i+gap];
+        }
+        gap*=2;
     }
 
-    ArbreB tmp, tmp2;
-    std::cout << forest.size() << std::endl;
-    while(forest.size() >= 2) {
-        
-        tmp = forest.top();
-        forest.pop();
-
-        tmp2 = forest.top();
-        forest.pop();
-
-        forest.push(tmp2 += tmp);
-        std::cout << forest.size() << " element of stack " << std::endl;
-    }
-    
-    //forest.top().getRoot()->printBeautifulTree(0);
-
-    return tmp;
-
+    return forest[0];
 }

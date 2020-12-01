@@ -599,7 +599,12 @@ void Sommet::printBeautifulTree(int space) {
     for(int i = 0; i < space; i++) {
         std::cout << "   ";
     }
-    std::cout << "(" << data.car << ", " << data.freq << "), " << std::endl;
+    if(data.car == '\0') {
+        std::cout << "(" <<  data.freq << "), " << std::endl;
+    }
+    else {
+        std::cout << "(" << data.car << ", " << data.freq << "), " << std::endl;
+    }
     if(left) {
         left->printBeautifulTree(space + 1);
     }
