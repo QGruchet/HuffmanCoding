@@ -129,20 +129,16 @@ void Writer::writeTextNoEncoding(std::string text) {
         std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
     }
 
-    writeTextCoding();
-}
-
-void Writer::writeTextCoding() {
-    // Convert
     Parser parser; ArbreB huffmanTree;
     huffmanTree = parser.creatHuffmanTree(parser.freqChar(file.c_str()));
-    // huffmanTree.getRoot()->printBeautifulTree(0);
+    huffmanTree.getRoot()->printBeautifulTree(0);
     // std::cout << parser.readHuffmanTree(huffmanTree) << std::endl;
+
+     // Convert
     std::string convert = "01000010000100111010100101110\n001010001000110101010101010010101";
 
     //
-    std::ofstream flux;
-    flux.open(file.c_str(), std::ios::out | std::ios::trunc);
+    flux.open("src/txtQt/code.txt", std::ios::out | std::ios::trunc);
     if(flux) {
         flux << convert;
         flux.close();
@@ -150,6 +146,10 @@ void Writer::writeTextCoding() {
     else {
         std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
     }
+    
+}
+
+void Writer::writeTextCoding() {
 
 }
  

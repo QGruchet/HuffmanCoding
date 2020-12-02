@@ -8,8 +8,6 @@ int main(void) {
 
     Writer writer("src/txtQt/text.txt");
     writer.writeTextNoEncoding("Ceeciiiz");
-    Writer writer2("src/txtQt/code.txt");
-    writer2.writeTextCoding();
     
     return 0;
 }
