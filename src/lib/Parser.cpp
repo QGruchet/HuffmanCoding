@@ -112,4 +112,5 @@ std::string Parser::readHuffmanTreeRec(Sommet* node) const{
 
 std::string Parser::readHuffmanTree(ArbreB huffmanTree) const {
     return readHuffmanTreeRec(huffmanTree.getRoot());
+    
 }
