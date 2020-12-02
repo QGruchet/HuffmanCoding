@@ -89,27 +89,31 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
     return forest[0];
 }
 
-std::string Parser::readHuffmanTreeRec(Sommet* node) const{
+std::string *Parser::readHuffmanTreeRec(Sommet* node, std::string tabCode[], int index) const{
+    std::string codage;
     if(node->isLeaf()) {
-        std::string res(1, node->getData().car);
-        return res;
+        //std::string res(1, node->getData().car);
+        codage += node->getData().car;
+        tabCode[index] = codage;
+        index++;
     }
     else {
         std::string res;
         if(node->getLeft()) {
-            std::cout << "0";
-            return res + readHuffmanTreeRec(node->getLeft());
+            codage += '0';
+            readHuffmanTreeRec(node->getLeft(), tabCode, index);
         }
         if(node->getRight()) {
-            std::cout << "1";
-            return res + readHuffmanTreeRec(node->getLeft());
+            codage += '1';
+            readHuffmanTreeRec(node->getLeft(), tabCode, index);
         }
     }
 
-    return "\0";
+    return tabCode;
 }
 
-std::string Parser::readHuffmanTree(ArbreB huffmanTree) const {
-    return readHuffmanTreeRec(huffmanTree.getRoot());
-    
+std::string* Parser::readHuffmanTree(ArbreB huffmanTree) const {
+    std::string tabCode[size];
+    int index = 0;
+    return readHuffmanTreeRec(huffmanTree.getRoot(), tabCode, index);
 }
