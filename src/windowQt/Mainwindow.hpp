@@ -44,9 +44,11 @@ private:
     void printMenu();
 
 public slots:
-    void printEncoding();
-    void printDecoding();
+    void menuEncoding();
+    void menuDecoding();
+    void menu();
 
     void encoding();
+    void drawTree();
 };
 #endif // MAINWINDOW_HPP

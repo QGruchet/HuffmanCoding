@@ -25,7 +25,7 @@ void MainWindow::printMenu() {
     setCentralWidget(mainWidget);
 
     //
-    for(int i=0; i < 2; ++i) {
+    for(int i=0; i<3; ++i) {
         QPushButton* newButton = new QPushButton(mainWidget);
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
@@ -35,15 +35,21 @@ void MainWindow::printMenu() {
 
     //
     listButton.at(0)->setText("Encoding");
-    connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(printEncoding()));
+    connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
     listButton.at(0)->setToolTip("Encoding a text");
     listButton.at(1)->setText("Decoding");
-    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(printDecoding()));
+    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(menuDecoding()));
     listButton.at(1)->setToolTip("Decoding a text");
-
+    listButton.at(2)->setText("Exit");
+    connect(listButton.at(2), SIGNAL(clicked()), qApp, SLOT(quit()));
+    listButton.at(2)->setToolTip("Leave the application");
 }
 
-void MainWindow::printEncoding()
+void MainWindow::menu() {
+    printMenu();
+}
+
+void MainWindow::menuEncoding()
 {
     resetWindow(winWidth*2, winHeight*2);
 
@@ -56,7 +62,7 @@ void MainWindow::printEncoding()
     keypadLayout = new QGridLayout;
 
     //
-    for(int i=0; i < 2; ++i) {
+    for(int i=0; i<4; ++i) {
         QPushButton* newButton = new QPushButton(mainWidget);
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
@@ -65,12 +71,18 @@ void MainWindow::printEncoding()
     keypadLayout->setAlignment(Qt::AlignCenter);
 
     //
-    listButton.at(0)->setText("Exit");
-    connect(listButton.at(0), SIGNAL(clicked()), qApp, SLOT(quit()));
-    listButton.at(0)->setToolTip("Leave the application");
-    listButton.at(1)->setText("encoding");
-    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(encoding()));
-    listButton.at(1)->setToolTip("Encoding the current text");
+    listButton.at(0)->setText("Menu");
+    connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menu()));
+    listButton.at(0)->setToolTip("Back to the menu");
+    listButton.at(1)->setText("Exit");
+    connect(listButton.at(1), SIGNAL(clicked()), qApp, SLOT(quit()));
+    listButton.at(1)->setToolTip("Leave the application");
+    listButton.at(2)->setText("Encoding");
+    connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(encoding()));
+    listButton.at(2)->setToolTip("Encoding the current text");
+    listButton.at(2)->setText("Print tree");
+    connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(drawTree()));
+    listButton.at(2)->setToolTip("Print the Huffman tree");
 
     //
     reader = new QTextEdit();
@@ -94,7 +106,7 @@ void MainWindow::encoding()
     QString read;
     read = reader->toPlainText();
     std::string strRead = read.toStdString();
-    if(strRead.length() == 0) {
+    if(strRead.length() <= 1) {
         QMessageBox::information(mainWidget, "Error message", "Too short message.\nBack to the menu.");
         printMenu();
         return;
@@ -119,12 +131,16 @@ void MainWindow::encoding()
     file.close();
 }
 
-void MainWindow::printDecoding()
+void MainWindow::menuDecoding()
 {
     resetWindow(winWidth*2, winHeight*2);
     mainWidget = new QWidget(this);
     QMessageBox::information(mainWidget, "Information", "Not implented yet.\nBack to the menu.");
     printMenu();
+}
+
+void MainWindow::drawTree() {
+    
 }
 
 void MainWindow::resetWindow(int newWidth, int newHeight)
