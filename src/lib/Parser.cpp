@@ -86,7 +86,6 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
     }
 
     // Return the final tree.
-    // forest[0].getRoot()->printBeautifulTree(0);
     return forest[0];
 }
 
