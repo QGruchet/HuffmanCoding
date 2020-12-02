@@ -3,16 +3,16 @@
 
 #include <QMainWindow>
 #include <QApplication>
-#include <QDebug>
 
 #include <QGridLayout>
 #include <QPushButton>
+#include <QMessageBox>
 
+#include <QFile>
 #include <QTextEdit>
 
-#include "../lib/Writer.hpp"
-
 #include "Tiltewidget.hpp"
+#include "../lib/Writer.hpp"
 
 class MainWindow : public QMainWindow
 {
@@ -29,18 +29,18 @@ private:
     /* Data */
     int winWidth, winHeight; // sizeX, sizeY
 
-    QWidget* mainWidget;
+    QWidget* mainWidget = nullptr;
 
-    QGridLayout* keypadLayout;
+    QGridLayout* keypadLayout = nullptr;
 
-    QHBoxLayout *readerLayout, *writerLayout;
-    QTextEdit *reader, *writer;
+    QHBoxLayout *readerLayout = nullptr, *writerLayout = nullptr;
+    QTextEdit *reader = nullptr, *writer = nullptr;
 
-    int numButton;
     QList<QPushButton*> listButton;
 
     /* Functions */
     void resetWindow(int newWidth, int newHeight);
+    void setupMenu();
     void printMenu();
 
 public slots:
