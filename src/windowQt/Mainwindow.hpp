@@ -9,10 +9,13 @@
 #include <QMessageBox>
 
 #include <QFile>
+#include <QDialog>
 #include <QTextEdit>
 
 #include "Tiltewidget.hpp"
+#include "Treewidget.hpp"
 #include "../lib/Writer.hpp"
+#include "../lib/Parser.hpp"
 
 class MainWindow : public QMainWindow
 {
@@ -35,6 +38,7 @@ private:
 
     QHBoxLayout *readerLayout = nullptr, *writerLayout = nullptr;
     QTextEdit *reader = nullptr, *writer = nullptr;
+    bool isEncoding = false;
 
     QList<QPushButton*> listButton;
 
