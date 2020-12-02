@@ -113,7 +113,7 @@ std::string *Parser::readHuffmanTreeRec(Sommet* node, std::string tabCode[], int
 }
 
 std::string* Parser::readHuffmanTree(ArbreB huffmanTree) const {
-    std::string tabCode[size];
+    std::string tabCode[256];
     int index = 0;
     return readHuffmanTreeRec(huffmanTree.getRoot(), tabCode, index);
 }
