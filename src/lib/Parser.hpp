@@ -21,6 +21,7 @@ class Parser
         ArbreB creatHuffmanTree(std::vector<Data>) const;
         std::string* readHuffmanTree(ArbreB) const;
         std::string* readHuffmanTreeRec(Sommet*, std::string[], int) const;
+        void printHuffmanTree(ArbreB) const;
 };
 
 #endif
