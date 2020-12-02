@@ -34,6 +34,8 @@ if(ANDROID)
     Mainwindow.hpp
     Tiltewidget.cpp
     Tiltewidget.hpp
+    Treewidget.cpp
+    Treewidget.hpp
   )
 else()
   add_executable(windowQt
@@ -42,6 +44,9 @@ else()
     Mainwindow.hpp
     Tiltewidget.cpp
     Tiltewidget.hpp
+    Treewidget.cpp
+    Treewidget.cpp
+    Treewidget.hpp
     ../lib/Parser.cpp
     ../lib/Parser.hpp
     ../lib/Tree.cpp

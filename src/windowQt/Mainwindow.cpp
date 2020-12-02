@@ -37,15 +37,16 @@ void MainWindow::printMenu() {
     listButton.at(0)->setText("Encoding");
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
     listButton.at(0)->setToolTip("Encoding a text");
-    listButton.at(1)->setText("Decoding");
-    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(menuDecoding()));
-    listButton.at(1)->setToolTip("Decoding a text");
-    listButton.at(2)->setText("Exit");
-    connect(listButton.at(2), SIGNAL(clicked()), qApp, SLOT(quit()));
-    listButton.at(2)->setToolTip("Leave the application");
+    listButton.at(1)->setText("Exit");
+    connect(listButton.at(1), SIGNAL(clicked()), qApp, SLOT(quit()));
+    listButton.at(1)->setToolTip("Leave the application");
+    listButton.at(2)->setText("Decoding");
+    connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(menuDecoding()));
+    listButton.at(2)->setToolTip("Decoding a text");
 }
 
 void MainWindow::menu() {
+    isEncoding = false;
     printMenu();
 }
 
@@ -80,9 +81,9 @@ void MainWindow::menuEncoding()
     listButton.at(2)->setText("Encoding");
     connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(encoding()));
     listButton.at(2)->setToolTip("Encoding the current text");
-    listButton.at(2)->setText("Print tree");
-    connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(drawTree()));
-    listButton.at(2)->setToolTip("Print the Huffman tree");
+    listButton.at(3)->setText("Print tree");
+    connect(listButton.at(3), SIGNAL(clicked()), this, SLOT(drawTree()));
+    listButton.at(3)->setToolTip("Print the Huffman tree");
 
     //
     reader = new QTextEdit();
@@ -99,36 +100,39 @@ void MainWindow::menuEncoding()
 
 void MainWindow::encoding()
 {
-    //
-    reader->setReadOnly(true);
+    reader->setReadOnly(true); // User can't write now;
 
     //
     QString read;
     read = reader->toPlainText();
     std::string strRead = read.toStdString();
     if(strRead.length() <= 1) {
-        QMessageBox::information(mainWidget, "Error message", "Too short message.\nBack to the menu.");
-        printMenu();
-        return;
+        QMessageBox::information(mainWidget, "Error message", "Too short message.");
+        reader->clear();
+        reader->setReadOnly(false); // User can write now;
     }
+    else {
+        //
+        Writer writerInFile("src/txtQt/text.txt");
+        writerInFile.textToCode(strRead);
 
-    //
-    Writer writerInFile("src/txtQt/text.txt");
-    writerInFile.textToCode(strRead);
+        //
+        QString fileName = "src/txtQt/code.txt";
+        QFile file(fileName);
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        QTextStream flux(&file);
+        QString code = flux.readAll();
 
-    //
-    QString fileName = "src/txtQt/code.txt";
-    QFile file(fileName);
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    QTextStream flux(&file);
-    QString code = flux.readAll();
+        //
+        writer->setText(code);
+        writer->show();
 
-    //
-    writer->setText(code);
-    writer->show();
+        //
+        file.close();
 
-    //
-    file.close();
+        //
+        isEncoding = true;
+    }
 }
 
 void MainWindow::menuDecoding()
@@ -140,7 +144,17 @@ void MainWindow::menuDecoding()
 }
 
 void MainWindow::drawTree() {
-    
+    if(!isEncoding) {
+        QMessageBox::information(mainWidget, "Information", "Any text endocing yet.");
+    }
+    else {
+        QDialog secondeWin(this);
+        QHBoxLayout *layout = new QHBoxLayout;
+        Parser parser;
+        layout->addWidget(new TreeWidget(mainWidget, parser.creatHuffmanTree(parser.freqChar("src/txtQt/code.txt"))));
+        secondeWin.setLayout(layout);
+        secondeWin.exec();
+    }
 }
 
 void MainWindow::resetWindow(int newWidth, int newHeight)

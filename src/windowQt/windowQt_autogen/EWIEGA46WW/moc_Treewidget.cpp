@@ -1,5 +1,5 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'Tiltewidget.hpp'
+** Meta object code from reading C++ file 'Treewidget.hpp'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.15.1)
 **
@@ -7,11 +7,11 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../../Tiltewidget.hpp"
+#include "../../Treewidget.hpp"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'Tiltewidget.hpp' doesn't include <QObject>."
+#error "The header file 'Treewidget.hpp' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.15.1. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -21,25 +21,25 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_TilteWidget_t {
+struct qt_meta_stringdata_TreeWidget_t {
     QByteArrayData data[1];
-    char stringdata0[12];
+    char stringdata0[11];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_TilteWidget_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_TreeWidget_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_TilteWidget_t qt_meta_stringdata_TilteWidget = {
+static const qt_meta_stringdata_TreeWidget_t qt_meta_stringdata_TreeWidget = {
     {
-QT_MOC_LITERAL(0, 0, 11) // "TilteWidget"
+QT_MOC_LITERAL(0, 0, 10) // "TreeWidget"
 
     },
-    "TilteWidget"
+    "TreeWidget"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_TilteWidget[] = {
+static const uint qt_meta_data_TreeWidget[] = {
 
  // content:
        8,       // revision
@@ -55,7 +55,7 @@ static const uint qt_meta_data_TilteWidget[] = {
        0        // eod
 };
 
-void TilteWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void TreeWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     Q_UNUSED(_o);
     Q_UNUSED(_id);
@@ -63,30 +63,30 @@ void TilteWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     Q_UNUSED(_a);
 }
 
-QT_INIT_METAOBJECT const QMetaObject TilteWidget::staticMetaObject = { {
+QT_INIT_METAOBJECT const QMetaObject TreeWidget::staticMetaObject = { {
     QMetaObject::SuperData::link<QWidget::staticMetaObject>(),
-    qt_meta_stringdata_TilteWidget.data,
-    qt_meta_data_TilteWidget,
+    qt_meta_stringdata_TreeWidget.data,
+    qt_meta_data_TreeWidget,
     qt_static_metacall,
     nullptr,
     nullptr
 } };
 
 
-const QMetaObject *TilteWidget::metaObject() const
+const QMetaObject *TreeWidget::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *TilteWidget::qt_metacast(const char *_clname)
+void *TreeWidget::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_TilteWidget.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_TreeWidget.stringdata0))
         return static_cast<void*>(this);
     return QWidget::qt_metacast(_clname);
 }
 
-int TilteWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int TreeWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
     return _id;
