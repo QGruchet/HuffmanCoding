@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <stack>
 #include <string>
 
 #include "Tree.hpp"
@@ -19,9 +20,7 @@ class Parser
         /* Methodes */
         std::vector<struct Data> freqChar(std::string) const;
         ArbreB creatHuffmanTree(std::vector<Data>) const;
-        //std::string* readHuffmanTree(ArbreB) const;
-        //std::string* readHuffmanTreeRec(Sommet*, std::string[], int) const;
-        //void printHuffmanTree(ArbreB) const;
+        void readHuffmanTree(Sommet*, std::string, std::stack<std::string>*) const;
 };
 
 #endif

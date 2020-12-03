@@ -151,7 +151,7 @@ void MainWindow::drawTree() {
         QDialog secondeWin(this);
         QHBoxLayout *layout = new QHBoxLayout;
         Parser parser;
-        layout->addWidget(new TreeWidget(mainWidget, parser.creatHuffmanTree(parser.freqChar("src/txtQt/code.txt"))));
+        layout->addWidget(new TreeWidget(mainWidget, parser.creatHuffmanTree(parser.freqChar("src/txtQt/text.txt"))));
         secondeWin.setLayout(layout);
         secondeWin.exec();
     }

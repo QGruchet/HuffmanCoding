@@ -89,40 +89,21 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
     return forest[0];
 }
 
-/*std::string *Parser::readHuffmanTreeRec(Sommet* node, std::string tabCode[], int index) const{
-    std::string codage;
+void Parser::readHuffmanTree(Sommet* node, std::string str, std::stack<std::string>* stack) const{
     if(node->isLeaf()) {
-        codage += node->getData().car;
-        tabCode[index] = codage;
-        index++;
+        stack->push(str + node->getData().car);
+
     }
     else {
-        std::string res;
         if(node->getLeft()) {
-            codage += '0';
-            readHuffmanTreeRec(node->getLeft(), tabCode, index);
+            str += "0";
+            readHuffmanTree(node->getLeft(), str, stack);
+            str.pop_back();
         }
         if(node->getRight()) {
-            codage += '1';
-            readHuffmanTreeRec(node->getLeft(), tabCode, index);
+            str += "1";
+            readHuffmanTree(node->getRight(), str, stack);
+            str.pop_back();
         }
     }
-
-    return tabCode;
 }
-
-std::string* Parser::readHuffmanTree(ArbreB huffmanTree) const {
-    std::string tabCode[256];
-    int index = 0;
-    return readHuffmanTreeRec(huffmanTree.getRoot(), tabCode, index);
-}*/
-
-/*void Parser::printHuffmanTree(ArbreB tree) const{
-    
-    std::string tab[256];
-    tab = readHuffmanTree(tree);
-    for (int i = 0; i < 256; i++)
-    {
-        std::cout << tab[i] << std::endl;
-    }
-}*/

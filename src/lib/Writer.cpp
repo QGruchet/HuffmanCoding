@@ -129,22 +129,21 @@ void Writer::textToCode(std::string text) {
         std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
     }
 
+    //
     Parser parser; ArbreB huffmanTree;
     huffmanTree = parser.creatHuffmanTree(parser.freqChar(file.c_str()));
-    // huffmanTree.getRoot()->printBeautifulTree(0);
-    // std::cout << parser.readHuffmanTree(huffmanTree) << std::endl;
+    huffmanTree.getRoot()->printBeautifulTree(0);
+    std::string str = "\0"; std::stack<std::string> stack;
+    parser.readHuffmanTree(huffmanTree.getRoot(), str, &stack);
 
-    // Convert
-    srand(time(NULL));
-    int numLetters = rand()%1000+100;
-    std::string convert;
-    for(int i=0; i<numLetters; ++i) {
-        if(rand()%2) {
-            convert += "0";
-        }
-        else {
-            convert += "1";
-        }
+    //
+    std::string convert = "\0";
+    while(!stack.empty()) {
+        std::string tmp;
+        tmp = stack.top();
+        stack.pop();
+        tmp.pop_back(); // Erase car
+        convert += tmp;
     }
 
     //

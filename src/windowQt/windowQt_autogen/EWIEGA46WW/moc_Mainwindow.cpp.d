@@ -91,6 +91,7 @@
   /usr/include/c++/10/bits/stl_queue.h \
   /usr/include/c++/10/bits/stl_raw_storage_iter.h \
   /usr/include/c++/10/bits/stl_relops.h \
+  /usr/include/c++/10/bits/stl_stack.h \
   /usr/include/c++/10/bits/stl_tempbuf.h \
   /usr/include/c++/10/bits/stl_tree.h \
   /usr/include/c++/10/bits/stl_uninitialized.h \
@@ -150,6 +151,7 @@
   /usr/include/c++/10/pstl/glue_numeric_defs.h \
   /usr/include/c++/10/queue \
   /usr/include/c++/10/ranges \
+  /usr/include/c++/10/stack \
   /usr/include/c++/10/stdexcept \
   /usr/include/c++/10/stdlib.h \
   /usr/include/c++/10/streambuf \
