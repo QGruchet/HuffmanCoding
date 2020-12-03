@@ -51,6 +51,16 @@ std::vector<Data> Parser::freqChar(std::string nameFile) const {
     return tabFreq;
 }
 
+bool stayOneTree(std::vector<ArbreB> forest) {
+    int _stayOneTree = 0;
+    for(int i=0; i<int(forest.size()); ++i) {
+        if(forest[i].getRoot()->getData().freq != -1) {
+            _stayOneTree++;
+        }
+    }
+    return (_stayOneTree == 1);
+}
+
 ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
     // Trie.
     int size = 0;
@@ -73,26 +83,49 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
         forest.push_back(ArbreB(newData));
     }
 
+    int posMin, posMin2;
+
     // Merge all tree in one.
-    if(size%2) {
-        forest[size-2]+=forest[size-1];
-    }
-    int gap = 1;
-    while(gap <= size/2) {
-        for(int i=0; i<size-gap; i+=gap) {
-            forest[i]+=forest[i+gap];
+    while(!stayOneTree(forest)) {
+        int min = INT32_MAX; // Init min with the max value for int;
+        int min2 = INT32_MAX;
+
+        //
+        for(int i=0; i<int(forest.size()); ++i) {
+            if(forest[i].getRoot()->getData().freq != -1
+            && forest[i].getRoot()->getData().freq <= min) {
+                min = forest[i].getRoot()->getData().freq;
+                posMin = i;
+            }
         }
-        gap*=2;
+        for(int i=0; i<int(forest.size()); ++i) {
+            if(forest[i].getRoot()->getData().freq != -1
+            && forest[i].getRoot()->getData().freq <= min2
+            && !(*forest[i].getRoot() == *forest[posMin].getRoot())) {
+                min2 = forest[i].getRoot()->getData().freq;
+                posMin2 = i;
+            }
+        }
+
+        forest[posMin2] += forest[posMin];
+        Data newData; newData.freq = -1; newData.car = '\0';
+        *forest[posMin].getRoot() = newData;
     }
 
     // Return the final tree.
-    return forest[0];
+    for(int i=0; i<int(forest.size()); ++i) {
+        if(forest[i].getRoot()->getData().freq != -1) {
+            return forest[i];
+        }
+    }
+
+    ArbreB tmp;
+    return tmp;
 }
 
 void Parser::readHuffmanTree(Sommet* node, std::string str, std::stack<std::string>* stack) const{
     if(node->isLeaf()) {
         stack->push(str + node->getData().car);
-
     }
     else {
         if(node->getLeft()) {

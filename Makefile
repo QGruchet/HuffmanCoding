@@ -66,7 +66,7 @@ vg3:
 	valgrind -v ./src/bin/$(EXEC)
 
 vgQT:
-	valgrind --leak-check=full --show-leak-kinds=all ./src/windowQT/$(EXEC)
+	valgrind  ./src/windowQt/windowQt
 
 gdb:
 	gdb ./src/bin/$(EXEC)

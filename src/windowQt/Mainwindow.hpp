@@ -38,9 +38,12 @@ private:
 
     QHBoxLayout *readerLayout = nullptr, *writerLayout = nullptr;
     QTextEdit *reader = nullptr, *writer = nullptr;
-    bool isEncoding = false;
-
+    
     QList<QPushButton*> listButton;
+    
+    bool isEncoding = false;
+    bool treeIsDraw = false;
+    QTextEdit *readerSave = nullptr, *writerSave = nullptr;
 
     /* Functions */
     void resetWindow(int newWidth, int newHeight);
@@ -49,6 +52,7 @@ private:
 
 public slots:
     void menuEncoding();
+    void clearEncoding();
     void menuDecoding();
     void menu();
 
