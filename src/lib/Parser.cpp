@@ -62,7 +62,7 @@ bool stayOneTree(std::vector<ArbreB> forest) {
 }
 
 ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
-    // Trie.
+    // Sort.
     int size = 0;
     for(int i=0; i<int(tabFreq.size()); ++i) {
         for(int j=i+1; j<int(tabFreq.size()); ++j)
