@@ -148,6 +148,7 @@ void MainWindow::encoding()
 void MainWindow::clearEncoding() {
     reader->clear();
     writer->clear();
+    reader->setReadOnly(false);
 }
 
 void MainWindow::drawTree() {
