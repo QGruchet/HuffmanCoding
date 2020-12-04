@@ -55,9 +55,9 @@ void MainWindow::menuEncoding()
     //
     resetWindow(winWidth*2, winHeight*2);
     mainWidget = new QWidget(this);
-    keypadLayout = new QGridLayout;
     readerLayout = new QHBoxLayout(mainWidget);
     writerLayout = new QHBoxLayout;
+    keypadLayout = new QGridLayout;
 
     //
     for(int i=0; i<5; ++i) {
@@ -86,22 +86,24 @@ void MainWindow::menuEncoding()
     listButton.at(4)->setToolTip("Print the Huffman tree");
 
     //
+    reader = new QTextEdit();
+    readerLayout->addWidget(reader);
+    writer = new QTextEdit();
+    writer->setReadOnly(true);
+    writerLayout->addWidget(writer);
+    readerLayout->addLayout(writerLayout);
+    readerLayout->addLayout(keypadLayout);
+
+    //
     if(treeIsDraw) {
         treeIsDraw = false;
-        reader = readerSave;
-        readerSave = nullptr;
-        writer = writerSave;
-        writerSave = nullptr;
-    }
-    else {
-        //
-        reader = new QTextEdit();
-        readerLayout->addWidget(reader);
-        writer = new QTextEdit();
-        writer->setReadOnly(true);
-        writerLayout->addWidget(writer);
-        readerLayout->addLayout(writerLayout);
-        readerLayout->addLayout(keypadLayout);
+        reader->setText(readerSave);
+        readerSave = "\0";
+        reader->show();
+        writer->setText(writerSave);
+        writerSave = "\0";
+        writer->show();
+        reader->setReadOnly(true);
     }
 
     //
@@ -147,6 +149,7 @@ void MainWindow::encoding()
 
 void MainWindow::clearEncoding() {
     reader->clear();
+    reader->setReadOnly(false);
     writer->clear();
     reader->setReadOnly(false);
 }
@@ -156,23 +159,26 @@ void MainWindow::drawTree() {
         QMessageBox::information(mainWidget, "Information", "Any text endocing yet.");
     }
     else {
+        //
         treeIsDraw = true;
-        readerSave = reader; writerSave = writer;
+        readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
 
+        //
         resetWindow(winWidth*2, winHeight*2);
         Parser parser;
         mainWidget = new TreeWidget(this, parser.creatHuffmanTree(parser.freqChar("src/txtQt/text.txt")));
         
+        //
         keypadLayout = new QGridLayout;
         QPushButton* newButton = new QPushButton(mainWidget);
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
         keypadLayout->addWidget(newButton, 0, 0);
-
         listButton.at(0)->setText("Back");
         connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
         listButton.at(0)->setToolTip("Back to the encoding menu");
         
+        //
         setCentralWidget(mainWidget);
     }
 }
