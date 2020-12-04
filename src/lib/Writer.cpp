@@ -132,18 +132,25 @@ void Writer::textToCode(std::string text) {
     //
     Parser parser; ArbreB huffmanTree;
     huffmanTree = parser.creatHuffmanTree(parser.freqChar(file.c_str()));
-    // huffmanTree.getRoot()->printBeautifulTree(0);
     std::string str = "\0"; std::stack<std::string> stack;
     parser.readHuffmanTree(huffmanTree.getRoot(), str, &stack);
 
     //
+    std::map<char, std::string> map;
     std::string convert = "\0";
     while(!stack.empty()) {
         std::string tmp;
         tmp = stack.top();
         stack.pop();
+        char c = tmp.back();
         tmp.pop_back(); // Erase car
-        convert += tmp;
+        map[c]=tmp;
+    }
+
+    for(char c : text) {
+        std::map<char, std::string>::iterator it;
+        it = map.find(c);
+        convert += it->second;
     }
 
     //

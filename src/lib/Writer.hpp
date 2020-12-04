@@ -9,6 +9,7 @@
 #include "Tree.hpp"
 #include "Parser.hpp"
 #include <fstream>
+#include <map>
 #include "../test/Test.hpp"
 
 class Writer
