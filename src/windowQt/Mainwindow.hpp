@@ -7,6 +7,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QScrollArea>
 
 #include <QFile>
 #include <QDialog>
@@ -42,7 +43,7 @@ private:
     QList<QPushButton*> listButton;
     
     bool isEncoding = false;
-    bool treeIsDraw = false;
+    bool treeIsDrawing = false;
     QString readerSave, writerSave;
 
     /* Functions */

@@ -19,7 +19,7 @@ void drawData(QPainter* painter, Sommet* node, int centerX, int centerY, int rad
     QString data;
     if(node->isLeaf()) {
         data = QString("(") + QString(node->getData().car) + QString(", ") + QString::number(node->getData().freq) + QString(")");
-        painter->drawText(centerX+5, centerY+radius/2, data);
+        painter->drawText(centerX+radius/2, centerY+radius/2, data);
     }
     else {
         data = QString::number(node->getData().freq);
@@ -64,7 +64,7 @@ void drawLink(QPainter* painter, Sommet* node, int centerX, int centerY, int gap
 void TreeWidget::draw(QPainter* painter, int width, int height) {
     // setup
     int depht = huffmanTree.getRoot()->countDepth();
-    int radius = width/pow(2, depht-1);
+    int radius = width/pow(2, depht);
     int gapX, gapY; gapX = gapY = 2*radius; 
     // width = x, height = y
     int posX = width/2, posY = radius;

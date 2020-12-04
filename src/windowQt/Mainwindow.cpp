@@ -95,8 +95,8 @@ void MainWindow::menuEncoding()
     readerLayout->addLayout(keypadLayout);
 
     //
-    if(treeIsDraw) {
-        treeIsDraw = false;
+    if(treeIsDrawing) {
+        treeIsDrawing = false;
         reader->setText(readerSave);
         readerSave = "\0";
         reader->show();
@@ -152,6 +152,7 @@ void MainWindow::clearEncoding() {
     reader->setReadOnly(false);
     writer->clear();
     reader->setReadOnly(false);
+    isEncoding = false; treeIsDrawing = false;
 }
 
 void MainWindow::drawTree() {
@@ -160,13 +161,16 @@ void MainWindow::drawTree() {
     }
     else {
         //
-        treeIsDraw = true;
+        treeIsDrawing = true;
         readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
 
         //
         resetWindow(winWidth*2, winHeight*2);
         Parser parser;
+        QScrollArea* scrollArea = new QScrollArea;
+        scrollArea->setBackgroundRole(QPalette::Dark);
         mainWidget = new TreeWidget(this, parser.creatHuffmanTree(parser.freqChar("src/txtQt/text.txt")));
+        scrollArea->setWidget(mainWidget);
         
         //
         keypadLayout = new QGridLayout;
