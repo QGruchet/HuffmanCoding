@@ -43,7 +43,7 @@ private:
     
     bool isEncoding = false;
     bool treeIsDraw = false;
-    QTextEdit *readerSave = nullptr, *writerSave = nullptr;
+    QString readerSave, writerSave;
 
     /* Functions */
     void resetWindow(int newWidth, int newHeight);

@@ -17,19 +17,24 @@ void drawData(QPainter* painter, Sommet* node, int centerX, int centerY, int rad
     painter->setPen(Qt::black);
     painter->setFont(QFont("Arial", 10));
     QString data;
-    if(node->getData().car == '\0') {
-        data = QString::number(node->getData().freq);
-        painter->drawText(centerX+radius/3, centerY+radius/2, data);
-    }
-    else {
+    if(node->isLeaf()) {
         data = QString("(") + QString(node->getData().car) + QString(", ") + QString::number(node->getData().freq) + QString(")");
         painter->drawText(centerX+5, centerY+radius/2, data);
+    }
+    else {
+        data = QString::number(node->getData().freq);
+        painter->drawText(centerX+radius/3, centerY+radius/2, data);
     }
     painter->setPen(backupPen);
 }
 
 void drawNode(QPainter* painter, Sommet* node, int centerX, int centerY, int gapX, int gapY, int depth, int radius) {
-    painter->drawEllipse(centerX, centerY, radius, radius);
+    if(node->isLeaf()) {
+        painter->drawEllipse(centerX, centerY, radius+radius/2, radius);
+    }
+    else {
+        painter->drawEllipse(centerX, centerY, radius, radius);
+    }
     drawData(painter, node, centerX, centerY, radius);
     if(node->getRight()) {
         drawNode(painter, node->getRight(), centerX+(gapX/pow(2, depth-1)), centerY+gapY, gapX, gapY, depth+1, radius);
@@ -58,7 +63,8 @@ void drawLink(QPainter* painter, Sommet* node, int centerX, int centerY, int gap
 
 void TreeWidget::draw(QPainter* painter, int width, int height) {
     // setup
-    int radius = 40;
+    int depht = huffmanTree.getRoot()->countDepth();
+    int radius = width/pow(2, depht-1);
     int gapX, gapY; gapX = gapY = 2*radius; 
     // width = x, height = y
     int posX = width/2, posY = radius;
@@ -70,8 +76,7 @@ void TreeWidget::draw(QPainter* painter, int width, int height) {
 
     painter->setBrush(myGreen);
     painter->setPen(QPen(myGreen));
-    int depht = huffmanTree.getRoot()->countDepth();
-    depht-=4;
+    depht-=3;
     while(depht) {
         gapX *= 2;
         depht--;
