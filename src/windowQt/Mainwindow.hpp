@@ -16,6 +16,7 @@
 #include "Tiltewidget.hpp"
 #include "Treewidget.hpp"
 #include "../lib/Writer.hpp"
+#include "../lib/Tree.hpp"
 #include "../lib/Parser.hpp"
 
 class MainWindow : public QMainWindow
@@ -36,7 +37,6 @@ private:
     QWidget* mainWidget = nullptr;
 
     QGridLayout* keypadLayout = nullptr;
-
     QHBoxLayout *readerLayout = nullptr, *writerLayout = nullptr;
     QTextEdit *reader = nullptr, *writer = nullptr;
     
@@ -44,6 +44,7 @@ private:
     
     bool isEncoding = false;
     bool treeIsDrawing = false;
+    int maxDepth = 5;
     QString readerSave, writerSave;
 
     /* Functions */

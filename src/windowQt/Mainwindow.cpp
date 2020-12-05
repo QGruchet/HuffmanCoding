@@ -103,7 +103,6 @@ void MainWindow::menuEncoding()
         writer->setText(writerSave);
         writerSave = "\0";
         writer->show();
-        reader->setReadOnly(true);
     }
 
     //
@@ -112,8 +111,6 @@ void MainWindow::menuEncoding()
 
 void MainWindow::encoding()
 {
-    reader->setReadOnly(true); // User can't write now;
-
     //
     QString read;
     read = reader->toPlainText();
@@ -161,29 +158,34 @@ void MainWindow::drawTree() {
     }
     else {
         //
-        treeIsDrawing = true;
-        readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
+        Parser parser;
+        ArbreB huffmanTree = parser.creatHuffmanTree(parser.freqChar("src/txtQt/text.txt"));
 
         //
-        resetWindow(winWidth*2, winHeight*2);
-        Parser parser;
-        QScrollArea* scrollArea = new QScrollArea;
-        scrollArea->setBackgroundRole(QPalette::Dark);
-        mainWidget = new TreeWidget(this, parser.creatHuffmanTree(parser.freqChar("src/txtQt/text.txt")));
-        scrollArea->setWidget(mainWidget);
-        
-        //
-        keypadLayout = new QGridLayout;
-        QPushButton* newButton = new QPushButton(mainWidget);
-        newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        listButton.append(newButton);
-        keypadLayout->addWidget(newButton, 0, 0);
-        listButton.at(0)->setText("Back");
-        connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
-        listButton.at(0)->setToolTip("Back to the encoding menu");
-        
-        //
-        setCentralWidget(mainWidget);
+        if(huffmanTree.getRoot()->countDepth() > maxDepth) {
+            QMessageBox::information(mainWidget, "Information", "Huffman tree is too big to be drawing.");
+        }
+        else {
+            treeIsDrawing = true;
+            readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
+
+            //
+            resetWindow(winWidth*2, winHeight*2);
+            mainWidget = new TreeWidget(this, huffmanTree);
+            
+            //
+            keypadLayout = new QGridLayout;
+            QPushButton* newButton = new QPushButton(mainWidget);
+            newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+            listButton.append(newButton);
+            keypadLayout->addWidget(newButton, 0, 0);
+            listButton.at(0)->setText("Back");
+            connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
+            listButton.at(0)->setToolTip("Back to the encoding menu");
+            
+            //
+            setCentralWidget(mainWidget);
+        }
     }
 }
 
