@@ -6,9 +6,13 @@
 //
 #include <cmath>
 
-TreeWidget::TreeWidget(QWidget *parent, ArbreB tree)
-    : QWidget(parent)
+TreeWidget::TreeWidget(QWidget *parent)
+    : QWidget(parent) 
 {
+    // Empty
+}
+
+void TreeWidget::setHuffmanTree(ArbreB tree) {
     huffmanTree = tree;
 }
 
@@ -19,7 +23,7 @@ void drawData(QPainter* painter, Sommet* node, int centerX, int centerY, int rad
     QString data;
     if(node->isLeaf()) {
         data = QString("(") + QString(node->getData().car) + QString(", ") + QString::number(node->getData().freq) + QString(")");
-        painter->drawText(centerX+radius/2, centerY+radius/2, data);
+        painter->drawText(centerX+radius/4, centerY+radius/2, data);
     }
     else {
         data = QString::number(node->getData().freq);
@@ -63,8 +67,7 @@ void drawLink(QPainter* painter, Sommet* node, int centerX, int centerY, int gap
 
 void TreeWidget::draw(QPainter* painter, int width, int height) {
     // setup
-    int depht = huffmanTree.getRoot()->countDepth();
-    int radius = width/pow(2, depht);
+    int radius = 35;
     int gapX, gapY; gapX = gapY = 2*radius; 
     // width = x, height = y
     int posX = width/2, posY = radius;
@@ -76,6 +79,7 @@ void TreeWidget::draw(QPainter* painter, int width, int height) {
 
     painter->setBrush(myGreen);
     painter->setPen(QPen(myGreen));
+    int depht = huffmanTree.getRoot()->countDepth();
     depht-=3;
     while(depht) {
         gapX *= 2;

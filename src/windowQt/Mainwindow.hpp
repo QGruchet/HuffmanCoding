@@ -5,6 +5,7 @@
 #include <QApplication>
 
 #include <QGridLayout>
+#include <QHBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
 #include <QScrollArea>
@@ -40,6 +41,9 @@ private:
     QHBoxLayout *readerLayout = nullptr, *writerLayout = nullptr;
     QTextEdit *reader = nullptr, *writer = nullptr;
     
+    TreeWidget* treeWidget = nullptr;
+    QScrollArea *scrollArea = nullptr;
+
     QList<QPushButton*> listButton;
     
     bool isEncoding = false;
