@@ -103,25 +103,47 @@ void MainWindow::menuEncoding()
         writer->setText(writerSave);
         writerSave = "\0";
         writer->show();
-        reader->setReadOnly(true);
     }
 
     //
     setCentralWidget(mainWidget);
 }
 
+bool checkASCII(std::string str) {
+    for(char c : str) {
+        if(!(int(c) >= 0 && int(c) <= 127)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool isOnlyOneChar(std::string str) {
+    for(int i=1; i<int(str.size()); ++i) {
+        if(str[i-1] != str[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void MainWindow::encoding()
 {
-    reader->setReadOnly(true); // User can't write now;
-
     //
     QString read;
     read = reader->toPlainText();
     std::string strRead = read.toStdString();
     if(strRead.length() <= 1) {
         QMessageBox::information(mainWidget, "Error message", "Too short message.");
-        reader->clear();
+        reader->setReadOnly(false);
+    }
+    else if(!checkASCII(strRead)) {
+        QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
         reader->setReadOnly(false); // User can write now;
+    }
+    else if(isOnlyOneChar(strRead)) {
+        QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
+        reader->setReadOnly(false);
     }
     else {
         //
@@ -138,12 +160,9 @@ void MainWindow::encoding()
         //
         writer->setText(code);
         writer->show();
-
-        //
-        file.close();
-
-        //
-        isEncoding = true;
+        
+        file.close(); //
+        isEncoding = true; //
     }
 }
 
@@ -161,28 +180,30 @@ void MainWindow::drawTree() {
     }
     else {
         //
+        Parser parser;
+        ArbreB huffmanTree = parser.creatHuffmanTree(parser.freqChar("src/txtQt/text.txt"));
+
+        //
         treeIsDrawing = true;
         readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
 
-        //
-        resetWindow(winWidth*2, winHeight*2);
-        Parser parser;
-        QScrollArea* scrollArea = new QScrollArea;
-        scrollArea->setBackgroundRole(QPalette::Dark);
-        mainWidget = new TreeWidget(this, parser.creatHuffmanTree(parser.freqChar("src/txtQt/text.txt")));
-        scrollArea->setWidget(mainWidget);
+        resetWindow(winWidth*2, winHeight*2); //
         
         //
-        keypadLayout = new QGridLayout;
-        QPushButton* newButton = new QPushButton(mainWidget);
+        mainWidget = new QWidget(this);
+        scrollArea = new QScrollArea(mainWidget);
+        scrollArea->setWidgetResizable(true);
+        treeWidget = new TreeWidget();
+        treeWidget->setHuffmanTree(huffmanTree);
+        scrollArea->setWidget(treeWidget);
+        keypadLayout = new QGridLayout();
+        scrollArea->setWidget(treeWidget);
+        QPushButton* newButton = new QPushButton("Back");
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
-        keypadLayout->addWidget(newButton, 0, 0);
-        listButton.at(0)->setText("Back");
+        keypadLayout->addWidget(newButton, 0, 1);
         connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
         listButton.at(0)->setToolTip("Back to the encoding menu");
-        
-        //
         setCentralWidget(mainWidget);
     }
 }

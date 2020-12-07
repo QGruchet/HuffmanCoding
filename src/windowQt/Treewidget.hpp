@@ -11,7 +11,8 @@ private:
     ArbreB huffmanTree;
 
 public:
-    explicit TreeWidget(QWidget*, ArbreB);
+    explicit TreeWidget(QWidget* parent = nullptr);
+    void setHuffmanTree(ArbreB);
     void draw(QPainter*, int, int);
 
 protected:

@@ -5,6 +5,7 @@
 #include <QApplication>
 
 #include <QGridLayout>
+#include <QHBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
 #include <QScrollArea>
@@ -16,6 +17,7 @@
 #include "Tiltewidget.hpp"
 #include "Treewidget.hpp"
 #include "../lib/Writer.hpp"
+#include "../lib/Tree.hpp"
 #include "../lib/Parser.hpp"
 
 class MainWindow : public QMainWindow
@@ -36,14 +38,17 @@ private:
     QWidget* mainWidget = nullptr;
 
     QGridLayout* keypadLayout = nullptr;
-
     QHBoxLayout *readerLayout = nullptr, *writerLayout = nullptr;
     QTextEdit *reader = nullptr, *writer = nullptr;
     
+    TreeWidget* treeWidget = nullptr;
+    QScrollArea *scrollArea = nullptr;
+
     QList<QPushButton*> listButton;
     
     bool isEncoding = false;
     bool treeIsDrawing = false;
+    int maxDepth = 5;
     QString readerSave, writerSave;
 
     /* Functions */
