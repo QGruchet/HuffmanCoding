@@ -192,12 +192,14 @@ void MainWindow::drawTree() {
         //
         mainWidget = new QWidget(this);
         scrollArea = new QScrollArea(mainWidget);
+        scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+        scrollArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+        scrollArea->setGeometry( 10, 10, winWidth, winHeight);
         scrollArea->setWidgetResizable(true);
         treeWidget = new TreeWidget();
         treeWidget->setHuffmanTree(huffmanTree);
-        scrollArea->setWidget(treeWidget);
         keypadLayout = new QGridLayout();
-        scrollArea->setWidget(treeWidget);
+        
         QPushButton* newButton = new QPushButton("Back");
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
@@ -205,6 +207,10 @@ void MainWindow::drawTree() {
         connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
         listButton.at(0)->setToolTip("Back to the encoding menu");
         setCentralWidget(mainWidget);
+        scrollArea->setWidget(treeWidget);
+        treeWidget->show();
+        scrollArea->setLayout(keypadLayout);
+        scrollArea->show();
     }
 }
 
