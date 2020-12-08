@@ -8,11 +8,11 @@ class TreeWidget : public QWidget
 {
     Q_OBJECT
 private:
-    ArbreB huffmanTree;
+    ArbreB tree;
 
 public:
     explicit TreeWidget(QWidget* parent = nullptr);
-    void setHuffmanTree(ArbreB);
+    void setTree(ArbreB);
     void draw(QPainter*, int, int);
 
 protected:

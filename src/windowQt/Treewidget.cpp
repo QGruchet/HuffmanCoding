@@ -12,8 +12,8 @@ TreeWidget::TreeWidget(QWidget *parent)
     // Empty
 }
 
-void TreeWidget::setHuffmanTree(ArbreB tree) {
-    huffmanTree = tree;
+void TreeWidget::setTree(ArbreB newTree) {
+    tree = newTree;
 }
 
 void drawData(QPainter* painter, Sommet* node, int centerX, int centerY, int radius) {
@@ -79,16 +79,16 @@ void TreeWidget::draw(QPainter* painter, int width, int height) {
 
     painter->setBrush(myGreen);
     painter->setPen(QPen(myGreen));
-    int depht = huffmanTree.getRoot()->countDepth();
+    int depht = tree.getRoot()->countDepth();
     depht-=3;
     while(depht) {
         gapX *= 2;
         depht--;
     }
-    drawNode(painter, huffmanTree.getRoot(), centerX, centerY, gapX, gapY, 1, radius);
+    drawNode(painter, tree.getRoot(), centerX, centerY, gapX, gapY, 1, radius);
 
     painter->setPen(QPen(myBrown, 4));
-    drawLink(painter, huffmanTree.getRoot(), centerX, centerY, gapX, gapY, 1, radius);
+    drawLink(painter, tree.getRoot(), centerX, centerY, gapX, gapY, 1, radius);
 }
 
 void TreeWidget::paintEvent(QPaintEvent *event)

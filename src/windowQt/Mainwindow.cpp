@@ -186,31 +186,25 @@ void MainWindow::drawTree() {
         //
         treeIsDrawing = true;
         readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
-
+        
         resetWindow(winWidth*2, winHeight*2); //
-        
-        //
         mainWidget = new QWidget(this);
-        scrollArea = new QScrollArea(mainWidget);
-        scrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
-        scrollArea->setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
-        scrollArea->setGeometry( 10, 10, winWidth, winHeight);
-        scrollArea->setWidgetResizable(true);
         treeWidget = new TreeWidget();
-        treeWidget->setHuffmanTree(huffmanTree);
-        keypadLayout = new QGridLayout();
+        treeWidget->setTree(huffmanTree);
+
+        writerLayout = new QHBoxLayout(mainWidget);
+        writerLayout->addWidget(treeWidget);
         
+        keypadLayout = new QGridLayout();
         QPushButton* newButton = new QPushButton("Back");
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
-        keypadLayout->addWidget(newButton, 0, 1);
+        keypadLayout->addWidget(newButton, 0, 0);
         connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
         listButton.at(0)->setToolTip("Back to the encoding menu");
+
+        writerLayout->addLayout(keypadLayout);
         setCentralWidget(mainWidget);
-        scrollArea->setWidget(treeWidget);
-        treeWidget->show();
-        scrollArea->setLayout(keypadLayout);
-        scrollArea->show();
     }
 }
 
