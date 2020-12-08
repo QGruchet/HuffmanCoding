@@ -79,6 +79,8 @@ gdbQT:
 cleantarget:
 	rm src/target/*.o
 	rmdir src/target
+
+cleanTxt:
 	rm src/txtQt/*.txt
 	rmdir src/txtQt
 
@@ -89,8 +91,8 @@ cleanQT:
 	rm src/windowQt/cmake_install.cmake
 	rm src/windowQt/Makefile
 
-clean: cleantarget cleanQT
+clean: cleantarget cleanTxt cleanQT
 
-mrproper: clean cleanQT
+mrproper: clean
 	rm src/bin/$(EXEC)
 	rmdir src/bin

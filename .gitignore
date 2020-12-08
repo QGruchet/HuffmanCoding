@@ -1,7 +1,8 @@
 .vscode
 
 target/
-txtQT/
+txtQt/
+bin/
 
 src/windowQT/CMakeFiles
 src/windowQT/Makefile
