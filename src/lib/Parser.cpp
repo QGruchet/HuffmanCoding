@@ -1,16 +1,16 @@
 /**
- * Parser.cpp : You can found here all functions implemented for the Parser class.
+ * Parser.cpp : You can found here all functions implemented for
+ * the Parser class.
  * Author : Mickael.
  **/
 
 #include "Parser.hpp"
 
 /**
- * Function : freChar.
- * Argument : nameFile, the file name.
- * Return : std::vector, vector of Data with the freq and the car of any.
- *              caracters in the file.
- * Description : Read the nameFile and fill the freq vector.
+ * *Description : Read the nameFile and fill the freq vector.
+ * @param nameFile, the file name.
+ * @return vector of Data with the freq and the car of any.
+ *          caracters in the file.
  * */
 std::vector<Data> Parser::freqChar(std::string nameFile) const {
     std::ifstream flux(nameFile);
@@ -53,22 +53,28 @@ std::vector<Data> Parser::freqChar(std::string nameFile) const {
 }
 
 /**
- * Function : stayOneTree.
- * Argument : forest, the vector of tree.
- * Return : bool, true if all trees have -1 in freq except one.
+ * *Description : Check if all trees was merge in one.
+ * @param forest, the vector of tree.
+ * @return boolean, true if all trees have -1 in freq except one.
  *          false, else.
- * Description : Check if all trees was merge in one.
  * */
 bool stayOneTree(std::vector<ArbreB> forest) {
     int _stayOneTree = 0;
     for(int i=0; i<int(forest.size()); ++i) {
         if(forest[i].getRoot()->getData().freq != -1) {
-            _stayOneTree++; // Add one if tree haven't -1 in freq <=> tree isn't merge.
+            _stayOneTree++; // Add one if tree haven't -1 in freq <=> 
+                            // tree isn't merge.
         }
     }
     return (_stayOneTree == 1);
 }
 
+
+/**
+ * *Description : Create subtrees with all Data in vector, and merge in one.
+ * @param tabFreq, the freq vector of any char.
+ * @return the huffman tree.
+ * */
 ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
     // Select sort.
     int size = 0;
@@ -118,7 +124,8 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
 
         forest[posMin2] += forest[posMin]; // Merge the two minimums trees.
         
-        // Put default parameter for indicat the tree is merge with an other one
+        // Put default parameter for indicat the tree is merge with an
+        // other one
         Data newData; newData.freq = -1; newData.car = '\0';
         *forest[posMin].getRoot() = newData;
     }
@@ -136,13 +143,13 @@ ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {
 }
 
 /**
- * Function : readHuffmanTree.
- * Argument : node, the current node.
- *          str, the string for concat the convert letter.
- *          stack, a stack for save all convert letter.
- * Description : Check if all trees was merge in one.
+ * * Description : Check if all trees was merge in one.
+ * @param node, the current node.
+ * @param str, the string for concat the convert letter.
+ * @param stack, a stack for save all convert letter.
  * */
-void Parser::readHuffmanTree(Sommet* node, std::string str, std::stack<std::string>* stack) const {
+void Parser::readHuffmanTree(Sommet* node, std::string str,
+                                std::stack<std::string>* stack) const {
     if(node->isLeaf()) {
         stack->push(str + node->getData().car);
     }

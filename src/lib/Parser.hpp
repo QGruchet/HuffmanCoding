@@ -20,7 +20,8 @@ class Parser
         /* Methodes */
         std::vector<struct Data> freqChar(std::string) const;
         ArbreB creatHuffmanTree(std::vector<Data>) const;
-        void readHuffmanTree(Sommet*, std::string, std::stack<std::string>*) const;
+        void readHuffmanTree(Sommet*, std::string,
+                                std::stack<std::string>*) const;
 };
 
 #endif
