@@ -187,10 +187,9 @@ void MainWindow::drawTree() {
         treeIsDrawing = true;
         readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
         if(huffmanTree.getRoot()->countDepth() >= maxDepth ) {
-            QMessageBox::information(mainWidget, "Error message", "HuffmanTree is too big for be drawing.");
+            QMessageBox::information(mainWidget, "Error message", "HuffmanTree is too big to be drawing");
         }
         else {
-            
             resetWindow(winWidth*2, winHeight*2); //
             mainWidget = new QWidget(this);
             treeWidget = new TreeWidget();
