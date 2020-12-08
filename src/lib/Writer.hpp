@@ -20,13 +20,9 @@ class Writer
 
 	public:
 		/* Constructor */
-		Writer();
 		Writer(std::string);
 
 		/* Methodes */
-		void writeBeautifulTreeInFile(ArbreB);
-		void writeBeautifulTreeInFileRec(Sommet*, int, std::ofstream&);
-		void writeResultAllTests();
 		void textToCode(std::string);
 };
 

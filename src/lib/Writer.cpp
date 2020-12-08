@@ -6,12 +6,6 @@
 #include "Writer.hpp"
 
 /**
- * *Description : Default constructor.
- * *Function : Default constructor.
- * */
-Writer::Writer() : file("\0") {}
-
-/**
  * *Description : Constructor with parameter.
  * *Function : Constructor with parameter.
  * @param nameFile, the name of the file.
