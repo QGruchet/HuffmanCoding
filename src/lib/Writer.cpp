@@ -6,119 +6,25 @@
 #include "Writer.hpp"
 
 /**
- * Function : Default constructor.
- * Return : Writer.
- * Description : Default constructor.
+ * *Description : Default constructor.
+ * *Function : Default constructor.
  * */
 Writer::Writer() : file("\0") {}
 
 /**
- * Function : Constructor with parameter.
- * Return : Writer.
- * Parameter : nameFile : the name of the file.
- * Description : Constructor with parameter.
+ * *Description : Constructor with parameter.
+ * *Function : Constructor with parameter.
+ * @param nameFile, the name of the file.
  * */
 Writer::Writer(std::string nameFile) : file(nameFile) {}
 
 /**
- * Function : writeBeautifulTreeInFile.
- * Parameter : Tree, the tree need to write in a file.
- * Description : Write a tree in a file.
+ * *Description : Write a texte in a file, create his huffman tree and write his convert.
+ * *Function : textToCode.
+ * @param text, the original text.
  * */
-void Writer::writeBeautifulTreeInFile(ArbreB tree) {
-    // Setup flux and open file
-    std::ofstream flux;
-    flux.open(file.c_str(), std::ios::trunc);
-
-    // If the file is open
-    if(flux) {
-        // Write some informations
-        Sommet *root = tree.getRoot();
-        flux << root->countSize() << "\n";
-        flux << root->getData().freq << "\n";
-        flux << root->countDepth() << "\n";
-        flux << root->dataMin() << "\n";
-        flux << root->dataMax() << "\n";
-
-        // Write the tree
-        writeBeautifulTreeInFileRec(root, 0, flux);
-
-        flux.close();
-    }
-    else {
-        std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
-    }
-}
-
-/**
- * Function : writeBeautifulTreeInFileRec.
- * Parameter : node, the node need to write in a file, recursive version.
- *                 flux, where we write.
- * Description : Write a tree in a file.
- * */
-void Writer::writeBeautifulTreeInFileRec(Sommet* node, int space, std::ofstream& flux) {
-    for(int i = 0; i < space; i++) {
-        flux << "|__";
-    }
-    Data getNodeData = node->getData();
-    flux << "(" << getNodeData.car << ", " << getNodeData.freq << "), " << std::endl;
-    if(node->getRight()) {
-        writeBeautifulTreeInFileRec(node->getRight(), space + 1, flux);
-    }
-    if(node->getLeft()) {
-        writeBeautifulTreeInFileRec(node->getLeft(), space + 1, flux);
-    }
-}
-
-/**
- * Function : writeResultAllTests.
- * Description : Write result of tests.
- * */
-void Writer::writeResultAllTests() {
-  // Setup flux and open file
-  std::ofstream flux(file.c_str(), std::ios::trunc);
-
-  // If the file is open
-  if(flux) {
-    bool withColor = false;
-    Test test(withColor);
-    // Sommet
-    flux<< "\t> TESTS <\n";
-    flux << test.testDefaultConstructorNode();
-    flux << test.testCopyConstructorNode();
-    flux << test.testParamConstructorNode();
-    flux << test.testEqualsNode();
-    flux << test.testAssignNode();
-    flux << test.testDepth();
-    flux << test.testSize();
-
-    // ArbreB
-    flux << test.testDefaultConstructorTree();
-    flux << test.testParamConstructorTree();
-    flux << test.testAssignTree();
-    flux << test.TestEqualsTree();
-    flux << test.testAdd();
-    flux << test.testDell();
-    flux << test.testFind();
-    flux << test.testGetNodeAtIndex();
-    flux << test.testJoin();
-    flux << test.testSplit();
-
-    if(test.getSumTest() == test.getNumTestGlobal()) {
-        flux << "> TESTS RESULT : [ " << test.getSumTest() << "/" << test.getNumTestGlobal() << " ] tests passed ! <\n";
-    }
-    else {
-        flux << "> TESTS RESULT : [ " << test.getSumTest() << "/" << test.getNumTestGlobal() << " ] tests passed ! <\n";
-    }
-
-    flux.close();
-  }
-  else {
-    std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
-  }
-}
-
 void Writer::textToCode(std::string text) {
+    // Write the original text.
     std::ofstream flux;
     flux.open(file.c_str(), std::ios::out | std::ios::trunc);
     if(flux) {
@@ -129,13 +35,13 @@ void Writer::textToCode(std::string text) {
         std::cout << "ERROR : can't open '" << file.c_str() << "'\n";
     }
 
-    //
+    // Create his huffman tree.
     Parser parser; ArbreB huffmanTree;
     huffmanTree = parser.creatHuffmanTree(parser.freqChar(file.c_str()));
     std::string str = "\0"; std::stack<std::string> stack;
     parser.readHuffmanTree(huffmanTree.getRoot(), str, &stack);
 
-    //
+    // Create a map to associate a char and his convert.
     std::map<char, std::string> map;
     std::string convert = "\0";
     while(!stack.empty()) {
@@ -143,17 +49,18 @@ void Writer::textToCode(std::string text) {
         tmp = stack.top();
         stack.pop();
         char c = tmp.back();
-        tmp.pop_back(); // Erase car
+        tmp.pop_back(); // Erase the car
         map[c]=tmp;
     }
 
+    // Concat all convert char in one string.
     for(char c : text) {
         std::map<char, std::string>::iterator it;
         it = map.find(c);
         convert += it->second;
     }
 
-    //
+    // Write the convert text in a file.
     flux.open("src/txtQt/code.txt", std::ios::out | std::ios::trunc);
     if(flux) {
         flux << convert;
