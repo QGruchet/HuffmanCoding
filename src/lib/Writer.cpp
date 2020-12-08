@@ -7,7 +7,6 @@
 
 /**
  * *Description : Constructor with parameter.
- * *Function : Constructor with parameter.
  * @param nameFile, the name of the file.
  * */
 Writer::Writer(std::string nameFile) : file(nameFile) {}
