@@ -9,9 +9,7 @@ class TilteWidget : public QWidget
     Q_OBJECT
 public:
     explicit TilteWidget(QWidget*, int, int);
-
-signals:
-
+    
 private:
     int widgetWidth, widgetHeight; // sizeX, sizeY
 

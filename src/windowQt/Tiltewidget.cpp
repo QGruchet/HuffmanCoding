@@ -5,6 +5,12 @@
 #include <QDebug>
 #define DEBUG false
 
+/**
+ * *Description : Constructor with parameters.
+ * @param parent, the widget parent.
+ * @param winSizeX, the widht.
+ * @param winSizeX, the height.
+ * */
 TilteWidget::TilteWidget(QWidget *parent, int winSizeX, int winSizeY)
     : QWidget(parent)
 {
@@ -12,10 +18,14 @@ TilteWidget::TilteWidget(QWidget *parent, int winSizeX, int winSizeY)
     widgetHeight = winSizeY;
 }
 
+/**
+ * *Description : Draw the tilte window.
+ * */
 void TilteWidget::paintEvent(QPaintEvent *event)
 {
-    Q_UNUSED((event)); // Unused parameter
+    Q_UNUSED((event)); // Unused parameter.
 
+    // The the project tilte.
     QPainter painter(this);
     painter.setPen(Qt::black);
     int police = widgetHeight*15/100;
@@ -23,6 +33,7 @@ void TilteWidget::paintEvent(QPaintEvent *event)
     painter.drawText(widgetWidth/4, widgetHeight/2 - police, "Huffman");
     painter.drawText(widgetWidth/2, widgetHeight/2 + 2*police, "Coding");
 
+    // The the autors names.
     painter.setFont(QFont("Helvetica", police/4));
     int littlePolice = police/4;
     painter.drawText(5, widgetHeight - littlePolice, "LE DENMAT Mickael");
