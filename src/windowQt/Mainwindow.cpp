@@ -186,25 +186,30 @@ void MainWindow::drawTree() {
         //
         treeIsDrawing = true;
         readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
-        
-        resetWindow(winWidth*2, winHeight*2); //
-        mainWidget = new QWidget(this);
-        treeWidget = new TreeWidget();
-        treeWidget->setTree(huffmanTree);
+        if(huffmanTree.getRoot()->countDepth() >= maxDepth ) {
+            QMessageBox::information(mainWidget, "Error message", "HuffmanTree is too big for be drawing.");
+        }
+        else {
+            
+            resetWindow(winWidth*2, winHeight*2); //
+            mainWidget = new QWidget(this);
+            treeWidget = new TreeWidget();
+            treeWidget->setTree(huffmanTree);
 
-        writerLayout = new QHBoxLayout(mainWidget);
-        writerLayout->addWidget(treeWidget);
-        
-        keypadLayout = new QGridLayout();
-        QPushButton* newButton = new QPushButton("Back");
-        newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        listButton.append(newButton);
-        keypadLayout->addWidget(newButton, 0, 0);
-        connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
-        listButton.at(0)->setToolTip("Back to the encoding menu");
+            writerLayout = new QHBoxLayout(mainWidget);
+            writerLayout->addWidget(treeWidget);
+            
+            keypadLayout = new QGridLayout();
+            QPushButton* newButton = new QPushButton("Back");
+            newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+            listButton.append(newButton);
+            keypadLayout->addWidget(newButton, 0, 0);
+            connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
+            listButton.at(0)->setToolTip("Back to the encoding menu");
 
-        writerLayout->addLayout(keypadLayout);
-        setCentralWidget(mainWidget);
+            writerLayout->addLayout(keypadLayout);
+            setCentralWidget(mainWidget);
+        }
     }
 }
 

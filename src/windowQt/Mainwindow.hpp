@@ -36,13 +36,11 @@ private:
     int winWidth, winHeight; // sizeX, sizeY
 
     QWidget* mainWidget = nullptr;
+    TreeWidget* treeWidget = nullptr;
 
     QGridLayout* keypadLayout = nullptr;
     QHBoxLayout *readerLayout = nullptr, *writerLayout = nullptr;
     QTextEdit *reader = nullptr, *writer = nullptr;
-    
-    TreeWidget* treeWidget = nullptr;
-    QScrollArea *scrollArea = nullptr;
 
     QList<QPushButton*> listButton;
     

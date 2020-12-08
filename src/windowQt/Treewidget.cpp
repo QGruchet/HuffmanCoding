@@ -23,7 +23,7 @@ void drawData(QPainter* painter, Sommet* node, int centerX, int centerY, int rad
     QString data;
     if(node->isLeaf()) {
         data = QString("(") + QString(node->getData().car) + QString(", ") + QString::number(node->getData().freq) + QString(")");
-        painter->drawText(centerX+radius/4, centerY+radius/2, data);
+        painter->drawText(centerX+radius/4, centerY+radius*3/4, data);
     }
     else {
         data = QString::number(node->getData().freq);
