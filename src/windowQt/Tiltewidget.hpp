@@ -1,3 +1,8 @@
+/**
+ * Tiltewidget.cpp : You can found here the Tiltewidget class.
+ * Author : Mickael.
+ * */
+
 #ifndef TILTEWIDGET_HPP
 #define TILTEWIDGET_HPP
 

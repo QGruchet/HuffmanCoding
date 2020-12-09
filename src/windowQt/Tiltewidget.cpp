@@ -1,3 +1,9 @@
+/**
+ * Tiltewidget.cpp : You can found here all functions implemented for
+ * the Tiltewidget class.
+ * Author : Mickael.
+ **/
+
 #include "Tiltewidget.hpp"
 #include <QFontDatabase>
 #include <QPainter>

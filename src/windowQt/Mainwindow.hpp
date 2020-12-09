@@ -1,3 +1,8 @@
+/**
+ * Mainwindow.cpp : You can found here the Mainwindow class.
+ * Author : Mickael.
+ * */
+
 #ifndef MAINWINDOW_HPP
 #define MAINWINDOW_HPP
 

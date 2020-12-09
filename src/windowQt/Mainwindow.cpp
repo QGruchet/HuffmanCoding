@@ -1,5 +1,6 @@
 /**
- * Mainwidow.cpp : You can found here all functions implemented for the Mainwidow class.
+ * Mainwidow.cpp : You can found here all functions implemented for
+ * the Mainwidow class.
  * Author : Mickael.
  **/
 
