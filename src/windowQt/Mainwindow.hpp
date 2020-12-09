@@ -13,14 +13,16 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
-#include <QScrollArea>
 
 #include <QFile>
 #include <QDialog>
 #include <QTextEdit>
+#include <QMouseEvent>
 
+// Include my files.
 #include "Tiltewidget.hpp"
 #include "Treewidget.hpp"
+#include "Mytextedit.hpp"
 #include "../lib/Writer.hpp"
 #include "../lib/Tree.hpp"
 #include "../lib/Parser.hpp"
@@ -45,7 +47,7 @@ private:
 
     QGridLayout* keypadLayout = nullptr;
     QHBoxLayout *readerLayout = nullptr, *writerLayout = nullptr;
-    QTextEdit *reader = nullptr, *writer = nullptr;
+    MyTextEdit *reader = nullptr, *writer = nullptr;
 
     QList<QPushButton*> listButton;
     
