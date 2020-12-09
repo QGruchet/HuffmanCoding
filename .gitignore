@@ -5,7 +5,7 @@ txtQt/
 bin/
 
 src/windowQt/CMakeFiles
-src/windowQt/windowQt_autogen/
+src/windowQt/windowQt_autogen
 src/windowQt/cmake_install.cmake
 src/windowQt/CMakeCache.txt
 src/windowQt/Makefile

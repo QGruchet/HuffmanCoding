@@ -47,6 +47,8 @@ else()
     Treewidget.cpp
     Treewidget.cpp
     Treewidget.hpp
+    Mytextedit.cpp
+    Mytextedit.hpp
     ../lib/Parser.cpp
     ../lib/Parser.hpp
     ../lib/Tree.cpp

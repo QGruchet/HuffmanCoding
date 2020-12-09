@@ -94,11 +94,12 @@ cleanTxt:
 	rmdir src/txtQt
 
 cleanQT:
-	rm src/windowQt/windowQt
 	rm -r src/windowQt/CMakeFiles
-	rm src/windowQt/CMakeCache.txt
+	rm -r src/windowQt/windowQt_autogen
 	rm src/windowQt/cmake_install.cmake
+	rm src/windowQt/CMakeCache.txt
 	rm src/windowQt/Makefile
+	rm src/windowQt/windowQt
 
 clean: cleantarget cleanTxt cleanQT
 
