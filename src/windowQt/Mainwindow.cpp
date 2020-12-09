@@ -108,12 +108,20 @@ void MainWindow::menuEncoding()
     connect(listButton.at(4), SIGNAL(clicked()), this, SLOT(drawTree()));
     listButton.at(4)->setToolTip("Print the Huffman tree");
 
-    // Setup writer and reader.
-    reader = new QTextEdit();
+    // Setup reader.
+    reader = new MyTextEdit();
+    reader->setInfo("Tape here the original text.");
+    reader->writeInfo();
     readerLayout->addWidget(reader);
-    writer = new QTextEdit();
-    writer->setReadOnly(true);
+
+    // Setup writer.
+    writer = new MyTextEdit();
+    writer->setReadOnly(true); // ! User can't write, QtextEdit for print the convert text.
+    writer->setInfo("Encoding text.");
+    writer->writeInfo();
     writerLayout->addWidget(writer);
+    
+    // Merge layout.
     readerLayout->addLayout(writerLayout);
     readerLayout->addLayout(keypadLayout);
 
@@ -193,6 +201,7 @@ void MainWindow::encoding()
         QString code = flux.readAll();
 
         // Print the convert text.
+        writer->setTextColor(Qt::black);
         writer->setText(code);
         writer->show();
         file.close();
@@ -205,9 +214,13 @@ void MainWindow::encoding()
  * */
 void MainWindow::clearEncoding() {
     reader->clear();
-    reader->setReadOnly(false);
+    reader->setReadOnly(false); // ! User can write.
+    reader->writeInfo();
+
     writer->clear();
-    reader->setReadOnly(false);
+    writer->writeInfo();
+    writer->setReadOnly(true); // ! User can't write.
+    
     isEncoding = false; treeIsDrawing = false;
 }
 
