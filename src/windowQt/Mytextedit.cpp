@@ -23,12 +23,16 @@ void MyTextEdit::mousePressEvent(QMouseEvent *event) {
 }
 
 void MyTextEdit::setInfo(QString information) {
-    info = information;
+    textInfo = information;
+}
+
+QString MyTextEdit::info() const {
+    return textInfo;
 }
 
 void MyTextEdit::writeInfo() {
     setTextColor(Qt::gray);
-    setText(info);
+    setText(textInfo);
     setTextColor(Qt::black);
 }
 

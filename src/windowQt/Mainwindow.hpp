@@ -51,8 +51,7 @@ private:
 
     QList<QPushButton*> listButton;
     
-    bool isEncoding = false;
-    bool treeIsDrawing = false;
+    bool isEncoding = false; bool treeIsDrawing = false;
     int maxDepth = 5;
     QString readerSave, writerSave;
 

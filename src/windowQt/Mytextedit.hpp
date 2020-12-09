@@ -11,7 +11,7 @@ class MyTextEdit : public QTextEdit
 {
     Q_OBJECT
 private:
-    QString info;
+    QString textInfo;
 
 public:
     /* Constructor */
@@ -20,6 +20,7 @@ public:
     /* Functions */
     void setInfo(QString);
     void writeInfo();
+    QString info() const;
 
     /* Destructor */
     ~MyTextEdit();

@@ -4,6 +4,7 @@
   /home/user/Documents/HuffmanCoding/src/lib/Tree.hpp \
   /home/user/Documents/HuffmanCoding/src/lib/Writer.hpp \
   /home/user/Documents/HuffmanCoding/src/test/Test.hpp \
+  /home/user/Documents/HuffmanCoding/src/windowQt/Mytextedit.hpp \
   /home/user/Documents/HuffmanCoding/src/windowQt/Tiltewidget.hpp \
   /home/user/Documents/HuffmanCoding/src/windowQt/Treewidget.hpp \
   /usr/include/asm-generic/errno-base.h \
@@ -240,6 +241,7 @@
   /usr/include/x86_64-linux-gnu/c++/10/bits/os_defines.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/QDebug \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QFile \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qalgorithms.h \
@@ -254,9 +256,11 @@
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qconfig.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontainerfwd.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontainertools_impl.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreapplication.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreevent.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qdatastream.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qeventloop.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qfiledevice.h \
@@ -288,6 +292,7 @@
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qrefcount.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qregexp.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h \
@@ -301,15 +306,18 @@
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qsysinfo.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qsystemdetection.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qtcore-config.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qtypeinfo.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qurl.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvarlengtharray.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qvector.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qversiontagging.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/QMouseEvent \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qbrush.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qcolor.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qcursor.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qevent.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qfont.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qfontinfo.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qfontmetrics.h \
@@ -334,7 +342,9 @@
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextoption.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtgui-config.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtguiglobal.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qtouchdevice.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qtransform.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtGui/qvector2d.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qwindowdefs.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QDialog \
@@ -343,7 +353,6 @@
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMainWindow \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMessageBox \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QScrollArea \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QTextEdit \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h \
@@ -358,7 +367,6 @@
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmainwindow.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmessagebox.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qpushbutton.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qscrollarea.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qsizepolicy.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabwidget.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtextedit.h \

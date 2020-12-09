@@ -173,39 +173,44 @@ void MainWindow::encoding()
     // Setup read the text
     QString read;
     read = reader->toPlainText();
-    std::string strRead = read.toStdString();
+    if(read != reader->info()) {
+        std::string strRead = read.toStdString();
 
-    //
-    if(strRead.length() <= 1) { // ! Not enought char for create the tree.
-        QMessageBox::information(mainWidget, "Error message", "Too short message.");
-        reader->setReadOnly(false); // User can write now;
-    }
-    else if(isOnlyOneChar(strRead)) { // ! Not enought char.
-        QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
-        reader->setReadOnly(false);
-    }
-    else if(!checkASCII(strRead)) { // ! Text write by the user don't respect ASCII encoding.
-        QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
-        reader->setReadOnly(false); 
+        //
+        if(strRead.length() <= 1) { // ! Not enought char for create the tree.
+            QMessageBox::information(mainWidget, "Error message", "Too short message.");
+            reader->setReadOnly(false); // User can write now;
+        }
+        else if(isOnlyOneChar(strRead)) { // ! Not enought char.
+            QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
+            reader->setReadOnly(false);
+        }
+        else if(!checkASCII(strRead)) { // ! Text write by the user don't respect ASCII encoding.
+            QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
+            reader->setReadOnly(false); 
+        }
+        else {
+            // Write the current text.
+            Writer writerInFile("src/txtQt/text.txt");
+            writerInFile.textToCode(strRead);
+
+            // Read the convert text.
+            QString fileName = "src/txtQt/code.txt";
+            QFile file(fileName);
+            file.open(QIODevice::ReadOnly | QIODevice::Text);
+            QTextStream flux(&file);
+            QString code = flux.readAll();
+
+            // Print the convert text.
+            writer->setTextColor(Qt::black);
+            writer->setText(code);
+            writer->show();
+            file.close();
+            isEncoding = true;
+        }
     }
     else {
-        // Write the current text.
-        Writer writerInFile("src/txtQt/text.txt");
-        writerInFile.textToCode(strRead);
-
-        // Read the convert text.
-        QString fileName = "src/txtQt/code.txt";
-        QFile file(fileName);
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
-        QTextStream flux(&file);
-        QString code = flux.readAll();
-
-        // Print the convert text.
-        writer->setTextColor(Qt::black);
-        writer->setText(code);
-        writer->show();
-        file.close();
-        isEncoding = true;
+        QMessageBox::information(mainWidget, "Information", "Any text to encoding.");
     }
 }
 
