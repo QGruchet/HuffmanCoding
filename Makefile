@@ -1,10 +1,9 @@
 DEBUG=yes
 CC=g++
 EXEC=main
-# WIN=window
-# PACKWIN=-std=c++0x `pkg-config --CXXFLAGS gtkmm-3.0 --CXXFLAGS --libs`
-# STRC=src/windowQt
 
+#################################
+###### SETUP FLAGS COMPILE ######
 #################################
 
 ifeq ($(DEBUG), yes)
@@ -13,6 +12,8 @@ else
 	CXXFLAGS = -std=c++17 -Ofast
 endif
 
+#################################
+###### COMPILATION PROJECT ######
 #################################
 
 all: build $(EXEC)
@@ -25,6 +26,8 @@ $(EXEC) : Main.o Tree.o Test.o Writer.o Parser.o
 	$(CC) src/target/Main.o src/target/Tree.o src/target/Test.o src/target/Writer.o src/target/Parser.o -o src/bin/$@
 
 #################################
+#############  RUN  #############
+#################################
 
 run :
 	./src/bin/$(EXEC)
@@ -34,6 +37,8 @@ window: run
 	make -C src/windowQt
 	src/windowQt/./windowQt
 
+#################################
+########## COMPILE FILE #########
 #################################
 
 # $@ ref name of target, here Main.o
@@ -55,6 +60,8 @@ Parser.o: src/lib/Parser.cpp src/lib/Parser.hpp
 	$(CC) -c $(CXXFLAGS) $< -o src/target/$@
 
 #################################
+######## VALGRIND AND DGB #######
+#################################
 
 vg:
 	valgrind ./src/bin/$(EXEC)
@@ -74,6 +81,8 @@ gdb:
 gdbQT:
 	gdb ./src/windowQt/windowQt
 
+#################################
+############  CLEAN  ############
 #################################
 
 cleantarget:
