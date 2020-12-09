@@ -4,9 +4,9 @@ target/
 txtQt/
 bin/
 
-src/windowQT/CMakeFiles
-src/windowQT/Makefile
-src/windowQT/main_autogen
-src/windowQT/CMakeCache.txt
-src/windowQT/cmake_install.cmake
-src/windowQT/main
+src/windowQt/CMakeFiles
+src/windowQt/windowQt_autogen/
+src/windowQt/cmake_install.cmake
+src/windowQt/CMakeCache.txt
+src/windowQt/Makefile
+src/windowQt/windowQt
