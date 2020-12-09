@@ -77,53 +77,60 @@ void MainWindow::menuEncoding()
     // Setup the main window.
     resetWindow(winWidth*2, winHeight*2);
     mainWidget = new QWidget(this);
+    // mainWidget->setStyleSheet("background-color: grey;");
     setCentralWidget(mainWidget);
-    readerLayout = new QHBoxLayout(mainWidget);
-    writerLayout = new QHBoxLayout;
-    keypadLayout = new QGridLayout;
+    keypadLayout = new QGridLayout(mainWidget);
 
     // Create buttons.
     for(int i=0; i<5; ++i) {
         QPushButton* newButton = new QPushButton(mainWidget);
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
-        keypadLayout->addWidget(newButton, i, 0);
     }
     keypadLayout->setAlignment(Qt::AlignCenter);
 
-    // Setup buttons.
+    // Button 1 : menu
     listButton.at(0)->setText("Menu");
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menu()));
     listButton.at(0)->setToolTip("Back to the menu");
-    listButton.at(1)->setText("Exit");
-    connect(listButton.at(1), SIGNAL(clicked()), qApp, SLOT(quit()));
-    listButton.at(1)->setToolTip("Leave the application");
-    listButton.at(2)->setText("Encoding");
-    connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(encoding()));
-    listButton.at(2)->setToolTip("Encoding the current text");
+    keypadLayout->addWidget(listButton.at(0), 0, 0);
+
+    // Button 2 : Encoding
+    listButton.at(1)->setText("Encoding");
+    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(encoding()));
+    listButton.at(1)->setToolTip("Encoding the current text");
+    keypadLayout->addWidget(listButton.at(1), 2, 2);
+
+    // Button 3 : print tree
+    listButton.at(2)->setText("Print tree");
+    connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(drawTree()));
+    listButton.at(2)->setToolTip("Print the Huffman tree");
+    keypadLayout->addWidget(listButton.at(2), 1, 2);
+
+    // Button 4 : clear
     listButton.at(3)->setText("Clear");
     connect(listButton.at(3), SIGNAL(clicked()), this, SLOT(clearEncoding()));
     listButton.at(3)->setToolTip("Clean the window");
-    listButton.at(4)->setText("Print tree");
-    connect(listButton.at(4), SIGNAL(clicked()), this, SLOT(drawTree()));
-    listButton.at(4)->setToolTip("Print the Huffman tree");
+    keypadLayout->addWidget(listButton.at(3), 0, 2);
+
+    // Button 5 : exit
+    listButton.at(4)->setText("Exit");
+    connect(listButton.at(4), SIGNAL(clicked()), qApp, SLOT(quit()));
+    listButton.at(4)->setToolTip("Leave the application");
+    keypadLayout->addWidget(listButton.at(4), 0, 4);
 
     // Setup reader.
     reader = new MyTextEdit();
-    reader->setInfo("Tape here the original text.");
+    reader->setInfo("Entry text");
     reader->writeInfo();
-    readerLayout->addWidget(reader);
+    keypadLayout->addWidget(reader, 2, 1);
 
     // Setup writer.
     writer = new MyTextEdit();
     writer->setReadOnly(true); // ! User can't write, QtextEdit for print the convert text.
-    writer->setInfo("Encoding text.");
+    writer->setInfo("Encoding");
     writer->writeInfo();
-    writerLayout->addWidget(writer);
-    
-    // Merge layout.
-    readerLayout->addLayout(writerLayout);
-    readerLayout->addLayout(keypadLayout);
+    keypadLayout->addWidget(writer, 2, 3);
 
     // If we drawing the tree and back to the menu.
     if(treeIsDrawing) {

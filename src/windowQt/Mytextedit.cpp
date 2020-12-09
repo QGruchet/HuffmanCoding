@@ -13,7 +13,7 @@
 MyTextEdit::MyTextEdit(QWidget *parent)
     : QTextEdit() 
 {
-    //
+    // Empty
 }
 
 void MyTextEdit::mousePressEvent(QMouseEvent *event) {
