@@ -187,3 +187,10 @@ void TreeWidget::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     draw(&painter, width(), height());
 }
+
+/**
+ * *Description : destructor
+ * */
+TreeWidget::~TreeWidget() {
+    //Empty
+}
