@@ -12,6 +12,8 @@
 #define iconClear "src/windowQt/icons/clear.png"
 #define iconExit "src/windowQt/icons/exit.png"
 #define iconHome "src/windowQt/icons/home.png"
+#define iconTree "src/windowQt/icons/tree.png"
+#define iconEncoding "src/windowQt/icons/encoding.png"
 
 /**
  * *Description : Constructor with parameter.
@@ -107,24 +109,21 @@ void MainWindow::menuEncoding()
     keypadLayout = new QGridLayout(mainWidget);
 
     // Create buttons.
-    for(int i=0; i<2; ++i) {
-        QPushButton* newButton = new QPushButton(mainWidget);
-        newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-        listButton.append(newButton);
-    }
     keypadLayout->setAlignment(Qt::AlignCenter);
 
     // Button 1 : Encoding.
-    listButton.at(0)->setText("Encoding");
+    MyButton* encoding = new MyButton(mainWidget, iconEncoding);
+    encoding->setToolTip("Encoding the current text");
+    listButton.append(encoding);
+    keypadLayout->addWidget(encoding, 2, 2);
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(encoding()));
-    listButton.at(0)->setToolTip("Encoding the current text");
-    keypadLayout->addWidget(listButton.at(0), 2, 2);
 
     // Button 2 : Print tree.
-    listButton.at(1)->setText("Print tree");
-    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(drawTree()));
-    listButton.at(1)->setToolTip("Print the Huffman tree.");
-    keypadLayout->addWidget(listButton.at(1), 1, 2);
+    MyButton* tree = new MyButton(mainWidget, iconTree);
+    tree->setToolTip("Print the Huffman tree.");
+    listButton.append(tree);
+    keypadLayout->addWidget(tree, 1, 2);
+    connect(tree, SIGNAL(clicked()), this, SLOT(drawTree()));
 
     // Button 3 : Clear.
     MyButton* clear = new MyButton(mainWidget, iconClear);
