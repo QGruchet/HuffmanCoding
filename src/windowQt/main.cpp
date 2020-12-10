@@ -7,6 +7,8 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    //
     int sizeX = app.desktop()->width();
     int sizeY = app.desktop()->height();
     if(sizeX > 1920) {
@@ -15,7 +17,11 @@ int main(int argc, char *argv[])
     if(sizeY > 1080) {
         sizeY = 1080;
     }
-    MainWindow w(nullptr, sizeX, sizeY);
+
+    //
+    MainWindow w;
+    w.setWidth(sizeX); w.setHeight(sizeY);
+    w.setup();
     w.show();
     return app.exec();
 }

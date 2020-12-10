@@ -33,7 +33,12 @@ class MainWindow : public QMainWindow
 
 public:
     /* Constructor */
-    MainWindow(QWidget*, int, int);
+    MainWindow(QWidget* parent = nullptr);
+
+    /* Function */
+    void setWidth(int);
+    void setHeight(int);
+    void setup();
 
     /* Destructor */
     ~MainWindow();

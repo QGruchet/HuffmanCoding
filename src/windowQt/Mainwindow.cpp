@@ -14,12 +14,22 @@
  * @param winSizeX, the window width.
  * @param winSizeY, the window height.
  * */
-MainWindow::MainWindow(QWidget *parent, int winSizeX, int winSizeY)
-    : QMainWindow(parent = nullptr)
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent)
 {
+    // Empty
+}
+
+void MainWindow::setWidth(int sizeX) {
+    winWidth = sizeX/4;
+}
+
+void MainWindow::setHeight(int sizeY) {
+    winHeight = sizeY/4;
+}
+
+void MainWindow::setup() {
     setWindowTitle("Huffman Coding");
-    winWidth = winSizeX/4;
-    winHeight = winSizeY/4;
     setFixedWidth(winWidth);
     setFixedHeight(winHeight);
 
