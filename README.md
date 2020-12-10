@@ -17,7 +17,14 @@ Implementation of Huffman coding in cpp.
     - [Tree.cpp](#Tree)
     - [Writer.cpp](#Writer)
     - [Test.cpp](#Test)
-    - [WindowQT.cpp](#WindowQT)
+    - [Parser.cpp](#Parser)
+    - [Main.cpp](#Main)
+    - [Mainwindow.cpp](#MainWindow)
+    - [Mybutton.cpp](#MyButton)
+    - [MyTextEdit.cpp](#MyTextEdit)
+    - [Tiltewidget.cpp](#Titlewidget)
+    - [Treewidget.cpp](#Treewidget)
+
 - [Status](#Status)
 - [Explanation of the project](#Explanation-of-the-project)
 - [Some ideas for amelioration](#Some-ideas-for-amelioration)
@@ -33,14 +40,10 @@ We split the project in many sub directories like the hierarchy as below :
 ├── Makefile
 ├── README.md
 ├── screenshots
-│   ├── clean.png
-│   ├── interface.png
-│   ├── print_test.png
-│   ├── print_tree.png
-│   └── quit.png
+│   ├── encodingMenu.png
+│   ├── mainMenu.png
+│   └── treeMenu.png
 └── src
-    ├── bin
-    │   └── main
     ├── lib
     │   ├── Parser.cpp
     │   ├── Parser.hpp
@@ -50,15 +53,34 @@ We split the project in many sub directories like the hierarchy as below :
     │   └── Writer.hpp
     ├── main
     │   └── Main.cpp
-    ├── _test
+    ├── test
     │   ├── Test.cpp
     │   └── Test.hpp
-    └── windowQT
+    ├── txtQT
+    │   ├── binary.txt
+    │   └── resultTest.txt
+    └── windowQt
         ├── CMakeLists.txt
-        ├── WindowQT.cpp
-        └── WindowQT.hpp
+        ├── CMakeLists.txt.user
+        ├── icons
+        │   ├── clear.png
+        │   ├── encoding.jpg
+        │   ├── exit.png
+        │   ├── home.png
+        │   └── tree.png
+        ├── main.cpp
+        ├── Mainwindow.cpp
+        ├── Mainwindow.hpp
+        ├── Mybutton.cpp
+        ├── Mybutton.hpp
+        ├── Mytextedit.cpp
+        ├── Mytextedit.hpp
+        ├── Tiltewidget.cpp
+        ├── Tiltewidget.hpp
+        ├── Treewidget.cpp
+        └── Treewidget.hpp
 
-7 directories, 21 files
+8 directories, 35 files
 
 ```
 * src : Contains all sources codes.
@@ -563,43 +585,13 @@ int Test::getNumTestGlobal() const {
 }
 /* End getters */
 ```
-## WindowQT
-```cpp
-
-/** Function : Window().
-* Description : Default constructor for window. It put layout, button, and text area inside the window.
- * */
-Window(){}
-
-/** Function : ~Window().
-* Description : Destructor for Window.
-* */
-~Window(){
-
-/** Function : printTree().
-* Description : Print the tree and his informations in the window.
-* */
-void printTree(){}
-            
-/** Function : delArbre().
-* Description : Clean the entire window.
-* */
-void delArbre(){}
-
-/** Function : secretButton().
- * Description : Configure the secret button.
- * */
-void secretbutton(){}
-
-/** Function : printTest().
- * Description : Print all test in the window.
- * */
-void printTest(){}
-
-/** Function : resizeFull().
- * Description : Resize the window with the size of current display.
- * */
-void resizeFull(){}
+## Parser
+    - [Main.cpp](#Main)
+    - [Mainwindow.cpp](#MainWindow)
+    - [Mybutton.cpp](#MyButton)
+    - [MyTextEdit.cpp](#MyTextEdit)
+    - [Tiltewidget.cpp](#Titlewidget)
+    - [Treewidget.cpp](#Treewidget)
 
 ```
 # Status
