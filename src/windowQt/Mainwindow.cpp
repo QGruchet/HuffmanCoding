@@ -18,8 +18,6 @@
 /**
  * *Description : Constructor with parameter.
  * @param parent, the widget parent.
- * @param winSizeX, the window width.
- * @param winSizeY, the window height.
  * */
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
