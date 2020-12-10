@@ -53,7 +53,7 @@ We split the project in many sub directories like the hierarchy as below :
     │   └── Writer.hpp
     ├── main
     │   └── Main.cpp
-    ├── test
+    ├── _test
     │   ├── Test.cpp
     │   └── Test.hpp
     ├── txtQT
@@ -88,7 +88,7 @@ We split the project in many sub directories like the hierarchy as below :
 * src/main : Contains the main file (without interface).
 * src/test : Contains the tests files.
 * src/windowQt : Contains application files.  
-* src/windowQt/icons : Contains application files.  
+* src/windowQt/icons : Contains images use for applications.  
 
 # Needed
 
@@ -588,12 +588,24 @@ int Test::getNumTestGlobal() const {
 /* End getters */
 ```
 ## Parser
-    - [Main.cpp](#Main)
-    - [Mainwindow.cpp](#MainWindow)
-    - [Mybutton.cpp](#MyButton)
-    - [MyTextEdit.cpp](#MyTextEdit)
-    - [Tiltewidget.cpp](#Titlewidget)
-    - [Treewidget.cpp](#Treewidget)
+
+
+## Main
+
+
+## MainWindow
+
+
+## MyButton
+
+
+## MyTextEdit
+
+
+## Titlewidget
+
+
+## Treewidget
 
 ```
 # Status
