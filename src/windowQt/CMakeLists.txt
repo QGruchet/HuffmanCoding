@@ -49,8 +49,8 @@ else()
     Treewidget.hpp
     Mytextedit.cpp
     Mytextedit.hpp
-    Myexitbutton.cpp
-    Myexitbutton.hpp
+    Mybutton.cpp
+    Mybutton.hpp
     ../lib/Parser.cpp
     ../lib/Parser.hpp
     ../lib/Tree.cpp

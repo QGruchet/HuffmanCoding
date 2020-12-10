@@ -1,12 +1,11 @@
-#include "Myexitbutton.hpp"
+#include "Mybutton.hpp"
 
 #include <QDebug>
 
-MyExitButton::MyExitButton(QWidget *parent)
+MyButton::MyButton(QWidget *parent, QString pathicon)
     : QPushButton(parent)
 {
-    //
-    QPixmap pixmap("src/windowQt/icons/close.png");
+    QPixmap pixmap(pathIcon = pathicon);
     QIcon buttonIcon(pixmap);
     setIcon(buttonIcon);
     int y = parent->height();
@@ -14,11 +13,8 @@ MyExitButton::MyExitButton(QWidget *parent)
     int imgSize = x*40/100;
     setIconSize(QSize(imgSize, imgSize));
     setFixedSize(QSize(imgSize, imgSize));
-    
-    //
-    setToolTip("Leave the application");
 }
 
-MyExitButton::~MyExitButton() {
+MyButton::~MyButton() {
     // Empty
 }
