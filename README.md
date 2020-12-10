@@ -495,7 +495,8 @@ std::string Test::testEqualsNode() {}
 /**
  * Function : testDepth.
  * Return : 'std::string'.
- * Description : Check the depth of the tree. If the tree has no child, depth = 1, if he has child, depth  = 2, if child has child, depth = 3, ....
+ * Description : Check the depth of the tree. If the tree has no child, depth = 1, if he has child, depth = 2, 
+ * if child has child, depth = 3, ....
  * */
 std::string Test::testDepth() {}
 
@@ -616,13 +617,18 @@ int Test::getNumTestGlobal() const {
 
 
 - Part1 : Implementation of a tree and graphic interface.  
-For the first part we were suppose to implement a tree and a graphic interface. The work has been split in two. Mickael had to implement the tree and Quentin had to implement the interface. But we helped each other when help was needed, and we sometimes worked together online.  
+For the first part we were suppose to implement a tree and a graphic interface. The work has been split in two. 
+Mickael had to implement the tree and Quentin had to implement the interface. 
+But we helped each other when help was needed, and we sometimes worked together online.  
 For the tree we decided to use two classes, 'Sommet' and 'ArbreB'.
 'Sommet' represent a node with a data, a left child and a right child.
 With this data structure we can find the minimum, the maximum, count the detph and count the number of element.
 And we have 'ArbreB' who represent a tree, with the root which is also a node.
 With this tree we can add a node, delete one (swap the node with a leaf and delete the leaf), find a node, add two trees, and split a tree in two.  
-For the interface, we decided to make the interface with Gtk librairies but some bug, a lot actually, appeared because we didn't have more informations about Gtk. It turned out harder than we thougth. Furthermore results were aesthetically pleasant. That why we decided to use Qt librairies instead. The tree is not depicted in the interface but the tree is stored in a .txt file and the interface just displays it. It is not represented has a usual tree but it is displayed hierarchically.
+For the interface, we decided to make the interface with Gtk librairies but some bug, a lot actually, appeared because we didn't have more informations about Gtk. 
+It turned out harder than we thougth. Furthermore results were aesthetically pleasant.
+  That why we decided to use Qt librairies instead. The tree is not depicted in the interface but the tree is stored in a .txt file and the interface just displays it. 
+  It is not represented has a usual tree but it is displayed hierarchically.
 
 
 # Some ideas for amelioration
