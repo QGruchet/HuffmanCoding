@@ -41,7 +41,7 @@ void MyTextEdit::setClicDellText(bool newClicDellText) {
 }
 
 void MyTextEdit::writeInfo() {
-    setTextColor(Qt::gray);
+    setTextColor(Qt::darkGray);
     setText(textInfo);
     setTextColor(Qt::black);
 }

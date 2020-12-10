@@ -8,7 +8,7 @@
 
 #include <QDebug>
 
-//
+// Icon path
 #define iconClear "src/windowQt/icons/clear.png"
 #define iconExit "src/windowQt/icons/exit.png"
 #define iconHome "src/windowQt/icons/home.png"
