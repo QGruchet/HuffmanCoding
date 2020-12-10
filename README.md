@@ -873,10 +873,11 @@ void TreeWidget::paintEvent(QPaintEvent *event){}
 TreeWidget::~TreeWidget() {}
 ```
 
-```
+
 # Status
 
 20/11/2020 : version 1.3 => End part1
+
 09/12/2020 : version 2.2 => End part2
 
 # Explanation of the project
