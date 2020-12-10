@@ -896,6 +896,7 @@ For the interface, we decided to make the interface with Gtk librairies but some
 It turned out harder than we thougth. Furthermore results were aesthetically pleasant.
   That why we decided to use Qt librairies instead. The tree is not depicted in the interface but the tree is stored in a .txt file and the interface just displays it. 
   It is not represented has a usual tree but it is displayed hierarchically.
+- Part 2: Encoding a text and upgrade the interface.
 
 
 # Some ideas for amelioration
