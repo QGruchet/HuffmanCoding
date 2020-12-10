@@ -1,7 +1,7 @@
 /**
  * Mainwidow.cpp : You can found here all functions implemented for
  * the Mainwidow class.
- * Author : Mickael.
+ * Author : Quentin.
  **/
 
 #include "Mainwindow.hpp"
@@ -27,16 +27,27 @@ MainWindow::MainWindow(QWidget *parent)
     // Empty
 }
 
+/**
+ * *Description : Set a new width.
+ * @param sizeX, the widget sizeX.
+ * */
 void MainWindow::setWidth(int sizeX) {
     winWidth = sizeX/4;
 }
 
+/**
+ * *Description : Set a new height.
+ * @param sizeY, the widget sizeY.
+ * */
 void MainWindow::setHeight(int sizeY) {
     winHeight = sizeY/4;
 }
 
+/**
+ * *Description : Setup the main window.
+ * */
 void MainWindow::setup() {
-    setWindowTitle("Huffman Coding");
+    setWindowTitle("Huffman Coding (v2.2)");
     setFixedWidth(winWidth);
     setFixedHeight(winHeight);
 
@@ -270,7 +281,7 @@ void MainWindow::clearEncoding() {
  * */
 void MainWindow::drawTree() {
     if(!isEncoding) { // ! Any text endocing yet.
-        QMessageBox::information(mainWidget, "Information", "Any text endocing yet.");
+        QMessageBox::information(mainWidget, "Information", "Any text encoding yet.");
     }
     else {
         // Create the tree.

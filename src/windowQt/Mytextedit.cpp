@@ -1,7 +1,7 @@
 /**
  * Mytextedit.cpp : You can found here all functions implemented for
  * the Mytextedit class.
- * Author : Mickael.
+ * Author : Quentin.
  **/
 
 #include "Mytextedit.hpp"

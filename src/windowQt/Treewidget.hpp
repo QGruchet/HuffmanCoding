@@ -1,3 +1,8 @@
+/**
+ * Treewidget.cpp : You can found here the Treewidget class.
+ * Author : Quentin.
+ * */
+
 #ifndef TREEWIDGET_HPP
 #define TREEWIDGET_HPP
 

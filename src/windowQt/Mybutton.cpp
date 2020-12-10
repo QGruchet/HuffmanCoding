@@ -1,7 +1,18 @@
+/**
+ * MyButton.cpp : You can found here all functions implemented for
+ * the MyButton class.
+ * Author : Quentin.
+ **/
+
 #include "Mybutton.hpp"
 
 #include <QDebug>
 
+/**
+ * *Descirption : Constructor with parameter.
+ * @param parent, the widget parent.
+ * @param pathicon, the path for print the icon.
+ * */
 MyButton::MyButton(QWidget *parent, QString pathicon)
     : QPushButton(parent)
 {

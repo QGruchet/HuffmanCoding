@@ -1,7 +1,7 @@
 /**
  * main.cpp : You can found here all functions implemented for
  * the main class.
- * Author : Mickael.
+ * Author : Quentin.
  **/
 
 #include "Mainwindow.hpp"
@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    //
+    // Setup size.
     int sizeX = app.desktop()->width();
     int sizeY = app.desktop()->height();
     if(sizeX > 1920) {
@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
         sizeY = 1080;
     }
 
-    //
+    // Start main window.
     MainWindow w;
     w.setWidth(sizeX); w.setHeight(sizeY);
     w.setup();

@@ -1,7 +1,7 @@
 /**
  * Tiltewidget.cpp : You can found here all functions implemented for
  * the Tiltewidget class.
- * Author : Mickael.
+ * Author : Quentin.
  **/
 
 #include "Tiltewidget.hpp"

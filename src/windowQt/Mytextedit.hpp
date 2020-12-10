@@ -1,3 +1,8 @@
+/**
+ * Mytextedit.hpp : You can found here the Mytextedit class.
+ * Author : Quentin.
+ * */
+
 #ifndef MYTEXTEDIT_HPP
 #define MYTEXTEDIT_HPP
 

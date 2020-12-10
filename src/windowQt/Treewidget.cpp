@@ -1,7 +1,7 @@
 /**
  * Treewidget.cpp : You can found here all functions implemented for
  * the Treewidget class.
- * Author : Mickael.
+ * Author : Quentin.
  **/
 
 #include "Treewidget.hpp"

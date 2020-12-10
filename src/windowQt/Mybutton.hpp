@@ -1,3 +1,8 @@
+/**
+ * Mybutton.hpp : You can found here the Mybutton class.
+ * Author : Quentin.
+ * */
+
 #ifndef MYBUTTON_HPP
 #define MYBUTTON_HPP
 

@@ -1,6 +1,6 @@
 /**
- * Mainwindow.cpp : You can found here the Mainwindow class.
- * Author : Mickael.
+ * Mainwindow.hpp : You can found here the Mainwindow class.
+ * Author : Quentin.
  * */
 
 #ifndef MAINWINDOW_HPP
