@@ -76,6 +76,11 @@ Sommet::Sommet(int newData, char newCar) {
     right = nullptr;
 }
 
+/**
+ * *Description : Create a object 'Sommet' by initializing the data.
+ * *Function : Constructor with parameter.
+ * @param newData, the data to init the node.
+ * */
 Sommet::Sommet(Data newData) : data(newData), left(nullptr), right(nullptr) {}
 
 /**
