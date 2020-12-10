@@ -8,6 +8,11 @@
 
 #include <QDebug>
 
+//
+#define iconClear "src/windowQt/icons/clear.png"
+#define iconExit "src/windowQt/icons/exit.png"
+#define iconHome "src/windowQt/icons/home.png"
+
 /**
  * *Description : Constructor with parameter.
  * @param parent, the widget parent.
@@ -65,10 +70,10 @@ void MainWindow::printMenu() {
     keypadLayout->addWidget(listButton.at(0), 0, 0);
     
     // Button 2 : Exit
-    MyButton* exitButton = new MyButton(mainWidget, "src/windowQt/icons/close.png");
-    exitButton->setToolTip("Leave the application.");
-    listButton.append(exitButton);
-    keypadLayout->addWidget(exitButton, 0, 2);
+    MyButton* exit = new MyButton(mainWidget, iconExit);
+    exit->setToolTip("Leave the application.");
+    listButton.append(exit);
+    keypadLayout->addWidget(exit, 0, 2);
     connect(listButton.at(2), SIGNAL(clicked()), qApp, SLOT(quit()));
 
     // Button 3 : Decoding menu
@@ -102,44 +107,45 @@ void MainWindow::menuEncoding()
     keypadLayout = new QGridLayout(mainWidget);
 
     // Create buttons.
-    for(int i=0; i<3; ++i) {
+    for(int i=0; i<2; ++i) {
         QPushButton* newButton = new QPushButton(mainWidget);
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
     }
     keypadLayout->setAlignment(Qt::AlignCenter);
 
-    // Button 1 : Encoding
+    // Button 1 : Encoding.
     listButton.at(0)->setText("Encoding");
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(encoding()));
     listButton.at(0)->setToolTip("Encoding the current text");
     keypadLayout->addWidget(listButton.at(0), 2, 2);
 
-    // Button 2 : Print tree
+    // Button 2 : Print tree.
     listButton.at(1)->setText("Print tree");
     connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(drawTree()));
-    listButton.at(1)->setToolTip("Print the Huffman tree");
+    listButton.at(1)->setToolTip("Print the Huffman tree.");
     keypadLayout->addWidget(listButton.at(1), 1, 2);
 
-    // Button 3 : Clear
-    listButton.at(2)->setText("Clear");
-    connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(clearEncoding()));
-    listButton.at(2)->setToolTip("Clean the window");
-    keypadLayout->addWidget(listButton.at(2), 0, 2);
+    // Button 3 : Clear.
+    MyButton* clear = new MyButton(mainWidget, iconClear);
+    clear->setToolTip("Clean the window.");
+    listButton.append(clear);
+    keypadLayout->addWidget(clear, 0, 2);
+    connect(clear, SIGNAL(clicked()), this, SLOT(clearEncoding()));
 
-    // Button 4 : Menu
-    MyButton* homeButton = new MyButton(mainWidget, "src/windowQt/icons/home.png");
-    homeButton->setToolTip("Back to the menu.");
-    listButton.append(homeButton);
-    keypadLayout->addWidget(listButton.at(3), 0, 0);
-    connect(listButton.at(3), SIGNAL(clicked()), this, SLOT(menu()));
+    // Button 4 : Menu.
+    MyButton* home = new MyButton(mainWidget, iconHome);
+    home->setToolTip("Back to the menu.");
+    listButton.append(home);
+    keypadLayout->addWidget(home, 0, 0);
+    connect(home, SIGNAL(clicked()), this, SLOT(menu()));
 
-    // Button 5 : Exit
-    MyButton* exitButton = new MyButton(mainWidget, "src/windowQt/icons/close.png");
-    exitButton->setToolTip("Leave the application.");
-    listButton.append(exitButton);
-    keypadLayout->addWidget(exitButton, 0, 4);
-    connect(listButton.at(4), SIGNAL(clicked()), qApp, SLOT(quit()));
+    // Button 5 : Exit.
+    MyButton* exit = new MyButton(mainWidget, iconExit);
+    exit->setToolTip("Leave the application.");
+    listButton.append(exit);
+    keypadLayout->addWidget(exit, 0, 4);
+    connect(exit, SIGNAL(clicked()), qApp, SLOT(quit()));
 
     // Setup reader.
     reader = new MyTextEdit();
@@ -250,6 +256,7 @@ void MainWindow::encoding()
 void MainWindow::clearEncoding() {
     reader->clear();
     reader->setReadOnly(false); // ! User can write.
+    reader->setClicDellText(true);
     reader->writeInfo();
 
     writer->clear();

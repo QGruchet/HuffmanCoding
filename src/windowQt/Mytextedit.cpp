@@ -21,6 +21,7 @@ void MyTextEdit::mousePressEvent(QMouseEvent *event) {
 
     if(clicDellText) {
         clear(); // Clear information text.
+        clicDellText = false;
     }
 }
 
