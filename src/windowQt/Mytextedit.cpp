@@ -19,7 +19,9 @@ MyTextEdit::MyTextEdit(QWidget *parent)
 void MyTextEdit::mousePressEvent(QMouseEvent *event) {
     Q_UNUSED(event); // unused param.
 
-    clear(); // Clear information text.
+    if(clicDellText) {
+        clear(); // Clear information text.
+    }
 }
 
 void MyTextEdit::setInfo(QString information) {
@@ -28,6 +30,10 @@ void MyTextEdit::setInfo(QString information) {
 
 QString MyTextEdit::info() const {
     return textInfo;
+}
+
+void MyTextEdit::setClicDellText(bool newClicDellText) {
+    clicDellText = newClicDellText;
 }
 
 void MyTextEdit::writeInfo() {

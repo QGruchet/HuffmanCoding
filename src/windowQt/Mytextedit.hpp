@@ -12,15 +12,21 @@ class MyTextEdit : public QTextEdit
     Q_OBJECT
 private:
     QString textInfo;
+    bool clicDellText = true;
 
 public:
     /* Constructor */
     MyTextEdit(QWidget* parent = nullptr);
 
     /* Functions */
-    void setInfo(QString);
     void writeInfo();
+
+    /* Getter */
     QString info() const;
+
+    /* Setters */
+    void setInfo(QString);
+    void setClicDellText(bool newClicDellText);
 
     /* Destructor */
     ~MyTextEdit();
