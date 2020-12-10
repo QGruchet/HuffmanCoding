@@ -51,24 +51,30 @@ void MainWindow::printMenu() {
     setCentralWidget(mainWidget);
 
     // Create buttons.
-    for(int i=0; i<3; ++i) {
+    for(int i=0; i<2; ++i) {
         QPushButton* newButton = new QPushButton(mainWidget);
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
-        keypadLayout->addWidget(newButton, 0, i);
     }
     keypadLayout->setAlignment(Qt::AlignCenter);
 
-    // Setup buttons.
+    // Button 1 : Encoding menu.
     listButton.at(0)->setText("Encoding");
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
     listButton.at(0)->setToolTip("Encoding a text");
-    listButton.at(1)->setText("Exit");
-    connect(listButton.at(1), SIGNAL(clicked()), qApp, SLOT(quit()));
-    listButton.at(1)->setToolTip("Leave the application");
-    listButton.at(2)->setText("Decoding");
-    connect(listButton.at(2), SIGNAL(clicked()), this, SLOT(menuDecoding()));
-    listButton.at(2)->setToolTip("Decoding a text");
+    keypadLayout->addWidget(listButton.at(0), 0, 0);
+    
+    // Button 2 : Exit
+    MyExitButton* exitButton = new MyExitButton(mainWidget);
+    listButton.append(exitButton);
+    keypadLayout->addWidget(exitButton, 0, 2);
+    connect(listButton.at(2), SIGNAL(clicked()), qApp, SLOT(quit()));
+
+    // Button 3 : Decoding menu
+    listButton.at(1)->setText("Decoding");
+    connect(listButton.at(1), SIGNAL(clicked()), this, SLOT(menuDecoding()));
+    listButton.at(1)->setToolTip("Decoding a text");
+    keypadLayout->addWidget(listButton.at(1), 0, 3);
 }
 
 /**
@@ -87,12 +93,15 @@ void MainWindow::menuEncoding()
     // Setup the main window.
     resetWindow(winWidth*2, winHeight*2);
     mainWidget = new QWidget(this);
-    // mainWidget->setStyleSheet("background-color: grey;");
+    QPalette pal = palette();
+    pal.setColor(QPalette::Background, Qt::white);
+    mainWidget->setAutoFillBackground(true);
+    mainWidget->setPalette(pal);
     setCentralWidget(mainWidget);
     keypadLayout = new QGridLayout(mainWidget);
 
     // Create buttons.
-    for(int i=0; i<5; ++i) {
+    for(int i=0; i<4; ++i) {
         QPushButton* newButton = new QPushButton(mainWidget);
         newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
         listButton.append(newButton);
@@ -124,10 +133,10 @@ void MainWindow::menuEncoding()
     keypadLayout->addWidget(listButton.at(3), 0, 2);
 
     // Button 5 : exit
-    listButton.at(4)->setText("Exit");
+    MyExitButton* exitButton = new MyExitButton(mainWidget);
+    listButton.append(exitButton);
+    keypadLayout->addWidget(exitButton, 0, 4);
     connect(listButton.at(4), SIGNAL(clicked()), qApp, SLOT(quit()));
-    listButton.at(4)->setToolTip("Leave the application");
-    keypadLayout->addWidget(listButton.at(4), 0, 4);
 
     // Setup reader.
     reader = new MyTextEdit();

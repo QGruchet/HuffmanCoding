@@ -18,11 +18,13 @@
 #include <QDialog>
 #include <QTextEdit>
 #include <QMouseEvent>
+#include <QPalette>
 
 // Include my files.
 #include "Tiltewidget.hpp"
 #include "Treewidget.hpp"
 #include "Mytextedit.hpp"
+#include "Myexitbutton.hpp"
 #include "../lib/Writer.hpp"
 #include "../lib/Tree.hpp"
 #include "../lib/Parser.hpp"
