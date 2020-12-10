@@ -8,6 +8,7 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QPalette>
 
 class TilteWidget : public QWidget
 {

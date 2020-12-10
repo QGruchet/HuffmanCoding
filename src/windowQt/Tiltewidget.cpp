@@ -19,6 +19,11 @@ TilteWidget::TilteWidget(QWidget *parent, int winSizeX, int winSizeY)
 {
     widgetWidth = winSizeX;
     widgetHeight = winSizeY;
+
+    QPalette pal = palette();
+    pal.setColor(QPalette::Background, Qt::white);
+    setAutoFillBackground(true);
+    setPalette(pal);
 }
 
 /**
@@ -28,7 +33,7 @@ void TilteWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED((event)); // Unused parameter.
 
-    // The the project tilte.
+    // Draw the project tilte.
     QPainter painter(this);
     painter.setPen(Qt::black);
     int police = widgetHeight*15/100;
@@ -36,7 +41,7 @@ void TilteWidget::paintEvent(QPaintEvent *event)
     painter.drawText(widgetWidth/4, widgetHeight/2 - police, "Huffman");
     painter.drawText(widgetWidth/2 - widgetWidth*5/100, widgetHeight/2 + 2*police, "Coding");
 
-    // The the autors names.
+    // Draw the autors names.
     painter.setFont(QFont("Helvetica", police/4));
     int littlePolice = police/4;
     painter.drawText(5, widgetHeight - littlePolice, "LE DENMAT Mickael");
