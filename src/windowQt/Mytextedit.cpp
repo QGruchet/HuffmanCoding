@@ -13,7 +13,10 @@
 MyTextEdit::MyTextEdit(QWidget *parent)
     : QTextEdit() 
 {
-    // Empty
+    QPalette pal = palette();
+    pal.setColor(QPalette::Base, Qt::lightGray);
+    setAutoFillBackground(true);
+    setPalette(pal);
 }
 
 void MyTextEdit::mousePressEvent(QMouseEvent *event) {

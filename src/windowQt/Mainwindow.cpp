@@ -13,7 +13,7 @@
 #define iconExit "src/windowQt/icons/exit.png"
 #define iconHome "src/windowQt/icons/home.png"
 #define iconTree "src/windowQt/icons/tree.png"
-#define iconEncoding "src/windowQt/icons/encoding.png"
+#define iconEncoding "src/windowQt/icons/encoding.jpg"
 
 /**
  * *Description : Constructor with parameter.
