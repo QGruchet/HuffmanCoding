@@ -904,6 +904,8 @@ Heres are some ideas for future versions :
 - Our interface can interact with the painting tree : adding node, deleting node, splitting tree, merge two different trees, ...
 - We can't delete node from the midlle of the tree. We'll have to fix it.
 - We should solve memory leaks in the graphic interface.
+- The tree is not able to print a tree with a depth up to 5. Maybe we can add a scrollbar to fix it.
+- The interface is not very attractive so we have to make a nicest interface.
 
 # Authors
 * **LE DENMAT Mickael 21804355**
