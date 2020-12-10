@@ -1,8 +1,13 @@
+/**
+ * main.cpp : You can found here all functions implemented for
+ * the main class.
+ * Author : Mickael.
+ **/
+
 #include "Mainwindow.hpp"
 
 #include <QApplication>
 #include <QDesktopWidget>
-#include <QDebug>
 
 int main(int argc, char *argv[])
 {
@@ -23,5 +28,7 @@ int main(int argc, char *argv[])
     w.setWidth(sizeX); w.setHeight(sizeY);
     w.setup();
     w.show();
+
+    //
     return app.exec();
 }
