@@ -137,13 +137,8 @@ void drawLink(QPainter* painter, Sommet* node, int centerX, int centerY,
 /**
  * *Description : Draw tree.
  * @param painter for draw.
- * @param node, for get informations.
- * @param centerX, coords in x where we write.
- * @param centerY, coords in y where we write.
- * @param gapX, the distance between nodes in x.
- * @param gapY, the distance between nodes in y.
- * @param depth, the depth of the tree.
- * @param raduis, the radius of the node.
+ * @param width the widht.
+ * @param heigth the heigth.
  * */
 void TreeWidget::draw(QPainter* painter, int width, int height) {
     

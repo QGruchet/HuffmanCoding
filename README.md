@@ -18,7 +18,6 @@ Implementation of Huffman coding in cpp.
     - [Writer.cpp](#Writer)
     - [Test.cpp](#Test)
     - [Parser.cpp](#Parser)
-    - [Main.cpp](#Main)
     - [Mainwindow.cpp](#MainWindow)
     - [Mybutton.cpp](#MyButton)
     - [MyTextEdit.cpp](#MyTextEdit)
@@ -115,13 +114,28 @@ To start our program, you have two options :
 - ``` make window ``` to run a graphic interface where you can interact with our program.
 
 # Usage
-![interface](screenshots/interface.png)  
-Here is a first look of the interface for the project (when you print the tree). All buttons are clickable.  
-![Print Test](screenshots/print_test.png) This button prints all the tests in the interface.  
-![print Tree](screenshots/print_tree.png)  This button prints the tree in the interface.  
-![clean](screenshots/clean.png)  This button clean all the window.  
-![quit](screenshots/quit.png)  This button close the window.  
-All buttons are connected to functions that have a description in windowQT file [see here](#windowQT).  
+![mainMenu](screenshots/mainMenu.png)
+
+This is our main menu of our application. All buttons are fonctional.
+1. This button open the encoding menu.
+2. This button stop our application.
+3. This button open the decoding menu. It's not implemented yet but don't worry it will come very soon.
+  
+![encodingMenu](screenshots/encodingMenu.png) 
+
+This is our encoding menu. Here you will can encoding any text and see in live the result.
+1. This button allows you to return to the previous menu.
+2. This button clear the display.
+3. This button close the application 
+4. This button allows you to draw three of your entering text.
+5. This button translate your text with Hauffman Coding.
+6. This is where you will write the text you want to translate.
+7. This is where you have the result of your translation.
+
+![print Tree](screenshots/treeMenu.png)
+
+1. This is a simple display of the tree.
+2. This button allows you to return to the previous menu.
 
 # Details of functions
 
@@ -590,28 +604,280 @@ int Test::getNumTestGlobal() const {
 ```
 ## Parser
 
+```cpp
+/**
+ * Description : Read the nameFile and fill the freq * vector.
+ * @param nameFile, the file name.
+ * @return vector of Data with the freq and the car of any caracters in the file.
+ * */
+std::vector<Data> Parser::freqChar(std::string nameFile) const {}
 
-## Main
+/**
+ * *Description : Check if all trees was merge in one.
+ * @param forest, the vector of tree.
+ * @return boolean, true if all trees have -1 in freq except one.
+ *          false, else.
+ * */
+bool stayOneTree(std::vector<ArbreB> forest) {}
+
+
+/**
+ * *Description : Create subtrees with all Data in vector, and merge in one.
+ * @param tabFreq, the freq vector of any char.
+ * @return the huffman tree.
+ * */
+ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {}
+
+/**
+ * * Description : Check if all trees was merge in one.
+ * @param node, the current node.
+ * @param str, the string for concat the convert letter.
+ * @param stack, a stack for save all convert letter.
+ * */
+void Parser::readHuffmanTree(Sommet* node, std::string str, std::stack<std::string>* stack) const {}
+```
 
 
 ## MainWindow
 
+```cpp
+/**
+ * *Description : Constructor with parameter.
+ * @param parent, the widget parent.
+ * */
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent){}
+
+/**
+ * *Description : Set a new width.
+ * @param sizeX, the widget sizeX.
+ * */
+void MainWindow::setWidth(int sizeX) {}
+
+/**
+ * *Description : Set a new height.
+ * @param sizeY, the widget sizeY.
+ * */
+void MainWindow::setHeight(int sizeY) {}
+
+/**
+ * *Description : Setup the main window.
+ * */
+void MainWindow::setup() {}
+
+/**
+ * *Description : Print the main menu.
+ * */
+void MainWindow::printMenu() {}
+
+/**
+ * *Description : Get back to the menu.
+ * */
+void MainWindow::menu() {}
+
+/**
+ * *Description : Print the encoding menu.
+ * */
+void MainWindow::menuEncoding(){}
+
+/**
+ * *Description : check if str recpect the ASCCI encoding.
+ * @param str, need to check.
+ * @return true/false.
+ * */
+bool checkASCII(std::string str) {}
+
+/**
+ * *Description : check if str is compose with only one char.
+ * @param str, need to check.
+ * @return true/false.
+ * */
+bool isOnlyOneChar(std::string str) {}
+
+/**
+ * *Description : Read the current text and convert him.
+ * */
+void MainWindow::encoding(){}
+
+/**
+ * *Description : Clear reader and writer in the encoding menu.
+ * */
+void MainWindow::clearEncoding() {}
+
+/**
+ * *Description : Drawing the huffman tree.
+ * */
+void MainWindow::drawTree() {}
+
+/**
+ * *Description : Print the decoding manu.
+ * */
+void MainWindow::menuDecoding(){}
+
+/**
+ * *Description : Reset the main window and change the size.
+ * */
+void MainWindow::resetWindow(int newWidth, int newHeight){}
+
+/**
+ * *Description : Destructor.
+ * */
+MainWindow::~MainWindow() {}
+```
 
 ## MyButton
 
+```cpp
+/**
+ * *Descirption : Constructor with parameter.
+ * @param parent, the widget parent.
+ * @param pathicon, the path for print the icon.
+ * */
+MyButton::MyButton(QWidget *parent, QString pathicon)
+    : QPushButton(parent){}
+
+MyButton::~MyButton() {}
+```
 
 ## MyTextEdit
 
+```cpp
+/**
+ * *Description : default constructor.
+ * @param parent = nullptr
+ * */
+MyTextEdit::MyTextEdit(QWidget *parent)
+    : QTextEdit() {}
+
+/**
+ * *Description : clear default text.
+ * @param event, not used.
+ * */
+void MyTextEdit::mousePressEvent(QMouseEvent *event) {}
+
+/**
+ * *Description : set a new text info.
+ * @param information, new text info.
+ * */
+void MyTextEdit::setInfo(QString information) {}
+
+/**
+ * *Description : get text info.
+ * @return info.
+ * */
+QString MyTextEdit::info() const {}
+
+/**
+ * *Description : set boolean if clic on textEdit dell the text.
+ * @param newClicDellText, the new boolean.
+ * */
+void MyTextEdit::setClicDellText(bool newClicDellText){}
+
+/**
+ * *Description : write text info in the textEdit.
+ * */
+void MyTextEdit::writeInfo() {}
+
+/**
+ * *Description : Destructor.
+ * */
+MyTextEdit::~MyTextEdit(){}
+```
 
 ## Titlewidget
 
+```cpp
+/**
+ * *Description : Constructor with parameters.
+ * @param parent, the widget parent.
+ * @param winSizeX, the widht.
+ * @param winSizeX, the height.
+ * */
+TilteWidget::TilteWidget(QWidget *parent, int winSizeX, int winSizeY): QWidget(parent){}
+
+/**
+ * *Description : Draw the tilte window.
+ * */
+void TilteWidget::paintEvent(QPaintEvent *event){}
+```
 
 ## Treewidget
+
+```cpp
+/**
+ * *Description : default constructor.
+ * @param parent = nullptr
+ * */
+TreeWidget::TreeWidget(QWidget *parent)
+    : QWidget(parent) {}
+
+/**
+ * *Description : set the tree for drawing it.
+ * @param newTree
+ * */
+void TreeWidget::setTree(ArbreB newTree) {}
+
+/**
+ * *Description : Write informations in all nodes.
+ * @param painter for draw.
+ * @param node, for get informations.
+ * @param centerX, coords in x where we write.
+ * @param centerY, coords in y where we write.
+ * @param raduis, the radius of the node.
+ * */
+void drawData(QPainter* painter, Sommet* node, int centerX, int centerY, int radius) {}
+
+/**
+ * *Description : Draw circle recursively we represent the node.
+ * @param painter for draw.
+ * @param node, for get informations.
+ * @param centerX, coords in x where we write.
+ * @param centerY, coords in y where we write.
+ * @param gapX, the distance between nodes in x.
+ * @param gapY, the distance between nodes in y.
+ * @param depth, the depth of the tree.
+ * @param raduis, the radius of the node.
+ * */
+void drawNode(QPainter* painter, Sommet* node, int centerX, int centerY, int gapX, int gapY, int depth, int radius) {}
+
+/**
+ * *Description : Draw line between nodes.
+ * @param painter for draw.
+ * @param node, for get informations.
+ * @param centerX, coords in x where we write.
+ * @param centerY, coords in y where we write.
+ * @param gapX, the distance between nodes in x.
+ * @param gapY, the distance between nodes in y.
+ * @param depth, the depth of the tree.
+ * @param raduis, the radius of the node.
+ * */
+void drawLink(QPainter* painter, Sommet* node, int centerX, int centerY, int gapX, int gapY, int depth, int radius) {}
+
+/**
+ * *Description : Draw tree.
+ * @param painter for draw.
+ * @param width the widht.
+ * @param heigth the heigth.
+ * */
+void TreeWidget::draw(QPainter* painter, int width, int height) {}
+
+/**
+ * *Description : main function paintEvent.
+ * @param event, not used.
+ * */
+void TreeWidget::paintEvent(QPaintEvent *event){}
+
+/**
+ * *Description : destructor
+ * */
+TreeWidget::~TreeWidget() {}
+```
 
 ```
 # Status
 
-20/11/2020 : version 3.0 => End part1
+20/11/2020 : version 1.3 => End part1
+09/12/2020 : version 2.2 => End part2
 
 # Explanation of the project
 
