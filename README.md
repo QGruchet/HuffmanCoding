@@ -897,6 +897,7 @@ It turned out harder than we thougth. Furthermore results were aesthetically ple
   That why we decided to use Qt librairies instead. The tree is not depicted in the interface but the tree is stored in a .txt file and the interface just displays it. 
   It is not represented has a usual tree but it is displayed hierarchically.
 - Part 2: Encoding a text and upgrade the interface.
+For the second part, we have to translate a text to binary code using Hauffman Encodation. The CPP code was not very difficult but we wanted to upgrade graphic interface. This take spend more of our time because Qt is difficult to learn. All text, enter by user, are save in a .txt file.  
 
 
 # Some ideas for amelioration
