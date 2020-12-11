@@ -883,7 +883,8 @@ TreeWidget::~TreeWidget() {}
 # Explanation of the project
 
 
-- Part1 : Implementation of a tree and graphic interface.  
+- Part1 : Implementation of a tree and graphic interface. 
+
 For the first part we were suppose to implement a tree and a graphic interface. The work has been split in two. 
 Mickael had to implement the tree and Quentin had to implement the interface. 
 But we helped each other when help was needed, and we sometimes worked together online.  
@@ -896,18 +897,19 @@ For the interface, we decided to make the interface with Gtk librairies but some
 It turned out harder than we thougth. Furthermore results were aesthetically pleasant.
   That why we decided to use Qt librairies instead. The tree is not depicted in the interface but the tree is stored in a .txt file and the interface just displays it. 
   It is not represented has a usual tree but it is displayed hierarchically.
-- Part 2: Encoding a text and upgrade the interface.
-For the second part, we have to translate a text to binary code using Hauffman Encodation. The CPP code was not very difficult but we wanted to upgrade graphic interface. This take spend more of our time because Qt is difficult to learn. All text, enter by user, are save in a .txt file.  
+- Part 2 : Encoding a text and upgrade the interface.
+
+For the second part, we have to translate a text to binary code using Hauffman Encodation. The CPP code was not very difficult but we wanted to upgrade graphic interface. This spend more of our time because Qt is difficult to learn. All text, enter by user, are save in a .txt file.  
 
 
 # Some ideas for amelioration
 
 Heres are some ideas for future versions :
-- Our interface can interact with the painting tree : adding node, deleting node, splitting tree, merge two different trees, ...
+- Our interface can interact with the painting tree : adding node, deleting node, splitting tree, merge two different trees, ... (DONE)
 - We can't delete node from the midlle of the tree. We'll have to fix it.
 - We should solve memory leaks in the graphic interface.
 - The tree is not able to print a tree with a depth up to 5. Maybe we can add a scrollbar to fix it.
-- The interface is not very attractive so we have to make a nicest interface.
+- The interface is not very attractive so we have to make a nicest interface.(DONE)
 
 # Authors
 * **LE DENMAT Mickael 21804355**
