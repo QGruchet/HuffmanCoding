@@ -188,7 +188,7 @@ void MainWindow::menuEncoding()
  * */
 bool checkASCII(std::string str) {
     for(char c : str) {
-        if(!(int(c) >= 0 && int(c) <= 127)) {
+        if(!(int(c) >= 0 && int(c) <= 255)) {
             return false;
         }
     }
