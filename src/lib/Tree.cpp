@@ -37,7 +37,7 @@ Sommet* Sommet::copy() {
 }
 
 /**
- * *Description : Create an object 'Sommet' with an other.
+ * *Description : Create an object 'Sommet' with another.
  * *Function : Constructor by copy.
  * @param other, the other node for the copy.
  * */
@@ -54,7 +54,7 @@ Sommet::Sommet(const Sommet& other) {
 }
 
 /**
- * *Description : Create a object 'ArbreB' with an other.
+ * *Description : Create an object 'ArbreB' with another.
  * *Function : Constructor by copy.
  * @param other, the other tree for the copy.
  * */
@@ -64,7 +64,7 @@ ArbreB::ArbreB(const ArbreB& other) {
 }
 
 /**
- * *Description : Create a object 'Sommet' by initializing the data.
+ * *Description : Create an object 'Sommet' by initializing the data.
  * *Function : Constructor with parameter.
  * @param newData, the data to init the node.
  * @param newCar, the car to init the node.
@@ -77,14 +77,14 @@ Sommet::Sommet(int newData, char newCar) {
 }
 
 /**
- * *Description : Create a object 'Sommet' by initializing the data.
+ * *Description : Create an object 'Sommet' by initializing the data.
  * *Function : Constructor with parameter.
  * @param newData, the data to init the node.
  * */
 Sommet::Sommet(Data newData) : data(newData), left(nullptr), right(nullptr) {}
 
 /**
- * *Description : Create a object 'ArbreB' by initializing the root.
+ * *Description : Create an object 'ArbreB' by initializing the root.
  * *Function : Constructor with parameter.
  * @param freqRoot, tha data to init the root of the tree.
  * @param charRoot, tha car to init the root of the tree.
@@ -94,7 +94,7 @@ ArbreB::ArbreB(int freqRoot, char charRoot) {
 }
 
 /**
- * *Description : Create a object 'ArbreB' by initializint the root.
+ * *Description : Create an object 'ArbreB' by initializint the root.
  * *Function : constructor with parameter.
  * @param newData, the data(freq and car) to init the root.
  * */
@@ -103,7 +103,7 @@ ArbreB::ArbreB(Data newData) {
 }
 
 /**
- * *Description : Copy a object 'Sommet' with an other.
+ * *Description : Copy an object 'Sommet' with another.
  * *Function : Overloading operator=.
  * @param other, the node for the copy.
  * */
@@ -131,7 +131,7 @@ Sommet& Sommet::operator=(Data newData) {
 }
 
 /**
- * *Description : Copy a object 'ArbreB' with an other.
+ * *Description : Copy an object 'ArbreB' with another.
  * *Function : Overloading operator=.
  * @param other, the other tree for the copy.
  * */
@@ -146,7 +146,7 @@ ArbreB& ArbreB::operator=(const ArbreB& other) {
 }
 
 /**
- * *Description : Say if the 'Sommet' is equal to an other.
+ * *Description : Say if the 'Sommet' is equal to another.
  * *Function : Overloading operator==.
  * @param other, the other node for compare.
  * @return boolean, true if this and other are equals, else false.
@@ -169,7 +169,7 @@ bool Sommet::operator==(const Sommet& other) {
 }
 
 /**
- * *Description : Say if the 'Sommet' is equal to an other, recursive version.
+ * *Description : Say if the 'Sommet' is equal to another, recursive version.
  * *Function : Overloading operator==.
  * @param node, the other node for compare.
  * @return boolean, true if this and other are equals, else false.
@@ -192,7 +192,7 @@ bool Sommet::equal(Sommet *node) {
 }
 
 /**
- * *Description : Say if the 'ArbreB' is equal to an other.
+ * *Description : Say if the 'ArbreB' is equal to another.
  * *Function : Overloading operator==.
  * @param other, the other tree for compare.
  * @return boolean, true if this and other are equals, else false.
@@ -289,7 +289,7 @@ ArbreB& ArbreB::operator>>(Data dellData) {
 
 /**
  * *Description : Delete a node with the value dellData in the tree, if
- *                  *the node with dellData exist, recursive version.
+ *                  *the node with dellData exists, recursive version.
  * @param root, node used for recursive call,
  * @param dellData, data need to be deleted.
  * */
@@ -373,7 +373,7 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {
 /**
  * *Description : Merge two trees.
  * *Function : Overloading operator+=.
- * @param other, for merge two trees.
+ * @param other, to merge two trees.
  * */
 ArbreB& ArbreB::operator+=(const ArbreB& other) {
     Sommet *cpyOther = other.root->copy();
