@@ -188,7 +188,6 @@ void MainWindow::menuEncoding()
  * */
 bool checkASCII(std::string str) {
     for(char c : str) {
-        qDebug() << c;
         if(!(int(c) >= 0 && int(c) <= 255)) {
             qDebug() << c << "not accepted";
             return false;

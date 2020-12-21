@@ -1,4 +1,4 @@
-DEBUG=yes
+DEBUG=true
 CC=g++
 EXEC=main
 
