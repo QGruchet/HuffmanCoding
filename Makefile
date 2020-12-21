@@ -32,7 +32,7 @@ $(EXEC) : Main.o Tree.o Test.o Writer.o Parser.o
 run :
 	./src/bin/$(EXEC)
 
-window: run
+window:
 	cmake src/windowQt/CMakeLists.txt
 	make -C src/windowQt
 	src/windowQt/./windowQt

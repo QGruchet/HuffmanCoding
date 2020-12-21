@@ -24,7 +24,7 @@ class Writer
 
 		/* Methodes */
 		void textToCode(std::string);
-		void codeToText(std::string, std::vector<Data>)
+		void codeToText(std::string, std::vector<Data>);
 };
 
 #endif

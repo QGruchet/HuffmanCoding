@@ -13,7 +13,7 @@ int main(void) {
     }
     if(DEBUG2) {
         std::cout << "################## Test encoding ##############" << std::endl;
-        std::string text = "bonjour";
+        std::string text = "au revoir";
         Writer writer("src/txtQt/text.txt");
         writer.textToCode(text);
 
@@ -47,16 +47,18 @@ int main(void) {
     }
     if(DEBUG3) {
         std::cout << "################## Test decoding ##############" << std::endl;
-        std::string text = "011100100011000011";
+        std::string text = "111110101000100011010001000";
         Writer writer("src/txtQt/code.txt");
         writer.textToCode(text);
 
-        Data data1; data1.car = 'b', data1.freq = 1;
-        Data data2; data2.car = 'o', data2.freq = 2;
-        Data data3; data3.car = 'n', data3.freq = 1;
-        Data data4; data4.car = 'j', data4.freq = 1;
-        Data data5; data5.car = 'u', data5.freq = 1;
-        Data data6; data6.car = 'r', data6.freq = 1;
+        Data data1; data1.car = 'a', data1.freq = 1;
+        Data data2; data2.car = 'u', data2.freq = 1;
+        Data data3; data3.car = ' ', data3.freq = 1;
+        Data data4; data4.car = 'e', data4.freq = 1;
+        Data data5; data5.car = 'v', data5.freq = 1;
+        Data data6; data6.car = 'o', data6.freq = 1;
+        Data data7; data7.car = 'i', data7.freq = 1;
+        Data data8; data8.car = 'r', data8.freq = 2;
 
         std::vector<Data> tabFreq;
         tabFreq.push_back(data1);
@@ -65,6 +67,8 @@ int main(void) {
         tabFreq.push_back(data4);
         tabFreq.push_back(data5);
         tabFreq.push_back(data6);
+        tabFreq.push_back(data7);
+        tabFreq.push_back(data8);
 
         Parser parser;
         ArbreB huffmanTree = parser.creatHuffmanTree(tabFreq);

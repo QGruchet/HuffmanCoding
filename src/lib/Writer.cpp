@@ -115,7 +115,7 @@ void Writer::codeToText(std::string text, std::vector<Data> tabFreq) {
     }
 
     // Write the convert text in a file.
-    flux.open("src/txtQt/text.txt", std::ios::out | std::ios::trunc);
+    flux.open("src/txtQt/code.txt", std::ios::out | std::ios::trunc);
     if(flux) {
         flux << convert;
         flux.close();

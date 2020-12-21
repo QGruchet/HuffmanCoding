@@ -188,7 +188,7 @@ void MainWindow::menuEncoding()
  * */
 bool checkASCII(std::string str) {
     for(char c : str) {
-        if(!(int(c) >= 0 && int(c) <= 255)) {
+        if(!(int(c) >= 0 && int(c) <= 127)) {
             qDebug() << c << "not accepted";
             return false;
         }
@@ -345,7 +345,7 @@ void MainWindow::menuDecoding()
     encoding->setToolTip("Decoding the current text");
     listButton.append(encoding);
     keypadLayout->addWidget(encoding, 2, 2);
-    connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(encoding()));
+    connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(decoding()));
 
     // Button 2 : Print tree.
     MyButton* tree = new MyButton(mainWidget, iconTree);
@@ -377,14 +377,14 @@ void MainWindow::menuDecoding()
 
     // Setup reader.
     reader = new MyTextEdit();
-    reader->setInfo("Entry text");
+    reader->setInfo("011100100011000011\nr1\no2\nb1\nn1\nj1\nu1");
     reader->writeInfo();
     keypadLayout->addWidget(reader, 2, 1);
 
     // Setup writer.
     writer = new MyTextEdit();
     writer->setReadOnly(true); // ! User can't write, QtextEdit for print the convert text.
-    writer->setInfo("Decoding");
+    writer->setInfo("bonjour");
     writer->setClicDellText(false);
     writer->writeInfo();
     keypadLayout->addWidget(writer, 2, 3);
@@ -417,25 +417,37 @@ void MainWindow::decoding()
             QMessageBox::information(mainWidget, "Error message", "Too short message.");
             reader->setReadOnly(false); // User can write now;
         }
-        else if(isOnlyOneChar(strRead)) { // ! Not enought char.
-            QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
-            reader->setReadOnly(false);
-        }
-        else if(!checkASCII(strRead)) { // ! Text write by the user don't respect ASCII encoding.
-            QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
-            reader->setReadOnly(false); 
-        }
         else {
             // Write the current text.
-            Writer writerInFile("src/txtQt/code.txt");
+            Writer writerInFile("src/txtQt/text.txt");
             
             std::vector<Data> tabFreq;
-            
+            std::string text = "\0";
+            int i = 0;
+            while(strRead[i] != '\n') {
+                text += strRead[i];
+                i++;
+            }
+            // QString qtext(text.c_str());
+            // qDebug() << qtext;
+            i++;
+            while(i < strRead.length()) {
+                Data data;
+                data.car = strRead[i];
+                i++;
+                data.freq = strRead[i] - '0';
+                i+=2;
+                tabFreq.push_back(data);
+            }
 
-            writerInFile.codeToText(strRead, tabFreq);
+            // for(auto const & it : tabFreq) {
+            //     std::cout << it.car << ", " << it.freq << std::endl;
+            // }
+
+            writerInFile.codeToText(text, tabFreq);
 
             // Read the convert text.
-            QString fileName = "src/txtQt/text.txt";
+            QString fileName = "src/txtQt/code.txt";
             QFile file(fileName);
             file.open(QIODevice::ReadOnly | QIODevice::Text);
             QTextStream flux(&file);
