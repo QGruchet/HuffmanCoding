@@ -108,18 +108,17 @@ To build our program, you just needed to write this in a terminal :
 
 # Launch
 
-To start our program, you have two options :
-
-- ``` make run ``` to have a display in the terminal.
+To start our program, you have to write :
 - ``` make window ``` to run a graphic interface where you can interact with our program.
+after building the project.
 
 # Usage
 ![mainMenu](screenshots/mainMenu.png)
 
 This is our main menu of our application. All buttons are fonctional.
-1. This button open the encoding menu.
-2. This button stop our application.
-3. This button open the decoding menu. It's not implemented yet but don't worry it will come very soon.
+1. This button opens the encoding menu.
+2. This button stops our application.
+3. This button opens the decoding menu. It's not implemented yet but don't worry it will come very soon.
   
 ![encodingMenu](screenshots/encodingMenu.png) 
 
@@ -127,13 +126,14 @@ This is our encoding menu. Here you will can encoding any text and see in live t
 1. This button allows you to return to the previous menu.
 2. This button clear the display.
 3. This button close the application 
-4. This button allows you to draw three of your entering text.
+4. This button allows you to draw the tree of your entering text.
 5. This button translate your text with Hauffman Coding.
 6. This is where you will write the text you want to translate.
 7. This is where you have the result of your translation.
 
 ![print Tree](screenshots/treeMenu.png)
 
+This is our window where we draw the Huffman tree.
 1. This is a simple display of the tree.
 2. This button allows you to return to the previous menu.
 
@@ -161,21 +161,21 @@ ArbreB::ArbreB() : root(nullptr)  {}
 Sommet* Sommet::copy() {}
 
 /**
- * *Description : Create an object 'Sommet' with an other.
+ * *Description : Create an object 'Sommet' with another.
  * *Function : Constructor by copy.
  * @param other, the other node for the copy.
  * */
 Sommet::Sommet(const Sommet& other) {}
 
 /**
- * *Description : Create a object 'ArbreB' with an other.
+ * *Description : Create an object 'ArbreB' with another.
  * *Function : Constructor by copy.
  * @param other, the other tree for the copy.
  * */
 ArbreB::ArbreB(const ArbreB& other) {}
 
 /**
- * *Description : Create a object 'Sommet' by initializing the data.
+ * *Description : Create an object 'Sommet' by initializing the data.
  * *Function : Constructor with parameter.
  * @param newData, the data to init the node.
  * @param newCar, the car to init the node.
@@ -183,36 +183,36 @@ ArbreB::ArbreB(const ArbreB& other) {}
 Sommet::Sommet(int newData, char newCar) {}
 
 /**
- * *Description : Create a object 'Sommet' by initializing the data.
+ * *Description : Create an object 'Sommet' by initializing the data.
  * *Function : Constructor with parameter.
  * @param newData, the data to init the node.
  * */
 Sommet::Sommet(Data newData) {}
 
 /**
- * *Description : Create a object 'ArbreB' by initializing the root.
+ * *Description : Create an object 'ArbreB' by initializing the root.
  * *Function : Constructor with parameter.
- * @param freqRoot, tha data to init the root of the tree.
- * @param charRoot, tha car to init the root of the tree.
+ * @param freqRoot, the data to init the root of the tree.
+ * @param charRoot, the car to init the root of the tree.
  * */
 ArbreB::ArbreB(int freqRoot, char charRoot) {}
 
 /**
- * *Description : Create a object 'ArbreB' by initializint the root.
+ * *Description : Create an object 'ArbreB' by initializint the root.
  * *Function : constructor with parameter.
  * @param newData, the data(freq and car) to init the root.
  * */
 ArbreB::ArbreB(Data newData) {}
 
 /**
- * *Description : Copy a object 'Sommet' with an other.
+ * *Description : Copy an object 'Sommet' with another.
  * *Function : Overloading operator=.
  * @param other, the node for the copy.
  * */
 Sommet& Sommet::operator=(Sommet other) {}
 
 /**
- * *Description : Copy a object 'Sommet' with an other.
+ * *Description : Copy an object 'Sommet' with another.
  * *Function : Overloading operator=.
  * @param other, the node for the copy.
  * */
@@ -226,14 +226,14 @@ Sommet& Sommet::operator=(int newData) {}
 Sommet& Sommet::operator=(Data newData) {}
 
 /**
- * *Description : Copy a object 'ArbreB' with an other.
+ * *Description : Copy an object 'ArbreB' with another.
  * *Function : Overloading operator=.
  * @param other, the other tree for the copy.
  * */
 ArbreB& ArbreB::operator=(const ArbreB& other) {}
 
 /**
- * *Description : Say if the 'Sommet' is equal to an other.
+ * *Description : Say if the 'Sommet' is equal to another.
  * *Function : Overloading operator==.
  * @param other, the other node for compare.
  * @return boolean, true if this and other are equals, else false.
@@ -241,7 +241,7 @@ ArbreB& ArbreB::operator=(const ArbreB& other) {}
 bool Sommet::operator==(const Sommet& other) {}
 
 /**
- * *Description : Say if the 'Sommet' is equal to an other, recursive version.
+ * *Description : Say if the 'Sommet' is equal to another, recursive version.
  * *Function : Overloading operator==.
  * @param node, the other node for compare.
  * @return boolean, true if this and other are equals, else false.
@@ -249,7 +249,7 @@ bool Sommet::operator==(const Sommet& other) {}
 bool Sommet::equal(Sommet *node) {}
 
 /**
- * *Description : Say if the 'ArbreB' is equal to an other.
+ * *Description : Say if the 'ArbreB' is equal to another.
  * *Function : Overloading operator==.
  * @param other, the other tree for compare.
  * @return boolean, true if this and other are equals, else false.
@@ -273,7 +273,7 @@ void ArbreB::add(Sommet *root, int newData) {}
 
 /**
  * *Description : Dell a node with the value dellData in the tree, if
- *                  *the node with dellData exist.
+ *                  *the node with dellData exists.
  * *Function : Overloading operator>>.
  * @param dellData, data need to be deleted.
  * */
@@ -281,7 +281,7 @@ ArbreB& ArbreB::operator>>(int dellData) {}
 
 /**
  * *Description : Delete a node with the value dellData in the tree, if
- *                  *the node with dellData exist, recursive version.
+ *                  *the node with dellData exists, recursive version.
  * @param root, node used for recursive call,
  * @param dellData, data need to be deleted.
  * */
@@ -306,7 +306,7 @@ std::ostream &operator<<(std::ostream &flux, const ArbreB& tree) {}
 /**
  * *Description : Merge two trees.
  * *Function : Overloading operator+=.
- * @param other, for merge two trees.
+ * @param other, to merge two trees.
  * */
 ArbreB& ArbreB::operator+=(const ArbreB& other) {}
 
@@ -402,7 +402,7 @@ int Sommet::countDepth() {}
 
 /**
  * *Description : Count the size of the tree.
- * @return the number of element.
+ * @return the number of elements.
  * */
 int Sommet::countSize() {}
 /* End printers */
@@ -467,7 +467,7 @@ std::string FAIL = inRed("FAIL");
 
 /**
  * Function : allTest.
- * Description : Print all results of test in our terminal.
+ * Description : Print all results of the test in our terminal.
  * */
 void Test::allTest() {}
 
@@ -517,7 +517,7 @@ std::string Test::testDepth() {}
 /**
  * Function : testSize.
  * Return : std::string.
- * Description : Check the size of tree. One node => size = 1, two nodes => size = 2...
+ * Description : Check the size of the tree. One node => size = 1, two nodes => size = 2...
  * */
 std::string Test::testSize() {}
 
@@ -532,7 +532,7 @@ std::string Test::testDefaultConstructorTree() {}
 /**
  * Function : testParamConstructorTree.
  * Return : std::string.
- * Description : Check the constructor with parameter of a tree.
+ * Description : Check the constructor with parameters of a tree.
  * */
 std::string Test::testParamConstructorTree() {}
 
@@ -606,15 +606,15 @@ int Test::getNumTestGlobal() const {
 
 ```cpp
 /**
- * Description : Read the nameFile and fill the freq * vector.
+ * Description : Read the nameFile and fill the freq vector.
  * @param nameFile, the file name.
- * @return vector of Data with the freq and the car of any caracters in the file.
+ * @return vector of Data with the freq and the car of any characters in the file.
  * */
 std::vector<Data> Parser::freqChar(std::string nameFile) const {}
 
 /**
- * *Description : Check if all trees was merge in one.
- * @param forest, the vector of tree.
+ * *Description : Check if all trees was merged in one.
+ * @param forest, the vector of trees.
  * @return boolean, true if all trees have -1 in freq except one.
  *          false, else.
  * */
@@ -629,10 +629,10 @@ bool stayOneTree(std::vector<ArbreB> forest) {}
 ArbreB Parser::creatHuffmanTree(std::vector<Data> tabFreq) const {}
 
 /**
- * * Description : Check if all trees was merge in one.
+ * * Description : Check if all trees was merged in one.
  * @param node, the current node.
  * @param str, the string for concat the convert letter.
- * @param stack, a stack for save all convert letter.
+ * @param stack, a stack for saving all converted letter.
  * */
 void Parser::readHuffmanTree(Sommet* node, std::string str, std::stack<std::string>* stack) const {}
 ```
@@ -681,14 +681,14 @@ void MainWindow::menu() {}
 void MainWindow::menuEncoding(){}
 
 /**
- * *Description : check if str recpect the ASCCI encoding.
+ * *Description : check if str respect the ASCII encoding.
  * @param str, need to check.
  * @return true/false.
  * */
 bool checkASCII(std::string str) {}
 
 /**
- * *Description : check if str is compose with only one char.
+ * *Description : check if str is composed with only one char.
  * @param str, need to check.
  * @return true/false.
  * */
@@ -729,9 +729,9 @@ MainWindow::~MainWindow() {}
 
 ```cpp
 /**
- * *Descirption : Constructor with parameter.
+ * *Description : Constructor with parameter.
  * @param parent, the widget parent.
- * @param pathicon, the path for print the icon.
+ * @param pathicon, the path for printing the icon.
  * */
 MyButton::MyButton(QWidget *parent, QString pathicon)
     : QPushButton(parent){}
@@ -768,7 +768,7 @@ void MyTextEdit::setInfo(QString information) {}
 QString MyTextEdit::info() const {}
 
 /**
- * *Description : set boolean if clic on textEdit dell the text.
+ * *Description : set boolean if click on textEdit dell the text.
  * @param newClicDellText, the new boolean.
  * */
 void MyTextEdit::setClicDellText(bool newClicDellText){}
@@ -790,13 +790,13 @@ MyTextEdit::~MyTextEdit(){}
 /**
  * *Description : Constructor with parameters.
  * @param parent, the widget parent.
- * @param winSizeX, the widht.
+ * @param winSizeX, the width.
  * @param winSizeX, the height.
  * */
 TilteWidget::TilteWidget(QWidget *parent, int winSizeX, int winSizeY): QWidget(parent){}
 
 /**
- * *Description : Draw the tilte window.
+ * *Description : Draw the title window.
  * */
 void TilteWidget::paintEvent(QPaintEvent *event){}
 ```
@@ -818,12 +818,12 @@ TreeWidget::TreeWidget(QWidget *parent)
 void TreeWidget::setTree(ArbreB newTree) {}
 
 /**
- * *Description : Write informations in all nodes.
+ * *Description : Write information in all nodes.
  * @param painter for draw.
  * @param node, for get informations.
  * @param centerX, coords in x where we write.
  * @param centerY, coords in y where we write.
- * @param raduis, the radius of the node.
+ * @param radiss, the radius of the node.
  * */
 void drawData(QPainter* painter, Sommet* node, int centerX, int centerY, int radius) {}
 
@@ -836,7 +836,7 @@ void drawData(QPainter* painter, Sommet* node, int centerX, int centerY, int rad
  * @param gapX, the distance between nodes in x.
  * @param gapY, the distance between nodes in y.
  * @param depth, the depth of the tree.
- * @param raduis, the radius of the node.
+ * @param radius, the radius of the node.
  * */
 void drawNode(QPainter* painter, Sommet* node, int centerX, int centerY, int gapX, int gapY, int depth, int radius) {}
 
@@ -849,15 +849,15 @@ void drawNode(QPainter* painter, Sommet* node, int centerX, int centerY, int gap
  * @param gapX, the distance between nodes in x.
  * @param gapY, the distance between nodes in y.
  * @param depth, the depth of the tree.
- * @param raduis, the radius of the node.
+ * @param radius, the radius of the node.
  * */
 void drawLink(QPainter* painter, Sommet* node, int centerX, int centerY, int gapX, int gapY, int depth, int radius) {}
 
 /**
  * *Description : Draw tree.
  * @param painter for draw.
- * @param width the widht.
- * @param heigth the heigth.
+ * @param width the width.
+ * @param height the height.
  * */
 void TreeWidget::draw(QPainter* painter, int width, int height) {}
 
@@ -873,7 +873,6 @@ void TreeWidget::paintEvent(QPaintEvent *event){}
 TreeWidget::~TreeWidget() {}
 ```
 
-
 # Status
 
 20/11/2020 : version 1.3 => End part1
@@ -885,31 +884,34 @@ TreeWidget::~TreeWidget() {}
 
 - Part1 : Implementation of a tree and graphic interface. 
 
-For the first part we were suppose to implement a tree and a graphic interface. The work has been split in two. 
+For the first part we were supposed to implement a tree and a graphic interface. The work has been split in two. 
 Mickael had to implement the tree and Quentin had to implement the interface. 
 But we helped each other when help was needed, and we sometimes worked together online.  
 For the tree we decided to use two classes, 'Sommet' and 'ArbreB'.
-'Sommet' represent a node with a data, a left child and a right child.
-With this data structure we can find the minimum, the maximum, count the detph and count the number of element.
-And we have 'ArbreB' who represent a tree, with the root which is also a node.
+'Sommet' represents a node with data, a left child and a right child.
+With this data structure we can find the minimum, the maximum, count the depth and count the number of elements.
+And we have 'ArbreB' who represents a tree, with the root which is also a node.
 With this tree we can add a node, delete one (swap the node with a leaf and delete the leaf), find a node, add two trees, and split a tree in two.  
-For the interface, we decided to make the interface with Gtk librairies but some bug, a lot actually, appeared because we didn't have more informations about Gtk. 
-It turned out harder than we thougth. Furthermore results were aesthetically pleasant.
-  That why we decided to use Qt librairies instead. The tree is not depicted in the interface but the tree is stored in a .txt file and the interface just displays it. 
-  It is not represented has a usual tree but it is displayed hierarchically.
-- Part 2 : Encoding a text and upgrade the interface.
+For the interface, we decided to make the interface with Gtk libraries but some bugs, a lot actually, appeared because we didn't have more information about Gtk. 
+It turned out harder than we thought. Furthermore, the results were aesthetically pleasant.
+That's why we decided to use Qt libraries instead. The tree is not depicted in the interface but the tree is stored in a .txt file and the interface just displays it. 
+It is not represented has a usual tree but it is displayed hierarchically.
+- Part 2 : Encoding a text and upgrading the interface.
 
-For the second part, we have to translate a text to binary code using Hauffman Encodation. The CPP code was not very difficult but we wanted to upgrade graphic interface. This spend more of our time because Qt is difficult to learn. All text, enter by user, are save in a .txt file.  
+For the second part, we have to translate a text to binary code using Huffman Encoding. The CPP code was not very difficult. For the tree we have just changed type node data, is not a single integer it's now a struct with an integer and a char.  After we have added a new file, the parser file, which reads the file, calculates all frequencies of char, creates hufftree with these frequencies, reads the huffman tree, and returns the convert text. 
 
+Also we wanted to upgrade the graphic interface. This takes more of our time because Qt is difficult to learn. The new interface consists of a main menu, encoding menu, decoding menu and some other things, like present in "usage". We had some new classes, like MyButton for manipulating our special button, with icon and note text.  More precisely we have replaced text by icon and added information text so the user uses his mouse to fly over the icon for more clarity and  aesthetic.
+On top of that we add a MyTextEdit file for manipulation text zone. we had text in grey for show where users need to write and where the translation is printed. We follow of modèle of "google translate" which is enough soft to be programming in few weeks.
 
 # Some ideas for amelioration
 
-Heres are some ideas for future versions :
-- Our interface can interact with the painting tree : adding node, deleting node, splitting tree, merge two different trees, ... (DONE)
-- We can't delete node from the midlle of the tree. We'll have to fix it.
+Here's are some ideas for future versions :
+- Our interface can interact with the painting tree : adding nodes, deleting nodes, splitting trees, merging two different trees, ... (DONE)
+- We can't delete nodes from the middle of the tree. We'll have to fix it.
 - We should solve memory leaks in the graphic interface.
 - The tree is not able to print a tree with a depth up to 5. Maybe we can add a scrollbar to fix it.
 - The interface is not very attractive so we have to make a nicest interface.(DONE)
+- Our coding does not support accented characters or special characters.
 
 # Authors
 * **LE DENMAT Mickael 21804355**
