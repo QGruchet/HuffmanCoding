@@ -327,7 +327,131 @@ void MainWindow::drawTree() {
  * */
 void MainWindow::menuDecoding()
 {
-    QMessageBox::information(mainWidget, "Information", "Not implented yet.\nBack to the menu.");
+    // Setup the main window.
+    resetWindow(winWidth*2, winHeight*2);
+    mainWidget = new QWidget(this);
+    QPalette pal = palette();
+    pal.setColor(QPalette::Background, Qt::white);
+    mainWidget->setAutoFillBackground(true);
+    mainWidget->setPalette(pal);
+    setCentralWidget(mainWidget);
+    keypadLayout = new QGridLayout(mainWidget);
+
+    // Create buttons.
+    keypadLayout->setAlignment(Qt::AlignCenter);
+
+    // Button 1 : Encoding.
+    MyButton* encoding = new MyButton(mainWidget, iconEncoding);
+    encoding->setToolTip("Decoding the current text");
+    listButton.append(encoding);
+    keypadLayout->addWidget(encoding, 2, 2);
+    connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(encoding()));
+
+    // Button 2 : Print tree.
+    MyButton* tree = new MyButton(mainWidget, iconTree);
+    tree->setToolTip("Print the Huffman tree.");
+    listButton.append(tree);
+    keypadLayout->addWidget(tree, 1, 2);
+    connect(tree, SIGNAL(clicked()), this, SLOT(drawTree()));
+
+    // Button 3 : Clear.
+    MyButton* clear = new MyButton(mainWidget, iconClear);
+    clear->setToolTip("Clean the window.");
+    listButton.append(clear);
+    keypadLayout->addWidget(clear, 0, 2);
+    connect(clear, SIGNAL(clicked()), this, SLOT(clearEncoding()));
+
+    // Button 4 : Menu.
+    MyButton* home = new MyButton(mainWidget, iconHome);
+    home->setToolTip("Back to the menu.");
+    listButton.append(home);
+    keypadLayout->addWidget(home, 0, 0);
+    connect(home, SIGNAL(clicked()), this, SLOT(menu()));
+
+    // Button 5 : Exit.
+    MyButton* exit = new MyButton(mainWidget, iconExit);
+    exit->setToolTip("Leave the application.");
+    listButton.append(exit);
+    keypadLayout->addWidget(exit, 0, 4);
+    connect(exit, SIGNAL(clicked()), qApp, SLOT(quit()));
+
+    // Setup reader.
+    reader = new MyTextEdit();
+    reader->setInfo("Entry text");
+    reader->writeInfo();
+    keypadLayout->addWidget(reader, 2, 1);
+
+    // Setup writer.
+    writer = new MyTextEdit();
+    writer->setReadOnly(true); // ! User can't write, QtextEdit for print the convert text.
+    writer->setInfo("Decoding");
+    writer->setClicDellText(false);
+    writer->writeInfo();
+    keypadLayout->addWidget(writer, 2, 3);
+
+    // If we drawing the tree and back to the menu.
+    if(treeIsDrawing) {
+        treeIsDrawing = false;
+        reader->setText(readerSave);
+        readerSave = "\0";
+        reader->show();
+        writer->setText(writerSave);
+        writerSave = "\0";
+        writer->show();
+    }
+}
+
+/**
+ * *Description : Read the current text and convert him.
+ * */
+void MainWindow::decoding()
+{
+    // Setup read the text
+    QString read;
+    read = reader->toPlainText();
+    if(read != reader->info()) {
+        std::string strRead = read.toStdString();
+
+        //
+        if(strRead.length() <= 1) { // ! Not enought char for create the tree.
+            QMessageBox::information(mainWidget, "Error message", "Too short message.");
+            reader->setReadOnly(false); // User can write now;
+        }
+        else if(isOnlyOneChar(strRead)) { // ! Not enought char.
+            QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
+            reader->setReadOnly(false);
+        }
+        else if(!checkASCII(strRead)) { // ! Text write by the user don't respect ASCII encoding.
+            QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
+            reader->setReadOnly(false); 
+        }
+        else {
+            // Write the current text.
+            Writer writerInFile("src/txtQt/code.txt");
+            
+            std::vector<Data> tabFreq;
+            
+
+            writerInFile.codeToText(strRead, tabFreq);
+
+            // Read the convert text.
+            QString fileName = "src/txtQt/text.txt";
+            QFile file(fileName);
+            file.open(QIODevice::ReadOnly | QIODevice::Text);
+            QTextStream flux(&file);
+            QString code = flux.readAll();
+
+            // Print the convert text.
+            writer->setTextColor(Qt::black);
+            writer->setText(code);
+            writer->show();
+            file.close();
+            isEncoding = true;
+        }
+    }
+    else {
+        QMessageBox::information(mainWidget, "Information", "Any text to encoding.");
+    }
 }
 
 /**

@@ -74,6 +74,7 @@ public slots:
     void menu();
 
     void encoding();
+    void decoding();
     void drawTree();
 };
 #endif // MAINWINDOW_HPP
