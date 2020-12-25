@@ -136,6 +136,8 @@ void MainWindow::setupButton() {
  * *Description : Print the encoding menu.
  * */
 void MainWindow::menuEncoding() {
+
+    qDebug() << "je suis là";
     //
     setWindowTitle("Encoding menu");
     
@@ -210,10 +212,10 @@ void MainWindow::menuDecoding() {
     keypadLayout->setAlignment(Qt::AlignCenter);
 
     // Button 1 : Encoding.
-    MyButton* encoding = new MyButton(mainWidget, iconEncoding);
-    encoding->setToolTip("Decoding the current text");
-    listButton.append(encoding);
-    keypadLayout->addWidget(encoding, 2, 2);
+    MyButton* decoding = new MyButton(mainWidget, iconEncoding);
+    decoding->setToolTip("Decoding the current text");
+    listButton.append(decoding);
+    keypadLayout->addWidget(decoding, 2, 2);
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(decoding()));
 
     //
@@ -391,11 +393,11 @@ void MainWindow::decoding() {
  * *Description : Clear reader and writer in the encoding menu.
  * */
 void MainWindow::clearTextEdit() {
-    reader->clear();
-    reader->setReadOnly(false); // ! User can write.
     reader->setClicDellText(true);
+    reader->clear();
     qDebug() << reader->info();
     reader->writeInfo();
+    reader->setReadOnly(false); // ! User can write.
 
     writer->clear();
     writer->writeInfo();
@@ -408,14 +410,13 @@ void MainWindow::clearTextEdit() {
  * *Description : Drawing the huffman tree.
  * */
 void MainWindow::drawTree() {
-    
-    //
-    setWindowTitle("Tree");
-
     if(!isEncoding) { // ! Any text endocing yet.
         QMessageBox::information(mainWidget, "Information", "Any text encoding or decoding yet.");
     }
     else {
+        //
+        setWindowTitle("Tree");
+
         // Create the tree.
         Parser parser;
         ArbreB huffmanTree = parser.creatHuffmanTree(tabFreq);
@@ -423,7 +424,6 @@ void MainWindow::drawTree() {
         // Save the old text if user back at the menu.
         treeIsDrawing = true;
         readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
-        qDebug() << readerSave;
         if(huffmanTree.getRoot()->countDepth() >= maxDepth ) { // ! Too many elements for be drawing.
             QMessageBox::information(mainWidget, "Error message", "HuffmanTree is too big to be drawing");
         }
