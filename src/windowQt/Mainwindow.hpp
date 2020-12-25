@@ -62,6 +62,8 @@ private:
     int maxDepth = 5;
     QString readerSave, writerSave;
 
+    std::vector<Data> tabFreq;
+
     /* Functions */
     void resetWindow(int newWidth, int newHeight);
     void setupMenu();
@@ -69,7 +71,7 @@ private:
 
 public slots:
     void menuEncoding();
-    void clearEncoding();
+    void clearTextEdit();
     void menuDecoding();
     void menu();
 
