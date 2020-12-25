@@ -105,8 +105,7 @@ void MainWindow::menu() {
 /**
  * *Description : Print the encoding menu.
  * */
-void MainWindow::menuEncoding()
-{
+void MainWindow::menuEncoding() {
     // Setup the main window.
     resetWindow(winWidth*2, winHeight*2);
     mainWidget = new QWidget(this);
@@ -182,106 +181,9 @@ void MainWindow::menuEncoding()
 }
 
 /**
- * *Description : check if str recpect the ASCCI encoding.
- * @param str, need to check.
- * @return true/false.
- * */
-bool checkASCII(std::string str) {
-    for(char c : str) {
-        if(!(int(c) >= 0 && int(c) <= 127)) {
-            qDebug() << c << "not accepted";
-            return false;
-        }
-    }
-    return true;
-}
-
-/**
- * *Description : check if str is compose with only one char.
- * @param str, need to check.
- * @return true/false.
- * */
-bool isOnlyOneChar(std::string str) {
-    for(int i=1; i<int(str.size()); ++i) {
-        if(str[i-1] != str[i]) {
-            return false;
-        }
-    }
-    return true;
-}
-
-/**
- * *Description : Read the current text and convert him.
- * */
-void MainWindow::encoding()
-{
-    // Setup read the text
-    QString read;
-    read = reader->toPlainText();
-    if(read != reader->info()) {
-        std::string strRead = read.toStdString();
-
-        //
-        if(strRead.length() <= 1) { // ! Not enought char for create the tree.
-            QMessageBox::information(mainWidget, "Error message", "Too short message.");
-            reader->setReadOnly(false); // User can write now;
-        }
-        else if(isOnlyOneChar(strRead)) { // ! Not enought char.
-            QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
-            reader->setReadOnly(false);
-        }
-        else if(!checkASCII(strRead)) { // ! Text write by the user don't respect ASCII encoding.
-            QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
-            reader->setReadOnly(false); 
-        }
-        else {
-            // Write the current text.
-            Writer writerInFile("src/txtQt/text.txt");
-            writerInFile.textToCode(strRead);
-            Parser parser;
-            tabFreq = parser.freqChar("src/txtQt/text.txt");
-
-            // Read the convert text.
-            QString fileName = "src/txtQt/code.txt";
-            QFile file(fileName);
-            file.open(QIODevice::ReadOnly | QIODevice::Text);
-            QTextStream flux(&file);
-            QString code = flux.readAll();
-
-            // Print the convert text.
-            writer->setTextColor(Qt::black);
-            writer->setText(code);
-            writer->show();
-            file.close();
-            isEncoding = true;
-        }
-    }
-    else {
-        QMessageBox::information(mainWidget, "Information", "Any text to encoding.");
-    }
-}
-
-/**
- * *Description : Clear reader and writer in the encoding menu.
- * */
-void MainWindow::clearTextEdit() {
-    reader->clear();
-    reader->setReadOnly(false); // ! User can write.
-    reader->setClicDellText(true);
-    reader->writeInfo();
-
-    writer->clear();
-    writer->writeInfo();
-    writer->setReadOnly(true); // ! User can't write.
-    
-    isEncoding = false; treeIsDrawing = false;
-}
-
-/**
  * *Description : Print the decoding manu.
  * */
-void MainWindow::menuDecoding()
-{
+void MainWindow::menuDecoding() {
     // Setup the main window.
     resetWindow(winWidth*2, winHeight*2);
     mainWidget = new QWidget(this);
@@ -357,10 +259,88 @@ void MainWindow::menuDecoding()
 }
 
 /**
+ * *Description : check if str recpect the ASCCI encoding.
+ * @param str, need to check.
+ * @return true/false.
+ * */
+bool checkASCII(std::string str) {
+    for(char c : str) {
+        if(!(int(c) >= 0 && int(c) <= 127)) {
+            qDebug() << c << "not accepted";
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * *Description : check if str is compose with only one char.
+ * @param str, need to check.
+ * @return true/false.
+ * */
+bool isOnlyOneChar(std::string str) {
+    for(int i=1; i<int(str.size()); ++i) {
+        if(str[i-1] != str[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
  * *Description : Read the current text and convert him.
  * */
-void MainWindow::decoding()
-{
+void MainWindow::encoding() {
+    // Setup read the text
+    QString read;
+    read = reader->toPlainText();
+    if(read != reader->info()) {
+        std::string strRead = read.toStdString();
+
+        //
+        if(strRead.length() <= 1) { // ! Not enought char for create the tree.
+            QMessageBox::information(mainWidget, "Error message", "Too short message.");
+            reader->setReadOnly(false); // User can write now;
+        }
+        else if(isOnlyOneChar(strRead)) { // ! Not enought char.
+            QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
+            reader->setReadOnly(false);
+        }
+        else if(!checkASCII(strRead)) { // ! Text write by the user don't respect ASCII encoding.
+            QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
+            reader->setReadOnly(false); 
+        }
+        else {
+            // Write the current text.
+            Writer writerInFile("src/txtQt/text.txt");
+            writerInFile.textToCode(strRead);
+            Parser parser;
+            tabFreq = parser.freqChar("src/txtQt/text.txt");
+
+            // Read the convert text.
+            QString fileName = "src/txtQt/code.txt";
+            QFile file(fileName);
+            file.open(QIODevice::ReadOnly | QIODevice::Text);
+            QTextStream flux(&file);
+            QString code = flux.readAll();
+
+            // Print the convert text.
+            writer->setTextColor(Qt::black);
+            writer->setText(code);
+            writer->show();
+            file.close();
+            isEncoding = true;
+        }
+    }
+    else {
+        QMessageBox::information(mainWidget, "Information", "Any text to encoding.");
+    }
+}
+
+/**
+ * *Description : Read the current text and convert him.
+ * */
+void MainWindow::decoding() {
     // Setup read the text
     QString read;
     read = reader->toPlainText();
@@ -417,6 +397,22 @@ void MainWindow::decoding()
 }
 
 /**
+ * *Description : Clear reader and writer in the encoding menu.
+ * */
+void MainWindow::clearTextEdit() {
+    reader->clear();
+    reader->setReadOnly(false); // ! User can write.
+    reader->setClicDellText(true);
+    reader->writeInfo();
+
+    writer->clear();
+    writer->writeInfo();
+    writer->setReadOnly(true); // ! User can't write.
+    
+    isEncoding = false; treeIsDrawing = false;
+}
+
+/**
  * *Description : Drawing the huffman tree.
  * */
 void MainWindow::drawTree() {
@@ -466,8 +462,7 @@ void MainWindow::drawTree() {
 /**
  * *Description : Reset the main window and change the size.
  * */
-void MainWindow::resetWindow(int newWidth, int newHeight)
-{
+void MainWindow::resetWindow(int newWidth, int newHeight) {
     // Change the size.
     setFixedWidth(newWidth);
     setFixedHeight(newHeight);
@@ -506,7 +501,6 @@ void MainWindow::resetWindow(int newWidth, int newHeight)
 /**
  * *Description : Destructor.
  * */
-MainWindow::~MainWindow() 
-{
+MainWindow::~MainWindow() {
     // Empty
 }

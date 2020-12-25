@@ -70,10 +70,10 @@ private:
     void printMenu();
 
 public slots:
-    void menuEncoding();
-    void clearTextEdit();
-    void menuDecoding();
     void menu();
+    void menuEncoding();
+    void menuDecoding();
+    void clearTextEdit();
 
     void encoding();
     void decoding();
