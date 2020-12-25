@@ -65,8 +65,9 @@ private:
     std::vector<Data> tabFreq;
 
     /* Functions */
-    void resetWindow(int newWidth, int newHeight);
+    void resetWindow(int, int);
     void setupMenu();
+    void setupButton();
     void printMenu();
 
 public slots:

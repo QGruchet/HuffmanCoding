@@ -68,7 +68,6 @@ void MyTextEdit::writeInfo() {
 /**
  * *Description : Destructor.
  * */
-MyTextEdit::~MyTextEdit()
-{
+MyTextEdit::~MyTextEdit() {
     // Empty
 }
