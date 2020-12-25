@@ -45,7 +45,7 @@ void MainWindow::setHeight(int sizeY) {
  * *Description : Setup the main window.
  * */
 void MainWindow::setup() {
-    setWindowTitle("Huffman Coding (v2.2)");
+    setWindowTitle("Huffman Coding (v3.2)");
     setFixedWidth(winWidth);
     setFixedHeight(winHeight);
 
@@ -139,7 +139,7 @@ void MainWindow::menuEncoding()
     clear->setToolTip("Clean the window.");
     listButton.append(clear);
     keypadLayout->addWidget(clear, 0, 2);
-    connect(clear, SIGNAL(clicked()), this, SLOT(clearEncoding()));
+    connect(clear, SIGNAL(clicked()), this, SLOT(clearTextEdit()));
 
     // Button 4 : Menu.
     MyButton* home = new MyButton(mainWidget, iconHome);
@@ -238,6 +238,8 @@ void MainWindow::encoding()
             // Write the current text.
             Writer writerInFile("src/txtQt/text.txt");
             writerInFile.textToCode(strRead);
+            Parser parser;
+            tabFreq = parser.freqChar("src/txtQt/text.txt");
 
             // Read the convert text.
             QString fileName = "src/txtQt/code.txt";
@@ -262,7 +264,7 @@ void MainWindow::encoding()
 /**
  * *Description : Clear reader and writer in the encoding menu.
  * */
-void MainWindow::clearEncoding() {
+void MainWindow::clearTextEdit() {
     reader->clear();
     reader->setReadOnly(false); // ! User can write.
     reader->setClicDellText(true);
@@ -273,53 +275,6 @@ void MainWindow::clearEncoding() {
     writer->setReadOnly(true); // ! User can't write.
     
     isEncoding = false; treeIsDrawing = false;
-}
-
-/**
- * *Description : Drawing the huffman tree.
- * */
-void MainWindow::drawTree() {
-    if(!isEncoding) { // ! Any text endocing yet.
-        QMessageBox::information(mainWidget, "Information", "Any text encoding yet.");
-    }
-    else {
-        // Create the tree.
-        Parser parser;
-        ArbreB huffmanTree = parser.creatHuffmanTree(parser.freqChar("src/txtQt/text.txt"));
-
-        // Save the old text if user back at the menu.
-        treeIsDrawing = true;
-        readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
-        if(huffmanTree.getRoot()->countDepth() >= maxDepth ) { // ! Too many elements for be drawing.
-            QMessageBox::information(mainWidget, "Error message", "HuffmanTree is too big to be drawing");
-        }
-        else {
-            // Setup the main window.
-            resetWindow(winWidth*2, winHeight*2);
-            mainWidget = new QWidget(this);
-            QPalette pal = palette();
-            pal.setColor(QPalette::Background, Qt::white);
-            mainWidget->setAutoFillBackground(true);
-            mainWidget->setPalette(pal);
-
-            // Setup tree and layout
-            treeWidget = new TreeWidget();
-            treeWidget->setTree(huffmanTree);
-            writerLayout = new QHBoxLayout(mainWidget);
-            writerLayout->addWidget(treeWidget);
-            
-            // Create and setup buttons.
-            keypadLayout = new QGridLayout();
-            QPushButton* newButton = new QPushButton("Back");
-            newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
-            listButton.append(newButton);
-            keypadLayout->addWidget(newButton, 0, 0);
-            connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
-            listButton.at(0)->setToolTip("Back to the encoding menu");
-            writerLayout->addLayout(keypadLayout);
-            setCentralWidget(mainWidget);
-        }
-    }
 }
 
 /**
@@ -359,7 +314,7 @@ void MainWindow::menuDecoding()
     clear->setToolTip("Clean the window.");
     listButton.append(clear);
     keypadLayout->addWidget(clear, 0, 2);
-    connect(clear, SIGNAL(clicked()), this, SLOT(clearEncoding()));
+    connect(clear, SIGNAL(clicked()), this, SLOT(clearTextEdit()));
 
     // Button 4 : Menu.
     MyButton* home = new MyButton(mainWidget, iconHome);
@@ -377,7 +332,7 @@ void MainWindow::menuDecoding()
 
     // Setup reader.
     reader = new MyTextEdit();
-    reader->setInfo("011100100011000011\nr1\no2\nb1\nn1\nj1\nu1");
+    reader->setInfo("Exemple : \n011100100011000011\nr1\no2\nb1\nn1\nj1\nu1");
     reader->writeInfo();
     keypadLayout->addWidget(reader, 2, 1);
 
@@ -421,15 +376,13 @@ void MainWindow::decoding()
             // Write the current text.
             Writer writerInFile("src/txtQt/text.txt");
             
-            std::vector<Data> tabFreq;
+            std::vector<Data> tabFreqText;
             std::string text = "\0";
             int i = 0;
             while(strRead[i] != '\n') {
                 text += strRead[i];
                 i++;
             }
-            // QString qtext(text.c_str());
-            // qDebug() << qtext;
             i++;
             while(i < strRead.length()) {
                 Data data;
@@ -437,12 +390,9 @@ void MainWindow::decoding()
                 i++;
                 data.freq = strRead[i] - '0';
                 i+=2;
-                tabFreq.push_back(data);
+                tabFreqText.push_back(data);
             }
-
-            // for(auto const & it : tabFreq) {
-            //     std::cout << it.car << ", " << it.freq << std::endl;
-            // }
+            tabFreq = tabFreqText;
 
             writerInFile.codeToText(text, tabFreq);
 
@@ -463,6 +413,53 @@ void MainWindow::decoding()
     }
     else {
         QMessageBox::information(mainWidget, "Information", "Any text to encoding.");
+    }
+}
+
+/**
+ * *Description : Drawing the huffman tree.
+ * */
+void MainWindow::drawTree() {
+    if(!isEncoding) { // ! Any text endocing yet.
+        QMessageBox::information(mainWidget, "Information", "Any text encoding or decoding yet.");
+    }
+    else {
+        // Create the tree.
+        Parser parser;
+        ArbreB huffmanTree = parser.creatHuffmanTree(tabFreq);
+
+        // Save the old text if user back at the menu.
+        treeIsDrawing = true;
+        readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
+        if(huffmanTree.getRoot()->countDepth() >= maxDepth ) { // ! Too many elements for be drawing.
+            QMessageBox::information(mainWidget, "Error message", "HuffmanTree is too big to be drawing");
+        }
+        else {
+            // Setup the main window.
+            resetWindow(winWidth*2, winHeight*2);
+            mainWidget = new QWidget(this);
+            QPalette pal = palette();
+            pal.setColor(QPalette::Background, Qt::white);
+            mainWidget->setAutoFillBackground(true);
+            mainWidget->setPalette(pal);
+
+            // Setup tree and layout
+            treeWidget = new TreeWidget();
+            treeWidget->setTree(huffmanTree);
+            writerLayout = new QHBoxLayout(mainWidget);
+            writerLayout->addWidget(treeWidget);
+            
+            // Create and setup buttons.
+            keypadLayout = new QGridLayout();
+            QPushButton* newButton = new QPushButton("Back");
+            newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
+            listButton.append(newButton);
+            keypadLayout->addWidget(newButton, 0, 0);
+            connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
+            listButton.at(0)->setToolTip("Back to the encoding menu");
+            writerLayout->addLayout(keypadLayout);
+            setCentralWidget(mainWidget);
+        }
     }
 }
 
