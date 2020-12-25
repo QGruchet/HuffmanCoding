@@ -45,7 +45,6 @@ void MainWindow::setHeight(int sizeY) {
  * *Description : Setup the main window.
  * */
 void MainWindow::setup() {
-    setWindowTitle("Huffman Coding (v3.2)");
     setFixedWidth(winWidth);
     setFixedHeight(winHeight);
 
@@ -62,6 +61,7 @@ void MainWindow::printMenu() {
     }
     
     // Init tilte.
+    setWindowTitle("Huffman Coding (v3.2)");
     mainWidget = new TilteWidget(this, winWidth, winHeight);
     keypadLayout = new QGridLayout(mainWidget);
     setCentralWidget(mainWidget);
@@ -102,10 +102,43 @@ void MainWindow::menu() {
     printMenu();
 }
 
+void MainWindow::setupButton() {
+    // Button 2 : Print tree.
+    MyButton* tree = new MyButton(mainWidget, iconTree);
+    tree->setToolTip("Print the Huffman tree.");
+    listButton.append(tree);
+    keypadLayout->addWidget(tree, 1, 2);
+    connect(tree, SIGNAL(clicked()), this, SLOT(drawTree()));
+
+    // Button 3 : Clear.
+    MyButton* clear = new MyButton(mainWidget, iconClear);
+    clear->setToolTip("Clean the window.");
+    listButton.append(clear);
+    keypadLayout->addWidget(clear, 0, 2);
+    connect(clear, SIGNAL(clicked()), this, SLOT(clearTextEdit()));
+
+    // Button 4 : Menu.
+    MyButton* home = new MyButton(mainWidget, iconHome);
+    home->setToolTip("Back to the menu.");
+    listButton.append(home);
+    keypadLayout->addWidget(home, 0, 0);
+    connect(home, SIGNAL(clicked()), this, SLOT(menu()));
+
+    // Button 5 : Exit.
+    MyButton* exit = new MyButton(mainWidget, iconExit);
+    exit->setToolTip("Leave the application.");
+    listButton.append(exit);
+    keypadLayout->addWidget(exit, 0, 4);
+    connect(exit, SIGNAL(clicked()), qApp, SLOT(quit()));
+}
+
 /**
  * *Description : Print the encoding menu.
  * */
 void MainWindow::menuEncoding() {
+    //
+    setWindowTitle("Encoding menu");
+    
     // Setup the main window.
     resetWindow(winWidth*2, winHeight*2);
     mainWidget = new QWidget(this);
@@ -126,44 +159,19 @@ void MainWindow::menuEncoding() {
     keypadLayout->addWidget(encoding, 2, 2);
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(encoding()));
 
-    // Button 2 : Print tree.
-    MyButton* tree = new MyButton(mainWidget, iconTree);
-    tree->setToolTip("Print the Huffman tree.");
-    listButton.append(tree);
-    keypadLayout->addWidget(tree, 1, 2);
-    connect(tree, SIGNAL(clicked()), this, SLOT(drawTree()));
-
-    // Button 3 : Clear.
-    MyButton* clear = new MyButton(mainWidget, iconClear);
-    clear->setToolTip("Clean the window.");
-    listButton.append(clear);
-    keypadLayout->addWidget(clear, 0, 2);
-    connect(clear, SIGNAL(clicked()), this, SLOT(clearTextEdit()));
-
-    // Button 4 : Menu.
-    MyButton* home = new MyButton(mainWidget, iconHome);
-    home->setToolTip("Back to the menu.");
-    listButton.append(home);
-    keypadLayout->addWidget(home, 0, 0);
-    connect(home, SIGNAL(clicked()), this, SLOT(menu()));
-
-    // Button 5 : Exit.
-    MyButton* exit = new MyButton(mainWidget, iconExit);
-    exit->setToolTip("Leave the application.");
-    listButton.append(exit);
-    keypadLayout->addWidget(exit, 0, 4);
-    connect(exit, SIGNAL(clicked()), qApp, SLOT(quit()));
+    //
+    setupButton();
 
     // Setup reader.
     reader = new MyTextEdit();
-    reader->setInfo("Entry text");
+    reader->setInfo("Exemple :\nbonjour");
     reader->writeInfo();
     keypadLayout->addWidget(reader, 2, 1);
 
     // Setup writer.
     writer = new MyTextEdit();
     writer->setReadOnly(true); // ! User can't write, QtextEdit for print the convert text.
-    writer->setInfo("Encoding");
+    writer->setInfo("011100100011000011");
     writer->setClicDellText(false);
     writer->writeInfo();
     keypadLayout->addWidget(writer, 2, 3);
@@ -184,6 +192,10 @@ void MainWindow::menuEncoding() {
  * *Description : Print the decoding manu.
  * */
 void MainWindow::menuDecoding() {
+
+    //
+    setWindowTitle("Decoding menu");
+
     // Setup the main window.
     resetWindow(winWidth*2, winHeight*2);
     mainWidget = new QWidget(this);
@@ -204,37 +216,12 @@ void MainWindow::menuDecoding() {
     keypadLayout->addWidget(encoding, 2, 2);
     connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(decoding()));
 
-    // Button 2 : Print tree.
-    MyButton* tree = new MyButton(mainWidget, iconTree);
-    tree->setToolTip("Print the Huffman tree.");
-    listButton.append(tree);
-    keypadLayout->addWidget(tree, 1, 2);
-    connect(tree, SIGNAL(clicked()), this, SLOT(drawTree()));
-
-    // Button 3 : Clear.
-    MyButton* clear = new MyButton(mainWidget, iconClear);
-    clear->setToolTip("Clean the window.");
-    listButton.append(clear);
-    keypadLayout->addWidget(clear, 0, 2);
-    connect(clear, SIGNAL(clicked()), this, SLOT(clearTextEdit()));
-
-    // Button 4 : Menu.
-    MyButton* home = new MyButton(mainWidget, iconHome);
-    home->setToolTip("Back to the menu.");
-    listButton.append(home);
-    keypadLayout->addWidget(home, 0, 0);
-    connect(home, SIGNAL(clicked()), this, SLOT(menu()));
-
-    // Button 5 : Exit.
-    MyButton* exit = new MyButton(mainWidget, iconExit);
-    exit->setToolTip("Leave the application.");
-    listButton.append(exit);
-    keypadLayout->addWidget(exit, 0, 4);
-    connect(exit, SIGNAL(clicked()), qApp, SLOT(quit()));
+    //
+    setupButton();
 
     // Setup reader.
     reader = new MyTextEdit();
-    reader->setInfo("Exemple : \n011100100011000011\nr1\no2\nb1\nn1\nj1\nu1");
+    reader->setInfo("Exemple :\n011100100011000011\nr1\no2\nb1\nn1\nj1\nu1");
     reader->writeInfo();
     keypadLayout->addWidget(reader, 2, 1);
 
@@ -357,6 +344,10 @@ void MainWindow::decoding() {
             Writer writerInFile("src/txtQt/text.txt");
             
             std::vector<Data> tabFreqText;
+            if(!tabFreqText.empty()) {
+                tabFreqText.clear();
+            }
+
             std::string text = "\0";
             int i = 0;
             while(strRead[i] != '\n') {
@@ -403,6 +394,7 @@ void MainWindow::clearTextEdit() {
     reader->clear();
     reader->setReadOnly(false); // ! User can write.
     reader->setClicDellText(true);
+    qDebug() << reader->info();
     reader->writeInfo();
 
     writer->clear();
@@ -416,6 +408,10 @@ void MainWindow::clearTextEdit() {
  * *Description : Drawing the huffman tree.
  * */
 void MainWindow::drawTree() {
+    
+    //
+    setWindowTitle("Tree");
+
     if(!isEncoding) { // ! Any text endocing yet.
         QMessageBox::information(mainWidget, "Information", "Any text encoding or decoding yet.");
     }
@@ -427,6 +423,7 @@ void MainWindow::drawTree() {
         // Save the old text if user back at the menu.
         treeIsDrawing = true;
         readerSave = reader->toPlainText(); writerSave = writer->toPlainText();
+        qDebug() << readerSave;
         if(huffmanTree.getRoot()->countDepth() >= maxDepth ) { // ! Too many elements for be drawing.
             QMessageBox::information(mainWidget, "Error message", "HuffmanTree is too big to be drawing");
         }
