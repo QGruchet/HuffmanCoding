@@ -402,12 +402,12 @@ void MainWindow::decoding() {
             QMessageBox::information(mainWidget, "Error message", "Too short message.");
             reader->setReadOnly(false);
         }
-        else if(!isOnlyBytes(text, posError)) { // ! Wrong format message encoding
+        else if(!isOnlyBytes(text, posError)) { // ! Wrong format in the binary text.
             std::string errorMsg = "Wrong format, error in positon : ";
             errorMsg += std::to_string(posError);
             qDebug() << posError;
             qDebug() << errorMsg.c_str();
-            QString qerrorMsg(errorMsg.c_str());
+            QString qerrorMsg(errorMsg.c_str()); // ! Wrong format in the vector frenquency.
             QMessageBox::information(mainWidget, "Error message", qerrorMsg);
             reader->setReadOnly(false);
         }
