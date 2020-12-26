@@ -58,9 +58,13 @@ int main(void) {
         Data data5; data5.car = 'v', data5.freq = 1;
         Data data6; data6.car = 'o', data6.freq = 1;
         Data data7; data7.car = 'i', data7.freq = 1;
-        Data data8; data8.car = 'r', data8.freq = 2;
+        Data data8; data8.car = 'r', data8.freq = 1;
+        Data data9; data9.car = 'r', data9.freq = 1;
 
         std::vector<Data> tabFreq;
+        if(!tabFreq.empty()) {
+            tabFreq.clear();
+        }
         tabFreq.push_back(data1);
         tabFreq.push_back(data2);
         tabFreq.push_back(data3);
@@ -69,6 +73,7 @@ int main(void) {
         tabFreq.push_back(data6);
         tabFreq.push_back(data7);
         tabFreq.push_back(data8);
+        tabFreq.push_back(data9);
 
         Parser parser;
         ArbreB huffmanTree = parser.creatHuffmanTree(tabFreq);

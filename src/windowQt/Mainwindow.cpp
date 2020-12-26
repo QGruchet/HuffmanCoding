@@ -109,7 +109,11 @@ void MainWindow::menu() {
     printMenu();
 }
 
+/**
+ * *Description : Setup buttons for encoding and decoding menu.
+ * */
 void MainWindow::setupButton() {
+
     // Button 2 : Print tree.
     MyButton* tree = new MyButton(mainWidget, iconTree);
     tree->setToolTip("Print the Huffman tree.");
@@ -143,6 +147,7 @@ void MainWindow::setupButton() {
  * *Description : Print the encoding menu.
  * */
 void MainWindow::menuEncoding() {
+
     //
     setWindowTitle("Encoding menu");
     
@@ -177,7 +182,7 @@ void MainWindow::menuEncoding() {
 
     // Setup writer.
     writer = new MyTextEdit();
-    writer->setReadOnly(true); // ! User can't write, QtextEdit for print the convert text.
+    writer->setReadOnly(true);
     writer->setInfo("011100100011000011");
     writer->setClicDellText(false);
     writer->writeInfo();
@@ -234,7 +239,7 @@ void MainWindow::menuDecoding() {
 
     // Setup writer.
     writer = new MyTextEdit();
-    writer->setReadOnly(true); // ! User can't write, QtextEdit for print the convert text.
+    writer->setReadOnly(true);
     writer->setInfo("bonjour");
     writer->setClicDellText(false);
     writer->writeInfo();
@@ -260,7 +265,6 @@ void MainWindow::menuDecoding() {
 bool checkASCII(std::string str) {
     for(char c : str) {
         if(!(int(c) >= 0 && int(c) <= 127)) {
-            qDebug() << c << "not accepted";
             return false;
         }
     }
@@ -294,7 +298,7 @@ void MainWindow::encoding() {
         //
         if(strRead.length() <= 1) { // ! Not enought char for create the tree.
             QMessageBox::information(mainWidget, "Error message", "Too short message.");
-            reader->setReadOnly(false); // User can write now;
+            reader->setReadOnly(false);
         }
         else if(isOnlyOneChar(strRead)) { // ! Not enought char.
             QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
@@ -332,6 +336,35 @@ void MainWindow::encoding() {
 }
 
 /**
+ * 
+ * */
+bool isOnlyBytes(std::string str, int& posError) {
+    for(int i=0; i<str.length(); ++i) {
+        char c = str[i];
+        if(c != '0' && c != '1') {
+            posError = i;
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
+ * 
+ * */
+bool tabFreqIsGood(std::vector<Data> tabFreqText, int& posError) {
+    for(int i=0; i<(int)tabFreqText.size(); ++i) {
+        Data data = tabFreqText[i];
+        if(!(int(data.car) >= 0 && int(data.car) <= 127)
+        || !(data.freq > 0 && data.freq < INT64_MAX)) {
+            posError = i;
+            return false;
+        }
+    }
+    return true;
+}
+
+/**
  * *Description : Read the current text and convert him.
  * */
 void MainWindow::decoding() {
@@ -342,37 +375,55 @@ void MainWindow::decoding() {
         std::string strRead = read.toStdString();
 
         //
+        std::vector<Data> tabFreqText;
+        if(!tabFreqText.empty()) {
+            tabFreqText.clear();
+        }
+        std::string text = "\0";
+        int i = 0;
+        while(strRead[i] != '\n') {
+            text += strRead[i];
+            i++;
+        }
+        i++;
+        while(i < strRead.length()) {
+            Data data;
+            data.car = strRead[i];
+            i++;
+            data.freq = strRead[i] - '0';
+            i+=2;
+            tabFreqText.push_back(data);
+        }
+
+        int posError = -1;
+
+        //
         if(strRead.length() <= 1) { // ! Not enought char for create the tree.
             QMessageBox::information(mainWidget, "Error message", "Too short message.");
-            reader->setReadOnly(false); // User can write now;
+            reader->setReadOnly(false);
+        }
+        else if(!isOnlyBytes(text, posError)) { // ! Wrong format message encoding
+            std::string errorMsg = "Wrong format, error in positon : ";
+            errorMsg += std::to_string(posError);
+            qDebug() << posError;
+            qDebug() << errorMsg.c_str();
+            QString qerrorMsg(errorMsg.c_str());
+            QMessageBox::information(mainWidget, "Error message", qerrorMsg);
+            reader->setReadOnly(false);
+        }
+        else if(!tabFreqIsGood(tabFreqText, posError)) {
+            std::string errorMsg = "Wrong format, error in positon : ";
+            errorMsg += std::to_string(posError);
+            QString qerrorMsg(errorMsg.c_str());
+            QMessageBox::information(mainWidget, "Error message", qerrorMsg);
+            reader->setReadOnly(false);
         }
         else {
             // Write the current text.
-            Writer writerInFile("src/txtQt/text.txt");
-            
-            std::vector<Data> tabFreqText;
-            if(!tabFreqText.empty()) {
-                tabFreqText.clear();
-            }
-
-            std::string text = "\0";
-            int i = 0;
-            while(strRead[i] != '\n') {
-                text += strRead[i];
-                i++;
-            }
-            i++;
-            while(i < strRead.length()) {
-                Data data;
-                data.car = strRead[i];
-                i++;
-                data.freq = strRead[i] - '0';
-                i+=2;
-                tabFreqText.push_back(data);
-            }
+            Writer write("src/txtQt/text.txt");
             tabFreq = tabFreqText;
 
-            writerInFile.codeToText(text, tabFreq);
+            write.codeToText(text, tabFreq);
 
             // Read the convert text.
             QString fileName = "src/txtQt/code.txt";
@@ -401,11 +452,11 @@ void MainWindow::clearTextEdit() {
     reader->setClicDellText(true);
     reader->clear();
     reader->writeInfo();
-    reader->setReadOnly(false); // ! User can write.
+    reader->setReadOnly(false);
 
     writer->clear();
     writer->writeInfo();
-    writer->setReadOnly(true); // ! User can't write.
+    writer->setReadOnly(true);
     
     isEncoding = false; isDecoding = false; treeIsDrawing = false;
 }
@@ -418,9 +469,6 @@ void MainWindow::drawTree() {
         QMessageBox::information(mainWidget, "Information", "Any text encoding or decoding yet.");
     }
     else {
-        //
-        setWindowTitle("Tree");
-
         // Create the tree.
         Parser parser;
         ArbreB huffmanTree = parser.creatHuffmanTree(tabFreq);
@@ -432,6 +480,9 @@ void MainWindow::drawTree() {
             QMessageBox::information(mainWidget, "Error message", "HuffmanTree is too big to be drawing");
         }
         else {
+            //
+            setWindowTitle("Tree");
+
             // Setup the main window.
             resetWindow(winWidth*2, winHeight*2);
             mainWidget = new QWidget(this);

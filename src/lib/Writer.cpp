@@ -64,6 +64,8 @@ void Writer::textToCode(std::string text) {
     }
 }
 
+
+
 /**
  * *Description : Write a texte in a file, create his huffman tree and write his convert.
  * *Function : codeToText.
