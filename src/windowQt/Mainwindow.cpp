@@ -364,6 +364,19 @@ bool tabFreqIsGood(std::vector<Data> tabFreqText, int& posError) {
     return true;
 }
 
+void addInVectorData(std::vector<Data>& tabFreq, Data newData) {
+    bool found = false;
+    for(Data& data : tabFreq) {
+        if(data.car == newData.car) {
+            data.freq++;
+            found = true;
+        }
+    }
+    if(!found) {
+        tabFreq.push_back(newData);
+    }
+}
+
 /**
  * *Description : Read the current text and convert him.
  * */
@@ -392,9 +405,8 @@ void MainWindow::decoding() {
             i++;
             data.freq = strRead[i] - '0';
             i+=2;
-            tabFreqText.push_back(data);
+            addInVectorData(tabFreqText, data);
         }
-
         int posError = -1;
 
         //
@@ -405,13 +417,11 @@ void MainWindow::decoding() {
         else if(!isOnlyBytes(text, posError)) { // ! Wrong format in the binary text.
             std::string errorMsg = "Wrong format, error in positon : ";
             errorMsg += std::to_string(posError);
-            qDebug() << posError;
-            qDebug() << errorMsg.c_str();
-            QString qerrorMsg(errorMsg.c_str()); // ! Wrong format in the vector frenquency.
+            QString qerrorMsg(errorMsg.c_str());
             QMessageBox::information(mainWidget, "Error message", qerrorMsg);
             reader->setReadOnly(false);
         }
-        else if(!tabFreqIsGood(tabFreqText, posError)) {
+        else if(!tabFreqIsGood(tabFreqText, posError)) { // ! Wrong format in the vector frenquency.
             std::string errorMsg = "Wrong format, error in positon : ";
             errorMsg += std::to_string(posError);
             QString qerrorMsg(errorMsg.c_str());
