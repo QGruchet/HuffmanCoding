@@ -99,6 +99,7 @@ void MainWindow::printMenu() {
  * */
 void MainWindow::menu() {
     isEncoding = false;
+    isDecoding = false;
     printMenu();
 }
 
@@ -381,7 +382,7 @@ void MainWindow::decoding() {
             writer->setText(code);
             writer->show();
             file.close();
-            isEncoding = true;
+            isDecoding = true;
         }
     }
     else {
@@ -395,7 +396,6 @@ void MainWindow::decoding() {
 void MainWindow::clearTextEdit() {
     reader->setClicDellText(true);
     reader->clear();
-    qDebug() << reader->info();
     reader->writeInfo();
     reader->setReadOnly(false); // ! User can write.
 
@@ -403,14 +403,14 @@ void MainWindow::clearTextEdit() {
     writer->writeInfo();
     writer->setReadOnly(true); // ! User can't write.
     
-    isEncoding = false; treeIsDrawing = false;
+    isEncoding = false; isDecoding = false; treeIsDrawing = false;
 }
 
 /**
  * *Description : Drawing the huffman tree.
  * */
 void MainWindow::drawTree() {
-    if(!isEncoding) { // ! Any text endocing yet.
+    if(!isEncoding && !isDecoding) { // ! Any text endocing yet.
         QMessageBox::information(mainWidget, "Information", "Any text encoding or decoding yet.");
     }
     else {
@@ -448,10 +448,16 @@ void MainWindow::drawTree() {
             newButton->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Maximum);
             listButton.append(newButton);
             keypadLayout->addWidget(newButton, 0, 0);
-            connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
             listButton.at(0)->setToolTip("Back to the encoding menu");
             writerLayout->addLayout(keypadLayout);
             setCentralWidget(mainWidget);
+
+            if(isEncoding) {
+                connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuEncoding()));
+            }
+            if(isDecoding) {
+                connect(listButton.at(0), SIGNAL(clicked()), this, SLOT(menuDecoding()));
+            }
         }
     }
 }
