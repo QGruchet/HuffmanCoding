@@ -278,15 +278,17 @@ bool checkASCII(std::string str, int& posError) {
  * @param str, need to check.
  * @return true/false.
  * */
-bool isOnlyOneChar(std::string str, int& posError) {
+bool isOnlyOneChar(std::string str) {
     bool oneChar = true;
     for(int i=1; i<str.length(); ++i) {
         char c1 = str[i-1], c2 = str[i];
 
         if(c1 != '\n' && c2 != '\n') {
             oneChar & (c1 == c2);
+            qDebug() << "etape" << i-1 << c1 << c2 << oneChar;
         }
     }
+    qDebug() << oneChar;
 
     return oneChar;
 }
@@ -307,13 +309,17 @@ void MainWindow::encoding() {
             QMessageBox::information(mainWidget, "Error message", "Too short message.");
             reader->setReadOnly(false);
         }
-        else if(isOnlyOneChar(strRead, posError)) { // ! Not enought char.
+        else if(!checkASCII(strRead, posError)) { // ! Text write by the user don't respect ASCII encoding.
+            std::string errorMsg = "Caractere not supported,\nerror in positon : ";
+            errorMsg += std::to_string(posError);
+            errorMsg += " ('"; errorMsg += strRead[posError]; errorMsg += "')";
+            QString qerrorMsg(errorMsg.c_str());
+            QMessageBox::information(mainWidget, "Error message", qerrorMsg);
+            reader->setReadOnly(false); 
+        }
+        else if(isOnlyOneChar(strRead)) { // ! Not enought char.
             QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
             reader->setReadOnly(false);
-        }
-        else if(!checkASCII(strRead, posError)) { // ! Text write by the user don't respect ASCII encoding.
-            QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
-            reader->setReadOnly(false); 
         }
         else {
             // Write the current text.
