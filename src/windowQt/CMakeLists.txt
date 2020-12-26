@@ -32,8 +32,8 @@ if(ANDROID)
     main.cpp
     Mainwindow.cpp
     Mainwindow.hpp
-    Tiltewidget.cpp
-    Tiltewidget.hpp
+    Titlewidget.cpp
+    Titlewidget.hpp
     Treewidget.cpp
     Treewidget.hpp
   )
@@ -42,8 +42,8 @@ else()
     main.cpp
     Mainwindow.cpp
     Mainwindow.hpp
-    Tiltewidget.cpp
-    Tiltewidget.hpp
+    Titlewidget.cpp
+    Titlewidget.hpp
     Treewidget.cpp
     Treewidget.cpp
     Treewidget.hpp

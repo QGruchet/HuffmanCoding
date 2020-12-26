@@ -21,7 +21,7 @@
 #include <QPalette>
 
 // Include my files.
-#include "Tiltewidget.hpp"
+#include "Titlewidget.hpp"
 #include "Treewidget.hpp"
 #include "Mytextedit.hpp"
 #include "Mybutton.hpp"

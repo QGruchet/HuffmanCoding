@@ -15,6 +15,9 @@
 #define iconTree "src/windowQt/icons/tree.png"
 #define iconEncoding "src/windowQt/icons/encoding.jpg"
 
+//
+#define version "v3.3"
+
 /**
  * *Description : Constructor with parameter.
  * @param parent, the widget parent.
@@ -60,9 +63,12 @@ void MainWindow::printMenu() {
         resetWindow(winWidth, winHeight);
     }
     
-    // Init tilte.
-    setWindowTitle("Huffman Coding (v3.2)");
-    mainWidget = new TilteWidget(this, winWidth, winHeight);
+    // Init title.
+    std::string title = "Huffman coding ";
+    title += version;
+    QString qtitle(title.c_str());
+    setWindowTitle(qtitle);
+    mainWidget = new TitleWidget(this, winWidth, winHeight);
     keypadLayout = new QGridLayout(mainWidget);
     setCentralWidget(mainWidget);
 
@@ -137,8 +143,6 @@ void MainWindow::setupButton() {
  * *Description : Print the encoding menu.
  * */
 void MainWindow::menuEncoding() {
-
-    qDebug() << "je suis là";
     //
     setWindowTitle("Encoding menu");
     

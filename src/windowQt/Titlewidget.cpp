@@ -1,10 +1,10 @@
 /**
- * Tiltewidget.cpp : You can found here all functions implemented for
- * the Tiltewidget class.
+ * Titlewidget.cpp : You can found here all functions implemented for
+ * the Titlewidget class.
  * Author : Quentin.
  **/
 
-#include "Tiltewidget.hpp"
+#include "Titlewidget.hpp"
 #include <QFontDatabase>
 #include <QPainter>
 
@@ -14,7 +14,7 @@
  * @param winSizeX, the widht.
  * @param winSizeX, the height.
  * */
-TilteWidget::TilteWidget(QWidget *parent, int winSizeX, int winSizeY)
+TitleWidget::TitleWidget(QWidget *parent, int winSizeX, int winSizeY)
     : QWidget(parent)
 {
     widgetWidth = winSizeX;
@@ -29,7 +29,7 @@ TilteWidget::TilteWidget(QWidget *parent, int winSizeX, int winSizeY)
 /**
  * *Description : Draw the tilte window.
  * */
-void TilteWidget::paintEvent(QPaintEvent *event)
+void TitleWidget::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED((event)); // Unused parameter.
 

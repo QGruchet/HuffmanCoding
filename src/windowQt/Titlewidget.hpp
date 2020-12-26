@@ -1,20 +1,20 @@
 /**
- * Tiltewidget.cpp : You can found here the Tiltewidget class.
+ * Titlewidget.cpp : You can found here the Titlewidget class.
  * Author : Quentin.
  * */
 
-#ifndef TILTEWIDGET_HPP
-#define TILTEWIDGET_HPP
+#ifndef TITLEWIDGET_HPP
+#define TITLEWIDGET_HPP
 
 #include <QObject>
 #include <QWidget>
 #include <QPalette>
 
-class TilteWidget : public QWidget
+class TitleWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit TilteWidget(QWidget*, int, int);
+    explicit TitleWidget(QWidget*, int, int);
     
 private:
     int widgetWidth, widgetHeight; // sizeX, sizeY
