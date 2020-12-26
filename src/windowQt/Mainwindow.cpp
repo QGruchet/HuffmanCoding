@@ -262,9 +262,11 @@ void MainWindow::menuDecoding() {
  * @param str, need to check.
  * @return true/false.
  * */
-bool checkASCII(std::string str) {
-    for(char c : str) {
+bool checkASCII(std::string str, int& posError) {
+    for(int i=0; i<str.length(); ++i) {
+        char c = str[i];
         if(!(int(c) >= 0 && int(c) <= 127)) {
+            posError = i;
             return false;
         }
     }
@@ -276,13 +278,17 @@ bool checkASCII(std::string str) {
  * @param str, need to check.
  * @return true/false.
  * */
-bool isOnlyOneChar(std::string str) {
-    for(int i=1; i<int(str.size()); ++i) {
-        if(str[i-1] != str[i]) {
-            return false;
+bool isOnlyOneChar(std::string str, int& posError) {
+    bool oneChar = true;
+    for(int i=1; i<str.length(); ++i) {
+        char c1 = str[i-1], c2 = str[i];
+
+        if(c1 != '\n' && c2 != '\n') {
+            oneChar & (c1 == c2);
         }
     }
-    return true;
+
+    return oneChar;
 }
 
 /**
@@ -294,17 +300,18 @@ void MainWindow::encoding() {
     read = reader->toPlainText();
     if(read != reader->info()) {
         std::string strRead = read.toStdString();
+        int posError = -1;
 
         //
         if(strRead.length() <= 1) { // ! Not enought char for create the tree.
             QMessageBox::information(mainWidget, "Error message", "Too short message.");
             reader->setReadOnly(false);
         }
-        else if(isOnlyOneChar(strRead)) { // ! Not enought char.
+        else if(isOnlyOneChar(strRead, posError)) { // ! Not enought char.
             QMessageBox::information(mainWidget, "Error message", "Not enought different caracters.");
             reader->setReadOnly(false);
         }
-        else if(!checkASCII(strRead)) { // ! Text write by the user don't respect ASCII encoding.
+        else if(!checkASCII(strRead, posError)) { // ! Text write by the user don't respect ASCII encoding.
             QMessageBox::information(mainWidget, "Error message", "Caractere not supported.");
             reader->setReadOnly(false); 
         }
