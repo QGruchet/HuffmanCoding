@@ -233,14 +233,14 @@ void MainWindow::menuDecoding() {
 
     // Setup reader.
     reader = new MyTextEdit();
-    reader->setInfo("Exemple :\n011100100011000011\nr1\no2\nb1\nn1\nj1\nu1");
+    reader->setInfo("Exemple :\n111110101000100011010001000\na1,u1, 1,e1,v1,o1,i1,r2");
     reader->writeInfo();
     keypadLayout->addWidget(reader, 2, 1);
 
     // Setup writer.
     writer = new MyTextEdit();
     writer->setReadOnly(true);
-    writer->setInfo("bonjour");
+    writer->setInfo("au revoir");
     writer->setClicDellText(false);
     writer->writeInfo();
     keypadLayout->addWidget(writer, 2, 3);
@@ -288,7 +288,6 @@ bool isOnlyOneChar(std::string str) {
             qDebug() << "etape" << i-1 << c1 << c2 << oneChar;
         }
     }
-    qDebug() << oneChar;
 
     return oneChar;
 }
@@ -368,7 +367,7 @@ bool isOnlyBytes(std::string str, int& posError) {
 bool tabFreqIsGood(std::vector<Data> tabFreqText, int& posError) {
     for(int i=0; i<(int)tabFreqText.size(); ++i) {
         Data data = tabFreqText[i];
-        if(!(int(data.car) >= 0 && int(data.car) <= 127)
+        if(!((int)data.car >= 0 && (int)data.car <= 127)
         || !(data.freq > 0 && data.freq < INT64_MAX)) {
             posError = i;
             return false;
@@ -390,6 +389,45 @@ void addInVectorData(std::vector<Data>& tabFreq, Data newData) {
     }
 }
 
+void readDecoding(std::string text, std::string& binText, std::vector<Data>& tabFreq) {
+    std::string firstLine = "\0";
+    std::string secondLine = "\0";
+    size_t i;
+    for(i = 0; i < text.size() && text[i] != '\n'; i++) {
+        firstLine += text[i];
+    }
+    i++; // skip the \n
+    for(i; i < text.size() && text[i] != '\n'; i++) {
+        secondLine += text[i];
+    }
+    
+    qDebug() << "firstLine : " << firstLine.c_str();
+    qDebug() << "secondLine : " << secondLine.c_str();
+
+    binText = firstLine;
+
+    char car;
+    std::string freq;
+    i = 0;
+    while(i < secondLine.size()) {
+        freq = "\0";
+        car = secondLine[i];
+        i++;
+        while(secondLine[i] != ',') {
+            freq += secondLine[i];
+            i++;
+        }
+        i++; // skip ,
+        Data data;
+        std::string::size_type sz;
+        data.car = car;
+        data.freq = std::stoi(freq, &sz);
+        qDebug() << data.car << ", " << data.freq;
+        tabFreq.push_back(data);
+    }
+    
+}
+
 /**
  * *Description : Read the current text and convert him.
  * */
@@ -405,21 +443,8 @@ void MainWindow::decoding() {
         if(!tabFreqText.empty()) {
             tabFreqText.clear();
         }
-        std::string text = "\0";
-        int i = 0;
-        while(strRead[i] != '\n') {
-            text += strRead[i];
-            i++;
-        }
-        i++;
-        while(i < strRead.length()) {
-            Data data;
-            data.car = strRead[i];
-            i++;
-            data.freq = strRead[i] - '0';
-            i+=2;
-            addInVectorData(tabFreqText, data);
-        }
+        std::string binText;
+        readDecoding(strRead, binText, tabFreqText);
         int posError = -1;
 
         //
@@ -427,7 +452,7 @@ void MainWindow::decoding() {
             QMessageBox::information(mainWidget, "Error message", "Too short message.");
             reader->setReadOnly(false);
         }
-        else if(!isOnlyBytes(text, posError)) { // ! Wrong format in the binary text.
+        else if(!isOnlyBytes(binText, posError)) { // ! Wrong format in the binary text.
             std::string errorMsg = "Wrong format, error in positon : ";
             errorMsg += std::to_string(posError);
             QString qerrorMsg(errorMsg.c_str());
@@ -446,7 +471,7 @@ void MainWindow::decoding() {
             Writer write("src/txtQt/text.txt");
             tabFreq = tabFreqText;
 
-            write.codeToText(text, tabFreq);
+            write.codeToText(binText, tabFreq);
 
             // Read the convert text.
             QString fileName = "src/txtQt/code.txt";
