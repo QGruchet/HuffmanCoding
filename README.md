@@ -118,7 +118,7 @@ after building the project.
 This is our main menu of our application. All buttons are fonctional.
 1. This button opens the encoding menu.
 2. This button stops our application.
-3. This button opens the decoding menu. It's not implemented yet but don't worry it will come very soon.
+3. This button opens the decoding menu.
   
 ![encodingMenu](screenshots/encodingMenu.png) 
 
@@ -136,6 +136,10 @@ This is our encoding menu. Here you will can encoding any text and see in live t
 This is our window where we draw the Huffman tree.
 1. This is a simple display of the tree.
 2. This button allows you to return to the previous menu.
+
+![decoding menu](screenshots/decodingMenu.png)
+
+This is our window where you can decoding a binary text. She has the same functionality than encoding menu.
 
 # Details of functions
 
@@ -426,6 +430,13 @@ Writer::Writer(std::string nameFile) : file(nameFile) {}
  * @param text, the original text.
  * */
 void Writer::textToCode(std::string text) {}
+
+/**
+ * *Description : Write a texte in a file, create his huffman tree and write his convert.
+ * *Function : codeToText.
+ * @param text, the original text.
+ * */
+void Writer::codeToText(std::string text, std::vector<Data> tabFreq) {}
  
 ```
 ## Test
@@ -681,6 +692,11 @@ void MainWindow::menu() {}
 void MainWindow::menuEncoding(){}
 
 /**
+ * *Description : Print the decoding manu.
+ * */
+void MainWindow::menuDecoding() {}
+
+/**
  * *Description : check if str respect the ASCII encoding.
  * @param str, need to check.
  * @return true/false.
@@ -700,9 +716,44 @@ bool isOnlyOneChar(std::string str) {}
 void MainWindow::encoding(){}
 
 /**
+ * *Description : check if str is a binary code
+ * @param str : string we need to check.
+ * @param posError : position of error if she exists.
+ * @return false if it's not a binary code else true.
+ * */
+bool isOnlyBytes(std::string str, int& posError) {}
+
+/**
+ * *Description : check if table of frequence is good.
+ * @tabFreqText, the table we have to check.
+ * @posError, the position of the error if she exists.
+ * */
+bool tabFreqIsGood(std::vector<Data> tabFreqText, int& posError) {}
+
+/**
+ * *Description : add a value in the vector given in parameters.
+ * @param : tabFreq, the vector of frequence.
+ * @param : newDate, the value we have to add.
+ * */
+void addInVectorData(std::vector<Data>& tabFreq, Data newData) {}
+
+/**
+ * *Description : read the decoded text.
+ * @param : text, the text we read at the end.
+ * @param : binText, the binary code that we have to decode
+ * @param : tabFreq, the frequence of car in the coded text.
+ * */
+void readDecoding(std::string text, std::string& binText, std::vector<Data>& tabFreq) {}
+
+/**
+ * *Description : Read the current text and convert him.
+ * */
+void MainWindow::decoding() {}
+
+/**
  * *Description : Clear reader and writer in the encoding menu.
  * */
-void MainWindow::clearEncoding() {}
+void MainWindow::clearTextEdit() {}
 
 /**
  * *Description : Drawing the huffman tree.
@@ -879,6 +930,8 @@ TreeWidget::~TreeWidget() {}
 
 09/12/2020 : version 2.2 => End part2
 
+30/12/2020 : version 3.3 => End part3
+
 # Explanation of the project
 
 
@@ -903,6 +956,11 @@ For the second part, we have to translate a text to binary code using Huffman En
 Also we wanted to upgrade the graphic interface. This takes more of our time because Qt is difficult to learn. The new interface consists of a main menu, encoding menu, decoding menu and some other things, like present in "usage". We had some new classes, like MyButton for manipulating our special button, with icon and note text.  More precisely we have replaced text by icon and added information text so the user uses his mouse to fly over the icon for more clarity and  aesthetic.
 On top of that we add a MyTextEdit file for manipulation text zone. we had text in grey for show where users need to write and where the translation is printed. We follow of modèle of "google translate" which is enough soft to be programming in few weeks.
 
+- Part 3 : decoding a text
+
+For the third and last part, we had to decoding a text. The text we need to decode is give with his table of frequencies. So it was easy for us according to what we have to decode a binary text. Actually, we had two options to decode a text. One use the binary tree, the other use table of frequencies. We choose the second one because it appears more user-friendly. We don't upgrade the interface because her plainness enjoy us.
+
+
 # Some ideas for amelioration
 
 Here's are some ideas for future versions :
@@ -912,6 +970,7 @@ Here's are some ideas for future versions :
 - The tree is not able to print a tree with a depth up to 5. Maybe we can add a scrollbar to fix it.
 - The interface is not very attractive so we have to make a nicest interface.(DONE)
 - Our coding does not support accented characters or special characters.
+- We are close to perfection so we can't upgrade anymore.
 
 # Authors
 * **LE DENMAT Mickael 21804355**

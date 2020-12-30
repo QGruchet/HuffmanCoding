@@ -348,7 +348,10 @@ void MainWindow::encoding() {
 }
 
 /**
- * 
+ * *Description : check if str is a binary code
+ * @param str : string we need to check.
+ * @param posError : position of error if she exists.
+ * @return false if it's not a binary code else true.
  * */
 bool isOnlyBytes(std::string str, int& posError) {
     for(int i=0; i<str.length(); ++i) {
@@ -362,7 +365,9 @@ bool isOnlyBytes(std::string str, int& posError) {
 }
 
 /**
- * 
+ * *Description : check if table of frequence is good.
+ * @tabFreqText, the table we have to check.
+ * @posError, the position of the error if she exists.
  * */
 bool tabFreqIsGood(std::vector<Data> tabFreqText, int& posError) {
     for(int i=0; i<(int)tabFreqText.size(); ++i) {
@@ -376,6 +381,11 @@ bool tabFreqIsGood(std::vector<Data> tabFreqText, int& posError) {
     return true;
 }
 
+/**
+ * *Description : add a value in the vector given in parameters.
+ * @param : tabFreq, the vector of frequence.
+ * @param : newDate, the value we have to add.
+ * */
 void addInVectorData(std::vector<Data>& tabFreq, Data newData) {
     bool found = false;
     for(Data& data : tabFreq) {
@@ -389,6 +399,12 @@ void addInVectorData(std::vector<Data>& tabFreq, Data newData) {
     }
 }
 
+/**
+ * *Description : read the decoded text.
+ * @param : text, the text we read at the end.
+ * @param : binText, the binary code that we have to decode
+ * @param : tabFreq, the frequence of car in the coded text.
+ * */
 void readDecoding(std::string text, std::string& binText, std::vector<Data>& tabFreq) {
     std::string firstLine = "\0";
     std::string secondLine = "\0";
@@ -423,7 +439,7 @@ void readDecoding(std::string text, std::string& binText, std::vector<Data>& tab
         data.car = car;
         data.freq = std::stoi(freq, &sz);
         qDebug() << data.car << ", " << data.freq;
-        tabFreq.push_back(data);
+        addInVectorData(tabFreq, data);
     }
     
 }
