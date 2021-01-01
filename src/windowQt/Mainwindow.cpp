@@ -417,8 +417,8 @@ void readDecoding(std::string text, std::string& binText, std::vector<Data>& tab
         secondLine += text[i];
     }
     
-    qDebug() << "firstLine : " << firstLine.c_str();
-    qDebug() << "secondLine : " << secondLine.c_str();
+    // qDebug() << "firstLine : " << firstLine.c_str();
+    // qDebug() << "secondLine : " << secondLine.c_str();
 
     binText = firstLine;
 
@@ -438,7 +438,7 @@ void readDecoding(std::string text, std::string& binText, std::vector<Data>& tab
         std::string::size_type sz;
         data.car = car;
         data.freq = std::stoi(freq, &sz);
-        qDebug() << data.car << ", " << data.freq;
+        // qDebug() << data.car << ", " << data.freq;
         addInVectorData(tabFreq, data);
     }
     
