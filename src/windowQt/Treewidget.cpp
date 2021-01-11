@@ -178,7 +178,7 @@ void TreeWidget::draw(QPainter* painter, int width, int height) {
  * */
 void TreeWidget::paintEvent(QPaintEvent *event)
 {
-    Q_UNUSED(event); // Unused parameter
+    Q_UNUSED(event); // Unused parameter evite de raler lorsqu'il compil. pour ne pas voir que *event n'est pas utilise
     QPainter painter(this);
     draw(&painter, width(), height());
 }

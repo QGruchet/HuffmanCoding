@@ -279,17 +279,14 @@ bool checkASCII(std::string str, int& posError) {
  * @return true/false.
  * */
 bool isOnlyOneChar(std::string str) {
-    bool oneChar = true;
+    int sumEqChar = 0;
     for(int i=1; i<str.length(); ++i) {
-        char c1 = str[i-1], c2 = str[i];
-
-        if(c1 != '\n' && c2 != '\n') {
-            oneChar & (c1 == c2);
-            qDebug() << "etape" << i-1 << c1 << c2 << oneChar;
+        if(str[i-1] == str[i]) {
+          sumEqChar++;
         }
     }
 
-    return oneChar;
+    return sumEqChar == (str.length() - 1);
 }
 
 /**
@@ -437,7 +434,7 @@ void readDecoding(std::string text, std::string& binText, std::vector<Data>& tab
         Data data;
         std::string::size_type sz;
         data.car = car;
-        data.freq = std::stoi(freq, &sz);
+        data.freq = std::stoi(freq, &sz); //stoi convertir string en int
         // qDebug() << data.car << ", " << data.freq;
         addInVectorData(tabFreq, data);
     }
