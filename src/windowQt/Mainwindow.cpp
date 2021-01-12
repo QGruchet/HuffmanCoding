@@ -441,18 +441,18 @@ void readDecoding(std::string text, std::string& binText, std::vector<Data>& tab
 }
 
 bool goodDecoding(std::vector<Data> tabFreqs, std::string code) {
-  int sumRightChar = 0;
-  if(tabFreqs.size() != code.length()) {
-    return false;
-  }
-  for(char c : code) {
-    for(Data data : tabFreqs) {
-      if(c == data.car) {
-        sumRightChar++;
-      }
+    int sumRightChar = 0;
+    if(tabFreqs.size() != code.length()) {
+        return false;
     }
-  }
-  return sumRightChar == code.length();
+    for(char c : code) {
+        for(Data data : tabFreqs) {
+            if(c == data.car) {
+                sumRightChar++;
+            }
+        }
+    }
+    return sumRightChar == code.length();
 }
 
 /**
