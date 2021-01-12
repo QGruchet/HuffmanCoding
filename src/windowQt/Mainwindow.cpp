@@ -440,6 +440,21 @@ void readDecoding(std::string text, std::string& binText, std::vector<Data>& tab
     }
 }
 
+bool goodDecoding(std::vector<Data> tabFreqs, std::string code) {
+  int sumRightChar = 0;
+  if(tabFreqs.size() != code.length()) {
+    return false;
+  }
+  for(char c : code) {
+    for(Data data : tabFreqs) {
+      if(c == data.car) {
+        sumRightChar++;
+      }
+    }
+  }
+  return sumRightChar == code.length();
+}
+
 /**
  * *Description : Read the current text and convert him.
  * */
@@ -478,7 +493,7 @@ void MainWindow::decoding() {
             QMessageBox::information(mainWidget, "Error message", qerrorMsg);
             reader->setReadOnly(false);
         }
-        else if(tabFreqText.size() == 0) { // ! Not enought char for create the tree.
+        else if(tabFreqText.size() == 0) { // ! Missing frequencies while decoding.
             QMessageBox::information(mainWidget, "Error message", "Missing frequencies.");
             reader->setReadOnly(false);
         }
@@ -496,12 +511,18 @@ void MainWindow::decoding() {
             QTextStream flux(&file);
             QString code = flux.readAll();
 
-            // Print the convert text.
-            writer->setTextColor(Qt::black);
-            writer->setText(code);
-            writer->show();
+            if(goodDecoding(tabFreqText, code.toStdString())) {
+              // Print the convert text.
+                writer->setTextColor(Qt::black);
+                writer->setText(code);
+                writer->show();
+                isDecoding = true;
+            }
+            else {
+                QMessageBox::information(mainWidget, "Error", "Error in the encoding.");
+                reader->setReadOnly(false);
+            }
             file.close();
-            isDecoding = true;
         }
     }
     else {
