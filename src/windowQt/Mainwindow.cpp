@@ -438,7 +438,6 @@ void readDecoding(std::string text, std::string& binText, std::vector<Data>& tab
         // qDebug() << data.car << ", " << data.freq;
         addInVectorData(tabFreq, data);
     }
-    
 }
 
 /**
@@ -477,6 +476,10 @@ void MainWindow::decoding() {
             errorMsg += std::to_string(posError);
             QString qerrorMsg(errorMsg.c_str());
             QMessageBox::information(mainWidget, "Error message", qerrorMsg);
+            reader->setReadOnly(false);
+        }
+        else if(tabFreqText.size() == 0) { // ! Not enought char for create the tree.
+            QMessageBox::information(mainWidget, "Error message", "Missing frequencies.");
             reader->setReadOnly(false);
         }
         else {
